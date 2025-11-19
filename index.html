@@ -1,1079 +1,242 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-6127233618306992">
-    <meta name="description" content="Memet Çınar resmi sitesi - Müzik, albümler, canlı yayınlar, şarkılar ve daha fazlası.">
-    <meta name="keywords" content="Memet Çınar, Türk müzik, şarkılar, albümler, Spotify, YouTube">
-    <meta property="og:title" content="MEMET ÇINAR | Resmi Site">
-    <meta property="og:description" content="Bağımsız şarkıcı ve besteci Memet Çınar'ın resmi web sitesi.">
+    <meta name="description" content="Memet Çınar resmi web sitesi 2025 - Efkar Gecesi, YAK, ELKAY serisi ve tüm damar şarkılar">
+    <meta property="og:title" content="MEMET ÇINAR | Resmi Web Sitesi 2025">
     <meta property="og:image" content="https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg">
-    <meta property="og:url" content="https://memetcinar.com"> <!-- Varsayılan domain, gerçekte değiştirin -->
-    <title>MEMET ÇINAR | Resmi Site</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>MEMET ÇINAR | Resmi Web Sitesi</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127233618306992" crossorigin="anonymous"></script>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127233618306992"
-     crossorigin="anonymous"></script>
-<!-- AnaSayfaBanner -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-6127233618306992"
-     data-ad-slot="6275145219"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-    
     <style>
-        :root {
-            --bg1: #0b0c1a;
-            --bg2: #0f1a2b;
-            --accent: #FF0C14;
-            --muted: #2a2b3c;
-            --card: #1a1b2c;
-            --shadow: 0 8px 32px rgba(0,0,0,0.3);
-            --glow: 0 0 20px rgba(255,12,20,0.3);
-            --primary: #007bff;
-            --secondary: #6c757d;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg1);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: background 0.6s ease, color 0.3s;
-            overflow-x: hidden;
-            animation: fadeIn 1s ease-out;
-            padding: 25px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        :root { --primary: #8D6282; --dark: #000; --card: rgba(20,20,35,0.98); --glow: 0 0 30px rgba(141,98,130,0.5); }
+        * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+        body { font-family:'Poppins',sans-serif; background:#000; color:#eee; overflow-x:hidden; }
+        canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.6; }
+
         header {
-            width: 100%;
-            max-width: 1200px;
-            padding: 18px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            animation: slideDown 0.8s ease-out;
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        .logo-text {
-            font-weight: 800;
-            font-size: 2rem;
-            white-space: nowrap;
-            background: linear-gradient(90deg, #ff0044, #ff7a00, #ffd400, #22c55e, #3b82f6, #7c3aed);
-            background-size: 400% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: rainbow 4s ease-in-out infinite, pulse 2s ease-in-out infinite;
-            transition: transform 0.3s ease;
-        }
-        .logo-text:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(var(--glow));
-        }
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        .verified-badge {
-            position: relative;
-            margin-left: 10px;
-            width: 20px;
-            height: 20px;
-            background-color: #1d9bf0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            cursor: pointer;
-            animation: rainbow 4s ease-in-out infinite;
-        }
-        .verified-badge .tooltip {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            box-shadow: var(--shadow);
-            color: #fff;
-            z-index: 10;
-        }
-        .verified-badge:hover .tooltip {
-            display: block;
-        }
-        .top-badges-container {
-            position: absolute;
-            left: 14px;
-            top: 10px;
-            display: flex;
-            gap: 8px;
-            align-items: flex-start;
-        }
-        .top-badge {
-            width: 64px;
-            border-radius: 6px;
-            overflow: hidden;
-            animation: bounceIn 1s ease-out;
-        }
-        .top-badge:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .top-badge iframe {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .top-badge-credit {
-            font-size: 0.6rem;
-            color: #aaa;
-            text-align: center;
-            margin: 2px 0 0 0;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .top-badge:hover .top-badge-credit {
-            opacity: 1;
-        }
-        .wrap {
-            width: 90%;
-            max-width: 1200px;
-            margin: 14px auto;
-            display: grid;
-            grid-template-columns: 1fr 360px;
-            gap: 18px;
-            align-items: start;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .left {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.03);
-            transition: all 0.4s ease;
-            animation: cardSlide 0.6s ease-out;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow), var(--glow);
-        }
-        .card h3, .card h4 {
-            margin: 0 0 12px 0;
-            font-weight: 600;
-        }
-        .card p {
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
-        .card:nth-child(5) { animation-delay: 0.5s; }
-        .card:nth-child(6) { animation-delay: 0.6s; }
-        @keyframes cardSlide {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .embed {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        .embed:hover {
-            transform: scale(1.02);
-        }
-        .embed iframe {
-            width: 100%;
-            height: 380px;
-            border: 0;
-            display: block;
-        }
-        .datetime {
-            font-family: monospace;
-            color: var(--accent);
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-            font-size: 1.1rem;
-            text-align: center;
-            animation: glowPulse 2s ease-in-out infinite alternate;
-        }
-        @keyframes glowPulse {
-            from { text-shadow: 2px 2px 8px rgba(0,0,0,0.6), var(--glow); }
-            to { text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 30px rgba(255,12,20,0.5); }
-        }
-        #calendar-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        #calendar-controls button {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.06);
-            color: inherit;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        #calendar-controls button:hover {
-            background: var(--accent);
-            transform: scale(1.1);
-        }
-        #calendar-controls select {
-            background: transparent;
-            color: inherit;
-            border-radius: 8px;
-            padding: 8px;
-            border: 1px solid rgba(255,255,255,0.04);
-            cursor: pointer;
-        }
-        #calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-        }
-        .day {
-            min-height: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 10px;
-            border-radius: 8px;
-            background: var(--muted);
-            cursor: pointer;
-            transition: all .3s ease;
-            color: #ddd;
-            font-size: 0.9rem;
-            animation: dayFade 0.5s ease-out;
-        }
-        .day:hover {
-            transform: scale(1.05) rotate(1deg);
-            background: var(--accent);
-            box-shadow: var(--glow);
-        }
-        .day .num {
-            font-weight: 700;
-        }
-        .day.today {
-            background: var(--accent);
-            color: #fff;
-            animation: todayPulse 1s ease-in-out infinite;
-        }
-        @keyframes dayFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes todayPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        #song-search {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: var(--muted);
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 16px;
-            transition: border-color 0.3s;
-        }
-        #song-search:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 16px;
-        }
-        .album {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #111;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.04);
-            transition: all 0.4s ease;
-            animation: galleryPop 0.6s ease-out;
-            padding: 8px;
-        }
-        .album:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: var(--glow);
-        }
-        .album img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-            border-radius: 8px;
-        }
-        .album:hover img {
-            transform: scale(1.1);
-        }
-        @keyframes galleryPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .album-title {
-            font-weight: bold;
-            margin-top: 8px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-        .album-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-            width: 100%;
-            justify-content: center;
-        }
-        .btn {
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-        .btn-download {
-            background: var(--primary);
-            color: white;
-            flex: 1;
-        }
-        .btn-comment {
-            background: var(--secondary);
-            color: white;
-            flex: 1;
-        }
-        .comments {
-            margin-top: 12px;
-            padding: 8px;
-            background: var(--muted);
-            border-radius: 6px;
-            max-height: 150px;
-            overflow-y: auto;
-            width: 100%;
-        }
-        .comment-input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: var(--card);
-            color: #fff;
-            font-size: 0.85rem;
-        }
-        .comment-btn {
-            background: var(--accent);
-            color: white;
-            padding: 6px 10px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            width: 100%;
-        }
-        .comment-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .comment-list li {
-            margin-bottom: 6px;
-            padding: 6px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 4px;
-            font-size: 0.8rem;
-        }
-        .profiles .social {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            justify-content: center;
-        }
-        .profiles img {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        .profiles img:hover {
-            transform: rotate(360deg) scale(1.2);
-            filter: brightness(1.2);
-        }
-        .right {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .bg-selector {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .bg-selector button {
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 0;
-            cursor: pointer;
-            font-weight: 700;
-            background: rgba(255,255,255,0.03);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-        .bg-selector button:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: var(--glow);
-        }
-        .toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            justify-content: center;
-        }
-        .toggle:hover {
-            transform: scale(1.02);
-        }
-        .toggle label {
-            font-weight: 700;
-        }
-        .live-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-        .rights {
-            font-size: 0.9rem;
-            color: #bbb;
-            text-align: center;
-            margin-top: 12px;
-            animation: fadeIn 1s ease-out;
-        }
-        footer {
-            width: 100%;
-            max-width: 1200px;
-            padding: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #aaa;
-            font-size: 0.9rem;
-            animation: slideUp 0.8s ease-out 1s both;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        #music-canvas {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        .news-ticker {
-            width: 100%;
-            background: #000;
-            overflow: hidden;
-            border-top: 3px solid #fff;
-            position: relative;
-            margin: 20px 0 0 0;
-            animation: tickerSlide 1s ease-out;
-        }
-        @keyframes tickerSlide {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .label {
-            position: absolute;
-            top: -3px;
-            left: 10px;
-            background: #ff0000;
-            color: #fff;
-            padding: 4px 10px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            z-index: 1;
-            border: 1px solid #fff;
-            animation: labelGlow 2s ease-in-out infinite alternate;
-        }
-        @keyframes labelGlow {
-            from { box-shadow: 0 0 5px #ff0000; }
-            to { box-shadow: 0 0 15px #ff0000; }
-        }
-        .marquee {
-            display: flex;
-            overflow: hidden;
-            height: 35px;
-            align-items: center;
-        }
-        .inner {
-            white-space: nowrap;
-            animation: marquee 25s linear infinite;
-            color: #ffff00;
-            padding: 5px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-        .inner:hover {
-            color: #ff0000;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        @media (max-width: 980px) {
-            .wrap {
-                grid-template-columns: 1fr;
-            }
-            .right { order: 2; }
-            .left { order: 1; }
-        }
-        @media (max-width: 520px) {
-            .logo-text { font-size: 1.3rem; }
-            .top-badges-container {
-                flex-direction: column;
-                gap: 4px;
-                width: 48px;
-                left: 10px;
-                top: 8px;
-            }
-            .top-badge { width: 48px; }
-            .embed iframe { height: 240px; }
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-        }
-        .title {
-            color: #5C6AC4;
-        }
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: var(--card);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            max-width: 300px;
-            width: 80%;
-        }
-        .modal-content p {
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-        .modal-close {
-            background: var(--accent);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .modal-close:hover {
-            background: #cc0000;
-        }
+            position:fixed; top:0; width:100%; background:rgba(0,0,0,0.95); backdrop-filter:blur(15px); z-index:1000;
+            padding:1.2rem 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary);
+        }
+        .logo-container { display:flex; align-items:center; gap:12px; }
+        .logo { font-size:2.8rem; font-weight:800; background:linear-gradient(90deg,#ff3366,var(--primary),#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .verified { width:32px; height:32px; background:#1d9bf0; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:18px; animation:pulse 2s infinite; box-shadow:0 0 15px #1d9bf0; }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(29,155,240,0.7)} 70%{box-shadow:0 0 0 12px rgba(29,155,240,0)} 100%{box-shadow:0 0 0 0 rgba(29,155,240,0)} }
+
+        nav ul { display:flex; gap:3rem; list-style:none; }
+        nav a { color:#fff; text-decoration:none; font-weight:600; font-size:1.1rem; position:relative; }
+        nav a::after { content:''; position:absolute; bottom:-8px; left:0; width:0; height:3px; background:var(--primary); transition:0.3s; }
+        nav a:hover::after, nav a.active::after { width:100%; }
+
+        .page { display:none; min-height:100vh; padding:120px 5% 80px; text-align:center; opacity:0; transform:translateY(30px); transition:all 0.8s ease; }
+        .page.active { display:block; opacity:1; transform:translateY(0); }
+
+        .hero { height:100vh; background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)), url('https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg') center/cover no-repeat fixed; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+        .hero h1 { font-size:7rem; background:linear-gradient(45deg,var(--primary),#fff,#ff3366); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .btn { padding:20px 60px; background:var(--primary); color:white; border-radius:50px; font-size:1.4rem; text-decoration:none; box-shadow:var(--glow); transition:0.4s; }
+        .btn:hover { transform:translateY(-10px); box-shadow:0 25px 60px rgba(141,98,130,0.7); }
+
+        .song-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:3rem; max-width:1600px; margin:4rem auto; }
+        .song-card { background:var(--card); border-radius:25px; overflow:hidden; box-shadow:var(--glow); transition:0.5s; cursor:pointer; }
+        .song-card:hover { transform:translateY(-25px) scale(1.03); box-shadow:0 35px 80px rgba(141,98,130,0.6); }
+        .song-card img { width:100%; height:340px; object-fit:cover; }
+        .song-info { padding:1.8rem; }
+        .song-info h3 { font-size:1.8rem; margin-bottom:0.5rem; }
+        .play-btn { background:var(--primary); width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; font-size:2rem; transition:0.3s; }
+        .play-btn:hover { transform:scale(1.15); }
+        .download-btn { background:#333; color:#fff; padding:12px 30px; border-radius:50px; text-decoration:none; display:inline-block; margin-top:1rem; transition:0.3s; }
+        .download-btn:hover { background:var(--primary); }
+
+        .about-text { max-width:900px; margin:0 auto; font-size:1.6rem; line-height:2.2; }
+
+        .social-icons { margin:3rem 0; }
+        .social-icons a { color:#fff; font-size:4.5rem; margin:0 3rem; transition:0.4s; }
+        .social-icons a:hover { color:var(--primary); transform:translateY(-12px); }
+
+        footer { background:#000; padding:4rem; text-align:center; border-top:3px solid var(--primary); }
+        .ads { margin:4rem auto; text-align:center; }
+
+        /* Modal */
+        #downloadModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; justify-content:center; align-items:center; }
+        .modal-content { background:var(--card); padding:40px; border-radius:25px; text-align:center; max-width:500px; box-shadow:var(--glow); }
+        .modal-content p { font-size:1.8rem; margin-bottom:2rem; }
+        .modal-close { background:var(--primary); color:white; padding:15px 40px; border:none; border-radius:50px; font-size:1.3rem; cursor:pointer; }
+
+        /* Player */
+        #globalPlayer { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--card); padding:15px 30px; border-radius:50px; box-shadow:0 10px 40px rgba(0,0,0,0.6); z-index:999; display:none; align-items:center; gap:20px; }
+        #globalPlayer audio { width:400px; }
+        #nowPlaying { font-weight:600; }
     </style>
 </head>
 <body>
-    <canvas id="music-canvas"></canvas>
-    <header>
-        <div class="top-badges-container" aria-hidden="true">
-            <div class="top-badge">
-                <div style="width:100%;height:0;padding-bottom:100%;position:relative;">
-                    <iframe src="https://giphy.com/embed/Sqs3q0jJuafiJ6FAUn" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen title="Giphy Animasyon 1"></iframe>
-                </div>
-            </div>
-            <div class="top-badge">
-                <div style="width:100%;height:0;padding-bottom:138%;position:relative;">
-                    <iframe src="https://giphy.com/embed/GVRE5bjfjYc3og6ffl" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen title="Giphy Animasyon 2"></iframe>
-                </div>
-                <p class="top-badge-credit"><a href="https://giphy.com/stickers/tristeza-luto-pesar-GVRE5bjfjYc3og6ffl" style="color:#aaa; text-decoration:none;">via GIPHY</a></p>
-            </div>
-        </div>
-        <div class="logo-container">
-            <div class="logo-text">MEMET ÇINAR</div>
-            <div class="verified-badge">✓ <span class="tooltip">DOĞRULANMIŞ SİTE</span></div>
-        </div>
-    </header>
-    <main class="wrap" role="main">
-        <section class="left">
-            <div class="card bio-card">
-                <h3>Memet Çınar Hakkında</h3>
-                <p>Memet Çınar, Türk müzik sahnesinde yer alan bağımsız bir şarkıcı ve bestecidir. Müziği hayatının merkezine koyan Çınar, orijinal eserlerini ve sevdiği şarkıların yorumlarını paylaşmaya odaklanmıştır. Kendisini YouTube kanalında (@memetcinar444) şöyle tanıtıyor: "Ben Memet Çınar. Müziği hayatımın merkezine koydum ve bu kanalda kendi şarkılarımı, bestelediğim parçaları ve zaman zaman sevdiğim şarkıların yorumlarını paylaşıyorum."</p>
-            </div>
-            <div class="card">
-                <h3>Spotify</h3>
-                <div class="embed">
-                    <iframe src="https://open.spotify.com/embed/artist/5RsoLkeIEuJA1JwF7tFZLI?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Sanatçı Profili"></iframe>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Spotify Playlist</h3>
-                <div class="embed">
-                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4UTVfHqKR19ccTgs4CzMXc?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Playlist"></iframe>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Deezer</h3>
-                <div class="embed">
-                    <iframe title="Deezer Widget" src="https://widget.deezer.com/widget/dark/artist/317120491/top_tracks" width="100%" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media; clipboard-write"></iframe>
-                </div>
-            </div>
-            <div class="card" id="live-card">
-                <div class="live-title">
-                    <h3>CNR MÜZİK TV — Canlı Yayın</h3>
-                    <div style="font-size:0.85rem;color:#ccc">Herkese açık</div>
-                </div>
-                <div style="margin-top:10px" class="embed">
-                    <iframe id="live-iframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Canlı Yayın"></iframe>
-                </div>
-                <p style="margin:10px 0 0 0;color:#cfcfcf;font-size:0.9rem"> Not: Canlı yayın herkese açıktır. Tüm hakları gizlidir. </p>
-            </div>
-            <div class="card">
-                <div id="calendar-controls">
-                    <div style="display:flex;gap:8px;align-items:center">
-                        <button id="prev-year" title="Önceki yıl">◀</button>
-                        <div id="current-year" style="font-weight:800"></div>
-                        <button id="next-year" title="Sonraki yıl">▶</button>
-                    </div>
-                    <div style="font-size:0.9rem;color:#ddd">Ay seç:
-                        <select id="month-select">
-                            <option value="0">Ocak</option>
-                            <option value="1">Şubat</option>
-                            <option value="2">Mart</option>
-                            <option value="3">Nisan</option>
-                            <option value="4">Mayıs</option>
-                            <option value="5">Haziran</option>
-                            <option value="6">Temmuz</option>
-                            <option value="7">Ağustos</option>
-                            <option value="8">Eylül</option>
-                            <option value="9">Ekim</option>
-                            <option value="10">Kasım</option>
-                            <option value="11">Aralık</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="calendar"></div>
-            </div>
-            <div class="card songs-section">
-                <h3>Albümler & Parçalar</h3>
-                <input type="text" id="song-search" placeholder="Şarkı ara...">
-                <div class="gallery" id="gallery"></div>
-            </div>
-        </section>
-        <aside class="right">
-            <div class="card">
-                <div class="datetime" id="datetime"></div>
-                <div style="margin-top:10px;font-size:0.9rem;color:#ddd">Saat ve tarih otomatik güncellenir.</div>
-            </div>
-            <div class="card">
-                <h4>Arka Plan & Efektler</h4>
-                <div class="bg-selector">
-                    <button data-bg="dark">Koyu (Varsayılan)</button>
-                    <button data-bg="midnight">Gece Gradyan</button>
-                    <button data-bg="sunset">Günbatımı</button>
-                    <button data-bg="album">Albüm Sanatı</button>
-                </div>
-                <div style="height:12px"></div>
-                <div class="toggle">
-                    <label>Müzik-temalı kar/nota efekti</label>
-                    <input id="toggle-effect" type="checkbox" style="transform:scale(1.2);margin-left:8px" checked />
-                </div>
-                <p style="margin-top:8px;color:#ccc;font-size:0.9rem">Efekt müziğe tepki vermez (tarayıcı kısıtları). Görsel, site temasına uyumlu tasarlandı.</p>
-            </div>
-            <div class="card profiles">
-                <h4>Beni Takip Edin</h4>
-                <div class="social">
-                    <a href="https://open.spotify.com/artist/5RsoLkeIEuJA1JwF7tFZLI" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify İkonu"></a>
-                    <a href="https://www.youtube.com/@memetcinar444" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube İkonu"></a>
-                    <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="https://cdn-icons-png.flaticon.com/512/732/732245.png" alt="Apple Music İkonu"></a>
-                    <a href="https://www.instagram.com/memetcinarofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram İkonu"></a>
-                </div>
-            </div>
-            <div class="card">
-                <h4>Parça Detayları</h4>
-                <div style="display:flex;flex-direction:column;gap:12px">
-                    <a href="https://www.google.com/search?q=efkar+gecesi+memet+çınar" target="_blank" rel="noopener noreferrer" style="display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit; transition: all 0.3s ease;" aria-label="Efkar Gecesi Detayları">
-                        <div style="width:80px;height:80px;border-radius:8px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,0.03)"><img src="https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg" alt="Efkar Gecesi Kapak" style="width:100%;height:100%;object-fit:cover; transition: transform 0.3s ease;" loading="lazy"></div>
-                        <div>
-                            <div style="font-weight:800">Efkar Gecesi</div>
-                            <div style="font-size:0.9rem;color:#ccc">Sözyazarı bağlantısı ve görseller</div>
-                        </div>
-                    </a>
-                    <a href="https://www.google.com/search?q=yak+memet+çınar" target="_blank" rel="noopener noreferrer" style="display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit; transition: all 0.3s ease;" aria-label="Yak Detayları">
-                        <div style="width:80px;height:80px;border-radius:8px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,0.03)"><img src="https://i.ytimg.com/vi/igwmBMNW0WM/maxresdefault.jpg" alt="Yak Kapak" style="width:100%;height:100%;object-fit:cover; transition: transform 0.3s ease;" loading="lazy"></div>
-                        <div>
-                            <div style="font-weight:800">Yak</div>
-                            <div style="font-size:0.9rem;color:#ccc">Parça sayfası / arama sonuçları</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="card">
-                <h4>Google Kaynakları</h4>
-                <div style="display:flex;flex-direction:column;gap:12px">
-                    <a href="https://share.google/ahjxkcnH5odbKF0wA" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit; transition: all 0.3s ease;">1. Share Link</a>
-                    <a href="https://www.google.com/search?q=memet+çınar" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit; transition: all 0.3s ease;">2. Memet Çınar Arama</a>
-                    <a href="https://www.google.com/search?q=memet+çınar+şarkıları" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit; transition: all 0.3s ease;">3. Memet Çınar Şarkıları</a>
-                    <a href="https://www.google.com/search?q=memet+çınar+albümleri" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit; transition: all 0.3s ease;">4. Memet Çınar Albümleri</a>
-                </div>
-            </div>
-        </aside>
-        <div class="news-ticker">
-            <div class="label">HABER</div>
-            <div class="marquee">
-                <div class="inner" id="tickerText">Memet Çınar yeni single hazırlığında • Konser hazırlıkları sürüyor • Sürpriz iş birlikleri yolda • SON DAKİKA: Gürcistan'da düşen askeri kargo uçağında 20 askerimiz şehit oldu. Milletimizin başı sağ olsun.</div>
-            </div>
-        </div>
-    </main>
-    <footer>
-        <div>Tüm hakları gizlidir © Memet Çınar</div>
-        <div style="color:#888">Built — lightweight single page</div>
-    </footer>
 
-    <!-- Modal HTML -->
-    <div id="downloadModal" class="modal">
-        <div class="modal-content">
-            <p>ŞU ANDA BU ÖZELLİK AKTİF DEĞİL</p>
-            <button class="modal-close" onclick="closeModal()">Tamam</button>
-        </div>
+<canvas id="canvas"></canvas>
+
+<header>
+    <div class="logo-container">
+        <div class="logo">MEMET ÇINAR</div>
+        <div class="verified" title="Doğrulanmış Resmi Site">✓</div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#anasayfa" class="active">Ana Sayfa</a></li>
+            <li><a href="#hakkimda">Hakkımda</a></li>
+            <li><a href="#muzik">Müzik</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ANA SAYFA -->
+<div id="anasayfa" class="page active">
+    <div class="hero">
+        <h1>MEMET ÇINAR</h1>
+        <p style="font-size:2.5rem;margin:2rem 0;">2025'in Gerçek Damar Sesi • Bağımsız Sanatçı</p>
+        <a href="#muzik" class="btn">Şarkıları Dinle</a>
+    </div>
+</div>
+
+<!-- HAKKIMDA -->
+<div id="hakkimda" class="page">
+    <h1 style="font-size:6rem;margin-bottom:3rem;">Hakkımda</h1>
+    <div class="about-text">
+        <p>Çocukluğumdan beri içimde müzik vardı. Ritim tutar, geceleri kendi bestelerimi yapardım.</p>
+        <p>2025'te karar verdim: Artık susmayacağım. Kendi şarkılarımı tüm Türkiye'ye ve dünyaya duyuracağım.</p>
+        <p>Arabesk-pop ile damar ruhunu birleştiriyorum. Her şarkım gerçek bir hikaye, her nakarat bir yara izi...</p>
+        <p>Efkar Gecesi'nden YAK'a, ELKAY serisinden Özür Dilerim'e kadar hepsi benim hayatımdan izler taşıyor.</p>
+        <p>Siz de bu hikayenin bir parçası olun. Birlikte efkarlanalım ❤️</p>
+    </div>
+</div>
+
+<!-- MÜZİK -->
+<div id="muzik" class="page">
+    <h1 style="font-size:6rem;margin:3rem 0;">Müzik</h1>
+
+    <div style="max-width:1100px;margin:0 auto 5rem;">
+        <iframe src="https://open.spotify.com/embed/artist/5RsoLkeIEuJA1JwF7tFZLI?utm_source=generator&theme=0" height="520" style="width:100%;border-radius:25px;box-shadow:var(--glow);" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        /* =========================== Settings & initial data =========================== */
-        const YT_CHANNEL_ID = 'UChm4cD1UhsOt8WUXy-Okqcw';
-        /* =========================== Live iframe init =========================== */
-        (function initLive() {
-            const liveIframe = document.getElementById('live-iframe');
-            const uploadsPlaylist = `UU${YT_CHANNEL_ID.substring(2)}`;
-            liveIframe.src = `https://www.youtube.com/embed/videoseries?list=${uploadsPlaylist}&autoplay=1&loop=1&mute=1`;
-        })();
-        /* =========================== Date & Time =========================== */
-        function updateDateTime() {
-            const now = new Date();
-            const time = now.toLocaleTimeString('tr-TR', { hour12: false });
-            const date = now.toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('datetime').textContent = `${time} | ${date}`;
-        }
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
-        /* =========================== Calendar =========================== */
-        let calendarYear = (new Date()).getFullYear();
-        let calendarMonth = (new Date()).getMonth();
-        const currentYearEl = document.getElementById('current-year');
-        const monthSelect = document.getElementById('month-select');
-        document.getElementById('prev-year').addEventListener('click', () => { calendarYear--; renderCalendar(); });
-        document.getElementById('next-year').addEventListener('click', () => { calendarYear++; renderCalendar(); });
-        monthSelect.addEventListener('change', (e) => { calendarMonth = parseInt(e.target.value, 10); renderCalendar(); });
-        function renderCalendar() {
-            currentYearEl.textContent = calendarYear;
-            monthSelect.value = calendarMonth;
-            const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
-            const lastDate = new Date(calendarYear, calendarMonth + 1, 0).getDate();
-            const calendar = document.getElementById('calendar');
-            calendar.innerHTML = '';
-            const dayNames = ['Paz', 'Pts', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
-            dayNames.forEach(dn => {
-                const header = document.createElement('div');
-                header.style.opacity = '0.6';
-                header.style.fontSize = '0.75rem';
-                header.style.padding = '6px 8px';
-                header.textContent = dn;
-                header.style.background = 'transparent';
-                calendar.appendChild(header);
-            });
-            for (let i = 0; i < firstDay; i++) {
-                const empty = document.createElement('div');
-                empty.style.visibility = 'hidden';
-                calendar.appendChild(empty);
-            }
-            for (let d = 1; d <= lastDate; d++) {
-                const day = document.createElement('div');
-                day.className = 'day';
-                const num = document.createElement('div');
-                num.className = 'num';
-                num.textContent = d;
-                day.appendChild(num);
-                const now = new Date();
-                if (calendarYear === now.getFullYear() && calendarMonth === now.getMonth() && d === now.getDate()) {
-                    day.classList.add('today');
-                }
-                day.addEventListener('click', () => { alert(`${d} ${monthSelect.options[monthSelect.selectedIndex].text} ${calendarYear}`); });
-                calendar.appendChild(day);
-            }
-        }
-        renderCalendar();
-        /* =========================== Gallery + songs =========================== */
-        const songs = [
-            { title: "Efkar Gecesi", img: "https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg", link: "https://www.google.com/search?q=efkar+gecesi+memet+çınar", download: "#" },
-            { title: "Yak", img: "https://i.ytimg.com/vi/igwmBMNW0WM/maxresdefault.jpg", link: "https://www.google.com/search?q=yak+memet+çınar", download: "#" },
-            { title: "YILDIZLAR", img: "https://source.boomplaymusic.com/group10/M00/10/07/56b01957ad9d4f2ab21e16b0f4ab8604H3000W3000_464_464.jpg", link: "https://music.apple.com/tr/album/yildizlar-single/1743419994", download: "#" },
-            { title: "BÖYLE İŞTE ELKAY", img: "https://source.boomplaymusic.com/group10/M00/09/12/4eca08480aba4b22b6d44dd9119f6f41H3000W3000_320_320.jpg", link: "https://music.apple.com/tr/album/boyle-iste-elkay-single/1739198057", download: "#" },
-            { title: "LEYA", img: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/b8/ee/3ab8ee2e-1577-3937-19e9-8fc881ff1891/artwork.jpg/300x300bb.webp", link: "https://music.apple.com/tr/album/leya-single/1738144105", download: "#" },
-            { title: "ELKAY 2", img: "https://source.boomplaymusic.com/group10/M00/09/09/aa1c1881ab2d4445a3fb68fc28ce26c9H3000W3000_320_320.jpg", link: "https://music.apple.com/tr/album/elkay-2-single/1735742378", download: "#" },
-            { title: "Elkay Gibi", img: "https://source.boomplaymusic.com/group10/M00/09/07/8b8f185cf3364661b20fc9111786ec57H3000W3000_320_320.jpg", link: "https://music.apple.com/tr/album/elkay-gibi-single/1733426430", download: "#" },
-            { title: "KORUYUCU AİLE", img: "https://source.boomplaymusic.com/group10/M00/07/01/7f2535266dff43bc8098a9e226108710H3000W3000_320_320.jpg", link: "https://music.apple.com/tr/album/koruyucu-aile-official-music-single/1732151208", download: "#" },
-            { title: "EĞİLMEZ", img: "https://source.boomplaymusic.com/group10/M00/06/25/bc88b4bc9af4425fb23bd409a40275e7H3000W3000_320_320.jpg", link: "https://music.apple.com/tr/album/e%C4%9Filmez-single/1731054625", download: "#" },
-            { title: "BAŞKA BİRİSİ", img: "https://i.ytimg.com/vi/M90Fr_a7bOw/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=M90Fr_a7bOw", download: "#" },
-            { title: "Sen Gittin Ya", img: "https://i.ytimg.com/vi/BWdb0W2ARmA/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=BWdb0W2ARmA", download: "#" },
-            { title: "İremin Şarkısı", img: "https://i.ytimg.com/vi/CcCs4_OZNOo/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=CcCs4_OZNOo", download: "#" },
-            { title: "Vazgeçmez Bu Kalp", img: "https://source.boomplaymusic.com/group10/M00/04/25/0b4cea4ccc694a0b86cbb3dcff358714H3000W3000_320_320.jpg", link: "https://www.boomplay.com/songs/189673835", download: "#" },
-            { title: "GECEYE YAZDIM", img: "https://source.boomplaymusic.com/group10/M00/10/22/2d959b086e284537acc1dcbc12e90b5aH3000W3000_320_320.jpg", link: "https://www.boomplay.com/songs/189673836", download: "#" }
-        ];
-        function populateGallery(filter = '') {
-            const g = document.getElementById('gallery');
-            g.innerHTML = '';
-            const filteredSongs = songs.filter(s => s.title.toLowerCase().includes(filter.toLowerCase()));
-            filteredSongs.forEach((s, index) => {
-                const div = document.createElement('div');
-                div.className = 'album';
-                div.innerHTML = `
-                    <a href="${s.link}" target="_blank" rel="noopener noreferrer">
-                        <img src="${s.img}" alt="${s.title} Kapak" loading="lazy">
-                    </a>
-                    <div class="album-title">${s.title}</div>
-                    <div class="album-actions">
-                        <button class="btn btn-download" onclick="showModal()">İndir</button>
-                        <button class="btn btn-comment" onclick="toggleComments(${index})">Yorum</button>
-                    </div>
-                    <div class="comments" id="comments-${index}" style="display:block;">
-                        <input type="text" class="comment-input" id="input-${index}" placeholder="Yorum...">
-                        <button class="comment-btn" onclick="addComment(${index})">Gönder</button>
-                        <ul class="comment-list" id="list-${index}"></ul>
-                    </div>
-                `;
-                g.appendChild(div);
-                loadComments(index);
-            });
-        }
-        populateGallery();
-        document.getElementById('song-search').addEventListener('input', (e) => { populateGallery(e.target.value); });
-        function toggleComments(index) {
-            const commentsDiv = document.getElementById(`comments-${index}`);
-            commentsDiv.style.display = commentsDiv.style.display === 'none' ? 'block' : 'none';
-        }
-        function addComment(index) {
-            const input = document.getElementById(`input-${index}`);
-            const list = document.getElementById(`list-${index}`);
-            if (input.value.trim()) {
-                const li = document.createElement('li');
-                li.textContent = input.value;
-                list.appendChild(li);
-                saveComment(index, input.value);
-                input.value = '';
-            }
-        }
-        function saveComment(index, comment) {
-            let comments = JSON.parse(localStorage.getItem(`comments_${index}`)) || [];
-            comments.push(comment);
-            localStorage.setItem(`comments_${index}`, JSON.stringify(comments));
-        }
-        function loadComments(index) {
-            const list = document.getElementById(`list-${index}`);
-            let comments = JSON.parse(localStorage.getItem(`comments_${index}`)) || [];
-            comments.forEach(c => {
-                const li = document.createElement('li');
-                li.textContent = c;
-                list.appendChild(li);
-            });
-        }
-        /* =========================== Background switcher =========================== */
-        const body = document.body;
-        document.querySelectorAll('.bg-selector button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const v = btn.getAttribute('data-bg');
-                switch (v) {
-                    case 'dark':
-                        body.style.background = 'linear-gradient(180deg, #0b0c1a, #071025)';
-                        break;
-                    case 'midnight':
-                        body.style.background = 'linear-gradient(180deg, #0b1220, #071234)';
-                        break;
-                    case 'sunset':
-                        body.style.background = 'linear-gradient(180deg, #2b0a25, #7b2f7b, #ff7a00)';
-                        break;
-                    case 'album':
-                        body.style.background = 'url(https://via.placeholder.com/1600x900?text=Alb%C3%BCm+Arka+Plan) center/cover no-repeat';
-                        break;
-                    default:
-                        body.style.background = 'var(--bg1)';
-                }
-            });
-        });
-        /* =========================== Music-themed snowfall animation =========================== */
-        const canvas = document.getElementById('music-canvas');
-        const ctx = canvas.getContext('2d');
-        let cw, ch, notes = [], effectOn = true;
-        function resizeCanvas() {
-            cw = canvas.width = window.innerWidth;
-            ch = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        function rand(min, max) { return Math.random() * (max - min) + min; }
-        function makeNoteSprite(size) {
-            const s = document.createElement('canvas');
-            s.width = s.height = size;
-            const c = s.getContext('2d');
-            c.fillStyle = 'rgba(255,255,255,0.95)';
-            c.beginPath();
-            c.ellipse(size * 0.35, size * 0.6, size * 0.18, size * 0.22, 0, 0, Math.PI * 2);
-            c.fill();
-            c.fillRect(size * 0.45, size * 0.15, size * 0.08, size * 0.45);
-            c.beginPath();
-            c.moveTo(size * 0.53, size * 0.15);
-            c.quadraticCurveTo(size * 0.75, size * 0.1, size * 0.78, size * 0.3);
-            c.lineWidth = size * 0.06;
-            c.strokeStyle = 'rgba(255,255,255,0.9)';
-            c.stroke();
-            const g = c.createLinearGradient(0, 0, size, size);
-            g.addColorStop(0, 'rgba(255,200,0,0.12)');
-            g.addColorStop(1, 'rgba(120,200,255,0.06)');
-            c.fillStyle = g;
-            c.fillRect(0, 0, size, size);
-            return s;
-        }
-        const sprites = [makeNoteSprite(40), makeNoteSprite(28), makeNoteSprite(20)];
-        function createNote() {
-            return {
-                x: rand(0, cw),
-                y: -50,
-                vx: rand(-0.3, 0.6),
-                vy: rand(0.4, 1.2),
-                rot: rand(0, Math.PI * 2),
-                vr: rand(-0.01, 0.01),
-                size: sprites[Math.floor(rand(0, sprites.length))],
-                alpha: rand(0.5, 1)
-            };
-        }
-        for (let i = 0; i < 60; i++) notes.push(createNote());
-        function animateNotes() {
-            ctx.clearRect(0, 0, cw, ch);
-            const t = Date.now() / 1000;
-            const pulse = 0.5 + Math.abs(Math.sin(t * 0.8)) * 0.8;
-            if (effectOn) {
-                for (let n of notes) {
-                    n.x += n.vx * pulse * (0.6 + Math.sin(n.y * 0.01) * 0.2);
-                    n.y += n.vy * (0.6 + pulse * 0.6);
-                    n.rot += n.vr;
-                    ctx.save();
-                    ctx.globalAlpha = n.alpha * (0.6 + 0.4 * Math.sin(t * 0.6 + n.x * 0.01));
-                    ctx.translate(n.x, n.y);
-                    ctx.rotate(n.rot);
-                    const s = n.size;
-                    ctx.drawImage(s, -s.width / 2, -s.height / 2, s.width, s.height);
-                    ctx.restore();
-                    if (n.y > ch + 80 || n.x < -100 || n.x > cw + 100) {
-                        Object.assign(n, createNote());
-                        n.y = -rand(10, 200);
-                    }
-                }
-            }
-            requestAnimationFrame(animateNotes);
-        }
-        animateNotes();
-        document.getElementById('toggle-effect').addEventListener('change', (e) => { effectOn = e.target.checked; });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                effectOn = false;
-                document.getElementById('toggle-effect').checked = false;
-            }
-        });
+    <h2 style="font-size:4.5rem;margin:4rem 0;">Tüm Şarkılar</h2>
+    <div class="song-grid" id="songGrid"></div>
+</div>
 
-        /* Modal Functions */
-        function showModal() {
-            document.getElementById('downloadModal').style.display = 'flex';
-        }
-        function closeModal() {
-            document.getElementById('downloadModal').style.display = 'none';
-        }
-    </script>
+<!-- İLETİŞİM -->
+<div id="iletisim" class="page">
+    <div style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+        <p style="font-size:2.4rem;margin-bottom:4rem;opacity:0.9;">
+            Mesajlarını, yorumlarını, isteklerini her zaman bekliyorum.<br>
+            Direkt sosyal medyadan ulaşabilirsin!
+        </p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/memetcinarofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@memetcinar444" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://open.spotify.com/artist/5RsoLkeIEuJA1JwF7tFZLI" target="_blank"><i class="fab fa-spotify"></i></a>
+            <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank"><i class="fab fa-apple"></i></a>
+            <a href="https://www.tiktok.com/@memetcinar" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 MEMET ÇINAR – Tüm Hakları Saklıdır</p>
+</footer>
+
+<!-- Global Player -->
+<div id="globalPlayer">
+    <span id="nowPlaying">Şarkı yükleniyor...</span>
+    <audio id="audioPlayer" controls></audio>
+</div>
+
+<!-- Modal -->
+<div id="downloadModal">
+    <div class="modal-content">
+        <p>Şu anda bu özellik Aktif Değil</p>
+        <button class="modal-close" onclick="document.getElementById('downloadModal').style.display='none'">TAMAM</button>
+    </div>
+</div>
+
+<script>
+// Tüm şarkılar + YouTube linkleri (YouTube'dan MP3 çalmak için ytdl tarzı değil, direkt embed video yerine audio çalar için YouTube ID kullanıyoruz)
+const songs = [
+    {title:"YILDIZLAR",img:"https://source.boomplaymusic.com/group10/M00/10/07/56b01957ad9d4f2ab21e16b0f4ab8604H3000W3000_464_464.jpg",time:"3:12",yt:"AMDerpIe9QE"},
+    {title:"BÖYLE İŞTE ELKAY",img:"https://source.boomplaymusic.com/group10/M00/09/12/4eca08480aba4b22b6d44dd9119f6f41H3000W3000_320_320.jpg",time:"3:30",yt:"EkAtzXOP0p0"},
+    {title:"LEYA",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/b8/ee/3ab8ee2e-1577-3937-19e9-8fc881ff1891/artwork.jpg/300x300bb.webp",time:"3:25",yt:"8La-12lYhao"},
+    {title:"ELKAY 2",img:"https://source.boomplaymusic.com/group10/M00/09/09/aa1c1881ab2d4445a3fb68fc28ce26c9H3000W3000_320_320.jpg",time:"3:46",yt:"-Wrg7mJ__Ek"},
+    {title:"ELKAY GİBİ",img:"https://source.boomplaymusic.com/group10/M00/09/07/8b8f185cf3364661b20fc9111786ec57H3000W3000_320_320.jpg",time:"2:55",yt:"0QWuDJhDsHQ"},
+    {title:"KORUYUCU AİLE",img:"https://source.boomplaymusic.com/group10/M00/07/01/7f2535266dff43bc8098a9e226108710H3000W3000_320_320.jpg",time:"3:40",yt:"2ti6IK3Aix0"},
+    {title:"EĞİLMEZ",img:"https://source.boomplaymusic.com/group10/M00/06/25/bc88b4bc9af4425fb23bd409a40275e7H3000W3000_320_320.jpg",time:"3:15",yt:"441IylCM7B4"},
+    {title:"GECEYE YAZDIM",img:"https://source.boomplaymusic.com/group10/M00/10/22/2d959b086e284537acc1dcbc12e90b5aH3000W3000_320_320.jpg",time:"3:30",yt:"WsR79WlMqNI"},
+    {title:"VAZGEÇMEZ BU KALP",img:"https://source.boomplaymusic.com/group10/M00/04/25/0b4cea4ccc694a0b86cbb3dcff358714H3000W3000_320_320.jpg",time:"3:20",yt:"0xgUyoGm4hY"},
+    {title:"VUR BENİ KALBİMDEN",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5b/e2/4d/5be24d64-09d8-ac8e-1a37-d6e2703fa3c5/artwork.jpg/600x600bf-60.jpg",time:"3:49",yt:"gMGz2e9uMcA"},
+    {title:"DÜNYAMIN GÜNEŞİ",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/32/91/03/32910356-af9f-423c-5fe7-89246e1bd172/artwork.jpg/1200x630bb.jpg",time:"3:34",yt:"fvt8tI8n_cY"},
+    {title:"YOLUMU KAYBETTİM",img:"https://source.boomplaymusic.com/group10/M00/04/25/1acdcae663b24df899e39dd6d32763f4H3000W3000_320_320.jpg",time:"3:44",yt:"Rs6g6yaacXo"},
+    {title:"BİLE BİLE",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/96/a7/3d/96a73d2c-c212-8d5e-b43f-ab0392209ad5/artwork.jpg/600x600bf-60.jpg",time:"3:19",yt:"qED3CgFJ1Fc"},
+    {title:"BİTTİ HİKAYEM",img:"https://source.boomplaymusic.com/group10/M00/05/01/cb31a5b621b94b3f81dbea18d87d352eH3000W3000_320_320.jpg",time:"3:17",yt:"KMcinbhM7Bw"},
+    {title:"SEN GİTTİN YA",img:"https://source.boomplaymusic.com/group10/M00/04/25/790dfbbcba674a66b4360910950b936cH3000W3000_320_320.jpg",time:"4:00",yt:"BWdb0W2ARmA"},
+    {title:"SONSUZA DEK SENİ BEKLEDİM",img:"https://s.mxmcdn.net/images-storage/albums5/9/1/0/3/4/5/87543019_500_500.jpg",time:"3:22",yt:"ZIGiuOGCmA4"},
+    {title:"ÖZÜR DİLERİM",img:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg",time:"2:41",yt:"mSnp-mPxGus"},
+    {title:"GEL DE BİTSİN BU HASRET",img:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg",time:"3:05",yt:"DDEhRqKm1bE"},
+    {title:"BİR DUBLE DAHA",img:"https://source.boomplaymusic.com/group10/M00/05/01/05650b68b89b460fb5e5a3d9e74020c4H3000W3000_464_464.jpg",time:"2:07",yt:"8E0G3myGiFk"},
+    {title:"KIRMIZI YAZMA",img:"https://source.boomplaymusic.com/group10/M00/04/25/59b6353cd6fc4684bfb228690defb300H3000W3000_320_320.jpg",time:"3:25",yt:"NzVEoSWhgl0"},
+    {title:"AYREN",img:"https://i.ytimg.com/vi/pbS4NlHpzxw/sddefault.jpg",time:"3:04",yt:"pbS4NlHpzxw"},
+    {title:"GÖZLERİ",img:"https://source.boomplaymusic.com/group10/M00/06/26/4214246661104419978b389e7fb80184H3000W3000_464_464.jpg",time:"3:00",yt:"36ykG4zUtL0"},
+    {title:"KİBİR",img:"https://i.ytimg.com/vi/CNdZW-4h2FY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDpHD-JDxYa-KWESLjx5I5-z3zpng",time:"3:40",yt:"CNdZW-4h2FY"},
+    {title:"AŞKIN KÜLLERİ",img:"https://source.boomplaymusic.com/group10/M00/04/25/1a561e90cd94403ba2955338488d4cc1H3000W3000_320_320.jpg",time:"3:45",yt:"F3MAB4cgmEI"}
+];
+
+const grid = document.getElementById('songGrid');
+const player = document.getElementById('audioPlayer');
+const nowPlaying = document.getElementById('nowPlaying');
+const globalPlayer = document.getElementById('globalPlayer');
+
+songs.forEach((s, i) => {
+    grid.innerHTML += `
+        <div class="song-card" onclick="playSong('${s.yt}', '${s.title}')">
+            <img src="${s.img}" alt="${s.title}" loading="lazy">
+            <div class="song-info">
+                <div class="play-btn"><i class="fas fa-play"></i></div>
+                <h3>${s.title}</h3>
+                <span>${s.time}</span>
+                <a href="javascript:void(0)" class="download-btn" onclick="event.stopPropagation(); document.getElementById('downloadModal').style.display='flex'">ŞARKIYI İNDİR</a>
+            </div>
+        </div>`;
+});
+
+function playSong(id, title) {
+    player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+    nowPlaying.textContent = title + " çalıyor...";
+    globalPlayer.style.display = "flex";
+}
+
+// Sayfa geçiş
+const pages = document.querySelectorAll('.page');
+const links = document.querySelectorAll('nav a');
+function showPage(hash) {
+    pages.forEach(p => p.classList.remove('active'));
+    links.forEach(l => l.classList.remove('active'));
+    const target = document.querySelector(hash || '#anasayfa');
+    if (target) target.classList.add('active');
+    document.querySelector(`nav a[href="${hash || '#anasayfa'}"]`)?.classList.add('active');
+    window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', () => showPage(location.hash));
+showPage(location.hash);
+
+// Nota efekti (aynı)
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = innerWidth, h = canvas.height = innerHeight;
+onresize = () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; };
+const notes = [];
+const sprite = (() => { const c=document.createElement('canvas'); c.width=c.height=40; const x=c.getContext('2d'); x.fillStyle='#fff'; x.beginPath(); x.ellipse(14,24,7,9,0,0,Math.PI*2); x.fill(); x.fillRect(18,6,4,18); return c; })();
+for(let i=0;i<120;i++) notes.push({x:Math.random()*w,y:Math.random()*h-h,vx:Math.random()*0.6-0.3,vy:Math.random()*1+0.5,size:Math.random()*0.8+0.6,rot:Math.random()*Math.PI*2,vr:(Math.random()-0.5)*0.03});
+function anim(){ ctx.clearRect(0,0,w,h); notes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;n.rot+=n.vr;if(n.y>h+50){n.y=-50;n.x=Math.random()*w} ctx.save(); ctx.globalAlpha=0.8; ctx.translate(n.x,n.y); ctx.rotate(n.rot); ctx.drawImage(sprite,-20*n.size,-20*n.size,40*n.size,40*n.size); ctx.restore();}); requestAnimationFrame(anim); }
+anim();
+</script>
 </body>
-
 </html>
