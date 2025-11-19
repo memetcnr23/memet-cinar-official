@@ -8,235 +8,276 @@
     <meta property="og:title" content="MEMET ÇINAR | Resmi Web Sitesi 2025">
     <meta property="og:image" content="https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg">
     <title>MEMET ÇINAR | Resmi Web Sitesi</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127233618306992" crossorigin="anonymous"></script>
-
     <style>
-        :root { --primary: #8D6282; --dark: #000; --card: rgba(20,20,35,0.98); --glow: 0 0 30px rgba(141,98,130,0.5); }
-        * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
-        body { font-family:'Poppins',sans-serif; background:#000; color:#eee; overflow-x:hidden; }
-        canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.6; }
-
-        header {
-            position:fixed; top:0; width:100%; background:rgba(0,0,0,0.95); backdrop-filter:blur(15px); z-index:1000;
-            padding:1.2rem 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary);
-        }
-        .logo-container { display:flex; align-items:center; gap:12px; }
-        .logo { font-size:2.8rem; font-weight:800; background:linear-gradient(90deg,#ff3366,var(--primary),#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .verified { width:32px; height:32px; background:#1d9bf0; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:18px; animation:pulse 2s infinite; box-shadow:0 0 15px #1d9bf0; }
-        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(29,155,240,0.7)} 70%{box-shadow:0 0 0 12px rgba(29,155,240,0)} 100%{box-shadow:0 0 0 0 rgba(29,155,240,0)} }
-
-        nav ul { display:flex; gap:3rem; list-style:none; }
-        nav a { color:#fff; text-decoration:none; font-weight:600; font-size:1.1rem; position:relative; }
-        nav a::after { content:''; position:absolute; bottom:-8px; left:0; width:0; height:3px; background:var(--primary); transition:0.3s; }
-        nav a:hover::after, nav a.active::after { width:100%; }
-
-        .page { display:none; min-height:100vh; padding:120px 5% 80px; text-align:center; opacity:0; transform:translateY(30px); transition:all 0.8s ease; }
-        .page.active { display:block; opacity:1; transform:translateY(0); }
-
-        .hero { height:100vh; background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)), url('https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg') center/cover no-repeat fixed; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-        .hero h1 { font-size:7rem; background:linear-gradient(45deg,var(--primary),#fff,#ff3366); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .btn { padding:20px 60px; background:var(--primary); color:white; border-radius:50px; font-size:1.4rem; text-decoration:none; box-shadow:var(--glow); transition:0.4s; }
-        .btn:hover { transform:translateY(-10px); box-shadow:0 25px 60px rgba(141,98,130,0.7); }
-
-        .song-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:3rem; max-width:1600px; margin:4rem auto; }
-        .song-card { background:var(--card); border-radius:25px; overflow:hidden; box-shadow:var(--glow); transition:0.5s; cursor:pointer; }
-        .song-card:hover { transform:translateY(-25px) scale(1.03); box-shadow:0 35px 80px rgba(141,98,130,0.6); }
-        .song-card img { width:100%; height:340px; object-fit:cover; }
-        .song-info { padding:1.8rem; }
-        .song-info h3 { font-size:1.8rem; margin-bottom:0.5rem; }
-        .play-btn { background:var(--primary); width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; font-size:2rem; transition:0.3s; }
-        .play-btn:hover { transform:scale(1.15); }
-        .download-btn { background:#333; color:#fff; padding:12px 30px; border-radius:50px; text-decoration:none; display:inline-block; margin-top:1rem; transition:0.3s; }
-        .download-btn:hover { background:var(--primary); }
-
-        .about-text { max-width:900px; margin:0 auto; font-size:1.6rem; line-height:2.2; }
-
-        .social-icons { margin:3rem 0; }
-        .social-icons a { color:#fff; font-size:4.5rem; margin:0 3rem; transition:0.4s; }
-        .social-icons a:hover { color:var(--primary); transform:translateY(-12px); }
-
-        footer { background:#000; padding:4rem; text-align:center; border-top:3px solid var(--primary); }
-        .ads { margin:4rem auto; text-align:center; }
-
-        /* Modal */
-        #downloadModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; justify-content:center; align-items:center; }
-        .modal-content { background:var(--card); padding:40px; border-radius:25px; text-align:center; max-width:500px; box-shadow:var(--glow); }
-        .modal-content p { font-size:1.8rem; margin-bottom:2rem; }
-        .modal-close { background:var(--primary); color:white; padding:15px 40px; border:none; border-radius:50px; font-size:1.3rem; cursor:pointer; }
-
-        /* Player */
-        #globalPlayer { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--card); padding:15px 30px; border-radius:50px; box-shadow:0 10px 40px rgba(0,0,0,0.6); z-index:999; display:none; align-items:center; gap:20px; }
-        #globalPlayer audio { width:400px; }
-        #nowPlaying { font-weight:600; }
+        :root { --primary: #8D6282; --dark: #000; --card: rgba(20,20,35,0.98); --glow: 0 0 30px rgba(141,98,130,0.45); }
+        *{box-sizing:border-box;margin:0;padding:0}
+        html,body{height:100%}
+        body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#000;color:#eee;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.55}
+        header{position:fixed;top:0;left:0;width:100%;z-index:1200;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--primary)}
+        .logo-container{display:flex;align-items:center;gap:12px}
+        .logo{font-size:2.4rem;font-weight:800;background:linear-gradient(90deg,#ff3366,var(--primary),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .verified{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#1d9bf0;color:#fff;font-weight:700;box-shadow:0 0 12px #1d9bf0;animation:pulse 2s infinite}
+        @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(29,155,240,0.75)}70%{box-shadow:0 0 0 10px rgba(29,155,240,0)}100%{box-shadow:0 0 0 0 rgba(29,155,240,0)}}
+        nav ul{display:flex;gap:2.2rem;list-style:none}
+        nav a{color:#fff;text-decoration:none;font-weight:600;font-size:1.05rem;position:relative;padding:6px 0}
+        nav a::after{content:'';position:absolute;left:0;bottom:-8px;height:3px;width:0;background:var(--primary);transition:all .28s}
+        nav a:hover::after, nav a.active::after{width:100%}
+        .page{display:none;min-height:100vh;padding:120px 5% 80px;text-align:center;opacity:0;transform:translateY(30px);transition:all .6s ease}
+        .page.active{display:block;opacity:1;transform:translateY(0)}
+        .hero{height:100vh;background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)), url('https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg') center/cover no-repeat fixed;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1rem}
+        .hero h1{font-size:5.4rem;background:linear-gradient(45deg,var(--primary),#fff,#ff3366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:0.92}
+        .hero p{font-size:1.9rem;opacity:0.95}
+        .btn{padding:16px 48px;background:var(--primary);color:#fff;border-radius:50px;text-decoration:none;font-size:1.15rem;box-shadow:var(--glow);transition:all .32s;display:inline-block}
+        .btn:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(141,98,130,0.5)}
+        .song-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.2rem;max-width:1400px;margin:3rem auto}
+        .song-card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--glow);cursor:pointer;transition:all .35s;display:flex;flex-direction:column;justify-content:space-between}
+        .song-card:hover{transform:translateY(-16px) scale(1.02);box-shadow:0 35px 80px rgba(141,98,130,0.55)}
+        .song-card img{width:100%;height:300px;object-fit:cover}
+        .song-info{padding:1.4rem;text-align:center}
+        .song-info h3{font-size:1.35rem;margin-bottom:.4rem}
+        .meta-row{display:flex;justify-content:center;gap:12px;align-items:center}
+        .play-btn{background:var(--primary);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.15rem;transition:all .25s}
+        .play-btn i{font-size:1.2rem}
+        .download-btn{background:#333;color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;display:inline-block;margin-top:12px}
+        .download-btn:hover{background:var(--primary)}
+        .about-text{max-width:920px;margin:0 auto;font-size:1.18rem;line-height:1.9;color:#ddd}
+        .social-icons{margin:2rem 0}
+        .social-icons a{color:#fff;font-size:2.5rem;margin:0 .9rem;transition:all .28s}
+        .social-icons a:hover{color:var(--primary);transform:translateY(-8px)}
+        footer{background:#000;padding:3.2rem;text-align:center;border-top:3px solid var(--primary);margin-top:2rem}
+        /* Modal / Player */
+        #downloadModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:2500;align-items:center;justify-content:center}
+        .modal-content{background:var(--card);padding:36px;border-radius:18px;text-align:center;max-width:720px;box-shadow:var(--glow)}
+        .modal-content p{font-size:1.6rem;margin-bottom:20px}
+        .modal-close{background:var(--primary);color:#fff;padding:12px 28px;border-radius:14px;border:none;cursor:pointer}
+        #globalPlayer{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px 18px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.7);z-index:1500;border:2px solid rgba(141,98,130,0.15);display:none;align-items:center;gap:14px;min-width:320px;max-width:92%}
+        #nowPlaying{font-weight:700;min-width:220px;text-align:left}
+        #ytFrame{width:420px;height:56px;border-radius:12px;border:none;background:#000}
+        @media(max-width:880px){.hero h1{font-size:3.6rem}.song-card img{height:220px} #ytFrame{width:260px;height:46px} #nowPlaying{min-width:120px;font-size:0.95rem}}
+        .container{max-width:1200px;margin:0 auto;padding:0 1rem}
+        .center{display:flex;align-items:center;justify-content:center}
+        /* Sosyal medya her sayfanın altında (footer'dan hemen önce) */
+        .social-footer{text-align:center;padding:2.5rem 0;background:rgba(0,0,0,0.7);border-top:1px solid rgba(141,98,130,0.3)}
     </style>
 </head>
 <body>
-
-<canvas id="canvas"></canvas>
-
-<header>
+  <canvas id="canvas"></canvas>
+  <header>
     <div class="logo-container">
-        <div class="logo">MEMET ÇINAR</div>
-        <div class="verified" title="Doğrulanmış Resmi Site">✓</div>
+      <div class="logo">MEMET ÇINAR</div>
+      <div class="verified" title="Doğrulanmış Resmi Site">✓</div>
     </div>
     <nav>
-        <ul>
-            <li><a href="#anasayfa" class="active">Ana Sayfa</a></li>
-            <li><a href="#hakkimda">Hakkımda</a></li>
-            <li><a href="#muzik">Müzik</a></li>
-            <li><a href="#iletisim">İletişim</a></li>
-        </ul>
+      <ul>
+        <li><a href="#anasayfa" class="active">Ana Sayfa</a></li>
+        <li><a href="#hakkimda">Hakkımda</a></li>
+        <li><a href="#muzik">Müzik</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
     </nav>
-</header>
+  </header>
 
-<!-- ANA SAYFA -->
-<div id="anasayfa" class="page active">
+  <!-- ANA SAYFA -->
+  <section id="anasayfa" class="page active">
     <div class="hero">
-        <h1>MEMET ÇINAR</h1>
-        <p style="font-size:2.5rem;margin:2rem 0;">2025'in Gerçek Damar Sesi • Bağımsız Sanatçı</p>
-        <a href="#muzik" class="btn">Şarkıları Dinle</a>
+      <h1>MEMET ÇINAR</h1>
+      <p>2025'in Gerçek Damar Sesi • Bağımsız Sanatçı</p>
+      <a class="btn" href="#muzik">Şarkıları Dinle</a>
     </div>
-</div>
+  </section>
 
-<!-- HAKKIMDA -->
-<div id="hakkimda" class="page">
-    <h1 style="font-size:6rem;margin-bottom:3rem;">Hakkımda</h1>
-    <div class="about-text">
-        <p>Çocukluğumdan beri içimde müzik vardı. Ritim tutar, geceleri kendi bestelerimi yapardım.</p>
-        <p>2025'te karar verdim: Artık susmayacağım. Kendi şarkılarımı tüm Türkiye'ye ve dünyaya duyuracağım.</p>
-        <p>Arabesk-pop ile damar ruhunu birleştiriyorum. Her şarkım gerçek bir hikaye, her nakarat bir yara izi...</p>
-        <p>Efkar Gecesi'nden YAK'a, ELKAY serisinden Özür Dilerim'e kadar hepsi benim hayatımdan izler taşıyor.</p>
-        <p>Siz de bu hikayenin bir parçası olun. Birlikte efkarlanalım ❤️</p>
+  <!-- HAKKIMDA -->
+  <section id="hakkimda" class="page">
+    <h1 style="font-size:3.8rem;margin-bottom:1.6rem">Hakkımda</h1>
+    <div class="about-text container">
+      <p>Çocukluğumdan beri içimde müzik vardı. Ritim tutar, geceleri kendi bestelerimi yapardım.</p>
+      <p>2025'te karar verdim: Artık susmayacağım. Kendi şarkılarımı tüm Türkiye'ye ve dünyaya duyuracağım.</p>
+      <p>Arabesk-pop ile damar ruhunu birleştiriyorum. Her şarkım gerçek bir hikaye, her nakarat bir yara izi...</p>
+      <p>Efkar Gecesi'nden YAK'a, ELKAY serisinden Özür Dilerim'e kadar hepsi benim hayatımdan izler taşıyor.</p>
+      <p>Siz de bu hikayenin bir parçası olun. Birlikte efkarlanalım ❤️</p>
     </div>
-</div>
+  </section>
 
-<!-- MÜZİK -->
-<div id="muzik" class="page">
-    <h1 style="font-size:6rem;margin:3rem 0;">Müzik</h1>
-
-    <div style="max-width:1100px;margin:0 auto 5rem;">
-        <iframe src="https://open.spotify.com/embed/artist/5RsoLkeIEuJA1JwF7tFZLI?utm_source=generator&theme=0" height="520" style="width:100%;border-radius:25px;box-shadow:var(--glow);" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  <!-- MÜZİK -->
+  <section id="muzik" class="page">
+    <h1 style="font-size:3.8rem;margin-bottom:1.4rem">Müzik</h1>
+    <div class="container" style="max-width:1100px;margin:0 auto 2.6rem">
+      <iframe src="https://open.spotify.com/embed/artist/5RsoLkeIEuJA1JwF7tFZLI?utm_source=generator&theme=0" height="520" style="width:100%;border-radius:18px;box-shadow:var(--glow);border:none" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
+    <h2 style="font-size:2.4rem;margin:2rem 0">Tüm Şarkılar</h2>
+    <div class="song-grid container" id="songGrid"></div>
+  </section>
 
-    <h2 style="font-size:4.5rem;margin:4rem 0;">Tüm Şarkılar</h2>
-    <div class="song-grid" id="songGrid"></div>
-</div>
-
-<!-- İLETİŞİM -->
-<div id="iletisim" class="page">
-    <div style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-        <p style="font-size:2.4rem;margin-bottom:4rem;opacity:0.9;">
-            Mesajlarını, yorumlarını, isteklerini her zaman bekliyorum.<br>
-            Direkt sosyal medyadan ulaşabilirsin!
-        </p>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/memetcinarofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@memetcinar444" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://open.spotify.com/artist/5RsoLkeIEuJA1JwF7tFZLI" target="_blank"><i class="fab fa-spotify"></i></a>
-            <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank"><i class="fab fa-apple"></i></a>
-            <a href="https://www.tiktok.com/@memetcinar" target="_blank"><i class="fab fa-tiktok"></i></a>
-        </div>
+  <!-- İLETİŞİM -->
+  <section id="iletisim" class="page">
+    <div style="height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+      <p style="font-size:1.8rem;margin-bottom:2.6rem;opacity:0.95;">
+        Mesajlarını, yorumlarını, isteklerini her zaman bekliyorum.<br>
+        Direkt sosyal medyadan ulaşabilirsin!
+      </p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/memetcinarofficial/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@memetcinar444" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        <a href="https://open.spotify.com/artist/5RsoLkeIEuJA1JwF7tFZLI" target="_blank" rel="noopener noreferrer"><i class="fab fa-spotify"></i></a>
+        <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank" rel="noopener noreferrer"><i class="fab fa-apple"></i></a>
+        <a href="https://www.tiktok.com/@memetcnr44_" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+      </div>
     </div>
-</div>
+  </section>
 
-<footer>
+  <!-- SOSYAL MEDYA PROFİLLERİ - HER SAYFANIN ALTINDA (footer'dan hemen önce) -->
+  <div class="social-footer">
+    <div class="social-icons">
+      <a href="https://www.instagram.com/memetcinarofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@memetcinar444" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://open.spotify.com/artist/5RsoLkeIEuJA1JwF7tFZLI" target="_blank"><i class="fab fa-spotify"></i></a>
+      <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank"><i class="fab fa-apple"></i></a>
+      <a href="https://www.tiktok.com/@memetcnr44_" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <footer>
     <p>© 2025 MEMET ÇINAR – Tüm Hakları Saklıdır</p>
-</footer>
+  </footer>
 
-<!-- Global Player -->
-<div id="globalPlayer">
-    <span id="nowPlaying">Şarkı yükleniyor...</span>
-    <audio id="audioPlayer" controls></audio>
-</div>
+  <!-- Global Player -->
+  <div id="globalPlayer" aria-hidden="true">
+    <div id="nowPlaying">Şarkı yükleniyor...</div>
+    <iframe id="ytFrame" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" title="YouTube player"></iframe>
+    <button class="modal-close" id="closePlayerBtn" style="padding:10px 14px;border-radius:10px;background:#222;border:none;color:#fff;cursor:pointer">Kapat</button>
+  </div>
 
-<!-- Modal -->
-<div id="downloadModal">
+  <!-- Modal for download -->
+  <div id="downloadModal" role="dialog" aria-modal="true">
     <div class="modal-content">
-        <p>Şu anda bu özellik Aktif Değil</p>
-        <button class="modal-close" onclick="document.getElementById('downloadModal').style.display='none'">TAMAM</button>
+      <p>Bu özellik şu anda aktif değil. Şarkıları resmi platformlardan dinleyebilirsiniz.</p>
+      <button class="modal-close" id="modalClose">TAMAM</button>
     </div>
-</div>
+  </div>
 
-<script>
-// Tüm şarkılar + YouTube linkleri (YouTube'dan MP3 çalmak için ytdl tarzı değil, direkt embed video yerine audio çalar için YouTube ID kullanıyoruz)
-const songs = [
-    {title:"YILDIZLAR",img:"https://source.boomplaymusic.com/group10/M00/10/07/56b01957ad9d4f2ab21e16b0f4ab8604H3000W3000_464_464.jpg",time:"3:12",yt:"AMDerpIe9QE"},
-    {title:"BÖYLE İŞTE ELKAY",img:"https://source.boomplaymusic.com/group10/M00/09/12/4eca08480aba4b22b6d44dd9119f6f41H3000W3000_320_320.jpg",time:"3:30",yt:"EkAtzXOP0p0"},
-    {title:"LEYA",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/b8/ee/3ab8ee2e-1577-3937-19e9-8fc881ff1891/artwork.jpg/300x300bb.webp",time:"3:25",yt:"8La-12lYhao"},
-    {title:"ELKAY 2",img:"https://source.boomplaymusic.com/group10/M00/09/09/aa1c1881ab2d4445a3fb68fc28ce26c9H3000W3000_320_320.jpg",time:"3:46",yt:"-Wrg7mJ__Ek"},
-    {title:"ELKAY GİBİ",img:"https://source.boomplaymusic.com/group10/M00/09/07/8b8f185cf3364661b20fc9111786ec57H3000W3000_320_320.jpg",time:"2:55",yt:"0QWuDJhDsHQ"},
-    {title:"KORUYUCU AİLE",img:"https://source.boomplaymusic.com/group10/M00/07/01/7f2535266dff43bc8098a9e226108710H3000W3000_320_320.jpg",time:"3:40",yt:"2ti6IK3Aix0"},
-    {title:"EĞİLMEZ",img:"https://source.boomplaymusic.com/group10/M00/06/25/bc88b4bc9af4425fb23bd409a40275e7H3000W3000_320_320.jpg",time:"3:15",yt:"441IylCM7B4"},
-    {title:"GECEYE YAZDIM",img:"https://source.boomplaymusic.com/group10/M00/10/22/2d959b086e284537acc1dcbc12e90b5aH3000W3000_320_320.jpg",time:"3:30",yt:"WsR79WlMqNI"},
-    {title:"VAZGEÇMEZ BU KALP",img:"https://source.boomplaymusic.com/group10/M00/04/25/0b4cea4ccc694a0b86cbb3dcff358714H3000W3000_320_320.jpg",time:"3:20",yt:"0xgUyoGm4hY"},
-    {title:"VUR BENİ KALBİMDEN",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5b/e2/4d/5be24d64-09d8-ac8e-1a37-d6e2703fa3c5/artwork.jpg/600x600bf-60.jpg",time:"3:49",yt:"gMGz2e9uMcA"},
-    {title:"DÜNYAMIN GÜNEŞİ",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/32/91/03/32910356-af9f-423c-5fe7-89246e1bd172/artwork.jpg/1200x630bb.jpg",time:"3:34",yt:"fvt8tI8n_cY"},
-    {title:"YOLUMU KAYBETTİM",img:"https://source.boomplaymusic.com/group10/M00/04/25/1acdcae663b24df899e39dd6d32763f4H3000W3000_320_320.jpg",time:"3:44",yt:"Rs6g6yaacXo"},
-    {title:"BİLE BİLE",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/96/a7/3d/96a73d2c-c212-8d5e-b43f-ab0392209ad5/artwork.jpg/600x600bf-60.jpg",time:"3:19",yt:"qED3CgFJ1Fc"},
-    {title:"BİTTİ HİKAYEM",img:"https://source.boomplaymusic.com/group10/M00/05/01/cb31a5b621b94b3f81dbea18d87d352eH3000W3000_320_320.jpg",time:"3:17",yt:"KMcinbhM7Bw"},
-    {title:"SEN GİTTİN YA",img:"https://source.boomplaymusic.com/group10/M00/04/25/790dfbbcba674a66b4360910950b936cH3000W3000_320_320.jpg",time:"4:00",yt:"BWdb0W2ARmA"},
-    {title:"SONSUZA DEK SENİ BEKLEDİM",img:"https://s.mxmcdn.net/images-storage/albums5/9/1/0/3/4/5/87543019_500_500.jpg",time:"3:22",yt:"ZIGiuOGCmA4"},
-    {title:"ÖZÜR DİLERİM",img:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg",time:"2:41",yt:"mSnp-mPxGus"},
-    {title:"GEL DE BİTSİN BU HASRET",img:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg",time:"3:05",yt:"DDEhRqKm1bE"},
-    {title:"BİR DUBLE DAHA",img:"https://source.boomplaymusic.com/group10/M00/05/01/05650b68b89b460fb5e5a3d9e74020c4H3000W3000_464_464.jpg",time:"2:07",yt:"8E0G3myGiFk"},
-    {title:"KIRMIZI YAZMA",img:"https://source.boomplaymusic.com/group10/M00/04/25/59b6353cd6fc4684bfb228690defb300H3000W3000_320_320.jpg",time:"3:25",yt:"NzVEoSWhgl0"},
-    {title:"AYREN",img:"https://i.ytimg.com/vi/pbS4NlHpzxw/sddefault.jpg",time:"3:04",yt:"pbS4NlHpzxw"},
-    {title:"GÖZLERİ",img:"https://source.boomplaymusic.com/group10/M00/06/26/4214246661104419978b389e7fb80184H3000W3000_464_464.jpg",time:"3:00",yt:"36ykG4zUtL0"},
-    {title:"KİBİR",img:"https://i.ytimg.com/vi/CNdZW-4h2FY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDpHD-JDxYa-KWESLjx5I5-z3zpng",time:"3:40",yt:"CNdZW-4h2FY"},
-    {title:"AŞKIN KÜLLERİ",img:"https://source.boomplaymusic.com/group10/M00/04/25/1a561e90cd94403ba2955338488d4cc1H3000W3000_320_320.jpg",time:"3:45",yt:"F3MAB4cgmEI"}
-];
+  <script>
+    /* ---------- Sayfa geçiş/navigation ---------- */
+    const pages = document.querySelectorAll('.page');
+    const links = document.querySelectorAll('nav a');
+    function showPage(hash) {
+      pages.forEach(p => p.classList.remove('active'));
+      links.forEach(l => l.classList.remove('active'));
+      const target = document.querySelector(hash || '#anasayfa');
+      if (target) target.classList.add('active');
+      document.querySelector(`nav a[href="${hash || '#anasayfa'}"]`)?.classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    window.addEventListener('hashchange', ()=> showPage(location.hash));
+    showPage(location.hash);
+    links.forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      history.pushState(null, '', a.getAttribute('href'));
+      showPage(a.getAttribute('href'));
+    }));
 
-const grid = document.getElementById('songGrid');
-const player = document.getElementById('audioPlayer');
-const nowPlaying = document.getElementById('nowPlaying');
-const globalPlayer = document.getElementById('globalPlayer');
+    /* ---------- Şarkı listesi ---------- */
+    const songs = [
+        {title:"YILDIZLAR",img:"https://source.boomplaymusic.com/group10/M00/10/07/56b01957ad9d4f2ab21e16b0f4ab8604H3000W3000_464_464.jpg",time:"3:12",yt:"AMDerpIe9QE"},
+        {title:"BÖYLE İŞTE ELKAY",img:"https://source.boomplaymusic.com/group10/M00/09/12/4eca08480aba4b22b6d44dd9119f6f41H3000W3000_320_320.jpg",time:"3:30",yt:"EkAtzXOP0p0"},
+        {title:"LEYA",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/b8/ee/3ab8ee2e-1577-3937-19e9-8fc881ff1891/artwork.jpg/300x300bb.webp",time:"3:25",yt:"8La-12lYhao"},
+        {title:"ELKAY 2",img:"https://source.boomplaymusic.com/group10/M00/09/09/aa1c1881ab2d4445a3fb68fc28ce26c9H3000W3000_320_320.jpg",time:"3:46",yt:"-Wrg7mJ__Ek"},
+        {title:"ELKAY GİBİ",img:"https://source.boomplaymusic.com/group10/M00/09/07/8b8f185cf3364661b20fc9111786ec57H3000W3000_320_320.jpg",time:"2:55",yt:"0QWuDJhDsHQ"},
+        {title:"KORUYUCU AİLE",img:"https://source.boomplaymusic.com/group10/M00/07/01/7f2535266dff43bc8098a9e226108710H3000W3000_320_320.jpg",time:"3:40",yt:"2ti6IK3Aix0"},
+        {title:"EĞİLMEZ",img:"https://source.boomplaymusic.com/group10/M00/06/25/bc88b4bc9af4425fb23bd409a40275e7H3000W3000_320_320.jpg",time:"3:15",yt:"441IylCM7B4"},
+        {title:"GECEYE YAZDIM",img:"https://source.boomplaymusic.com/group10/M00/10/22/2d959b086e284537acc1dcbc12e90b5aH3000W3000_320_320.jpg",time:"3:30",yt:"WsR79WlMqNI"},
+        {title:"VAZGEÇMEZ BU KALP",img:"https://source.boomplaymusic.com/group10/M00/04/25/0b4cea4ccc694a0b86cbb3dcff358714H3000W3000_320_320.jpg",time:"3:20",yt:"0xgUyoGm4hY"},
+        {title:"VUR BENİ KALBİMDEN",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5b/e2/4d/5be24d64-09d8-ac8e-1a37-d6e2703fa3c5/artwork.jpg/600x600bf-60.jpg",time:"3:49",yt:"gMGz2e9uMcA"},
+        {title:"DÜNYAMIN GÜNEŞİ",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/32/91/03/32910356-af9f-423c-5fe7-89246e1bd172/artwork.jpg/1200x630bb.jpg",time:"3:34",yt:"fvt8tI8n_cY"},
+        {title:"YOLUMU KAYBETTİM",img:"https://source.boomplaymusic.com/group10/M00/04/25/1acdcae663b24df899e39dd6d32763f4H3000W3000_320_320.jpg",time:"3:44",yt:"Rs6g6yaacXo"},
+        {title:"BİLE BİLE",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/96/a7/3d/96a73d2c-c212-8d5e-b43f-ab0392209ad5/artwork.jpg/600x600bf-60.jpg",time:"3:19",yt:"qED3CgFJ1Fc"},
+        {title:"BİTTİ HİKAYEM",img:"https://source.boomplaymusic.com/group10/M00/05/01/cb31a5b621b94b3f81dbea18d87d352eH3000W3000_320_320.jpg",time:"3:17",yt:"KMcinbhM7Bw"},
+        {title:"SEN GİTTİN YA",img:"https://source.boomplaymusic.com/group10/M00/04/25/790dfbbcba674a66b4360910950b936cH3000W3000_320_320.jpg",time:"4:00",yt:"BWdb0W2ARmA"},
+        {title:"SONSUZA DEK SENİ BEKLEDİM",img:"https://s.mxmcdn.net/images-storage/albums5/9/1/0/3/4/5/87543019_500_500.jpg",time:"3:22",yt:"ZIGiuOGCmA4"},
+        {title:"ÖZÜR DİLERİM",img:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg",time:"2:41",yt:"mSnp-mPxGus"},
+        {title:"GEL DE BİTSİN BU HASRET",img:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg",time:"3:05",yt:"DDEhRqKm1bE"},
+        {title:"BİR DUBLE DAHA",img:"https://source.boomplaymusic.com/group10/M00/05/01/05650b68b89b460fb5e5a3d9e74020c4H3000W3000_464_464.jpg",time:"2:07",yt:"8E0G3myGiFk"},
+        {title:"KIRMIZI YAZMA",img:"https://source.boomplaymusic.com/group10/M00/04/25/59b6353cd6fc4684bfb228690defb300H3000W3000_320_320.jpg",time:"3:25",yt:"NzVEoSWhgl0"},
+        {title:"AYREN",img:"https://i.ytimg.com/vi/pbS4NlHpzxw/sddefault.jpg",time:"3:04",yt:"pbS4NlHpzxw"},
+        {title:"GÖZLERİ",img:"https://source.boomplaymusic.com/group10/M00/06/26/4214246661104419978b389e7fb80184H3000W3000_464_464.jpg",time:"3:00",yt:"36ykG4zUtL0"},
+        {title:"KİBİR",img:"https://i.ytimg.com/vi/CNdZW-4h2FY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDpHD-JDxYa-KWESLjx5I5-z3zpng",time:"3:40",yt:"CNdZW-4h2FY"},
+        {title:"AŞKIN KÜLLERİ",img:"https://source.boomplaymusic.com/group10/M00/04/25/1a561e90cd94403ba2955338488d4cc1H3000W3000_320_320.jpg",time:"3:45",yt:"F3MAB4cgmEI"}
+    ];
 
-songs.forEach((s, i) => {
-    grid.innerHTML += `
-        <div class="song-card" onclick="playSong('${s.yt}', '${s.title}')">
-            <img src="${s.img}" alt="${s.title}" loading="lazy">
-            <div class="song-info">
-                <div class="play-btn"><i class="fas fa-play"></i></div>
-                <h3>${s.title}</h3>
-                <span>${s.time}</span>
-                <a href="javascript:void(0)" class="download-btn" onclick="event.stopPropagation(); document.getElementById('downloadModal').style.display='flex'">ŞARKIYI İNDİR</a>
-            </div>
+    const grid = document.getElementById('songGrid');
+    const globalPlayer = document.getElementById('globalPlayer');
+    const ytFrame = document.getElementById('ytFrame');
+    const nowPlaying = document.getElementById('nowPlaying');
+    const downloadModal = document.getElementById('downloadModal');
+    const modalClose = document.getElementById('modalClose');
+    const closePlayerBtn = document.getElementById('closePlayerBtn');
+
+    songs.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'song-card';
+      card.innerHTML = `
+        <img src="${s.img}" alt="${s.title}" loading="lazy">
+        <div class="song-info">
+          <div class="play-btn center"><i class="fas fa-play"></i></div>
+          <h3>${s.title}</h3>
+          <div class="meta-row"><span style="opacity:.8">${s.time}</span></div>
+          <a href="javascript:void(0)" class="download-btn">ŞARKIYI İNDİR</a>
         </div>`;
-});
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.download-btn')) return;
+        playSong(s);
+      });
+      card.querySelector('.download-btn').addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        downloadModal.style.display = 'flex';
+      });
+      grid.appendChild(card);
+    });
 
-function playSong(id, title) {
-    player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-    nowPlaying.textContent = title + " çalıyor...";
-    globalPlayer.style.display = "flex";
-}
+    function playSong(song) {
+      ytFrame.src = `https://www.youtube-nocookie.com/embed/${song.yt}?autoplay=1&controls=1&rel=0&modestbranding=1`;
+      nowPlaying.textContent = song.title + ' — çalıyor';
+      globalPlayer.style.display = 'flex';
+    }
 
-// Sayfa geçiş
-const pages = document.querySelectorAll('.page');
-const links = document.querySelectorAll('nav a');
-function showPage(hash) {
-    pages.forEach(p => p.classList.remove('active'));
-    links.forEach(l => l.classList.remove('active'));
-    const target = document.querySelector(hash || '#anasayfa');
-    if (target) target.classList.add('active');
-    document.querySelector(`nav a[href="${hash || '#anasayfa'}"]`)?.classList.add('active');
-    window.scrollTo(0, 0);
-}
-window.addEventListener('hashchange', () => showPage(location.hash));
-showPage(location.hash);
+    modalClose.onclick = () => downloadModal.style.display = 'none';
+    downloadModal.onclick = (e) => { if (e.target === downloadModal) downloadModal.style.display = 'none'; };
+    closePlayerBtn.onclick = () => { ytFrame.src = ''; globalPlayer.style.display = 'none'; };
 
-// Nota efekti (aynı)
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-let w = canvas.width = innerWidth, h = canvas.height = innerHeight;
-onresize = () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; };
-const notes = [];
-const sprite = (() => { const c=document.createElement('canvas'); c.width=c.height=40; const x=c.getContext('2d'); x.fillStyle='#fff'; x.beginPath(); x.ellipse(14,24,7,9,0,0,Math.PI*2); x.fill(); x.fillRect(18,6,4,18); return c; })();
-for(let i=0;i<120;i++) notes.push({x:Math.random()*w,y:Math.random()*h-h,vx:Math.random()*0.6-0.3,vy:Math.random()*1+0.5,size:Math.random()*0.8+0.6,rot:Math.random()*Math.PI*2,vr:(Math.random()-0.5)*0.03});
-function anim(){ ctx.clearRect(0,0,w,h); notes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;n.rot+=n.vr;if(n.y>h+50){n.y=-50;n.x=Math.random()*w} ctx.save(); ctx.globalAlpha=0.8; ctx.translate(n.x,n.y); ctx.rotate(n.rot); ctx.drawImage(sprite,-20*n.size,-20*n.size,40*n.size,40*n.size); ctx.restore();}); requestAnimationFrame(anim); }
-anim();
-</script>
+    /* ---------- Nota animasyonu ---------- */
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth, h = canvas.height = innerHeight;
+    window.addEventListener('resize', () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; });
+    const notes = [];
+    const sprite = (() => {
+      const c = document.createElement('canvas');
+      c.width = c.height = 40;
+      const x = c.getContext('2d');
+      x.fillStyle = 'rgba(255,255,255,0.95)';
+      x.beginPath(); x.ellipse(14,24,7,9,0,0,Math.PI*2); x.fill();
+      x.fillRect(18,6,4,18);
+      return c;
+    })();
+    for(let i=0;i<120;i++) notes.push({x:Math.random()*w,y:Math.random()*h-h,vx:(Math.random()*0.6)-0.3,vy:Math.random()*1+0.5,size:Math.random()*0.9+0.5,rot:Math.random()*Math.PI*2,vr:(Math.random()-0.5)*0.03});
+    function anim(){
+      ctx.clearRect(0,0,w,h);
+      notes.forEach(n=>{
+        n.x += n.vx; n.y += n.vy; n.rot += n.vr;
+        if(n.y > h+50){ n.y = -60; n.x = Math.random()*w; }
+        ctx.save();
+        ctx.globalAlpha = 0.8;
+        ctx.translate(n.x,n.y);
+        ctx.rotate(n.rot);
+        ctx.drawImage(sprite, -20*n.size, -20*n.size, 40*n.size, 40*n.size);
+        ctx.restore();
+      });
+      requestAnimationFrame(anim);
+    }
+    anim();
+  </script>
 </body>
 </html>
