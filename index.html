@@ -2,11 +2,11 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>MEMET ÇINAR | THE LEGACY VIP</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -15,8 +15,9 @@
             --neon-blue: #00F0FF;
             --neon-red: #FF003C;
             --dark-bg: #050505;
-            --glass-panel: rgba(10, 10, 10, 0.90);
-            --hud-color: rgba(0, 240, 255, 0.7);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+            --glass-bg: rgba(15, 15, 15, 0.75);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
         }
 
         * {
@@ -25,6 +26,7 @@
             box-sizing: border-box;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+            outline: none;
         }
 
         body {
@@ -33,306 +35,264 @@
             font-family: 'Rajdhani', sans-serif;
             overflow: hidden;
             height: 100vh;
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=2000&auto=format&fit=crop');
+            width: 100vw;
+            background-image: 
+                radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, #000 100%),
+                url('https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
         }
 
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--neon-gold); border-radius: 5px; }
+        /* Scanline Effect */
+        body::before {
+            content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 2; background-size: 100% 3px, 3px 100%; pointer-events: none;
+        }
 
-        /* --- LOGIN SIMULATION --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--neon-gold), #b8860b); border-radius: 10px; }
+
+        /* --- LOGIN --- */
         #login-gateway {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 20000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: fixed; inset: 0; background: #000; z-index: 20000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             background-image: url('https://images.unsplash.com/photo-1614850523018-c6148eb5ed4a?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
         }
         .login-panel {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid var(--neon-gold);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
-            width: 90%; max-width: 400px;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px);
+            border: 1px solid var(--neon-gold); padding: 40px; border-radius: 20px; text-align: center;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.3); width: 90%; max-width: 400px;
         }
         .google-btn {
-            background: #fff; color: #333; padding: 12px 20px; border-radius: 50px;
+            background: #fff; color: #000; padding: 12px 25px; border-radius: 50px;
             font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%; border: none;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            transition: transform 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s;
+            font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;
         }
-        .google-btn:active { transform: scale(0.95); }
+        .google-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255,255,255,0.6); }
 
-        /* --- HUD & NAVIGATION --- */
+        /* --- HUD & NAV --- */
         .hud-top {
-            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            padding: 0 20px; display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
-            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px; padding: 0 25px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);
+            z-index: 3000; backdrop-filter: blur(10px);
         }
-
         .brand-logo {
-            font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900;
-            background: linear-gradient(to right, #fff, var(--neon-gold));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            /* HİZALAMA DÜZELTMESİ */
-            display: flex; 
-            align-items: center; 
-            gap: 12px;
-            height: 100%;
+            font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900;
+            background: linear-gradient(to right, #fff, var(--neon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            display: flex; align-items: center; gap: 12px; height: 100%;
         }
-
         .nav-dock {
             position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 15px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 15px; z-index: 2500;
+            background: rgba(0,0,0,0.6); padding: 15px 10px; border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px);
         }
-
         .nav-item {
-            width: 50px; height: 50px; background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.2); display: flex;
-            align-items: center; justify-content: center; cursor: pointer;
-            transition: all 0.3s; color: #aaa; clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+            width: 50px; height: 50px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            transition: all 0.3s; color: #888; font-size: 1.3rem; position: relative;
         }
         .nav-item.active, .nav-item:hover {
-            background: rgba(255, 215, 0, 0.1); border-color: var(--neon-gold);
-            color: var(--neon-gold); transform: scale(1.1); box-shadow: 0 0 15px rgba(255,215,0,0.3);
+            background: rgba(255, 215, 0, 0.2); border-color: var(--neon-gold);
+            color: var(--neon-gold); box-shadow: 0 0 15px rgba(255,215,0,0.3); transform: scale(1.1);
         }
 
-        /* --- MAIN CONTENT --- */
+        /* --- CONTENT --- */
         .viewport {
-            position: fixed; top: 70px; left: 90px; right: 0; bottom: 90px; /* Bottom space for player */
-            padding: 20px; overflow-y: auto;
+            position: fixed; top: 70px; left: 90px; right: 0; bottom: 90px;
+            padding: 20px; overflow-y: auto; scroll-behavior: smooth;
         }
-
-        .screen { display: none; animation: fadeIn 0.5s ease-out; }
+        .screen { display: none; animation: fadeIn 0.4s ease-out; width: 100%; max-width: 1200px; margin: 0 auto; }
         .screen.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- WIDGETS ROW --- */
-        .widgets-row {
-            display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;
+        /* --- CLOCK & NEWS --- */
+        .led-clock-container {
+            text-align: center; margin-bottom: 25px; background: #000;
+            border: 4px solid #222; border-radius: 10px; padding: 10px 30px; display: inline-block;
+            box-shadow: 0 0 30px rgba(255,0,0,0.15);
         }
-        .widget-card {
-            flex: 1; min-width: 250px; background: rgba(20,20,20,0.8);
-            border: 1px solid #333; padding: 15px; border-radius: 10px;
-            display: flex; align-items: center; gap: 15px; backdrop-filter: blur(5px);
-            flex-direction: column; align-items: stretch;
+        .led-time {
+            font-family: 'VT323', monospace; font-size: 5rem; color: #FF0000;
+            text-shadow: 0 0 20px rgba(255,0,0,0.8); line-height: 1; letter-spacing: 5px;
         }
-        .widget-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px; }
-        .widget-icon { font-size: 2rem; color: var(--neon-blue); }
-        .widget-data h3 { font-family: 'Orbitron'; font-size: 1.2rem; color: #fff; }
-        .widget-data p { color: #888; font-size: 0.8rem; }
+        .led-date { font-family: 'VT323', monospace; font-size: 1.5rem; color: #cc0000; margin-top: 5px; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- ADVANCED CALENDAR STYLE --- */
+        .news-container {
+            width: 100%; background: rgba(0, 20, 40, 0.8); border-top: 1px solid var(--neon-blue); border-bottom: 1px solid var(--neon-blue);
+            height: 40px; display: flex; align-items: center; overflow: hidden; margin-bottom: 25px;
+        }
+        .news-label {
+            background: var(--neon-blue); color: #000; padding: 0 15px; height: 100%; display: flex; align-items: center;
+            font-weight: 900; font-family: 'Orbitron'; z-index: 2; white-space: nowrap;
+        }
+        .news-ticker { white-space: nowrap; animation: ticker 40s linear infinite; padding-left: 100%; color: #fff; font-size: 0.9rem; display: flex; align-items: center; }
+        .news-item { margin-right: 50px; display: inline-flex; align-items: center; gap: 8px; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* --- WIDGETS & CARDS --- */
+        .widgets-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+        .widget-card, .author-card {
+            flex: 1; min-width: 300px; background: var(--glass-bg); border: var(--glass-border); border-radius: 16px; padding: 20px;
+            backdrop-filter: blur(15px); box-shadow: var(--glass-shadow); transition: 0.3s; display: flex; flex-direction: column;
+        }
+        .widget-card:hover { border-color: rgba(255, 215, 0, 0.5); }
+
+        /* --- WEATHER ANIMATIONS (RESTORED) --- */
+        .weather-anim-container { height: 70px; display: flex; align-items: center; justify-content: center; margin: 10px 0; }
+        .weather-sun { 
+            width: 50px; height: 50px; background: radial-gradient(circle, #ffd700, #ff8c00); 
+            border-radius: 50%; box-shadow: 0 0 30px #ffd700; animation: spinSun 15s linear infinite; 
+        }
+        .weather-cloud { 
+            font-size: 3.5rem; color: #ddd; filter: drop-shadow(0 5px 10px rgba(255,255,255,0.3)); 
+            animation: floatCloud 4s ease-in-out infinite; 
+        }
+        @keyframes spinSun { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes floatCloud { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* --- CALENDAR --- */
         .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--neon-gold); }
-        .cal-nav-btn { background: transparent; border: 1px solid #444; color: #fff; cursor: pointer; padding: 2px 8px; border-radius: 4px; transition: 0.2s; }
-        .cal-nav-btn:hover { background: var(--neon-gold); color: #000; }
-        .calendar-grid {
-            display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;
-            text-align: center; font-size: 0.8rem;
+        .cal-nav-btn { background: transparent; border: 1px solid #444; color: #fff; cursor: pointer; padding: 2px 8px; border-radius: 4px; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; font-size: 0.8rem; }
+        .cal-day { 
+            padding: 10px; border-radius: 6px; background: rgba(255,255,255,0.05); 
+            display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: default; transition: 0.2s;
         }
-        .cal-day-header { color: #666; font-size: 0.7rem; padding-bottom: 5px; }
-        .cal-day { padding: 8px; border-radius: 4px; background: #1a1a1a; transition: 0.2s; cursor: default; }
-        .cal-day:hover:not(.empty) { background: #333; }
-        .cal-day.today {
-            background: var(--neon-gold); color: #000; font-weight: bold;
-            box-shadow: 0 0 15px rgba(255,215,0,0.5);
-            animation: pulseDay 2s infinite;
-        }
-        .cal-day.empty { background: transparent; cursor: default; }
-        @keyframes pulseDay { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        /* --- NEW & FIXED BADGE SYSTEM --- */
+        .cal-day:hover:not(.empty) { background: rgba(255,255,255,0.15); }
+        .cal-day.today { border: 1px solid var(--neon-blue); background: rgba(0, 240, 255, 0.15); color: var(--neon-blue); }
         
-        /* İsim ve Rozet Hizalama Konteyneri */
-        .name-badge-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 10px; /* İsim ve rozet arası boşluk */
-        }
+        /* Calendar Effects */
+        .anim-snow::before { content: '❄'; position: absolute; top:2px; right:2px; font-size:0.6rem; animation: fall 2s infinite linear; color:#fff; }
+        .anim-flag { background: linear-gradient(135deg, #1a1a1a 0%, #600 100%); border:1px solid red; }
+        .anim-flag::after { content: '☪'; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:1.2rem; opacity:0.2; color:#fff; }
+        .anim-balloon::before { content: '🎈'; position: absolute; bottom:0; left:50%; font-size:0.8rem; animation: floatUp 3s infinite ease-in; opacity:0.7; }
+        .anim-firework::before { content: '🎆'; position: absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; opacity:0.5; animation: pulse 1s infinite; }
+        @keyframes fall { 0% { transform:translateY(-5px); opacity:0; } 50% { opacity:1; } 100% { transform:translateY(5px); opacity:0; } }
+        @keyframes floatUp { 0% { transform:translateY(5px); } 100% { transform:translateY(-15px); opacity:0; } }
+        @keyframes pulse { 0% { opacity:0.3; transform:scale(0.8); } 50% { opacity:0.6; transform:scale(1.1); } 100% { opacity:0.3; transform:scale(0.8); } }
 
-        /* Ortak Rozet Stili */
+        /* --- ROZETLER (Tooltip Fix) --- */
         .official-badge {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: help;
-            flex-shrink: 0; /* Rozetin sıkışmasını engeller */
+            width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; 
+            position: relative; cursor: help; flex-shrink: 0;
         }
-
-        /* Site Altın Rozet (Top Left) - YENİDEN TASARLANDI */
         .site-gold-badge {
-            width: 26px;
-            height: 26px;
-            background: radial-gradient(ellipse at center, #ffd700 0%, #b8860b 100%);
-            border-radius: 50%;
-            border: 2px solid #fffacd;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-            color: #000;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); border-radius: 50%; border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); color: #000; font-size: 12px; font-weight: 900;
         }
-        
-        /* Mavi Doğrulanmış Rozet */
-        .user-blue-badge {
-            width: 22px;
-            height: 22px;
-            background-color: #1DA1F2;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            color: #fff;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(29, 161, 242, 0.4);
-        }
-
-        /* Tooltip (Açıklama Kutusu) - Hata Giderildi */
         .official-badge::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            top: 140%; /* Rozetin altı */
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.95);
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-family: 'Orbitron', sans-serif;
-            white-space: nowrap;
-            border: 1px solid rgba(255,255,255,0.2);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.2s ease-in-out;
-            z-index: 999999;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
-            visibility: hidden;
+            content: attr(data-tooltip); position: absolute; top: 130%; left: 50%; transform: translateX(-50%);
+            background: #000; color: var(--neon-gold); padding: 6px 10px; border-radius: 4px;
+            font-size: 10px; white-space: nowrap; border: 1px solid var(--neon-gold); opacity: 0; visibility: hidden;
+            pointer-events: none; transition: 0.2s; z-index: 99999; font-family: 'Orbitron', sans-serif;
         }
+        .official-badge:hover::after { opacity: 1; visibility: visible; top: 140%; }
+        .user-blue-badge { width: 20px; height: 20px; background-color: #1DA1F2; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 10px; display:flex; align-items:center; justify-content:center; }
 
-        .official-badge:hover::after {
-            opacity: 1;
-            visibility: visible;
-            top: 125%; /* Hafif yukarı animasyon */
+        /* --- CHAT --- */
+        .chat-container { 
+            background: rgba(0,0,0,0.7); border: 1px solid #333; height: 60vh; display: flex; flex-direction: column; 
+            border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px);
         }
-        
-        /* Tooltip Ok İşareti */
-        .official-badge:hover::before {
-            content: '';
-            position: absolute;
-            top: 115%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 6px;
-            border-style: solid;
-            border-color: transparent transparent rgba(0,0,0,0.95) transparent;
-            z-index: 999999;
-        }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+        .msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; font-size: 0.9rem; word-wrap: break-word; }
+        .msg.incoming { background: #222; color: #ddd; align-self: flex-start; border-left: 3px solid var(--neon-gold); }
+        .msg.outgoing { background: var(--neon-blue); color: #000; align-self: flex-end; font-weight: 600; }
+        .chat-input-area { padding: 15px; background: rgba(0,0,0,0.8); display: flex; gap: 10px; border-top: 1px solid #333; flex-shrink: 0; }
+        .chat-input { flex: 1; background: #222; border: 1px solid #444; padding: 10px 15px; color: #fff; border-radius: 25px; outline:none; }
+        .chat-send { background: var(--neon-gold); border: none; padding: 0 20px; border-radius: 25px; cursor: pointer; color: #000; font-weight: bold; }
 
-        /* --- CARDS --- */
-        .author-card {
-            background: linear-gradient(45deg, rgba(20,20,20,0.9), rgba(10,10,10,0.95));
-            border: 1px solid #333; border-radius: 15px; padding: 20px;
-            display: flex; gap: 20px; margin-bottom: 20px; align-items: center;
-            transition: transform 0.3s;
+        /* --- PLAYER --- */
+        .player-bar { 
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 90px; background: #080808;
+            border-top: 2px solid var(--neon-gold); display: flex; align-items: center; padding: 0 20px; z-index: 4000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
         }
-        .author-card:hover { border-color: var(--neon-gold); transform: translateY(-5px); }
-        .author-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--neon-blue); padding: 3px; }
-
-        /* --- CHAT (LONCA) --- */
-        .chat-container {
-            background: rgba(0,0,0,0.8); border: 1px solid #333; height: 60vh;
-            display: flex; flex-direction: column; border-radius: 10px; overflow: hidden;
-        }
-        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .msg { padding: 10px 15px; border-radius: 20px; max-width: 70%; font-size: 0.9rem; }
-        .msg.incoming { background: #222; align-self: flex-start; border-bottom-left-radius: 2px; border-left: 3px solid var(--neon-gold); }
-        .msg.outgoing { background: var(--neon-blue); color: #000; align-self: flex-end; border-bottom-right-radius: 2px; }
-        .chat-input-area { padding: 15px; background: #111; display: flex; gap: 10px; }
-        .chat-input { flex: 1; background: #222; border: none; padding: 10px; color: #fff; border-radius: 5px; }
-        .chat-send { background: var(--neon-gold); border: none; padding: 0 20px; border-radius: 5px; cursor: pointer; color: #000; font-weight: bold; }
-
-        /* --- ADVANCED PLAYER BAR --- */
-        .player-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 90px;
-            background: #0a0a0a; border-top: 2px solid var(--neon-gold);
-            display: flex; align-items: center; padding: 0 20px; z-index: 2000;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
-        }
-        .player-left { display: flex; align-items: center; width: 30%; gap: 15px; }
-        .player-art { width: 60px; height: 60px; border-radius: 5px; object-fit: cover; border: 1px solid #444; }
-        .player-info h4 { color: #fff; font-size: 0.9rem; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .player-info p { color: var(--neon-gold); font-size: 0.7rem; }
-        .player-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .player-left { display: flex; align-items: center; width: 30%; gap: 15px; overflow: hidden; }
+        .player-art { width: 60px; height: 60px; border-radius: 5px; object-fit: cover; border: 1px solid #444; flex-shrink:0; }
+        .player-info { overflow: hidden; }
+        .player-info h4 { white-space: nowrap; text-overflow: ellipsis; overflow: hidden; margin-bottom: 3px; font-size: 0.9rem; }
+        .player-center { flex: 1; display: flex; flex-direction: column; align-items: center; }
         .player-controls { display: flex; gap: 20px; align-items: center; margin-bottom: 8px; }
         .ctrl-btn { background: none; border: none; color: #888; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
         .ctrl-btn:hover { color: #fff; }
         .play-btn { width: 40px; height: 40px; background: var(--neon-gold); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
         .progress-container { width: 100%; max-width: 500px; height: 4px; background: #333; border-radius: 2px; cursor: pointer; position: relative; }
-        .progress-fill { height: 100%; background: var(--neon-blue); width: 0%; position: relative; }
+        .progress-fill { height: 100%; background: var(--neon-blue); width: 0%; }
         .player-right { width: 20%; display: flex; justify-content: flex-end; align-items: center; }
-        .equalizer { display: flex; gap: 3px; height: 30px; align-items: flex-end; }
-        .eq-bar { width: 4px; background: var(--neon-red); animation: eqBounce 0.5s infinite ease-in-out; }
-        @keyframes eqBounce { 0%, 100% { height: 5px; } 50% { height: 100%; } }
 
-        /* --- RESPONSIVE GAME STYLE --- */
-        #game-canvas { 
-            border: 2px solid var(--neon-blue); 
-            background: radial-gradient(circle, #1a1a2e 0%, #000000 100%); 
-            display: block; 
-            margin: 0 auto; 
-            box-shadow: 0 0 20px var(--neon-blue);
-            max-width: 100%; /* Mobilde taşmayı önler */
-            height: auto;
+        /* --- MUSIC LIST --- */
+        #song-list-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
+        .song-item {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 10px;
+            display: flex; gap: 15px; align-items: center; border-radius: 8px; transition: 0.2s;
         }
-        .game-ui { text-align: center; margin-bottom: 20px; }
+        .song-item:hover { background: rgba(255,215,0,0.1); border-color: var(--neon-gold); }
+        .song-play-btn {
+            background: transparent; border: 1px solid var(--neon-gold); color: var(--neon-gold);
+            padding: 5px 15px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; font-weight: bold; margin-left: auto;
+        }
+        .song-play-btn:hover { background: var(--neon-gold); color: #000; }
+
+        /* --- GAME --- */
+        #game-canvas { border: 2px solid var(--neon-blue); background: #000; display: block; margin: 0 auto; max-width: 100%; border-radius: 8px; }
 
         /* --- MODALS --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .modal.active { display: flex; }
-        .modal-box { width: 600px; max-height: 80vh; background: #0a0a0a; border: 2px solid var(--neon-gold); padding: 30px; position: relative; overflow-y: auto; border-radius: 10px; }
-        .close-modal { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--neon-red); font-size: 1.5rem; cursor: pointer; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100000; display: none; align-items: center; justify-content: center; }
+        .system-message-box { background: #111; border: 2px solid var(--neon-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 40px rgba(0, 240, 255, 0.2); }
+        .sys-btn { background: var(--neon-gold); color: #000; padding: 10px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .modal-box { background: #111; border: 1px solid var(--neon-gold); width: 600px; max-height: 80vh; padding: 30px; position: relative; overflow-y: auto; border-radius: 10px; }
+        .close-modal { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--neon-red); font-size: 2rem; cursor: pointer; }
 
-        /* --- RESPONSIVE --- */
+        /* --- SOCIAL --- */
+        .social-icons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; }
+        .social-icons a { 
+            width: 50px; height: 50px; background: rgba(255,255,255,0.05); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 1.5rem; text-decoration:none; transition:0.3s;
+        }
+        .social-icons a:hover { background: var(--neon-gold); color: #000; transform: translateY(-5px); }
+        .star-rating span { font-size: 2.5rem; cursor: pointer; color: #444; transition: 0.2s; }
+        .star-rating span:hover, .star-rating span.active { color: var(--neon-gold); }
+
         @media (max-width: 768px) {
-            .nav-dock { bottom: 100px; top: auto; left: 50%; transform: translateX(-50%); flex-direction: row; width: 100%; justify-content: center; padding-bottom: 10px; }
-            .viewport { left: 0; top: 70px; bottom: 160px; padding: 10px; }
-            .player-bar { height: 110px; flex-direction: column; padding: 10px; justify-content: center; }
-            .player-left { width: 100%; margin-bottom: 10px; justify-content: center; }
-            .player-center { width: 100%; }
+            .nav-dock { bottom: 100px; top: auto; left: 50%; transform: translateX(-50%); flex-direction: row; width: 95%; justify-content: space-around; background: #111; padding: 10px; border: 1px solid #333; }
+            .nav-item { width: 40px; height: 40px; font-size: 1rem; }
+            .viewport { left: 0; padding: 15px; bottom: 170px; top: 70px; right: 0; }
+            .player-bar { height: 110px; flex-direction: column; padding: 10px; justify-content: center; gap: 5px; }
+            .player-left { width: 100%; justify-content: center; margin-bottom: 5px; }
             .player-right { display: none; }
-            .author-card { flex-direction: column; text-align: center; }
-            .name-badge-wrapper { justify-content: center; } /* Mobilde isimleri ortala */
-            .widgets-row { flex-direction: column; }
+            .led-time { font-size: 4rem; }
+            .brand-logo { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LOGIN SCREEN -->
+    <!-- ALERTS -->
+    <div id="system-modal" class="modal">
+        <div class="system-message-box">
+            <h3 style="color:var(--neon-blue); margin-bottom:15px; font-family:'Orbitron'">SİSTEM MESAJI</h3>
+            <p id="sys-text" style="color:#ccc; line-height:1.5;">Mesaj içeriği...</p>
+            <button class="sys-btn" onclick="closeSystemMessage()">TAMAM</button>
+        </div>
+    </div>
+
+    <!-- LOGIN -->
     <div id="login-gateway">
         <div class="login-panel">
-            <h2 style="font-family:'Cinzel'; color:var(--neon-gold); margin-bottom:10px;">MEMET ÇINAR</h2>
-            <p style="color:#888; font-size:0.9rem; letter-spacing:2px;">LEGACY VIP SYSTEM</p>
+            <h2 style="font-family:'Cinzel'; color:var(--neon-gold); margin-bottom:10px; font-size: 2rem;">MEMET ÇINAR</h2>
+            <p style="color:#ccc; font-size:0.8rem; letter-spacing:3px;">LEGACY VIP SYSTEM</p>
             <button class="google-btn" onclick="login()">
                 <i class="fab fa-google"></i> Google ile Oturum Aç
             </button>
-            <div id="login-status" style="margin-top:15px; height:20px; color:var(--neon-blue); font-size:0.8rem;"></div>
+            <div id="login-status" style="margin-top:20px; height:20px; color:var(--neon-blue); font-size:0.8rem;"></div>
         </div>
     </div>
 
@@ -340,12 +300,14 @@
     <div class="hud-top">
         <div class="brand-logo">
             <span>MEMET ÇINAR</span>
-            <!-- YENİ SİTE ROZETİ (HİZALANMIŞ) -->
             <div class="official-badge site-gold-badge" data-tooltip="RESMİ WEB SİTESİ">
                 <i class="fas fa-check"></i>
             </div>
         </div>
-        <div style="font-family:'Orbitron'; color:var(--neon-gold);" id="clock-display">12:00</div>
+        <div style="display:flex; gap:15px; align-items:center;">
+            <i class="fas fa-wifi" style="color:var(--neon-blue);"></i>
+            <i class="fas fa-battery-full" style="color:var(--neon-gold);"></i>
+        </div>
     </div>
 
     <!-- NAV -->
@@ -353,122 +315,122 @@
         <div class="nav-item active" onclick="showScreen('home')"><i class="fas fa-home"></i></div>
         <div class="nav-item" onclick="showScreen('inventory')"><i class="fas fa-music"></i></div>
         <div class="nav-item" onclick="showScreen('authors')"><i class="fas fa-feather-alt"></i></div>
-        <div class="nav-item" onclick="showScreen('character')"><i class="fas fa-user-astronaut"></i></div>
+        <div class="nav-item" onclick="showScreen('contact')"><i class="fas fa-paper-plane"></i></div>
         <div class="nav-item" onclick="showScreen('minigame')"><i class="fas fa-gamepad"></i></div>
         <div class="nav-item" onclick="showScreen('guild')"><i class="fas fa-comments"></i></div>
+        <div class="nav-item" onclick="showScreen('about')"><i class="fas fa-info-circle"></i></div>
+        <div class="nav-item" onclick="showScreen('rate')"><i class="fas fa-star"></i></div>
     </div>
 
     <!-- CONTENT -->
     <div class="viewport">
         
-        <!-- HOME (DASHBOARD) -->
         <div id="home" class="screen active">
+            <div style="width:100%; text-align:center;">
+                <div class="led-clock-container">
+                    <div class="led-time" id="main-led-clock">00:00:00</div>
+                    <div class="led-date" id="main-led-date">YÜKLENİYOR...</div>
+                </div>
+            </div>
+
+            <div class="news-container">
+                <div class="news-label">SON DAKİKA</div>
+                <div class="news-ticker" id="news-ticker-content"></div>
+            </div>
+
             <div class="widgets-row">
-                <!-- Weather Widget -->
                 <div class="widget-card">
-                    <div class="widget-header">
-                         <i class="fas fa-cloud-sun widget-icon"></i>
-                         <span style="color:var(--neon-blue);">CANLI</span>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px; color:var(--neon-blue); border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">
+                         <span><i class="fas fa-satellite-dish"></i> CANLI KONUM</span>
+                         <span style="font-size:0.8rem;">ONLINE</span>
                     </div>
-                    <div class="widget-data">
-                        <h3>MALATYA</h3>
-                        <p id="weather-text">Hava durumu yükleniyor...</p>
+                    <div class="weather-anim-container" id="weather-anim"></div>
+                    <div style="text-align:center;">
+                        <h3 id="weather-city" style="font-size:1.5rem;">MALATYA</h3>
+                        <p id="weather-text" style="color:#aaa;">Veri bekleniyor...</p>
                     </div>
                 </div>
-                <!-- Advanced Calendar Widget -->
                 <div class="widget-card">
                     <div class="calendar-header">
                         <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-                        <h3 style="font-size:1rem; margin:0;" id="cal-month-year">KASIM 2025</h3>
+                        <h3 style="font-size:1.1rem; margin:0;" id="cal-month-year">KASIM 2025</h3>
                         <button class="cal-nav-btn" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
                     </div>
-                    <div class="calendar-grid" style="margin-bottom:5px;">
-                        <div class="cal-day-header">Pzt</div><div class="cal-day-header">Sal</div><div class="cal-day-header">Çar</div>
-                        <div class="cal-day-header">Per</div><div class="cal-day-header">Cum</div><div class="cal-day-header">Cmt</div>
-                        <div class="cal-day-header">Paz</div>
+                    <div class="calendar-grid" style="margin-bottom:10px; opacity:0.7;">
+                        <div>Pzt</div><div>Sal</div><div>Çar</div><div>Per</div><div>Cum</div><div>Cmt</div><div>Paz</div>
                     </div>
                     <div class="calendar-grid" id="calendar-body"></div>
                 </div>
             </div>
-
-            <div style="text-align:center; margin-top:50px;">
-                <h1 style="font-family:'Orbitron'; font-size:2.5rem; margin-bottom:10px;">THE LEGACY</h1>
-                <p style="color:#aaa;">Resmi Müzik Platformuna Hoşgeldiniz</p>
-            </div>
         </div>
 
-        <!-- INVENTORY -->
         <div id="inventory" class="screen">
-            <h2 style="color:var(--neon-gold); font-family:'Orbitron'; margin-bottom:20px;">// MÜZİK KÜTÜPHANESİ</h2>
-            <div id="song-list-container" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:20px;">
-                <!-- Şarkılar JS ile buraya -->
-            </div>
+            <h2 style="color:var(--neon-gold); font-family:'Orbitron'; margin-bottom:20px; border-bottom:1px solid #333; padding-bottom:10px;">// MÜZİK KÜTÜPHANESİ</h2>
+            <div id="song-list-container"></div>
         </div>
 
-        <!-- AUTHORS -->
         <div id="authors" class="screen">
             <h2 style="color:var(--neon-blue); font-family:'Orbitron'; margin-bottom:20px;">// SANATÇI & YAZARLAR</h2>
-            
-            <!-- Memet Çınar Kartı -->
-            <div class="author-card">
-                <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" class="author-img">
-                <div>
-                    <!-- İsim ve Rozet Hizalama -->
-                    <div class="name-badge-wrapper">
-                        <h3 style="font-family:'Cinzel'; font-size:1.8rem; color:var(--neon-gold); margin:0;">MEMET ÇINAR</h3>
-                        <div class="official-badge user-blue-badge" data-tooltip="DOĞRULANMIŞ SANATÇI">
-                            <i class="fas fa-check"></i>
+            <div class="widgets-row">
+                <div class="author-card">
+                    <div style="display:flex; gap:15px; align-items:center;">
+                        <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--neon-blue);">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <h3 style="font-family:'Cinzel'; color:var(--neon-gold); margin:0;">MEMET ÇINAR</h3>
+                                <div class="official-badge user-blue-badge" data-tooltip="DOĞRULANMIŞ SANATÇI"><i class="fas fa-check"></i></div>
+                            </div>
+                            <p style="color:#ccc; font-size:0.9rem;">Solist, Bestekar</p>
                         </div>
                     </div>
-                    <p style="color:#ccc; margin-top:5px;">Solist, Bestekar, The Legacy Kurucusu</p>
                 </div>
-            </div>
-
-            <!-- Bilal Güvercin Kartı -->
-            <div class="author-card">
-                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop" class="author-img" style="border-color:#fff;">
-                <div>
-                    <!-- İsim ve Rozet Hizalama -->
-                    <div class="name-badge-wrapper">
-                        <h3 style="font-family:'Cinzel'; font-size:1.5rem; color:#fff; margin:0;">BİLAL GÜVERCİN</h3>
-                        <div class="official-badge user-blue-badge" data-tooltip="DOĞRULANMIŞ SÖZ YAZARI" style="background:#555; border-color:#ccc;">
-                            <i class="fas fa-check"></i>
+                <div class="author-card">
+                    <div style="display:flex; gap:15px; align-items:center;">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop" style="width:80px; height:80px; border-radius:50%; border:2px solid #fff;">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <h3 style="font-family:'Cinzel'; color:#fff; margin:0;">BİLAL GÜVERCİN</h3>
+                                <div class="official-badge user-blue-badge" style="background:#555;" data-tooltip="DOĞRULANMIŞ SÖZ YAZARI"><i class="fas fa-check"></i></div>
+                            </div>
+                            <p style="color:#ccc; font-size:0.9rem;">Söz Yazarı</p>
                         </div>
                     </div>
-                    <p style="color:#ccc; margin-top:5px;">Söz Yazarı, "Bu Bir Rüya" Eserinin Sahibi</p>
                 </div>
             </div>
         </div>
 
-        <!-- CHARACTER -->
-        <div id="character" class="screen">
-            <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" 
-                     style="width:250px; height:250px; border-radius:50%; border:4px solid var(--neon-gold); box-shadow:0 0 30px rgba(255,215,0,0.3);">
-                <h2 style="margin-top:20px; font-family:'Cinzel'; font-size:2.5rem;">MEMET ÇINAR</h2>
-                <p style="color:var(--neon-blue); font-family:'Orbitron';">LEVEL 99 | LEGENDARY ARTIST</p>
+        <div id="contact" class="screen">
+            <div style="height:70vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+                <div style="position:relative; margin-bottom:2rem;">
+                    <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" 
+                         style="width:150px; height:150px; border-radius:50%; border:4px solid var(--neon-gold);">
+                    <div style="position:absolute; bottom:5px; right:5px; background:var(--neon-blue); color:#000; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;"><i class="fas fa-check"></i></div>
+                </div>
+                <h2 style="font-family:'Cinzel'; color:var(--neon-gold); font-size:2rem;">MEMET ÇINAR</h2>
+                <p style="font-size:1.2rem; margin-bottom:2rem; color:#ccc;">Mesajlarını bekliyorum ❤️</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/memetcinarofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@memetcinar444" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://open.spotify.com/intl-tr/artist/5RsoLkeIEuJA1JwF7tFZLI?si=RSQAHreHSdu6ltk6hn0U1Q" target="_blank"><i class="fab fa-spotify"></i></a>
+                    <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank"><i class="fab fa-apple"></i></a>
+                    <a href="https://www.tiktok.com/@memetcnr44_" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
         </div>
         
-        <!-- NEW MINIGAME (RESPONSIVE) -->
         <div id="minigame" class="screen">
-            <div class="game-ui">
+            <div style="text-align:center; margin-bottom:15px;">
                 <h2 style="font-family:'Orbitron'; color:var(--neon-gold);">MÜZİK KORUYUCUSU</h2>
-                <p style="color:#aaa; margin-bottom:10px;">Kötü notalar müziği bozmak istiyor! Onları yok et!</p>
-                <p>SKOR: <span id="game-score" style="color:var(--neon-blue); font-size:1.5rem; font-weight:bold;">0</span></p>
-                <button class="chat-send" onclick="startGame()" style="margin-top:10px;">BAŞLAT / YENİDEN</button>
-                <p style="font-size:0.8rem; color:#666; margin-top:5px;">PC: Ok Tuşları & Boşluk | Mobil: Parmağınla Sürükle & Dokun</p>
+                <p>SKOR: <span id="game-score" style="color:var(--neon-blue); font-weight:bold;">0</span></p>
+                <button class="sys-btn" onclick="startGame()">BAŞLAT</button>
             </div>
             <canvas id="game-canvas"></canvas>
         </div>
 
-        <!-- GUILD CHAT -->
         <div id="guild" class="screen">
-            <h2 style="color:var(--neon-gold); font-family:'Orbitron'; margin-bottom:10px;">// LONCA SOHBETİ</h2>
+            <h2 style="color:var(--neon-gold); font-family:'Orbitron'; margin-bottom:15px;">// LONCA SOHBETİ</h2>
             <div class="chat-container">
-                <div class="chat-messages" id="chat-box">
-                    <div class="msg incoming">Legacy Sistemine Hoşgeldin. Buradan yönetim ekibiyle iletişime geçebilirsin.</div>
-                </div>
+                <div class="chat-messages" id="chat-box"><div class="msg incoming">Legacy Sistemine Hoşgeldin.</div></div>
                 <div class="chat-input-area">
                     <input type="text" class="chat-input" id="chat-input" placeholder="Mesajınızı yazın...">
                     <button class="chat-send" onclick="sendMessage()">GÖNDER</button>
@@ -476,27 +438,48 @@
             </div>
         </div>
 
+        <div id="about" class="screen">
+            <h2 style="color:var(--neon-blue); font-family:'Orbitron'; margin-bottom:20px;">// HAKKIMDA</h2>
+            <div class="widget-card" style="text-align:center;">
+                <h3 style="color:var(--neon-gold); font-family:'Cinzel'; font-size:1.8rem;">MEMET ÇINAR</h3>
+                <div style="width: 50px; height:2px; background:var(--neon-gold); margin: 10px auto;"></div>
+                <p style="margin-top:10px; line-height:1.6; color:#ccc;">
+                    Müzik dünyasında kendine özgü tarzı ve güçlü sesiyle yer edinen Memet Çınar, Malatya'nın yetiştirdiği değerli sanatçılardan biridir. "The Legacy" projesi ile dijital dünyada müziğini ve sanatını sevenleriyle buluşturmaktadır.
+                </p>
+            </div>
+        </div>
+
+        <div id="rate" class="screen">
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:60vh;">
+                <div class="widget-card" style="max-width: 500px; text-align: center;">
+                    <h2 style="color:var(--neon-gold); margin-bottom:10px;">BİZİ DEĞERLENDİRİN</h2>
+                    <div class="star-rating">
+                        <span onclick="rate(1)">★</span><span onclick="rate(2)">★</span><span onclick="rate(3)">★</span><span onclick="rate(4)">★</span><span onclick="rate(5)">★</span>
+                    </div>
+                    <textarea id="feedback-text" placeholder="Düşüncelerinizi yazın..." style="width:100%; height:100px; background:rgba(0,0,0,0.3); border:1px solid #444; color:#fff; padding:10px; border-radius:8px; margin-top:15px; resize:none; outline:none;"></textarea>
+                    <button class="sys-btn" onclick="submitRating()" style="width:100%;">GÖNDER</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- LYRICS MODAL -->
     <div class="modal" id="lyrics-modal">
         <div class="modal-box">
             <button class="close-modal" onclick="closeLyrics()">&times;</button>
-            <h3 id="lyrics-title" style="color:var(--neon-gold); font-family:'Cinzel'; text-align:center; margin-bottom:20px;">Şarkı Adı</h3>
-            <div id="lyrics-content" style="text-align:center; line-height:1.6; color:#ddd; white-space: pre-line;"></div>
+            <h3 id="lyrics-title" style="color:var(--neon-gold); font-family:'Cinzel'; text-align:center; font-size:1.5rem; margin-bottom:20px; border-bottom:1px solid rgba(255,215,0,0.3); padding-bottom:10px;">Şarkı Adı</h3>
+            <div id="lyrics-content" style="text-align:center; line-height:1.8; color:#eee; white-space: pre-line; font-size:1rem;"></div>
         </div>
     </div>
 
-    <!-- PLAYER BAR -->
     <div class="player-bar">
         <div class="player-left">
             <img src="https://source.boomplaymusic.com/group10/M00/11/13/80d79673de0246248222b32fbc264ea7H3000W3000_320_320.jpg" class="player-art" id="p-art">
-            <div class="player-info">
-                <h4 id="p-title">Bu Bir Rüya</h4>
-                <p id="p-artist">Bilal Güvercin</p>
+            <div class="player-info" style="margin-left:15px;">
+                <h4 id="p-title" style="color:#fff;">Bu Bir Rüya</h4>
+                <p id="p-artist" style="color:var(--neon-gold); font-size:0.8rem;">Bilal Güvercin</p>
             </div>
         </div>
-        
         <div class="player-center">
             <div class="player-controls">
                 <button class="ctrl-btn" onclick="prevSong()"><i class="fas fa-step-backward"></i></button>
@@ -507,13 +490,11 @@
                 <div class="progress-fill" id="progress-bar"></div>
             </div>
         </div>
-
         <div class="player-right">
-            <div class="equalizer" id="equalizer"></div>
+            <div style="color:var(--neon-red); font-size:0.8rem; border:1px solid var(--neon-red); padding:2px 8px; border-radius:4px;">VIP AUDIO</div>
         </div>
     </div>
 
-    <!-- HIDDEN YOUTUBE -->
     <div id="youtube-player" style="position:absolute; top:-9999px;"></div>
 
     <script>
@@ -546,352 +527,226 @@
             { title: "AŞKIN KÜLLERİ", artist: "Memet Çınar", id: "F3MAB4cgmEI", cover: "https://i.ytimg.com/vi/F3MAB4cgmEI/maxresdefault.jpg" }
         ];
 
-        // ŞARKI SÖZLERİ VE YAZAR LİSTESİ
         const lyricsDB = {
+            "BU BİR RÜYA": "SÖZ YAZARI: Bilal Güvercin\n\nGeçmişle yandı başım\nAh bu günü nasıl taşır\nKalbimdeki yalnızlık\nBoğazıma ulaşır...",
             "ELKAY 2": "SÖZ YAZARLARI:\n- Hazal Erden\n- Leyla Loly\n- Memet Çınar\n- Nazlı Gül\n- Retaj Manaf\n- Zeynep Karaca\n\n(Şarkı sözleri yükleniyor...)",
-            "BU BİR RÜYA": "SÖZ YAZARI: Bilal Güvercin\n\nGeçmişle yandı başım\nAh bu günü nasıl taşır\nKalbimdeki yalnızlık\nBoğazıma ulaşır..."
+            "YILDIZLAR": "Sözler yakında eklenecek...",
+            "LEYA": "Sözler yakında eklenecek..."
         };
 
-        let player;
-        let currentIdx = 0;
-        let isPlaying = false;
-        let progressInterval;
-        
-        /* --- CALENDAR LOGIC --- */
-        let currDate = new Date();
-        const monthNames = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+        const newsHeadlines = [
+            "THE LEGACY PLATFORMU GÜNCELLENDİ!",
+            "MEMET ÇINAR: 'YILDIZLAR' PARÇASI MÜZİK LİSTELERİNİ SALLIYOR.",
+            "MALATYA'DA SANAT RÜZGARI EŞMEYE DEVAM EDİYOR.",
+            "BİLAL GÜVERCİN İLE 'BU BİR RÜYA' AKUSTİK PERFORMANSI YAKINDA..."
+        ];
 
-        function changeMonth(dir) {
-            currDate.setMonth(currDate.getMonth() + dir);
-            renderCalendar();
+        let player, currentIdx = 0, isPlaying = false, progressInterval;
+
+        /* --- SYSTEM ALERT --- */
+        function showSystemMessage(msg) {
+            document.getElementById('sys-text').innerText = msg;
+            document.getElementById('system-modal').style.display = 'flex';
         }
+        function closeSystemMessage() { document.getElementById('system-modal').style.display = 'none'; }
 
-        function renderCalendar() {
-            const year = currDate.getFullYear();
-            const month = currDate.getMonth();
-            document.getElementById('cal-month-year').innerText = `${monthNames[month]} ${year}`.toUpperCase();
-
-            const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const container = document.getElementById('calendar-body');
-            container.innerHTML = '';
-
-            // Pazartesi başlangıçlı yapmak için (0=Pazartesi, 6=Pazar gibi düzeltme)
-            let start = firstDay - 1;
-            if(start < 0) start = 6;
-
-            // Boş kutular
-            for(let i=0; i<start; i++) {
-                const div = document.createElement('div');
-                div.className = 'cal-day empty';
-                container.appendChild(div);
-            }
-
-            // Günler
-            const today = new Date();
-            for(let i=1; i<=daysInMonth; i++) {
-                const div = document.createElement('div');
-                div.className = 'cal-day';
-                div.innerText = i;
-                if(i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                    div.classList.add('today');
-                }
-                container.appendChild(div);
-            }
-        }
-
-        /* --- APP INIT --- */
+        /* --- INIT --- */
         function login() {
-            const status = document.getElementById('login-status');
-            const btn = document.querySelector('.google-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Doğrulanıyor...';
-            status.innerText = "Google Sunucuları ile Güvenli Bağlantı Kuruluyor...";
-            
+            const btn = document.querySelector('.google-btn'); btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GİRİŞ YAPILIYOR...';
             setTimeout(() => {
-                status.innerText = "Doğrulandı: Memet Çınar Yöneticisi";
-                status.style.color = "#00ff00";
+                document.getElementById('login-status').innerText = "BAŞARILI";
                 setTimeout(() => {
                     document.getElementById('login-gateway').style.opacity = 0;
-                    setTimeout(() => { 
-                        document.getElementById('login-gateway').style.display = 'none'; 
-                        initApp();
-                    }, 1000);
+                    setTimeout(() => { document.getElementById('login-gateway').style.display='none'; initApp(); }, 1000);
                 }, 1000);
-            }, 2000);
-        }
-
-        function initApp() {
-            loadWeather();
-            renderCalendar();
-            loadSongList();
-            initEqualizer();
-            startClock();
-            resizeCanvas();
-        }
-
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            
-            const map = { 'home':0, 'inventory':1, 'authors':2, 'character':3, 'minigame':4, 'guild':5 };
-            if(map[id] !== undefined) document.querySelectorAll('.nav-item')[map[id]].classList.add('active');
-            
-            if(id === 'minigame') {
-                resizeCanvas(); // Oyunu açarken boyutu ayarla
-                gameLoop();
-            }
-        }
-
-        /* --- WIDGETS --- */
-        function loadWeather() {
-            fetch('https://api.open-meteo.com/v1/forecast?latitude=38.35&longitude=38.31&current_weather=true')
-            .then(res => res.json())
-            .then(data => {
-                const temp = data.current_weather.temperature;
-                document.getElementById('weather-text').innerHTML = `${temp}°C <br> Parçalı Bulutlu`;
-            })
-            .catch(() => {
-                document.getElementById('weather-text').innerText = "18°C (Veri alınamadı)";
-            });
-        }
-
-        function startClock() {
-            setInterval(() => {
-                const now = new Date();
-                document.getElementById('clock-display').innerText = now.toLocaleTimeString('tr-TR').substring(0,5);
-            }, 1000);
-        }
-
-        /* --- PLAYER --- */
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '0', width: '0', videoId: songs[0].id,
-                events: { 'onStateChange': onPlayerStateChange }
-            });
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
-                isPlaying = true;
-                document.getElementById('main-play-btn').innerHTML = '<i class="fas fa-pause"></i>';
-                startProgress(); animateEqualizer(true);
-            } else {
-                isPlaying = false;
-                document.getElementById('main-play-btn').innerHTML = '<i class="fas fa-play"></i>';
-                stopProgress(); animateEqualizer(false);
-            }
-            if (event.data == YT.PlayerState.ENDED) nextSong();
-        }
-
-        function togglePlay() { if(isPlaying) player.pauseVideo(); else player.playVideo(); }
-        function playSong(idx) {
-            currentIdx = idx;
-            const s = songs[idx];
-            document.getElementById('p-title').innerText = s.title;
-            document.getElementById('p-artist').innerText = s.artist;
-            document.getElementById('p-art').src = s.cover;
-            player.loadVideoById(s.id);
-            player.playVideo();
-        }
-        function nextSong() { currentIdx = (currentIdx + 1) % songs.length; playSong(currentIdx); }
-        function prevSong() { currentIdx = (currentIdx - 1 + songs.length) % songs.length; playSong(currentIdx); }
-
-        function loadSongList() {
-            const container = document.getElementById('song-list-container');
-            songs.forEach((s, idx) => {
-                const div = document.createElement('div');
-                div.style.background = 'rgba(255,255,255,0.05)'; div.style.padding = '10px';
-                div.style.display = 'flex'; div.style.gap = '10px'; div.style.alignItems = 'center';
-                div.innerHTML = `
-                    <img src="${s.cover}" style="width:50px; height:50px; object-fit:cover;">
-                    <div style="flex:1;">
-                        <div style="color:#fff; font-weight:bold;">${s.title}</div>
-                        <div style="color:#888; font-size:0.8rem;">${s.artist}</div>
-                    </div>
-                    <button onclick="showLyrics('${s.title}')" style="background:none; border:none; color:#aaa; cursor:pointer; margin-right:10px;"><i class="fas fa-file-alt"></i></button>
-                    <button onclick="playSong(${idx})" style="background:transparent; border:1px solid var(--neon-gold); color:var(--neon-gold); padding:5px 10px; cursor:pointer;">OYNAT</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function showLyrics(title) {
-            document.getElementById('lyrics-modal').style.display = 'flex';
-            document.getElementById('lyrics-title').innerText = title;
-            document.getElementById('lyrics-content').innerText = lyricsDB[title] || "Bu şarkının sözleri henüz eklenmedi.";
-        }
-        function closeLyrics() { document.getElementById('lyrics-modal').style.display = 'none'; }
-
-        function startProgress() {
-            clearInterval(progressInterval);
-            progressInterval = setInterval(() => {
-                if(player && player.getDuration) {
-                    const cur = player.getCurrentTime();
-                    const dur = player.getDuration();
-                    document.getElementById('progress-bar').style.width = (cur/dur) * 100 + '%';
-                }
-            }, 1000);
-        }
-        function stopProgress() { clearInterval(progressInterval); }
-        function seek(e) {
-            if(!player) return;
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            player.seekTo((x/rect.width) * player.getDuration(), true);
-        }
-
-        function initEqualizer() {
-            const eq = document.getElementById('equalizer');
-            for(let i=0; i<10; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'eq-bar';
-                bar.style.height = Math.random() * 100 + '%';
-                bar.style.animationDuration = (0.2 + Math.random() * 0.5) + 's';
-                eq.appendChild(bar);
-            }
-        }
-        function animateEqualizer(active) {
-            document.querySelectorAll('.eq-bar').forEach(b => b.style.animationPlayState = active ? 'running' : 'paused');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const txt = input.value.trim();
-            if(!txt) return;
-            const box = document.getElementById('chat-box');
-            const uDiv = document.createElement('div');
-            uDiv.className = 'msg outgoing'; uDiv.innerText = txt; box.appendChild(uDiv);
-            input.value = ''; box.scrollTop = box.scrollHeight;
-            setTimeout(() => {
-                const rDiv = document.createElement('div'); rDiv.className = 'msg incoming';
-                rDiv.innerText = "Mesajınız iletildi. Yönetici kısa sürede dönecek.";
-                box.appendChild(rDiv); box.scrollTop = box.scrollHeight;
             }, 1500);
         }
 
-        /* --- NEW RESPONSIVE GAME LOGIC --- */
-        const canvas = document.getElementById('game-canvas');
-        const ctx = canvas.getContext('2d');
-        let gameActive = false;
-        let score = 0;
-        let playerX = 0;
-        let playerY = 0;
-        const bullets = [];
-        const enemies = [];
-        let enemySpawner;
+        function initApp() {
+            detectDevice(); startLedClock(); initWeather(); renderCalendar(); loadSongList(); startNewsTicker();
+        }
 
-        // Canvas Boyutlandırma
-        function resizeCanvas() {
-            const container = document.querySelector('.game-ui').parentElement;
-            if(container) {
-                canvas.width = container.clientWidth - 40; // Padding payı
-                canvas.height = 400;
-                playerY = canvas.height - 50;
-                playerX = canvas.width / 2; // Ortala
+        function detectDevice() {
+            if(document.getElementById('minigame').classList.contains('active')) resizeCanvas();
+        }
+        window.addEventListener('resize', detectDevice);
+
+        /* --- CLOCK --- */
+        function startLedClock() {
+            setInterval(() => {
+                const now = new Date();
+                const h = String(now.getHours()).padStart(2,'0');
+                const m = String(now.getMinutes()).padStart(2,'0');
+                const s = String(now.getSeconds()).padStart(2,'0');
+                document.getElementById('main-led-clock').innerText = `${h}:${m}:${s}`;
+                document.getElementById('main-led-date').innerText = now.toLocaleDateString('tr-TR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+            }, 1000);
+        }
+
+        /* --- NEWS --- */
+        function startNewsTicker() {
+            const c = document.getElementById('news-ticker-content');
+            let content = "";
+            newsHeadlines.forEach(n => content += `<span class="news-item"><i class="fas fa-bolt" style="color:var(--neon-gold);"></i> ${n}</span>`);
+            newsHeadlines.forEach(n => content += `<span class="news-item"><i class="fas fa-bolt" style="color:var(--neon-gold);"></i> ${n}</span>`);
+            c.innerHTML = content;
+        }
+
+        /* --- WEATHER --- */
+        function initWeather() {
+            if(navigator.geolocation) navigator.geolocation.getCurrentPosition(pos => fetchWeather(pos.coords.latitude, pos.coords.longitude), () => fetchWeather(38.35, 38.31));
+            else fetchWeather(38.35, 38.31);
+        }
+        function fetchWeather(lat, lon) {
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+            .then(res=>res.json()).then(data => {
+                const c = data.current_weather.weathercode;
+                document.getElementById('weather-text').innerHTML = `${data.current_weather.temperature}°C <br> ` + getWeatherDesc(c);
+                setWeatherAnim(c);
+            }).catch(()=>{});
+        }
+        function getWeatherDesc(c) {
+            if(c===0) return "AÇIK"; if(c<=3) return "BULUTLU"; if(c<=67) return "YAĞMURLU"; return "KARLI";
+        }
+        function setWeatherAnim(c) {
+            const d = document.getElementById('weather-anim');
+            if(c===0) d.innerHTML='<div class="weather-sun"></div>';
+            else if(c<=3) d.innerHTML='<i class="fas fa-cloud weather-cloud"></i>';
+            else d.innerHTML='<i class="fas fa-cloud-showers-heavy weather-cloud" style="color:#00F0FF;"></i>';
+        }
+
+        /* --- CALENDAR --- */
+        let currDate = new Date();
+        const months = ["OCAK","ŞUBAT","MART","NİSAN","MAYIS","HAZİRAN","TEMMUZ","AĞUSTOS","EYLÜL","EKİM","KASIM","ARALIK"];
+        const specialDays = { "1-1":"anim-snow", "23-4":"anim-balloon", "19-5":"anim-flag", "30-8":"anim-flag", "29-10":"anim-firework" };
+        function changeMonth(d) { currDate.setMonth(currDate.getMonth()+d); renderCalendar(); }
+        function renderCalendar() {
+            const y = currDate.getFullYear(), m = currDate.getMonth();
+            document.getElementById('cal-month-year').innerText = `${months[m]} ${y}`;
+            const firstDay = new Date(y, m, 1).getDay();
+            const days = new Date(y, m+1, 0).getDate();
+            const c = document.getElementById('calendar-body'); c.innerHTML = '';
+            let start = firstDay-1; if(start<0) start=6;
+            for(let i=0; i<start; i++) c.appendChild(document.createElement('div'));
+            const today = new Date();
+            for(let i=1; i<=days; i++) {
+                const d = document.createElement('div'); d.className='cal-day'; d.innerText=i;
+                if(specialDays[`${i}-${m+1}`]) d.classList.add(specialDays[`${i}-${m+1}`]);
+                if(i===today.getDate() && m===today.getMonth() && y===today.getFullYear()) d.classList.add('today');
+                c.appendChild(d);
             }
         }
 
-        window.addEventListener('resize', resizeCanvas);
+        /* --- YOUTUBE --- */
+        var tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        function onYouTubeIframeAPIReady() { player = new YT.Player('youtube-player', { height:'0', width:'0', videoId: songs[0].id, events: { 'onStateChange': onPlayerStateChange } }); }
+        function onPlayerStateChange(event) {
+            if(event.data == YT.PlayerState.PLAYING) { isPlaying=true; document.getElementById('main-play-btn').innerHTML='<i class="fas fa-pause"></i>'; startProgress(); }
+            else { isPlaying=false; document.getElementById('main-play-btn').innerHTML='<i class="fas fa-play"></i>'; stopProgress(); }
+            if(event.data == YT.PlayerState.ENDED) nextSong();
+        }
+        function togglePlay() { if(isPlaying) player.pauseVideo(); else player.playVideo(); }
+        function playSong(idx) {
+            currentIdx = idx; const s = songs[idx];
+            document.getElementById('p-title').innerText = s.title; document.getElementById('p-artist').innerText = s.artist;
+            document.getElementById('p-art').src = s.cover; player.loadVideoById(s.id); player.playVideo();
+        }
+        function nextSong() { currentIdx = (currentIdx+1)%songs.length; playSong(currentIdx); }
+        function prevSong() { currentIdx = (currentIdx-1+songs.length)%songs.length; playSong(currentIdx); }
+        function startProgress() { clearInterval(progressInterval); progressInterval = setInterval(() => { if(player && player.getDuration) document.getElementById('progress-bar').style.width = (player.getCurrentTime()/player.getDuration())*100+'%'; }, 1000); }
+        function stopProgress() { clearInterval(progressInterval); }
+        function seek(e) { const r = e.currentTarget.getBoundingClientRect(); player.seekTo(((e.clientX-r.left)/r.width)*player.getDuration(), true); }
 
+        function loadSongList() {
+            const c = document.getElementById('song-list-container');
+            songs.forEach((s, idx) => {
+                const div = document.createElement('div'); div.className = 'song-item';
+                div.innerHTML = `
+                    <img src="${s.cover}" style="width:50px;height:50px;border-radius:5px;object-fit:cover;">
+                    <div style="flex:1;">
+                        <div style="font-weight:bold;color:#fff;">${s.title}</div>
+                        <div style="font-size:0.8rem;color:#888;">${s.artist}</div>
+                    </div>
+                    <button onclick="showLyrics('${s.title}')" style="background:none;border:none;color:#aaa;cursor:pointer;margin-right:10px;"><i class="fas fa-file-alt"></i></button>
+                    <button class="song-play-btn" onclick="playSong(${idx})">OYNAT</button>
+                `;
+                c.appendChild(div);
+            });
+        }
+        function showLyrics(t) {
+            document.getElementById('lyrics-modal').style.display = 'flex';
+            document.getElementById('lyrics-title').innerText = t;
+            document.getElementById('lyrics-content').innerText = lyricsDB[t] || "Sözler ekleniyor...";
+        }
+        function closeLyrics() { document.getElementById('lyrics-modal').style.display = 'none'; }
+
+        /* --- GAME --- */
+        const canvas = document.getElementById('game-canvas'); const ctx = canvas.getContext('2d');
+        let gameActive=false, score=0, pX=0, bullets=[], enemies=[], spawner;
+        function resizeCanvas() {
+            const c = document.getElementById('minigame');
+            canvas.width = Math.min(c.clientWidth-40, 600); canvas.height = 400; pX = canvas.width/2;
+        }
         function startGame() {
-            if(gameActive) return;
-            resizeCanvas(); // Başlarken boyutu garanti et
-            gameActive = true; score = 0; document.getElementById('game-score').innerText = 0;
-            bullets.length = 0; enemies.length = 0;
-            enemySpawner = setInterval(spawnEnemy, 1000);
+            if(gameActive) return; resizeCanvas(); gameActive=true; score=0; document.getElementById('game-score').innerText=0;
+            bullets=[]; enemies=[]; spawner = setInterval(() => { if(gameActive) enemies.push({x:Math.random()*(canvas.width-30), y:-30, s:1+Math.random()*2}); }, 1000);
             gameLoop();
         }
-
-        function spawnEnemy() {
-            if(!gameActive) return;
-            const x = Math.random() * (canvas.width - 30);
-            enemies.push({x: x, y: -30, speed: 1 + Math.random() * 2});
-        }
-
         function gameLoop() {
             if(!gameActive) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Player Draw
-            ctx.fillStyle = '#00F0FF';
-            ctx.beginPath(); ctx.moveTo(playerX, playerY); ctx.lineTo(playerX - 15, playerY + 30); ctx.lineTo(playerX + 15, playerY + 30); ctx.fill();
-
-            // Bullets
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle='#00F0FF'; ctx.fillRect(pX-15, canvas.height-50, 30, 30);
             for(let i=bullets.length-1; i>=0; i--) {
-                const b = bullets[i];
-                b.y -= 5;
-                ctx.fillStyle = '#FFD700'; ctx.fillRect(b.x-2, b.y, 4, 10);
-                if(b.y < 0) bullets.splice(i, 1);
+                let b = bullets[i]; b.y-=5; ctx.fillStyle='#FFD700'; ctx.fillRect(b.x-2, b.y, 4, 10);
+                if(b.y<0) bullets.splice(i,1);
             }
-
-            // Enemies
             for(let i=enemies.length-1; i>=0; i--) {
-                const e = enemies[i];
-                e.y += e.speed;
-                ctx.fillStyle = '#FF003C';
-                ctx.beginPath(); ctx.arc(e.x, e.y, 15, 0, Math.PI*2); ctx.fill();
-                ctx.fillStyle = '#fff'; ctx.font='12px Arial'; ctx.fillText('♫', e.x-5, e.y+4);
-
-                // Collision (Game Over)
-                if(e.y > canvas.height) {
-                    gameActive = false; clearInterval(enemySpawner);
-                    alert("OYUN BİTTİ! SKOR: " + score);
-                    return;
-                }
-
-                // Hit Check
+                let e = enemies[i]; e.y+=e.s;
+                ctx.fillStyle='#FF003C'; ctx.beginPath(); ctx.arc(e.x, e.y, 15, 0, Math.PI*2); ctx.fill();
+                if(e.y>canvas.height) { gameActive=false; clearInterval(spawner); showSystemMessage("OYUN BİTTİ! SKOR: "+score); return; }
                 for(let j=bullets.length-1; j>=0; j--) {
-                    const b = bullets[j];
-                    const dist = Math.hypot(e.x - b.x, e.y - b.y);
-                    if(dist < 20) {
-                        enemies.splice(i, 1); bullets.splice(j, 1);
-                        score += 10; document.getElementById('game-score').innerText = score;
-                        break;
+                    if(Math.hypot(e.x-bullets[j].x, e.y-bullets[j].y)<20) {
+                        enemies.splice(i,1); bullets.splice(j,1); score+=10; document.getElementById('game-score').innerText=score; break;
                     }
                 }
             }
             requestAnimationFrame(gameLoop);
         }
+        window.addEventListener('keydown', e => { if(gameActive) { if(e.key==='ArrowLeft' && pX>20) pX-=20; if(e.key==='ArrowRight' && pX<canvas.width-20) pX+=20; if(e.key===' ') bullets.push({x:pX, y:canvas.height-50}); } });
+        canvas.addEventListener('touchstart', e => { if(gameActive) { e.preventDefault(); pX = e.touches[0].clientX - canvas.getBoundingClientRect().left; bullets.push({x:pX, y:canvas.height-50}); } });
+        canvas.addEventListener('touchmove', e => { if(gameActive) { e.preventDefault(); pX = e.touches[0].clientX - canvas.getBoundingClientRect().left; } });
 
-        // Controls (Keyboard)
-        window.addEventListener('keydown', (e) => {
-            if(!gameActive) return;
-            if(e.key === 'ArrowLeft' && playerX > 20) playerX -= 20;
-            if(e.key === 'ArrowRight' && playerX < canvas.width - 20) playerX += 20;
-            if(e.key === ' ') bullets.push({x: playerX, y: playerY});
-        });
-        
-        // Controls (Touch - Responsive)
-        canvas.addEventListener('touchstart', (e) => {
-            if(!gameActive) return;
-            e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touchX = e.touches[0].clientX - rect.left;
-            playerX = touchX;
-            bullets.push({x: playerX, y: playerY}); // Dokununca ateş et
-        });
-        
-        canvas.addEventListener('touchmove', (e) => {
-            if(!gameActive) return;
-            e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touchX = e.touches[0].clientX - rect.left;
-            
-            // Sınırlar içinde tut
-            if(touchX > 0 && touchX < canvas.width) {
-                playerX = touchX;
-            }
-        });
+        /* --- NAV --- */
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const map = {'home':0,'inventory':1,'authors':2,'contact':3,'minigame':4,'guild':5,'about':6,'rate':7};
+            if(map[id]!==undefined) document.querySelectorAll('.nav-item')[map[id]].classList.add('active');
+            if(id==='minigame') setTimeout(resizeCanvas, 100);
+        }
 
+        /* --- CHAT --- */
+        function sendMessage() {
+            const inp = document.getElementById('chat-input'); const txt = inp.value.trim(); if(!txt) return;
+            const box = document.getElementById('chat-box');
+            const d = document.createElement('div'); d.className='msg outgoing'; d.innerText=txt; box.appendChild(d);
+            inp.value=''; box.scrollTop=box.scrollHeight;
+            setTimeout(() => {
+                const r = document.createElement('div'); r.className='msg incoming'; r.innerText="Mesajınız iletildi.";
+                box.appendChild(r); box.scrollTop=box.scrollHeight;
+            }, 1000);
+        }
+
+        /* --- RATE --- */
+        function rate(n) { document.querySelectorAll('.star-rating span').forEach((s, i) => s.style.color = i<n ? '#FFD700' : '#444'); }
+        function submitRating() {
+            const t = document.getElementById('feedback-text').value;
+            if(!t) { showSystemMessage("Lütfen bir şeyler yazın."); return; }
+            showSystemMessage("Geri bildiriminiz alındı!"); document.getElementById('feedback-text').value=''; rate(0);
+        }
     </script>
 </body>
-
 </html>
-
