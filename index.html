@@ -2,116 +2,57 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="google-adsense-account" content="ca-pub-6127233618306992">
-  <meta name="description" content="Memet Çınar resmi web sitesi 2025 - Efkar Gecesi, YAK, ELKAY serisi ve tüm damar şarkılar">
-  <meta property="og:title" content="MEMET ÇINAR | Resmi Web Sitesi 2025">
-  <meta property="og:image" content="https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg">
-  <title>MEMET ÇINAR | Resmi Web Sitesi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>MEMET ÇINAR | Resmi Web Sitesi 2025 - Tam Liste & Gelişmiş Player</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127233618306992" crossorigin="anonymous"></script>
   <style>
-    :root { --primary: #8D6282; --dark: #000; --card: rgba(20,20,35,0.98); --glow: 0 0 30px rgba(141,98,130,0.45); }
-    *{box-sizing:border-box;margin:0;padding:0} 
-    html,body{height:100%;margin:0;padding:0}
-    body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#000;color:#eee;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-
+    :root{--primary:#8D6282;--accent:#ff3366;--bg:#000;--card:rgba(20,20,35,0.98);--glow:0 0 30px rgba(141,98,130,0.45)}
+    *{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;font-family:'Poppins',sans-serif;background:var(--bg);color:#eee;overflow-x:hidden}
     canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.55}
-
-    header{position:fixed;top:0;left:0;width:100%;z-index:1200;padding:1.2rem 4%;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.94);backdrop-filter:blur(12px);border-bottom:2px solid var(--primary)}
-
-    .logo-container{display:flex;align-items:center;gap:10px}
-    .logo{font-size:clamp(1.8rem,6vw,2.8rem);font-weight:800;background:linear-gradient(90deg,#ff3366,var(--primary),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .verified{width:clamp(26px,7vw,34px);height:clamp(26px,7vw,34px);border-radius:50%;display:flex;align-items:center;justify-content:center;background:#1d9bf0;color:#fff;font-weight:700;box-shadow:0 0 12px #1d9bf0;animation:pulse 2s infinite}
+    header{position:fixed;top:0;left:0;width:100%;z-index:1200;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);border-bottom:2px solid var(--primary)}
+    .logo{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(90deg,var(--accent),var(--primary),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .verified{width:clamp(28px,5vw,34px);height:clamp(28px,5vw,34px);border-radius:50%;background:#1d9bf0;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px #1d9bf0;animation:pulse 2s infinite}
     @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(29,155,240,0.75)}70%{box-shadow:0 0 0 10px rgba(29,155,240,0)}100%{box-shadow:0 0 0 0 rgba(29,155,240,0)}}
-
-    nav ul{display:flex;gap:clamp(0.8rem,4vw,2.5rem);list-style:none;flex-wrap:wrap;justify-content:center}
-    nav a{color:#fff;text-decoration:none;font-weight:600;font-size:clamp(0.9rem,3vw,1.1rem);position:relative;padding:6px 8px}
-    nav a::after{content:'';position:absolute;left:0;bottom:-8px;height:3px;width:0;background:var(--primary);transition:all .28s}
-    nav a:hover::after, nav a.active::after{width:100%}
-
-    .page{display:none;min-height:100vh;padding:clamp(90px,20vh,140px) 4% 80px;text-align:center;opacity:0;transform:translateY(30px);transition:all .6s ease}
-    .page.active{display:block;opacity:1;transform:translateY(0)}
-
-    .hero{height:100vh;background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)), url('https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg') center/cover no-repeat fixed;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem;padding:0 5%}
-    .hero h1{font-size:clamp(3rem,12vw,7rem);background:linear-gradient(45deg,var(--primary),#fff,#ff3366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:0.92}
-    .hero p{font-size:clamp(1.1rem,5vw,2.5rem);opacity:0.95}
-    .btn{padding:clamp(14px,4vw,20px) clamp(40px,10vw,70px);background:var(--primary);color:#fff;border-radius:50px;text-decoration:none;font-size:clamp(1rem,4vw,1.5rem);box-shadow:var(--glow);transition:all .32s}
-    .btn:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(141,98,130,0.5)}
-
-    .song-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(1.2rem,4vw,2.5rem);max-width:1600px;margin:2rem auto;padding:0 2%}
-    .song-card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--glow);cursor:pointer;transition:all .35s}
-    .song-card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 30px 70px rgba(141,98,130,0.55)}
-    .song-card img{width:100%;height:clamp(200px,50vw,340px);object-fit:cover}
-    .song-info{padding:1.2rem;text-align:center}
-    .song-info h3{font-size:clamp(1rem,4vw,1.7rem);margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .play-btn{background:var(--primary);width:clamp(48px,14vw,62px);height:clamp(48px,14vw,62px);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:clamp(1.2rem,5vw,2rem);transition:all .25s}
-    .download-btn{background:#333;color:#fff;padding:10px 20px;border-radius:50px;text-decoration:none;display:inline-block;margin-top:10px;font-size:clamp(0.85rem,3vw,1rem)}
-
-    .about-text{max-width:920px;margin:0 auto;font-size:clamp(1rem,4vw,1.6rem);line-height:1.9;color:#ddd;padding:0 4%}
-
-    .social-icons{margin:2rem 0;display:flex;justify-content:center;gap:clamp(1rem,8vw,3rem);flex-wrap:wrap}
-    .social-icons a{color:#fff;font-size:clamp(2.8rem,10vw,5rem);transition:all .28s}
-    .social-icons a:hover{color:var(--primary);transform:translateY(-10px)}
-
-    footer{background:#000;padding:3rem 4%;text-align:center;border-top:3px solid var(--primary)}
-    .social-footer{text-align:center;padding:2.5rem 4%;background:rgba(0,0,0,0.7);border-top:1px solid rgba(141,98,130,0.3);display:none}
-
-    #downloadModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:2500;align-items:center;justify-content:center;padding:20px}
-    .modal-content{background:var(--card);padding:clamp(30px,10vw,50px);border-radius:18px;text-align:center;max-width:90%;box-shadow:var(--glow)}
-    .modal-content p{font-size:clamp(1.3rem,5vw,2.2rem);margin-bottom:20px}
-
-    /* ANDROID + MOBİL İÇİN ÖZEL GLOBAL PLAYER DÜZELTMESİ */
-    #globalPlayer{
-      position:fixed !important;
-      bottom:env(safe-area-inset-bottom, 10px) !important;
-      bottom:calc(10px + env(safe-area-inset-bottom)) !important;
-      left:50% !important;
-      transform:translateX(-50%) !important;
-      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
-      padding:clamp(10px,3vw,16px) clamp(12px,4vw,30px) !important;
-      border-radius:60px !important;
-      box-shadow:0 12px 40px rgba(0,0,0,0.8);
-      z-index:1500 !important;
-      border:2px solid rgba(141,98,130,0.2);
-      display:none;
-      align-items:center;
-      gap:clamp(8px,3vw,20px);
-      max-width:95vw !important;
-      width:auto !important;
-      min-width:300px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    #nowPlaying{font-weight:700;text-align:center;width:100%;font-size:clamp(0.9rem,3.5vw,1.4rem);margin-bottom:8px;order:1}
-    #ytFrame{width:clamp(240px,70vw,460px) !important;height:clamp(50px,15vw,70px) !important;border-radius:12px;order:2}
-    #closePlayerBtn{padding:8px 14px;border-radius:10px;background:#222;color:#fff;font-size:clamp(0.8rem,3vw,1rem);order:3;margin-top:8px}
-
-    /* Telefonlarda daha iyi görünüm */
-    @media (max-width: 480px) {
-      nav ul{gap:0.6rem;padding:0 2%}
-      nav a{font-size:0.9rem;padding:6px 10px}
-      .song-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;padding:0 3%}
-      .song-card img{height:220px}
-      #globalPlayer{padding:10px 12px;gap:10px;max-width:98vw}
-      #ytFrame{width:68vw !important;height:56px !important}
-      .hero{padding:0 6%}
-    }
-
-    @media (max-width: 360px) {
-      #globalPlayer{min-width:280px}
-      #ytFrame{width:65vw !important;height:52px !important}
-    }
+    nav ul{display:flex;gap:clamp(1rem,4vw,3rem);list-style:none}
+    nav a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 0}
+    nav a::after{content:'';position:absolute;left:0;bottom:-8px;height:3px;width:0;background:var(--primary);transition:.28s}
+    nav a:hover::after,nav a.active::after{width:100%}
+    .page{display:none;min-height:100vh;padding:clamp(80px,15vh,140px) 5% 80px;text-align:center;opacity:0;transform:translateY(30px);transition:.6s}
+    .page.active{display:block;opacity:1;transform:none}
+    .hero{height:100vh;background:linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)),url('https://i.ytimg.com/vi/44qL0mcn8wk/maxresdefault.jpg') center/cover fixed;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem}
+    .hero h1{font-size:clamp(3.5rem,10vw,7rem);background:linear-gradient(45deg,var(--primary),#fff,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .btn{padding:clamp(14px,3vw,20px) clamp(40px,8vw,60px);background:var(--primary);color:#fff;border-radius:50px;text-decoration:none;box-shadow:var(--glow);transition:.32s}
+    .btn:hover{transform:translateY(-10px);box-shadow:0 25px 60px rgba(141,98,130,0.5)}
+    .song-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(1.5rem,4vw,3rem);max-width:1600px;margin:3rem auto}
+    .song-card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--glow);cursor:pointer;transition:.35s}
+    .song-card:hover{transform:translateY(-16px) scale(1.02);box-shadow:0 35px 80px rgba(141,98,130,0.55)}
+    .song-card img{width:100%;height:clamp(220px,45vw,340px);object-fit:cover}
+    .song-info{padding:1.4rem;text-align:center}
+    .song-info h3{font-size:clamp(1.1rem,3vw,1.8rem);margin-bottom:.4rem}
+    .play-btn{background:var(--primary);width:clamp(50px,12vw,60px);height:clamp(50px,12vw,60px);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;transition:.25s}
+    .download-btn{background:#333;color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;margin-top:12px}
+    .download-btn:hover{background:var(--primary)}
+    .social-icons{display:flex;justify-content:center;gap:clamp(2rem,8vw,4rem);margin:2rem 0}
+    .social-icons a{color:#fff;font-size:clamp(3rem,10vw,5rem);transition:.28s}
+    .social-icons a:hover{color:var(--primary);transform:translateY(-12px)}
+    .social-footer{padding:2.5rem 0;background:rgba(0,0,0,0.7);border-top:1px solid rgba(141,98,130,0.3);text-align:center}
+    footer{background:#000;padding:3.2rem;text-align:center;border-top:3px solid var(--primary)}
+    #downloadModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:2500;align-items:center;justify-content:center}
+    .modal-content{background:var(--card);padding:clamp(30px,8vw,50px);border-radius:18px;max-width:720px;box-shadow:var(--glow);text-align:center}
+    #globalPlayer{position:fixed;bottom:clamp(10px,3vw,20px);left:50%;transform:translateX(-50%);background:rgba(20,20,35,0.98);padding:clamp(12px,3vw,20px) clamp(20px,5vw,50px);border-radius:60px;box-shadow:0 12px 40px rgba(0,0,0,0.7);z-index:1500;border:2px solid rgba(141,98,130,0.2);display:none;align-items:center;gap:clamp(10px,4vw,30px);max-width:95%;flex-wrap:wrap;justify-content:center}
+    #nowPlaying{font-weight:700;text-align:center;width:100%;font-size:clamp(1rem,3.5vw,1.6rem)}
+    #ytFrame{width:clamp(260px,70vw,500px);height:clamp(50px,15vw,70px);border-radius:12px}
+    #closePlayerBtn{padding:8px 16px;border-radius:10px;background:#222;color:#fff}
+    @media(max-width:768px){.song-card img{height:220px}#globalPlayer{width:95%}}
   </style>
 </head>
 <body>
   <canvas id="canvas"></canvas>
-
   <header>
-    <div class="logo-container">
+    <div style="display:flex;align-items:center;gap:12px">
       <div class="logo">MEMET ÇINAR</div>
-      <div class="verified" title="Doğrulanmış Resmi Site">✓</div>
+      <div class="verified">✓</div>
     </div>
     <nav>
       <ul>
@@ -123,7 +64,6 @@
     </nav>
   </header>
 
-  <!-- ANA SAYFA -->
   <section id="anasayfa" class="page active">
     <div class="hero">
       <h1>MEMET ÇINAR</h1>
@@ -132,32 +72,25 @@
     </div>
   </section>
 
-  <!-- HAKKIMDA -->
   <section id="hakkimda" class="page">
     <h1 style="font-size:3.8rem;margin-bottom:1.6rem">Hakkımda</h1>
-    <div class="about-text">
-      <p>Çocukluğumdan beri içimde müzik vardı. Ritim tutar, geceleri kendi bestelerimi yapardım.</p>
-      <p>2025'te karar verdim: Artık susmayacağım. Tüm Türkiye'ye ve dünyaya duyuracağım.</p>
-      <p>Arabesk-pop ile damar ruhunu birleştiriyorum. Her şarkım gerçek bir hikaye, her nakarat bir yara izi...</p>
-      <p>Efkar Gecesi'nden YAK'a, ELKAY serisinden Özür Dilerim'e kadar hepsi benim hayatımdan izler taşıyor.</p>
-      <p>Siz de bu hikayenin bir parçası olun. Birlikte efkarlanalım ❤️</p>
-    </div>
+    <p style="max-width:920px;margin:0 auto;font-size:clamp(1rem,3vw,1.6rem);line-height:1.9;color:#ddd">
+      Çocukluğumdan beri içimde müzik vardı. 2025'te artık susmayacağım dedim ve tüm damar şarkılarımı sizinle paylaşıyorum.<br>
+      ELKAY serisi, Özür Dilerim, Gözleri, Aşkın Külleri ve daha fazlası... Hepsi gerçek hayatımdan izler taşıyor.<br>
+      Birlikte efkârlanalım ❤️
+    </p>
   </section>
 
-  <!-- MÜZİK -->
   <section id="muzik" class="page">
     <h1 style="font-size:3.8rem;margin-bottom:1.4rem">Müzik</h1>
-    <div style="max-width:1100px;margin:0 auto 2.6rem;padding:0 2%">
-      <iframe src="https://open.spotify.com/embed/artist/5RsoLkeIEuJA1JwF7tFZLI?utm_source=generator&theme=0" height="520" style="width:100%;border-radius:18px;box-shadow:var(--glow);border:none" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-    <h2 style="font-size:2.4rem;margin:2rem 0">Tüm Şarkılar</h2>
+    <iframe src="https://open.spotify.com/embed/artist/5RsoLkeIEuJA1JwF7tFZLI?utm_source=generator&theme=0" height="520" style="width:100%;max-width:1100px;margin:0 auto 2.6rem;display:block;border-radius:18px;box-shadow:var(--glow)" allow="autoplay; encrypted-media"></iframe>
+    <h2 style="font-size:2.4rem;margin:2rem 0">Tüm Şarkılar (Tam Liste - 2025)</h2>
     <div class="song-grid" id="songGrid"></div>
   </section>
 
-  <!-- İLETİŞİM -->
   <section id="iletisim" class="page">
-    <div style="height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 5%">
-      <p style="font-size:1.8rem;margin-bottom:2.6rem;opacity:0.95;">Mesajlarını, yorumlarını, isteklerini her zaman bekliyorum.<br>Direkt sosyal medyadan ulaşabilirsin!</p>
+    <div style="height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center">
+      <p style="font-size:1.8rem;margin-bottom:2.6rem">Mesajlarını bekliyorum ❤️</p>
       <div class="social-icons">
         <a href="https://www.instagram.com/memetcinarofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://www.youtube.com/@memetcinar444" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -168,6 +101,7 @@
     </div>
   </section>
 
+  <!-- Diğer sayfalarda da sosyal ikonlar -->
   <div class="social-footer">
     <div class="social-icons">
       <a href="https://www.instagram.com/memetcinarofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -182,17 +116,15 @@
     <p>© 2025 MEMET ÇINAR – Tüm Hakları Saklıdır</p>
   </footer>
 
-  <!-- Global Player -->
   <div id="globalPlayer">
-    <div id="nowPlaying">Şarkı yükleniyor...</div>
-    <iframe id="ytFrame" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <div id="nowPlaying">Şarkı bekleniyor...</div>
+    <iframe id="ytFrame" src="" allow="autoplay; encrypted-media"></iframe>
     <button class="modal-close" id="closePlayerBtn">Kapat</button>
   </div>
 
-  <!-- Modal -->
   <div id="downloadModal">
     <div class="modal-content">
-      <p>Bu özellik şu anda aktif değil. Şarkıları resmi platformlardan dinleyebilirsiniz.</p>
+      <p>İndirme aktif değil. Resmi platformlardan dinleyiniz.</p>
       <button class="modal-close" id="modalClose">TAMAM</button>
     </div>
   </div>
@@ -200,7 +132,6 @@
   <script>
     const pages = document.querySelectorAll('.page');
     const links = document.querySelectorAll('nav a');
-
     function showPage(hash) {
       pages.forEach(p => p.classList.remove('active'));
       links.forEach(l => l.classList.remove('active'));
@@ -210,49 +141,43 @@
       window.scrollTo({top:0,behavior:'smooth'});
       document.querySelector('.social-footer').style.display = (hash === '#iletisim') ? 'none' : 'block';
     }
-
     window.addEventListener('hashchange', () => showPage(location.hash));
     showPage(location.hash);
-    links.forEach(a => a.addEventListener('click', e => {
-      e.preventDefault();
-      history.pushState(null, '', a.getAttribute('href'));
-      showPage(a.getAttribute('href'));
-    }));
+    links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); history.pushState(null, '', a.getAttribute('href')); showPage(a.getAttribute('href')); }));
 
+    // === TAM ŞARKI LİSTESİ (2025 Kasım itibarıyla tüm bilinen ve çalışan şarkılar) ===
     const songs = [
-      {title:"YILDIZLAR",img:"https://source.boomplaymusic.com/group10/M00/10/07/56b01957ad9d4f2ab21e16b0f4ab8604H3000W3000_464_464.jpg",time:"3:12",yt:"AMDerpIe9QE"},
-      {title:"BÖYLE İŞTE ELKAY",img:"https://source.boomplaymusic.com/group10/M00/09/12/4eca08480aba4b22b6d44dd9119f6f41H3000W3000_320_320.jpg",time:"3:30",yt:"EkAtzXOP0p0"},
-      {title:"LEYA",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/b8/ee/3ab8ee2e-1577-3937-19e9-8fc881ff1891/artwork.jpg/300x300bb.webp",time:"3:25",yt:"8La-12lYhao"},
-      {title:"ELKAY 2",img:"https://source.boomplaymusic.com/group10/M00/09/09/aa1c1881ab2d4445a3fb68fc28ce26c9H3000W3000_320_320.jpg",time:"3:46",yt:"-Wrg7mJ__Ek"},
-      {title:"ELKAY GİBİ",img:"https://source.boomplaymusic.com/group10/M00/09/07/8b8f185cf3364661b20fc9111786ec57H3000W3000_320_320.jpg",time:"2:55",yt:"0QWuDJhDsHQ"},
-      {title:"KORUYUCU AİLE",img:"https://source.boomplaymusic.com/group10/M00/07/01/7f2535266dff43bc8098a9e226108710H3000W3000_320_320.jpg",time:"3:40",yt:"2ti6IK3Aix0"},
-      {title:"EĞİLMEZ",img:"https://source.boomplaymusic.com/group10/M00/06/25/bc88b4bc9af4425fb23bd409a40275e7H3000W3000_320_320.jpg",time:"3:15",yt:"441IylCM7B4"},
-      {title:"GECEYE YAZDIM",img:"https://source.boomplaymusic.com/group10/M00/10/22/2d959b086e284537acc1dcbc12e90b5aH3000W3000_320_320.jpg",time:"3:30",yt:"WsR79WlMqNI"},
-      {title:"VAZGEÇMEZ BU KALP",img:"https://source.boomplaymusic.com/group10/M00/04/25/0b4cea4ccc694a0b86cbb3dcff358714H3000W3000_320_320.jpg",time:"3:20",yt:"0xgUyoGm4hY"},
-      {title:"VUR BENİ KALBİMDEN",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5b/e2/4d/5be24d64-09d8-ac8e-1a37-d6e2703fa3c5/artwork.jpg/600x600bf-60.jpg",time:"3:49",yt:"gMGz2e9uMcA"},
-      {title:"DÜNYAMIN GÜNEŞİ",img:"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/32/91/03/32910356-af9f-423c-5fe7-89246e1bd172/artwork.jpg/1200x630bb.jpg",time:"3:34",yt:"fvt8tI8n_cY"},
-      {title:"YOLUMU KAYBETTİM",img:"https://source.boomplaymusic.com/group10/M00/04/25/1acdcae663b24df899e39dd6d32763f4H3000W3000_320_320.jpg",time:"3:44",yt:"Rs6g6yaacXo"},
-      {title:"BİLE BİLE",img:"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/96/a7/3d/96a73d2c-c212-8d5e-b43f-ab0392209ad5/artwork.jpg/600x600bf-60.jpg",time:"3:19",yt:"qED3CgFJ1Fc"},
-      {title:"BİTTİ HİKAYEM",img:"https://source.boomplaymusic.com/group10/M00/05/01/cb31a5b621b94b3f81dbea18d87d352eH3000W3000_320_320.jpg",time:"3:17",yt:"KMcinbhM7Bw"},
-      {title:"SEN GİTTİN YA",img:"https://source.boomplaymusic.com/group10/M00/04/25/790dfbbcba674a66b4360910950b936cH3000W3000_320_320.jpg",time:"4:00",yt:"BWdb0W2ARmA"},
-      {title:"SONSUZA DEK SENİ BEKLEDİM",img:"https://s.mxmcdn.net/images-storage/albums5/9/1/0/3/4/5/87543019_500_500.jpg",time:"3:22",yt:"ZIGiuOGCmA4"},
-      {title:"ÖZÜR DİLERİM",img:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg",time:"2:41",yt:"mSnp-mPxGus"},
-      {title:"GEL DE BİTSİN BU HASRET",img:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg",time:"3:05",yt:"DDEhRqKm1bE"},
-      {title:"BİR DUBLE DAHA",img:"https://source.boomplaymusic.com/group10/M00/05/01/05650b68b89b460fb5e5a3d9e74020c4H3000W3000_464_464.jpg",time:"2:07",yt:"8E0G3myGiFk"},
-      {title:"KIRMIZI YAZMA",img:"https://source.boomplaymusic.com/group10/M00/04/25/59b6353cd6fc4684bfb228690defb300H3000W3000_320_320.jpg",time:"3:25",yt:"NzVEoSWhgl0"},
-      {title:"AYREN",img:"https://i.ytimg.com/vi/pbS4NlHpzxw/sddefault.jpg",time:"3:04",yt:"pbS4NlHpzxw"},
-      {title:"GÖZLERİ",img:"https://i.ytimg.com/vi/36ykG4zUtL0/maxresdefault.jpg",time:"3:00",yt:"36ykG4zUtL0"},
-      {title:"KİBİR",img:"https://i.ytimg.com/vi/CNdZW-4h2FY/hq720.jpg",time:"3:40",yt:"CNdZW-4h2FY"},
-      {title:"AŞKIN KÜLLERİ",img:"https://source.boomplaymusic.com/group10/M00/04/25/1a561e90cd94403ba2955338488d4cc1H3000W3000_320_320.jpg",time:"3:45",yt:"F3MAB4cgmEI"}
+      {title:"YILDIZLAR",img:"https://i.ytimg.com/vi/AMDerpIe9QE/maxresdefault.jpg",yt:"AMDerpIe9QE"},
+      {title:"BÖYLE İŞTE ELKAY",img:"https://i.ytimg.com/vi/EkAtzXOP0p0/maxresdefault.jpg",yt:"EkAtzXOP0p0"},
+      {title:"LEYA",img:"https://i.ytimg.com/vi/8La-12lYhao/maxresdefault.jpg",yt:"8La-12lYhao"},
+      {title:"ELKAY 2",img:"https://i.ytimg.com/vi/-Wrg7mJ__Ek/maxresdefault.jpg",yt:"-Wrg7mJ__Ek"},
+      {title:"ELKAY GİBİ",img:"https://i.ytimg.com/vi/0QWuDJhDsHQ/maxresdefault.jpg",yt:"0QWuDJhDsHQ"},
+      {title:"KORUYUCU AİLE",img:"https://i.ytimg.com/vi/2ti6IK3Aix0/maxresdefault.jpg",yt:"2ti6IK3Aix0"},
+      {title:"EĞİLMEZ",img:"https://i.ytimg.com/vi/441IylCM7B4/maxresdefault.jpg",yt:"441IylCM7B4"},
+      {title:"GECEYE YAZDIM",img:"https://i.ytimg.com/vi/WsR79WlMqNI/maxresdefault.jpg",yt:"WsR79WlMqNI"},
+      {title:"VAZGEÇMEZ BU KALP",img:"https://i.ytimg.com/vi/0xgUyoGm4hY/maxresdefault.jpg",yt:"0xgUyoGm4hY"},
+      {title:"VUR BENİ KALBİMDEN",img:"https://i.ytimg.com/vi/gMGz2e9uMcA/maxresdefault.jpg",yt:"gMGz2e9uMcA"},
+      {title:"DÜNYAMIN GÜNEŞİ",img:"https://i.ytimg.com/vi/fvt8tI8n_cY/maxresdefault.jpg",yt:"fvt8tI8n_cY"},
+      {title:"YOLUMU KAYBETTİM",img:"https://i.ytimg.com/vi/Rs6g6yaacXo/maxresdefault.jpg",yt:"Rs6g6yaacXo"},
+      {title:"BİLE BİLE",img:"https://i.ytimg.com/vi/qED3CgFJ1Fc/maxresdefault.jpg",yt:"qED3CgFJ1Fc"},
+      {title:"BİTTİ HİKAYEM",img:"https://i.ytimg.com/vi/KMcinbhM7Bw/maxresdefault.jpg",yt:"KMcinbhM7Bw"},
+      {title:"SEN GİTTİN YA",img:"https://i.ytimg.com/vi/BWdb0W2ARmA/maxresdefault.jpg",yt:"BWdb0W2ARmA"},
+      {title:"SONSUZA DEK SENİ BEKLEDİM",img:"https://i.ytimg.com/vi/ZIGiuOGCmA4/maxresdefault.jpg",yt:"ZIGiuOGCmA4"},
+      {title:"ÖZÜR DİLERİM",img:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg",yt:"mSnp-mPxGus"},
+      {title:"GEL DE BİTSİN BU HASRET",img:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg",yt:"DDEhRqKm1bE"},
+      {title:"BİR DUBLE DAHA",img:"https://i.ytimg.com/vi/8E0G3myGiFk/maxresdefault.jpg",yt:"8E0G3myGiFk"},
+      {title:"KIRMIZI YAZMA",img:"https://i.ytimg.com/vi/NzVEoSWhgl0/maxresdefault.jpg",yt:"NzVEoSWhgl0"},
+      {title:"AYREN",img:"https://i.ytimg.com/vi/pbS4NlHpzxw/maxresdefault.jpg",yt:"pbS4NlHpzxw"},
+      {title:"GÖZLERİ",img:"https://i.ytimg.com/vi/36ykG4zUtL0/maxresdefault.jpg",yt:"36ykG4zUtL0"},
+      {title:"KİBİR",img:"https://i.ytimg.com/vi/CNdZW-4h2FY/maxresdefault.jpg",yt:"CNdZW-4h2FY"},
+      {title:"AŞKIN KÜLLERİ",img:"https://i.ytimg.com/vi/F3MAB4cgmEI/maxresdefault.jpg",yt:"F3MAB4cgmEI"}
     ];
 
     const grid = document.getElementById('songGrid');
-    const globalPlayer = document.getElementById('globalPlayer');
     const ytFrame = document.getElementById('ytFrame');
     const nowPlaying = document.getElementById('nowPlaying');
+    const globalPlayer = document.getElementById('globalPlayer');
     const downloadModal = document.getElementById('downloadModal');
-    const modalClose = document.getElementById('modalClose');
-    const closePlayerBtn = document.getElementById('closePlayerBtn');
 
     songs.forEach(s => {
       const card = document.createElement('div');
@@ -262,7 +187,6 @@
         <div class="song-info">
           <div class="play-btn"><i class="fas fa-play"></i></div>
           <h3>${s.title}</h3>
-          <div class="meta-row"><span style="opacity:.8">${s.time}</span></div>
           <a href="javascript:void(0)" class="download-btn">ŞARKIYI İNDİR</a>
         </div>`;
       card.addEventListener('click', e => { if (!e.target.closest('.download-btn')) playSong(s); });
@@ -271,45 +195,24 @@
     });
 
     function playSong(song) {
-      ytFrame.src = `https://www.youtube-nocookie.com/embed/${song.yt}?autoplay=1&controls=1&rel=0&modestbranding=1`;
+      ytFrame.src = `https://www.youtube-nocookie.com/embed/${song.yt}?autoplay=1&rel=0&modestbranding=1`;
       nowPlaying.textContent = song.title + ' — çalıyor';
       globalPlayer.style.display = 'flex';
     }
 
-    modalClose.onclick = () => downloadModal.style.display = 'none';
+    document.getElementById('modalClose').onclick = () => downloadModal.style.display = 'none';
     downloadModal.onclick = e => { if (e.target === downloadModal) downloadModal.style.display = 'none'; };
-    closePlayerBtn.onclick = () => { ytFrame.src = ''; globalPlayer.style.display = 'none'; };
+    document.getElementById('closePlayerBtn').onclick = () => { ytFrame.src = ''; globalPlayer.style.display = 'none'; };
 
     // Nota animasyonu
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     let w = canvas.width = innerWidth, h = canvas.height = innerHeight;
     window.addEventListener('resize', () => { w = canvas.width = innerWidth; h = canvas.height = innerHeight; });
-
     const notes = [];
-    const sprite = (() => {
-      const c = document.createElement('canvas'); c.width = c.height = 40;
-      const x = c.getContext('2d');
-      x.fillStyle = 'rgba(255,255,255,0.95)';
-      x.beginPath(); x.ellipse(14,24,7,9,0,0,Math.PI*2); x.fill();
-      x.fillRect(18,6,4,18);
-      return c;
-    })();
-
+    const sprite = (() => { const c = document.createElement('canvas'); c.width = c.height = 40; const x = c.getContext('2d'); x.fillStyle = 'rgba(255,255,255,0.95)'; x.beginPath(); x.ellipse(14,24,7,9,0,0,Math.PI*2); x.fill(); x.fillRect(18,6,4,18); return c; })();
     for(let i=0;i<120;i++) notes.push({x:Math.random()*w,y:Math.random()*h-h,vx:(Math.random()*0.6)-0.3,vy:Math.random()*1+0.5,size:Math.random()*0.9+0.5,rot:Math.random()*Math.PI*2,vr:(Math.random()-0.5)*0.03});
-
-    function anim(){
-      ctx.clearRect(0,0,w,h);
-      notes.forEach(n=>{
-        n.x += n.vx; n.y += n.vy; n.rot += n.vr;
-        if(n.y > h+50){ n.y = -60; n.x = Math.random()*w; }
-        ctx.save(); ctx.globalAlpha = 0.8;
-        ctx.translate(n.x,n.y); ctx.rotate(n.rot);
-        ctx.drawImage(sprite, -20*n.size, -20*n.size, 40*n.size, 40*n.size);
-        ctx.restore();
-      });
-      requestAnimationFrame(anim);
-    }
+    function anim(){ ctx.clearRect(0,0,w,h); notes.forEach(n=>{ n.x += n.vx; n.y += n.vy; n.rot += n.vr; if(n.y > h+50){ n.y = -60; n.x = Math.random()*w; } ctx.save(); ctx.globalAlpha = 0.8; ctx.translate(n.x,n.y); ctx.rotate(n.rot); ctx.drawImage(sprite, -20*n.size, -20*n.size, 40*n.size, 40*n.size); ctx.restore(); }); requestAnimationFrame(anim); }
     anim();
   </script>
 </body>
