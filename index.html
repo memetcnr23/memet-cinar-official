@@ -2,390 +2,744 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>MEMET ÇINAR | THE LEGACY VIP</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root{
   --gold:#FFD700;--gold-dark:#b8860b;--neon-blue:#00F0FF;--neon-red:#FF003C;--bg:#050505;
-  --glass:rgba(15,15,15,0.75);--glass-border:rgba(255,255,255,0.06);--glass-shadow:0 10px 35px rgba(0,0,0,0.7);
-  --smooth:cubic-bezier(.2,.9,.2,1);--radius:14px;--muted:#999;
+  --glass:rgba(15,15,15,0.85);--glass-border:rgba(255,255,255,0.08);--glass-shadow:0 10px 40px rgba(0,0,0,0.8);
+  --smooth:cubic-bezier(.2,.9,.2,1);--radius:16px;--muted:#999;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{font-family:'Rajdhani',sans-serif;background:linear-gradient(120deg,rgba(255,215,0,0.02),rgba(0,240,255,0.02)),url('https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=2000&auto=format&fit=crop') center/cover fixed;color:#fff;background-color:var(--bg);overflow:hidden}
-.page-light::after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(800px 200px at 10% 10%,rgba(255,240,200,0.03),transparent),radial-gradient(600px 150px at 90% 90%,rgba(0,240,255,0.02),transparent);animation:drift 12s linear infinite alternate;z-index:1}
-@keyframes drift{to{transform:translateY(6px) translateX(10px)}}
-.body-scan::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 3px);opacity:0.12;pointer-events:none;z-index:2}
-::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-dark));border-radius:10px}::-webkit-scrollbar-track{background:#0a0a0a}
-.hud-top{position:fixed;top:0;left:0;right:0;height:72px;padding:10px 26px;display:flex;align-items:center;justify-content:space-between;z-index:1200;backdrop-filter:blur(8px);background:linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.2));border-bottom:1px solid rgba(255,255,255,0.03)}
-.brand{display:flex;align-items:center;gap:14px}
-.brand .name{font-family:'Cinzel',serif;font-weight:900;font-size:1.45rem;background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-.brand .glow{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--gold));box-shadow:0 0 22px rgba(255,215,0,0.6);transform:translateY(-2px)}
-.official-badge{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;position:relative;cursor:pointer;flex-shrink:0;transition:transform .18s var(--smooth)}
-.site-gold-badge{background:radial-gradient(circle at 30% 30%,#fff 0%,var(--gold) 30%,var(--gold-dark) 100%);border:2px solid rgba(255,255,255,0.9);color:#000;font-weight:800;box-shadow:0 6px 24px rgba(255,215,0,0.12)}
-.site-gold-badge::after{content:"";position:absolute;inset:-6px;border-radius:50%;box-shadow:0 0 22px rgba(255,215,0,0.12);opacity:0;transition:opacity .3s}
-.official-badge:hover .site-gold-badge{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,215,0,0.18)}
-.official-badge:hover .site-gold-badge::after{opacity:1}
-.user-blue-badge{background:#1DA1F2;border:2px solid #fff;color:#fff;box-shadow:0 0 15px rgba(29,161,242,0.6)}
-.user-blue-badge::after{content:"";position:absolute;inset:-4px;border-radius:50%;box-shadow:0 0 20px rgba(29,161,242,0.4);opacity:0;transition:opacity .3s}
-.official-badge:hover .user-blue-badge::after{opacity:1}
-.badge-tooltip{position:absolute;left:50%;transform:translateX(-50%) translateY(12px);bottom:-45px;min-width:120px;padding:8px 10px;background:#0a0a0a;color:var(--gold);border-radius:8px;border:1px solid rgba(255,215,0,0.12);font-family:'Orbitron',sans-serif;font-size:12px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:all .15s;z-index:9999}
-.official-badge[data-tooltip-visible="true"] .badge-tooltip{opacity:1;transform:translateX(-50%) translateY(6px)}
-.nav-dock{position:fixed;left:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:1100;padding:12px;border-radius:20px;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.2));border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
-.nav-item{width:54px;height:54px;border-radius:12px;display:grid;place-items:center;cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));color:#bbb;transition:all .2s var(--smooth);font-size:1.2rem}
-.nav-item:active{transform:scale(.98)}
-.nav-item:hover{transform:translateY(-6px) scale(1.04);color:var(--gold);box-shadow:0 10px 30px rgba(255,215,0,0.08)}
-.nav-item.active{background:linear-gradient(90deg,rgba(255,215,0,0.06),rgba(0,240,255,0.02));color:var(--gold);box-shadow:0 8px 30px rgba(255,215,0,0.08)}
-.viewport{position:fixed;top:80px;left:110px;right:24px;bottom:110px;padding:18px;overflow:auto;z-index:100}
-.screen{display:none;animation:fadey .35s var(--smooth) both}
-.screen.active{display:block}
-@keyframes fadey{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.widgets-row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:stretch}
-.widget-card,.author-card{background:var(--glass);border-radius:var(--radius);padding:18px;border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);display:flex;flex-direction:column;gap:10px;min-height:150px;transition:transform .18s,border-color .18s}
-.widget-card:hover{transform:translateY(-6px);border-color:rgba(255,215,0,0.28)}
-.led-clock-container{display:inline-block;padding:12px 28px;border-radius:10px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03);box-shadow:0 0 28px rgba(0,0,0,0.06)}
-.led-time{font-family:'VT323',monospace;font-size:4.6rem;color:#ff3b3b;text-shadow:0 0 18px rgba(255,0,0,0.2);letter-spacing:4px}
-.led-date{font-family:'VT323';font-size:1.05rem;color:#c12b2b;letter-spacing:2px;margin-top:4px}
-.news-container{display:flex;align-items:center;gap:12px;height:46px;padding:0 6px;border-radius:10px;overflow:hidden;background:linear-gradient(90deg,rgba(0,20,40,0.85),rgba(0,20,40,0.65));border-top:1px solid var(--neon-blue)}
-.news-label{background:var(--neon-blue);color:#000;font-weight:800;padding:0 12px;height:36px;border-radius:8px;display:flex;align-items:center;font-family:'Orbitron'}
-.news-wrap{overflow:hidden;flex:1;position:relative}
-.news-track{display:inline-flex;gap:36px;align-items:center;white-space:nowrap;will-change:transform}
-.news-item{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:0.95rem}
-.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.cal-day{position:relative;padding:10px 6px;border-radius:8px;background:rgba(255,255,255,0.03);text-align:center;font-weight:700}
-.cal-day.today{border:1px solid var(--neon-blue);background:rgba(0,240,255,0.08);color:var(--neon-blue)}
-.chat-container{display:flex;flex-direction:column;height:58vh;border-radius:12px;overflow:hidden;background:var(--glass);border:1px solid var(--glass-border)}
-.chat-messages{padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;flex:1}
-.msg{max-width:78%;padding:11px 16px;border-radius:20px;line-height:1.4;font-size:0.95rem;word-break:break-word}
-.msg.incoming{background:#1b1b1b;color:#eee;align-self:flex-start;border-left:4px solid var(--gold)}
-.msg.outgoing{background:linear-gradient(90deg,var(--neon-blue),#88f);color:#000;align-self:flex-end;font-weight:700}
-.chat-input-area{display:flex;gap:10px;padding:12px;background:rgba(0,0,0,0.6);border-top:1px solid rgba(255,255,255,0.02)}
-#chat-input{flex:1;padding:12px 16px;border-radius:30px;background:#111;border:1px solid #333;color:#fff;outline:none;font-size:0.95rem}
-#chat-send{width:110px;height:46px;border-radius:999px;background:var(--gold);color:#000;font-weight:800;cursor:pointer;border:none;transition:.2s}
-#chat-send:hover{background:#fff}
-.player-bar{position:fixed;left:0;right:0;bottom:0;height:92px;padding:12px 22px;display:flex;gap:14px;align-items:center;background:linear-gradient(180deg,rgba(0,0,0,0.85),rgba(0,0,0,0.95));border-top:2px solid rgba(255,215,0,0.12);box-shadow:0 -10px 40px rgba(0,0,0,0.6);z-index:1200}
-.player-left{display:flex;align-items:center;gap:12px;min-width:300px;max-width:36%;overflow:hidden}
-.player-art{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.06)}
-.player-info h4{margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1rem}
-.player-info p{margin:0;color:var(--gold);font-size:0.85rem}
-.player-center{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
-.player-controls{display:flex;align-items:center;gap:18px}
-.ctrl-btn{background:transparent;border:none;color:#cfcfcf;font-size:1.15rem;cursor:pointer}
-.play-btn{width:44px;height:44px;border-radius:50%;background:linear-gradient(var(--gold),var(--gold-dark));color:#000;box-shadow:0 6px 24px rgba(255,215,0,0.12);cursor:pointer;display:grid;place-items:center}
-.progress-container{width:100%;max-width:560px;height:6px;background:#1b1b1b;border-radius:999px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
-.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--neon-blue),#44f);transition:width .2s linear}
-.eq{width:64px;display:flex;gap:4px;align-items:end}
-.eq span{display:block;width:6px;background:linear-gradient(var(--gold),#ffb84d);border-radius:2px;height:6px;transform-origin:bottom;animation:beat 800ms infinite ease-in-out}
-.eq span:nth-child(2){animation-delay:120ms}.eq span:nth-child(3){animation-delay:240ms}
-@keyframes beat{0%,100%{transform:scaleY(0.6)}50%{transform:scaleY(1.65)}}
-#song-list-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.song-item{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.035)}
-.song-item img{width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0}
-.song-meta{flex:1}
-.song-play-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:6px 12px;border-radius:26px;cursor:pointer;transition:all .2s}
-.song-play-btn:hover{background:var(--gold);color:#000}
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:1400}
-.modal-box{background:#0f0f0f;border-radius:12px;padding:20px;width:92%;max-width:720px;border:1px solid rgba(255,215,0,0.07)}
-.star-rating{display:flex;gap:12px;justify-content:center;margin:20px 0}
-.star{cursor:pointer;color:#555;font-size:2.4rem;transition:all .2s}
-.star.active,.star:hover{color:var(--gold)!important}
-@media (max-width:1000px){.widgets-row{grid-template-columns:1fr}.nav-dock{left:10px}.viewport{left:80px;top:80px;right:12px;bottom:140px}}
-@media (max-width:720px){
-  .hud-top{padding:8px 12px}
-  .nav-dock{left:50%;transform:translate(-50%,0);bottom:92px;top:auto;flex-direction:row;width:92%;justify-content:space-around}
-  .viewport{left:12px;right:12px;top:72px;bottom:180px;padding:12px}
-  .player-bar{flex-direction:column;height:auto;gap:10px;padding:12px}
-  .player-right{display:none}
-  .brand .name{font-size:1.05rem}
+*{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color: transparent;}
+html,body{height:100%; width: 100%; overflow: hidden;}
+body{
+  font-family:'Rajdhani',sans-serif;
+  background:linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
+  color:#fff;
+  position: relative;
 }
-.center{display:flex;align-items:center;justify-content:center}
-.small{font-size:0.85rem;color:var(--muted)}
+
+/* --- BACKGROUND FX --- */
+.bg-fx {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(255, 215, 0, 0.03), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.03), transparent 25%);
+  animation: bgPulse 10s ease-in-out infinite alternate;
+}
+.scanlines {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+  background-size: 100% 4px;
+}
+@keyframes bgPulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,0.3)}
+
+/* --- LAYOUT STRUCTURE --- */
+.hud-top {
+  position:fixed; top:0; left:0; right:0; height:70px;
+  padding:0 20px; display:flex; align-items:center; justify-content:space-between;
+  z-index:1000; background:rgba(5,5,5,0.9); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,215,0,0.1);
+}
+
+.brand { display:flex; align-items:center; gap:12px; }
+.brand .name {
+  font-family:'Cinzel',serif; font-weight:800; font-size:1.4rem;
+  background:linear-gradient(to right, #fff, var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+/* NAV DOCK (Responsive) */
+.nav-dock {
+  position:fixed; z-index:900;
+  background:rgba(20,20,20,0.9); backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);
+  transition: all 0.3s var(--smooth);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Desktop Nav */
+@media (min-width: 769px) {
+  .nav-dock {
+    top: 50%; left: 20px; transform: translateY(-50%);
+    flex-direction: column; padding: 15px 10px; border-radius: 20px; gap: 15px;
+  }
+  .viewport {
+    position: fixed; top: 70px; left: 100px; right: 0; bottom: 90px;
+    overflow-y: auto; padding: 30px;
+  }
+}
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+  .nav-dock {
+    bottom: 0; left: 0; right: 0; height: 70px;
+    flex-direction: row; justify-content: space-around;
+    border-top: 1px solid var(--gold); border-radius: 20px 20px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .viewport {
+    position: fixed; top: 70px; left: 0; right: 0; bottom: 160px; /* Space for nav + player */
+    overflow-y: auto; padding: 15px;
+  }
+  .brand .name { font-size: 1.1rem; }
+}
+
+.nav-item {
+  width: 45px; height: 45px; border-radius: 12px;
+  display: grid; place-items: center; font-size: 1.2rem;
+  color: #666; cursor: pointer; transition: 0.3s;
+}
+.nav-item:hover, .nav-item.active {
+  color: var(--gold); background: rgba(255,215,0,0.1);
+  box-shadow: 0 0 15px rgba(255,215,0,0.1);
+}
+
+/* --- SECTIONS & CARDS --- */
+.screen { display:none; animation: fadeIn 0.4s ease-out; }
+.screen.active { display:block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+.grid-2 { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.widget-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); padding: 20px;
+  box-shadow: var(--glass-shadow); position: relative; overflow: hidden;
+}
+
+/* --- CLOCK & NEWS --- */
+.led-clock-box {
+  background: #000; border: 2px solid #333; border-radius: 10px;
+  padding: 10px 20px; display: inline-block; margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(255,0,0,0.1);
+}
+.led-time { font-family:'VT323',monospace; font-size: 3.5rem; color: var(--neon-red); line-height: 1; text-shadow: 0 0 10px var(--neon-red); }
+.led-date { font-family:'Orbitron',sans-serif; color: #888; margin-top: 5px; font-size: 0.9rem; letter-spacing: 1px; }
+
+.news-ticker {
+  background: rgba(0,20,40,0.8); border-left: 4px solid var(--neon-blue);
+  height: 40px; display: flex; align-items: center; margin-bottom: 25px;
+  border-radius: 4px; overflow: hidden;
+}
+.news-content {
+  white-space: nowrap; animation: ticker 20s linear infinite; padding-left: 100%; display: flex; gap: 40px;
+}
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+/* --- WEATHER WIDGET (NEW) --- */
+.weather-details {
+  display: flex; justify-content: space-around; margin-top: 15px; 
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;
+}
+.w-detail { text-align: center; }
+.w-val { font-family: 'Orbitron'; color: var(--neon-blue); font-size: 1.1rem; }
+.w-label { font-size: 0.75rem; color: #888; }
+.weather-main { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 10px 0; }
+.weather-icon-lg { font-size: 3rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); animation: floatW 3s ease-in-out infinite; }
+@keyframes floatW { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* --- CALENDAR (FIXED & ANIMATED) --- */
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
+.cal-head { font-size: 0.8rem; color: var(--muted); padding-bottom: 8px; }
+.cal-cell {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; background: rgba(255,255,255,0.03); cursor: pointer;
+  position: relative; overflow: visible; font-weight: bold; font-size: 0.95rem;
+  transition: 0.2s;
+}
+.cal-cell:hover { background: rgba(255,215,0,0.1); border: 1px solid var(--gold); }
+.cal-cell.empty { background: transparent; cursor: default; }
+.cal-cell.today { border: 1px solid var(--neon-blue); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+
+/* Special Days Animations */
+/* Kar Yağışı (Yılbaşı) */
+.cal-cell.snowy { color: #fff; }
+.cal-cell.snowy::after {
+  content: '❄'; position: absolute; top: -5px; right: -5px; font-size: 10px;
+  animation: snowFall 2s linear infinite; color: var(--neon-blue);
+}
+@keyframes snowFall { 0% { transform: translateY(-5px) rotate(0deg); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(15px) rotate(360deg); opacity: 0; } }
+
+/* Türk Bayrağı (Resmi Günler) */
+.cal-cell.flag { background: linear-gradient(135deg, rgba(227, 10, 23, 0.2), rgba(0,0,0,0)); border: 1px solid #E30A17; }
+.cal-cell.flag::before {
+  content: '🇹🇷'; position: absolute; top: 2px; right: 2px; font-size: 10px;
+  animation: wave 2s ease-in-out infinite;
+}
+@keyframes wave { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+
+/* Özel Günler (Pasta vb) */
+.cal-cell.special { border-color: var(--gold); }
+.cal-cell.special::before {
+  content: '★'; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+  font-size: 8px; color: var(--gold); animation: pulseStar 1.5s infinite;
+}
+@keyframes pulseStar { 0% { transform: translateX(-50%) scale(1); opacity: 0.7; } 50% { transform: translateX(-50%) scale(1.5); opacity: 1; } 100% { transform: translateX(-50%) scale(1); opacity: 0.7; } }
+
+/* --- PLAYER BAR --- */
+.player-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 90px;
+  background: rgba(10,10,10,0.95); border-top: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; z-index: 1100; box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+}
+@media (max-width: 768px) {
+  .player-bar { bottom: 70px; height: 80px; padding: 10px; } /* Above Nav */
+  .p-extra { display: none; }
+  .p-info { max-width: 120px; }
+}
+
+.p-left { display: flex; align-items: center; gap: 15px; }
+.p-art { width: 50px; height: 50px; border-radius: 8px; border: 1px solid #333; object-fit: cover; }
+.p-info h4 { font-size: 0.9rem; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.p-info p { font-size: 0.75rem; color: var(--gold); }
+
+.p-center { flex: 1; display: flex; flex-direction: column; align-items: center; max-width: 500px; margin: 0 auto; }
+.p-controls { display: flex; gap: 20px; align-items: center; margin-bottom: 8px; }
+.p-btn { background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.1rem; transition: 0.2s; }
+.p-btn:hover { color: #fff; }
+.p-play {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: #000;
+  display: grid; place-items: center; font-size: 1.2rem; box-shadow: 0 0 15px rgba(255,215,0,0.3);
+}
+.progress-rail { width: 100%; height: 4px; background: #333; border-radius: 4px; position: relative; cursor: pointer; }
+.progress-bar { height: 100%; background: var(--neon-blue); width: 0%; border-radius: 4px; position: relative; }
+.progress-bar::after { 
+  content:''; position:absolute; right:-4px; top:-3px; width:10px; height:10px; 
+  background:#fff; border-radius:50%; box-shadow:0 0 5px var(--neon-blue); opacity:0; transition:0.2s; 
+}
+.progress-rail:hover .progress-bar::after { opacity: 1; }
+
+/* --- OTHER SECTIONS --- */
+.song-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+.song-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px;
+  background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid transparent;
+  transition: 0.2s; cursor: pointer;
+}
+.song-row:hover { border-color: var(--gold); background: rgba(255,215,0,0.05); }
+.song-row.active { border-color: var(--neon-blue); background: rgba(0,240,255,0.05); }
+
+.chat-box { height: 300px; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 10px; padding: 15px; margin-bottom: 10px; border: 1px solid #222; }
+.msg { padding: 8px 12px; border-radius: 15px; margin-bottom: 8px; max-width: 80%; font-size: 0.9rem; }
+.msg.in { background: #222; color: #ddd; align-self: flex-start; border-bottom-left-radius: 2px; }
+.msg.out { background: var(--gold); color: #000; margin-left: auto; border-bottom-right-radius: 2px; font-weight: 600; }
+
+.center-flex { display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; flex-direction: column; }
 </style>
 </head>
-<body class="page-light body-scan">
+<body>
 
-<div id="system-modal" class="modal"><div class="modal-box center"><div style="text-align:center"><h3 style="color:var(--neon-blue);font-family:'Orbitron';margin-bottom:8px">SİSTEM MESAJI</h3><p id="sys-text" style="color:#ccc;margin-bottom:12px">Mesaj içeriği...</p><button class="play-btn" id="sys-ok">TAMAM</button></div></div></div>
+<div class="bg-fx"></div>
+<div class="scanlines"></div>
 
-<div id="login-gateway" style="position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1614850523018-c6148eb5ed4a?q=80&w=1920&auto=format&fit=crop') center/cover">
-  <div style="width:92%;max-width:420px;border-radius:16px;padding:28px;background:rgba(0,0,0,0.75);border:1px solid rgba(255,215,0,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.6)">
-    <div style="text-align:center;margin-bottom:8px"><h2 style="font-family:'Cinzel';color:var(--gold);font-size:2rem;margin-bottom:6px">MEMET ÇINAR</h2><div class="small">LEGACY VIP SYSTEM</div></div>
-    <button id="login-btn" class="play-btn" style="width:100%;height:48px;border-radius:999px;margin-top:18px;display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;color:#000;font-weight:800"><i class="fab fa-google"></i> Google ile Oturum Aç</button>
-    <div id="login-status" class="small center" style="height:22px;margin-top:12px;color:var(--neon-blue)"></div>
+<!-- SYSTEM MODAL -->
+<div id="sys-modal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.8); align-items:center; justify-content:center;">
+  <div style="background:#111; border:1px solid var(--neon-blue); padding:30px; border-radius:15px; text-align:center; max-width:90%; width:400px; box-shadow:0 0 30px rgba(0,240,255,0.2);">
+    <h3 style="color:var(--neon-blue); font-family:'Orbitron'; margin-bottom:15px">SİSTEM MESAJI</h3>
+    <p id="sys-msg" style="color:#ccc; margin-bottom:20px"></p>
+    <button onclick="document.getElementById('sys-modal').style.display='none'" style="background:var(--neon-blue); border:none; padding:10px 30px; border-radius:20px; font-weight:bold; cursor:pointer;">TAMAM</button>
   </div>
 </div>
 
+<!-- TOP HEADER -->
 <header class="hud-top">
   <div class="brand">
-    <div class="glow"></div>
+    <i class="fas fa-crown" style="color:var(--gold); font-size:1.2rem;"></i>
     <div class="name">MEMET ÇINAR</div>
-    <div class="official-badge site-gold-badge" data-tooltip-visible="false" tabindex="0">
-      <i class="fas fa-check" style="font-size:12px"></i>
-      <div class="badge-tooltip">RESMİ WEB SİTESİ</div>
-    </div>
   </div>
-  <div style="display:flex;gap:14px;align-itemsPSO:center"><i class="fas fa-wifi" style="color:var(--neon-blue)"></i><i class="fas fa-battery-full" style="color:var(--gold)"></i></div>
+  <div style="display:flex; gap:15px; font-size:0.9rem;">
+    <div style="color:var(--neon-blue)"><i class="fas fa-wifi"></i> ONLINE</div>
+    <div style="color:var(--gold)"><i class="fas fa-battery-full"></i> 100%</div>
+  </div>
 </header>
 
+<!-- NAVIGATION -->
 <nav class="nav-dock">
-  <div class="nav-item active" data-target="home"><i class="fas fa-home"></i></div>
-  <div class="nav-item" data-target="inventory"><i class="fas fa-music"></i></div>
-  <div class="nav-item" data-target="authors"><i class="fas fa-feather-alt"></i></div>
-  <div class="nav-item" data-target="contact"><i class="fas fa-paper-plane"></i></div>
-  <div class="nav-item" data-target="minigame"><i class="fas fa-gamepad"></i></div>
-  <div class="nav-item" data-target="guild"><i class="fas fa-comments"></i></div>
-  <div class="nav-item" data-target="about"><i class="fas fa-info-circle"></i></div>
-  <div class="nav-item" data-target="rate"><i class="fas fa-star"></i></div>
+  <div class="nav-item active" onclick="switchTab('home', this)"><i class="fas fa-home"></i></div>
+  <div class="nav-item" onclick="switchTab('songs', this)"><i class="fas fa-music"></i></div>
+  <div class="nav-item" onclick="switchTab('artists', this)"><i class="fas fa-users"></i></div>
+  <div class="nav-item" onclick="switchTab('chat', this)"><i class="fas fa-comments"></i></div>
+  <div class="nav-item" onclick="switchTab('game', this)"><i class="fas fa-gamepad"></i></div>
+  <div class="nav-item" onclick="switchTab('contact', this)"><i class="fas fa-paper-plane"></i></div>
 </nav>
 
+<!-- MAIN CONTENT -->
 <main class="viewport">
+  
+  <!-- HOME TAB -->
   <section id="home" class="screen active">
-    <div style="text-align:center;margin-bottom:18px"><div class="led-clock-container"><div class="led-time" id="main-led-clock">00:00:00</div><div class="led-date" id="main-led-date">YÜKLENİYOR...</div></div></div>
-    <div class="news-container" style="margin-bottom:18px"><div class="news-label">SON DAKİKA</div><div class="news-wrap"><div id="news-track" class="news-track"></div></div></div>
-    <div class="widgets-row">
-      <div class="widget-card">
-        <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;gap:10px;align-items:center;color:var(--neon-blue)"><i class="fas fa-satellite-dish"></i> CANLI KONUM</div><div class="small">ONLINE</div></div>
-        <div class="center" id="weather-anim" style="height:70px"></div>
-        <div style="text-align:center"><h3 id="weather-city" style="font-size:1.15rem;margin-bottom:4px">MALATYA</h3><p id="weather-text" class="small">Veri bekleniyor...</p></div>
+    <div style="text-align:center;">
+      <div class="led-clock-box">
+        <div class="led-time" id="clock">00:00</div>
+        <div class="led-date" id="date">...</div>
       </div>
+    </div>
+
+    <div class="news-ticker">
+      <div class="news-content">
+        <span><i class="fas fa-bolt" style="color:var(--gold)"></i> MEMET ÇINAR YENİ ALBÜM YAKINDA!</span>
+        <span><i class="fas fa-star" style="color:var(--neon-blue)"></i> MALATYA KONSERİ BİLETLERİ SATIŞTA.</span>
+        <span><i class="fas fa-music" style="color:#fff"></i> 'YILDIZLAR' ŞİMDİ TÜM DİJİTAL PLATFORMLARDA.</span>
+        <span><i class="fas fa-check-circle" style="color:lime"></i> SİSTEM GÜNCELLEMESİ TAMAMLANDI: v2.5</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- CALENDAR WIDGET -->
       <div class="widget-card">
-        <div style="display:flex;justify-content:space-between;align-items:center"><button class="small" id="prev-month"><i class="fas fa-chevron-left"></i></button><h3 id="cal-month-year" style="font-size:1.05rem;margin:0">KASIM 2025</h3><button class="small" id="next-month"><i class="fas fa-chevron-right"></i></button></div>
-        <div class="calendar-grid" style="margin-top:8px;opacity:0.85;font-size:0.85rem"><div class="small center">Pzt</div><div class="small center">Sal</div><div class="small center">Çar</div><div class="small center">Per</div><div class="small center">Cum</div><div class="small center">Cmt</div><div class="small center">Paz</div></div>
-        <div class="calendar-grid" id="calendar-body" style="margin-top:8px"></div>
+        <div class="calendar-header">
+          <button class="p-btn" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+          <h3 id="cal-title" style="font-family:'Orbitron'; color:var(--gold)"></h3>
+          <button class="p-btn" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="cal-grid" style="margin-bottom:5px;">
+          <div class="cal-head">Pt</div><div class="cal-head">Sa</div><div class="cal-head">Ça</div><div class="cal-head">Pe</div><div class="cal-head">Cu</div><div class="cal-head">Ct</div><div class="cal-head">Pz</div>
+        </div>
+        <div id="cal-body" class="cal-grid"></div>
+      </div>
+
+      <!-- WEATHER WIDGET -->
+      <div class="widget-card">
+        <h3 style="font-family:'Orbitron'; color:var(--neon-blue); border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:10px;">HAVA DURUMU</h3>
+        <div id="weather-box">
+          <div class="weather-main">
+            <i id="w-icon" class="fas fa-sun weather-icon-lg" style="color:orange"></i>
+            <div style="text-align:left">
+              <div id="w-temp" style="font-size:2.5rem; font-weight:bold; line-height:1">--°</div>
+              <div id="w-desc" style="color:#aaa; font-size:0.9rem">Malatya</div>
+            </div>
+          </div>
+          <div class="weather-details">
+            <div class="w-detail"><div class="w-val" id="w-wind">--</div><div class="w-label">RÜZGAR (km/s)</div></div>
+            <div class="w-detail"><div class="w-val" id="w-hum">--</div><div class="w-label">NEM (%)</div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="inventory" class="screen"><h2 style="color:var(--gold);font-family:'Orbitron';margin-bottom:12px">// MÜZİK KÜTÜPHANESİ</h2><div id="song-list-container"></div></section>
+  <!-- SONGS TAB -->
+  <section id="songs" class="screen">
+    <h2 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:20px; border-left:4px solid var(--gold); padding-left:15px;">MÜZİK KÜTÜPHANESİ</h2>
+    <div class="song-list" id="song-container"></div>
+  </section>
 
-  <section id="authors" class="screen">
-    <h2 style="color:var(--neon-blue);font-family:'Orbitron';margin-bottom:12px">// SANATÇI & YAZARLAR</h2>
-    <div class="widgets-row">
-      <div class="author-card" style="display:flex;gap:14px;align-items:center">
-        <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" style="width:86px;height:86px;border-radius:50%;border:3px solid var(--neon-blue);object-fit:cover">
-        <div style="flex:1">
-          <div style="display:flex;align-items:center;gap:8px">
-            <h3 style="font-family:'Cinzel';color:var(--gold);margin:0">MEMET ÇINAR</h3>
-            <div class="official-badge user-blue-badge" data-tooltip-visible="false" tabindex="0">
-              <i class="fas fa-check" style="color:#fff;font-size:12px"></i>
-              <div class="badge-tooltip">DOĞRULANMIŞ SANATÇI</div>
-            </div>
-          </div>
-          <p class="small" style="margin-top:6px">Solist, Bestekar</p>
+  <!-- ARTISTS TAB -->
+  <section id="artists" class="screen">
+    <div class="grid-2">
+      <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
+        <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--gold);">
+        <div>
+          <h3 style="color:var(--gold); margin-bottom:5px">MEMET ÇINAR</h3>
+          <p style="font-size:0.85rem; color:#aaa">Solist & Bestekar</p>
+          <span style="font-size:0.7rem; background:var(--neon-blue); color:#000; padding:2px 6px; border-radius:4px; font-weight:bold;">DOĞRULANMIŞ</span>
         </div>
       </div>
-      <div class="author-card" style="display:flex;gap:14px;align-items:center">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop" style="width:86px;height:86px;border-radius:50%;border:3px solid #fff;object-fit:cover">
-        <div style="flex:1">
-          <div style="display:flex;align-items:center;gap:8px">
-            <h3 style="font-family:'Cinzel';color:#fff;margin:0">BİLAL GÜVERCİN</h3>
-            <div class="official-badge user-blue-badge" style="background:#555" data-tooltip-visible="false" tabindex="0">
-              <i class="fas fa-check" style="color:#fff;font-size:12px"></i>
-              <div class="badge-tooltip">DOĞRULANMIŞ SÖZ YAZARI</div>
-            </div>
-          </div>
-          <p class="small" style="margin-top:6px">Söz Yazarı</p>
+      <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300" style="width:80px; height:80px; border-radius:50%; border:2px solid #fff;">
+        <div>
+          <h3 style="color:#fff; margin-bottom:5px">BİLAL GÜVERCİN</h3>
+          <p style="font-size:0.85rem; color:#aaa">Söz Yazarı</p>
+          <span style="font-size:0.7rem; background:#555; color:#fff; padding:2px 6px; border-radius:4px;">ONAYLI</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CHAT TAB -->
+  <section id="chat" class="screen">
+    <div class="widget-card" style="height:70vh; display:flex; flex-direction:column;">
+      <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:15px;">VIP SOHBET</h3>
+      <div id="chat-history" class="chat-box">
+        <div class="msg in">Sisteme hoşgeldiniz. Size nasıl yardımcı olabilirim?</div>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:auto;">
+        <input type="text" id="chat-in" placeholder="Mesaj yaz..." style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:12px; border-radius:20px; outline:none;">
+        <button onclick="sendMsg()" style="width:50px; height:50px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME TAB -->
+  <section id="game" class="screen">
+    <div class="widget-card center-flex">
+      <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px">NOTA AVCISI</h3>
+      <div style="margin-bottom:10px">Skor: <span id="score" style="color:var(--neon-blue)">0</span></div>
+      <canvas id="game-canvas" width="300" height="300" style="background:#000; border:2px solid #333; max-width:100%;"></canvas>
+      <button onclick="startGame()" style="margin-top:15px; padding:10px 30px; background:var(--neon-blue); border:none; border-radius:20px; font-weight:bold; cursor:pointer;">BAŞLAT</button>
+      <p style="font-size:0.8rem; color:#666; margin-top:10px;">Yön Tuşları veya Dokunarak Yönlendirin</p>
+    </div>
+  </section>
+  
+  <!-- CONTACT TAB -->
   <section id="contact" class="screen">
-    <div style="height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
-      <div style="position:relative;margin-bottom:18px"><img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" style="width:150px;height:150px;border-radius:50%;border:4px solid var(--gold);object-fit:cover">
-        <div style="position:absolute;right:8px;bottom:8px;background:var(--neon-blue);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000"><i class="fas fa-check"></i></div>
-      </div>
-      <h2 style="font-family:'Cinzel';color:var(--gold);font-size:1.9rem;margin-bottom:6px">MEMET ÇINAR</h2>
-      <p class="small" style="margin-bottom:12px">Mesajlarını bekliyorum ❤️</p>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center">
-        <a href="https://www.instagram.com/memetcinarofficial/" target="_blank" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);display:grid;place-items:center;color:#ccc;font-size:1.5rem;transition:.3s" onmouseover="this.style.background='var(--gold)';this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/@memetcinar444" target="_blank" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);display:grid;place-items:center;color:#ccc;font-size:1.5rem;transition:.3s" onmouseover="this.style.background='var(--gold)';this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i class="fab fa-youtube"></i></a>
-        <a href="https://open.spotify.com/intl-tr/artist/5RsoLkeIEuJA1JwF7tFZLI?si=RSQAHreHSdu6ltk6hn0U1Q" target="_blank" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);display:grid;place-items:center;color:#ccc;font-size:1.5rem;transition:.3s" onmouseover="this.style.background='var(--gold)';this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i class="fab fa-spotify"></i></a>
-        <a href="https://music.apple.com/tr/artist/memet-%C3%A7inar/1808974503" target="_blank" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);display:grid;place-items:center;color:#ccc;font-size:1.5rem;transition:.3s" onmouseover="this.style.background='var(--gold)';this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i class="fab fa-apple"></i></a>
-        <a href="https://www.tiktok.com/@memetcnr44_" target="_blank" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);display:grid;place-items:center;color:#ccc;font-size:1.5rem;transition:.3s" onmouseover="this.style.background='var(--gold)';this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i class="fab fa-tiktok"></i></a>
+    <div class="center-flex" style="height:60vh">
+      <img src="https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/41/7f/1e/417f1e1d-4fac-940e-9af9-a49ce8b88944/ami-identity-1253970994c88f2e2af7c4cfc6a339b9-2025-04-30T23-10-57.783Z_cropped.png/486x486bb.png" style="width:120px; height:120px; border-radius:50%; border:4px solid var(--gold); margin-bottom:20px;">
+      <h2 style="font-family:'Cinzel'; color:var(--gold)">MEMET ÇINAR</h2>
+      <p style="color:#aaa; margin-bottom:30px">Resmi İletişim Kanalları</p>
+      <div style="display:flex; gap:20px; font-size:2rem;">
+        <a href="#" class="p-btn" style="color:#C13584"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="p-btn" style="color:#FF0000"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="p-btn" style="color:#1DB954"><i class="fab fa-spotify"></i></a>
+        <a href="#" class="p-btn" style="color:#fff"><i class="fab fa-tiktok"></i></a>
       </div>
     </div>
   </section>
 
-  <section id="minigame" class="screen">
-    <div style="text-align:center;margin-bottom:14px">
-      <h2 style="font-family:'Orbitron';color:var(--gold)">MÜZİK NOTASI AVCISI</h2>
-      <p>Skor: <strong id="snake-score" style="color:var(--neon-blue)">0</strong></p>
-      <button class="play-btn" id="snake-start">BAŞLAT</button>
-    </div>
-    <canvas id="snake-canvas" style="display:block;margin:0 auto;max-width:100%;border:2px solid var(--neon-blue);border-radius:8px;background:#000"></canvas>
-  </section>
-
-  <section id="guild" class="screen">
-    <h2 style="color:var(--gold);font-family:'Orbitron';margin-bottom:12px">// LONCA SOHBETİ</h2>
-    <div class="chat-container">
-      <div class="chat-messages" id="chat-box"><div class="msg incoming">Legacy Sistemine Hoşgeldin.</div></div>
-      <div class="chat-input-area">
-        <input id="chat-input" type="text" placeholder="Mesajınızı yazın..." autocomplete="off">
-        <button id="chat-send">GÖNDER</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="screen">
-    <h2 style="color:var(--neon-blue);font-family:'Orbitron';margin-bottom:12px">// HAKKIMDA</h2>
-    <div class="widget-card" style="text-align:center">
-      <h3 style="color:var(--gold);font-family:'Cinzel';font-size:1.6rem;margin-bottom:6px">MEMET ÇINAR</h3>
-      <div style="width:50px;height:2px;background:var(--gold);margin:10px auto"></div>
-      <p class="small" style="color:#d3d3d3;line-height:1.6">Müzik dünyasında kendine özgü tarzı ve güçlü sesiyle yer edinen Memet Çınar, Malatya'nın yetiştirdiği değerli sanatçılardan biridir. "The Legacy" projesi ile dijital dünyada müziğini ve sanatını sevenleriyle buluşturmaktadır.</p>
-    </div>
-  </section>
-
-  <section id="rate" class="screen">
-    <div style="display:flex;align-items:center;justify-content:center;height:60vh">
-      <div class="widget-card" style="max-width:580px;text-align:center">
-        <h2 style="color:var(--gold);margin-bottom:16px">BİZİ DEĞERLENDİRİN</h2>
-        <div class="star-rating">
-          <span class="star" data-val="1">★</span>
-          <span class="star" data-val="2">★</span>
-          <span class="star" data-val="3">★</span>
-          <span class="star" data-val="4">★</span>
-          <span class="star" data-val="5">★</span>
-        </div>
-        <textarea id="feedback-text" placeholder="Düşüncelerinizi yazın..." style="width:100%;height:120px;background:rgba(0,0,0,0.3);border:1px solid #444;color:#fff;padding:12px;border-radius:8px;resize:none;margin:20px 0;font-size:1rem"></textarea>
-        <button class="play-btn" id="send-feedback" style="width:100%;height:50px;font-size:1.1rem">GÖNDER</button>
-        <p class="small" style="margin-top:10px;color:#888">Geri bildiriminiz memetcinar223@gmail.com adresine gönderilecek.</p>
-      </div>
-    </div>
-  </section>
 </main>
 
-<div id="lyrics-modal" class="modal">
-  <div class="modal-box" style="position:relative">
-    <button id="close-lyrics" style="position:absolute;right:12px;top:10px;background:none;border:none;color:var(--neon-red);font-size:22px;cursor:pointer">×</button>
-    <h3 id="lyrics-title" style="color:var(--gold);font-family:'Cinzel';text-align:center;margin-bottom:10px"></h3>
-    <div id="lyrics-content" style="white-space:pre-line;color:#eee;line-height:1.6;text-align:center"></div>
-  </div>
-</div>
-
+<!-- PLAYER BAR -->
 <footer class="player-bar">
-  <div class="player-left">
-    <img id="p-art" src="https://source.boomplaymusic.com/group10/M00/11/13/80d79673de0246248222b32fbc264ea7H3000W3000_320_320.jpg" class="player-art" alt="cover">
-    <div class="player-info"><h4 id="p-title">BU BİR RÜYA</h4><p id="p-artist">Bilal Güvercin</p></div>
-  </div>
-  <div class="player-center">
-    <div class="player-controls">
-      <button class="ctrl-btn" id="prev-btn"><i class="fas fa-step-backward"></i></button>
-      <button id="main-play-btn" class="play-btn"><i class="fas fa-play"></i></button>
-      <button class="ctrl-btn" id="next-btn"><i class="fas fa-step-forward"></i></button>
-      <div class="eq"><span></span><span></span><span></span></div>
+  <div class="p-left">
+    <img id="track-art" src="" style="display:none;" class="p-art">
+    <div id="track-placeholder" class="p-art" style="background:#222; display:grid; place-items:center;"><i class="fas fa-music" style="color:#555"></i></div>
+    <div class="p-info">
+      <h4 id="track-title">Müzik Seçilmedi</h4>
+      <p id="track-artist">Listeden seçin</p>
     </div>
-    <div class="progress-container" id="progress"><div class="progress-fill" id="progress-bar"></div></div>
   </div>
-  <div class="player-right"><div style="color:var(--neon-red);font-size:0.82rem;border:1px solid var(--neon-red);padding:6px 10px;border-radius:6px">VIP AUDIO</div></div>
+  
+  <div class="p-center">
+    <div class="p-controls">
+      <button class="p-btn" onclick="playPrev()"><i class="fas fa-step-backward"></i></button>
+      <button class="p-play" id="play-pause-btn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+      <button class="p-btn" onclick="playNext()"><i class="fas fa-step-forward"></i></button>
+    </div>
+    <div class="progress-rail" id="prog-rail">
+      <div class="progress-bar" id="prog-bar"></div>
+    </div>
+  </div>
+
+  <div class="p-extra" style="color:var(--neon-blue); font-size:1.2rem;">
+    <i class="fas fa-volume-up"></i>
+  </div>
 </footer>
 
-<div id="youtube-player" style="position:absolute;left:-9999px;top:-9999px"></div>
+<div id="yt-player" style="position:absolute; top:-9999px;"></div>
 
 <script>
-const songs = [{title:"BU BİR RÜYA",artist:"Bilal Güvercin",id:"JlmddA0lefw",cover:"https://source.boomplaymusic.com/group10/M00/11/13/80d79673de0246248222b32fbc264ea7H3000W3000_320_320.jpg"},{title:"YILDIZLAR",artist:"Memet Çınar",id:"AMDerpIe9QE",cover:"https://i.ytimg.com/vi/AMDerpIe9QE/maxresdefault.jpg"},{title:"BÖYLE İŞTE ELKAY",artist:"Memet Çınar",id:"EkAtzXOP0p0",cover:"https://i.ytimg.com/vi/EkAtzXOP0p0/maxresdefault.jpg"},{title:"LEYA",artist:"Memet Çınar",id:"8La-12lYhao",cover:"https://i.ytimg.com/vi/8La-12lYhao/maxresdefault.jpg"},{title:"ELKAY 2",artist:"Çoklu Sanatçı Kadrosu",id:"-Wrg7mJ__Ek",cover:"https://i.ytimg.com/vi/-Wrg7mJ__Ek/maxresdefault.jpg"},{title:"ELKAY GİBİ",artist:"Memet Çınar",id:"0QWuDJhDsHQ",cover:"https://i.ytimg.com/vi/0QWuDJhDsHQ/maxresdefault.jpg"},{title:"KORUYUCU AİLE",artist:"Memet Çınar",id:"2ti6IK3Aix0",cover:"https://i.ytimg.com/vi/2ti6IK3Aix0/maxresdefault.jpg"},{title:"EĞİLMEZ",artist:"Memet Çınar",id:"441IylCM7B4",cover:"https://i.ytimg.com/vi/441IylCM7B4/maxresdefault.jpg"},{title:"GECEYE YAZDIM",artist:"Memet Çınar",id:"WsR79WlMqNI",cover:"https://i.ytimg.com/vi/WsR79WlMqNI/maxresdefault.jpg"},{title:"VAZGEÇMEZ BU KALP",artist:"Memet Çınar",id:"0xgUyoGm4hY",cover:"https://i.ytimg.com/vi/0xgUyoGm4hY/maxresdefault.jpg"},{title:"VUR BENİ KALBİMDEN",artist:"Memet Çınar",id:"gMGz2e9uMcA",cover:"https://i.ytimg.com/vi/gMGz2e9uMcA/maxresdefault.jpg"},{title:"DÜNYAMIN GÜNEŞİ",artist:"Memet Çınar",id:"fvt8tI8n_cY",cover:"https://i.ytimg.com/vi/fvt8tI8n_cY/maxresdefault.jpg"},{title:"YOLUMU KAYBETTİM",artist:"Memet Çınar",id:"Rs6g6yaacXo",cover:"https://i.ytimg.com/vi/Rs6g6yaacXo/maxresdefault.jpg"},{title:"BİLE BİLE",artist:"Memet Çınar",id:"qED3CgFJ1Fc",cover:"https://i.ytimg.com/vi/qED3CgFJ1Fc/maxresdefault.jpg"},{title:"BİTTİ HİKAYEM",artist:"Memet Çınar",id:"KMcinbhM7Bw",cover:"https://i.ytimg.com/vi/KMcinbhM7Bw/maxresdefault.jpg"},{title:"SEN GİTTİN YA",artist:"Memet Çınar",id:"BWdb0W2ARmA",cover:"https://i.ytimg.com/vi/BWdb0W2ARmA/maxresdefault.jpg"},{title:"SONSUZA DEK SENİ BEKLEDİM",artist:"Memet Çınar",id:"ZIGiuOGCmA4",cover:"https://i.ytimg.com/vi/ZIGiuOGCmA4/maxresdefault.jpg"},{title:"ÖZÜR DİLERİM",artist:"Memet Çınar",id:"mSnp-mPxGus",cover:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg"},{title:"GEL DE BİTSİN BU HASRET",artist:"Memet Çınar",id:"DDEhRqKm1bE",cover:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg"},{title:"BİR DUBLE DAHA",artist:"Memet Çınar",id:"8E0G3myGiFk",cover:"https://i.ytimg.com/vi/8E0G3myGiFk/maxresdefault.jpg"},{title:"KIRMIZI YAZMA",artist:"Memet Çınar",id:"NzVEoSWhgl0",cover:"https://i.ytimg.com/vi/NzVEoSWhgl0/maxresdefault.jpg"},{title:"AYREN",artist:"Memet Çınar",id:"pbS4NlHpzxw",cover:"https://i.ytimg.com/vi/pbS4NlHpzxw/maxresdefault.jpg"},{title:"GÖZLERİ",artist:"Memet Çınar",id:"36ykG4zUtL0",cover:"https://i.ytimg.com/vi/36ykG4zUtL0/maxresdefault.jpg"},{title:"KİBİR",artist:"Memet Çınar",id:"CNdZW-4h2FY",cover:"https://i.ytimg.com/vi/CNdZW-4h2FY/maxresdefault.jpg"},{title:"AŞKIN KÜLLERİ",artist:"Memet Çınar",id:"F3MAB4cgmEI",cover:"https://i.ytimg.com/vi/F3MAB4cgmEI/maxresdefault.jpg"}];
-const lyricsDB = {"BU BİR RÜYA":"SÖZ YAZARI: Bilal Güvercin\n\nGeçmişle yandı başım\nAh bu günü nasıl taşır\nKalbimdeki yalnızlık\nBoğazıma ulaşır..."};
-const newsHeadlines = ["THE LEGACY PLATFORMU GÜNCELLENDİ!","MEMET ÇINAR: 'YILDIZLAR' PARÇASI MÜZİK LİSTELERİNİ SALLIYOR.","MALATYA'DA SANAT RÜZGARI EŞMEYE DEVAM EDİYOR.","BİLAL GÜVERCİN İLE 'BU BİR RÜYA' AKUSTİK PERFORMANSI YAKINDA..."];
-let player=null,currentIdx=0,isPlaying=false,progressInterval,tickerRAF;
+/* --- DATA --- */
+const songs = [
+  {title:"BU BİR RÜYA",artist:"Bilal Güvercin",id:"JlmddA0lefw",cover:"https://source.boomplaymusic.com/group10/M00/11/13/80d79673de0246248222b32fbc264ea7H3000W3000_320_320.jpg"},
+  {title:"YILDIZLAR",artist:"Memet Çınar",id:"AMDerpIe9QE",cover:"https://i.ytimg.com/vi/AMDerpIe9QE/maxresdefault.jpg"},
+  {title:"BÖYLE İŞTE ELKAY",artist:"Memet Çınar",id:"EkAtzXOP0p0",cover:"https://i.ytimg.com/vi/EkAtzXOP0p0/maxresdefault.jpg"},
+  {title:"LEYA",artist:"Memet Çınar",id:"8La-12lYhao",cover:"https://i.ytimg.com/vi/8La-12lYhao/maxresdefault.jpg"},
+  {title:"ELKAY 2",artist:"Çoklu Sanatçı Kadrosu",id:"-Wrg7mJ__Ek",cover:"https://i.ytimg.com/vi/-Wrg7mJ__Ek/maxresdefault.jpg"},
+  {title:"ELKAY GİBİ",artist:"Memet Çınar",id:"0QWuDJhDsHQ",cover:"https://i.ytimg.com/vi/0QWuDJhDsHQ/maxresdefault.jpg"},
+  {title:"KORUYUCU AİLE",artist:"Memet Çınar",id:"2ti6IK3Aix0",cover:"https://i.ytimg.com/vi/2ti6IK3Aix0/maxresdefault.jpg"},
+  {title:"EĞİLMEZ",artist:"Memet Çınar",id:"441IylCM7B4",cover:"https://i.ytimg.com/vi/441IylCM7B4/maxresdefault.jpg"},
+  {title:"GECEYE YAZDIM",artist:"Memet Çınar",id:"WsR79WlMqNI",cover:"https://i.ytimg.com/vi/WsR79WlMqNI/maxresdefault.jpg"},
+  {title:"VAZGEÇMEZ BU KALP",artist:"Memet Çınar",id:"0xgUyoGm4hY",cover:"https://i.ytimg.com/vi/0xgUyoGm4hY/maxresdefault.jpg"},
+  {title:"VUR BENİ KALBİMDEN",artist:"Memet Çınar",id:"gMGz2e9uMcA",cover:"https://i.ytimg.com/vi/gMGz2e9uMcA/maxresdefault.jpg"},
+  {title:"DÜNYAMIN GÜNEŞİ",artist:"Memet Çınar",id:"fvt8tI8n_cY",cover:"https://i.ytimg.com/vi/fvt8tI8n_cY/maxresdefault.jpg"},
+  {title:"YOLUMU KAYBETTİM",artist:"Memet Çınar",id:"Rs6g6yaacXo",cover:"https://i.ytimg.com/vi/Rs6g6yaacXo/maxresdefault.jpg"},
+  {title:"BİLE BİLE",artist:"Memet Çınar",id:"qED3CgFJ1Fc",cover:"https://i.ytimg.com/vi/qED3CgFJ1Fc/maxresdefault.jpg"},
+  {title:"BİTTİ HİKAYEM",artist:"Memet Çınar",id:"KMcinbhM7Bw",cover:"https://i.ytimg.com/vi/KMcinbhM7Bw/maxresdefault.jpg"},
+  {title:"SEN GİTTİN YA",artist:"Memet Çınar",id:"BWdb0W2ARmA",cover:"https://i.ytimg.com/vi/BWdb0W2ARmA/maxresdefault.jpg"},
+  {title:"SONSUZA DEK SENİ BEKLEDİM",artist:"Memet Çınar",id:"ZIGiuOGCmA4",cover:"https://i.ytimg.com/vi/ZIGiuOGCmA4/maxresdefault.jpg"},
+  {title:"ÖZÜR DİLERİM",artist:"Memet Çınar",id:"mSnp-mPxGus",cover:"https://i.ytimg.com/vi/mSnp-mPxGus/maxresdefault.jpg"},
+  {title:"GEL DE BİTSİN BU HASRET",artist:"Memet Çınar",id:"DDEhRqKm1bE",cover:"https://i.ytimg.com/vi/DDEhRqKm1bE/maxresdefault.jpg"},
+  {title:"BİR DUBLE DAHA",artist:"Memet Çınar",id:"8E0G3myGiFk",cover:"https://i.ytimg.com/vi/8E0G3myGiFk/maxresdefault.jpg"},
+  {title:"KIRMIZI YAZMA",artist:"Memet Çınar",id:"NzVEoSWhgl0",cover:"https://i.ytimg.com/vi/NzVEoSWhgl0/maxresdefault.jpg"},
+  {title:"AYREN",artist:"Memet Çınar",id:"pbS4NlHpzxw",cover:"https://i.ytimg.com/vi/pbS4NlHpzxw/maxresdefault.jpg"},
+  {title:"GÖZLERİ",artist:"Memet Çınar",id:"36ykG4zUtL0",cover:"https://i.ytimg.com/vi/36ykG4zUtL0/maxresdefault.jpg"},
+  {title:"KİBİR",artist:"Memet Çınar",id:"CNdZW-4h2FY",cover:"https://i.ytimg.com/vi/CNdZW-4h2FY/maxresdefault.jpg"},
+  {title:"AŞKIN KÜLLERİ",artist:"Memet Çınar",id:"F3MAB4cgmEI",cover:"https://i.ytimg.com/vi/F3MAB4cgmEI/maxresdefault.jpg"}
+];
 
-/* LOGIN & SYSTEM */
-document.getElementById('login-btn').addEventListener('click',()=>{const b=document.getElementById('login-btn');b.disabled=true;b.innerHTML='<i class="fas fa-spinner fa-spin"></i> GİRİŞ YAPILIYOR...';setTimeout(()=>{document.getElementById('login-status').textContent='BAŞARILI';setTimeout(()=>{document.getElementById('login-gateway').style.opacity=0;setTimeout(()=>{document.getElementById('login-gateway').style.display='none';initApp()},600)},600)},800)});
-document.getElementById('sys-ok').onclick=()=>{document.getElementById('system-modal').style.display='none'};
-function showSystemMessage(m){document.getElementById('sys-text').textContent=m;document.getElementById('system-modal').style.display='flex'}
+/* --- INIT --- */
+let currIdx = 0;
+let player = null;
+let isPlaying = false;
+let progInt;
 
-/* INIT */
-function initApp(){startLedClock();buildNewsTicker();initWeather();renderCalendar();loadSongList();initNav();initBadges();initPlayer();initChat();initStars();initSnakeGame()}
+window.onload = () => {
+  initClock();
+  initCalendar();
+  initWeather();
+  renderSongs();
+  loadYouTubeAPI();
+};
 
-/* CLOCK */
-function startLedClock(){const tick=()=>{const n=new Date();document.getElementById('main-led-clock').textContent=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;document.getElementById('main-led-date').textContent=n.toLocaleDateString('tr-TR',{weekday:'long',year:'numeric',month:'long',day:'numeric'})};tick();setInterval(tick,1000)}
-
-/* NEWS TICKER */
-function buildNewsTicker(){const track=document.getElementById('news-track');track.innerHTML='';const items=newsHeadlines.map(h=>`<div class="news-item"><i class="fas fa-bolt" style="color:var(--gold)"></i>${h}</div>`).join('');track.innerHTML=items+items;let pos=0;const speed=0.5;function loop(){pos-=speed;if(Math.abs(pos)>=track.scrollWidth/2)pos=0;track.style.transform=`translateX(${pos}px)`;tickerRAF=requestAnimationFrame(loop)}tickerRAF=requestAnimationFrame(loop)}
-
-/* WEATHER */
-function initWeather(){navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>fetchWeather(p.coords.latitude,p.coords.longitude),()=>fetchWeather(38.35,38.31)):fetchWeather(38.35,38.31)}
-function fetchWeather(lat,lon){fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`).then(r=>r.json()).then(d=>{if(!d||!d.current_weather)return;const c=d.current_weather.weathercode;document.getElementById('weather-text').innerHTML=`${d.current_weather.temperature}°C <br>${c===0?'AÇIK':c<=3?'BULUTLU':c<=67?'YAĞMURLU':'KARLI'}`;setWeatherAnim(c)})}
-function setWeatherAnim(c){const e=document.getElementById('weather-anim');if(c===0)e.innerHTML='<div style="width:56px;height:56px;border-radius:50%;background:radial-gradient(#ffd700,#ff8c00);box-shadow:0 0 28px #ffd700;animation:spinSun 15s linear infinite"></div>';else if(c<=3)e.innerHTML='<i class="fas fa-cloud" style="font-size:42px;color:#ddd"></i>';else e.innerHTML='<i class="fas fa-cloud-showers-heavy" style="font-size:42px;color:#00F0FF"></i>'}
-
-/* CALENDAR */
-let currDate=new Date();const months=["OCAK","ŞUBAT","MART","NİSAN","MAYIS","HAZİRAN","TEMMUZ","AĞUSTOS","EYLÜL","EKİM","KASIM","ARALIK"];const specialDays={"1-1":"anim-snow","23-4":"anim-balloon","19-5":"anim-flag","30-8":"anim-flag","29-10":"anim-firework"};
-document.getElementById('prev-month').onclick=()=>changeMonth(-1);document.getElementById('next-month').onclick=()=>changeMonth(1);
-function changeMonth(d){currDate.setMonth(currDate.getMonth()+d);renderCalendar()}
-function renderCalendar(){const y=currDate.getFullYear(),m=currDate.getMonth();document.getElementById('cal-month-year').textContent=`${months[m]} ${y}`;const first=new Date(y,m,1).getDay();let start=first-1;if(start<0)start=6;const days=new Date(y,m+1,0).getDate();const c=document.getElementById('calendar-body');c.innerHTML='';for(let i=0;i<start;i++)c.innerHTML+='<div></div>';const today=new Date();for(let i=1;i<=days;i++){const key=`${i}-${m+1}`;c.innerHTML+=`<div class="cal-day${specialDays[key]?' '+specialDays[key]:''}${i===today.getDate()&&m===today.getMonth()&&y===today.getFullYear()?' today':''}">${i}</div>`}}
-
-/* NAV & BADGES */
-function initNav(){document.querySelectorAll('.nav-item').forEach(it=>it.onclick=()=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.getElementById(it.dataset.target).classList.add('active');it.classList.add('active');if(it.dataset.target==='minigame')resizeSnakeCanvas()})};
-function initBadges(){document.querySelectorAll('.official-badge').forEach(b=>{b.onmouseenter=b.onfocus=()=>b.dataset.tooltipVisible='true';b.onmouseleave=b.onblur=()=>b.dataset.tooltipVisible='false';b.ontouchend=e=>{e.preventDefault();b.dataset.tooltipVisible=b.dataset.tooltipVisible==='true'?'false':'true';setTimeout(()=>b.dataset.tooltipVisible='false',2500)}})}
-
-/* SONG LIST & LYRICS */
-function loadSongList(){const c=document.getElementById('song-list-container');c.innerHTML='';songs.forEach((s,i)=>{c.innerHTML+=`<div class="song-item"><img src="${s.cover}" alt="cover"><div class="song-meta"><div style="font-weight:700;color:#fff">${s.title}</div><div class="small">${s.artist}</div></div><button class="song-play-btn" data-idx="${i}">OYNAT</button></div>`});c.onclick=e=>{const btn=e.target.closest('.song-play-btn');if(btn)playSong(+btn.dataset.idx)}}
-document.getElementById('close-lyrics').onclick=()=>{document.getElementById('lyrics-modal').style.display='none'}
-function showLyrics(t){document.getElementById('lyrics-title').textContent=t;document.getElementById('lyrics-content').textContent=lyricsDB[t]||'Sözler ekleniyor...';document.getElementById('lyrics-modal').style.display='flex'}
-
-/* CHAT */
-document.getElementById('chat-send').onclick=sendChat;document.getElementById('chat-input').onkeydown=e=>{if(e.key==='Enter')send,sendChat()}
-function sendChat(){const i=document.getElementById('chat-input'),t=i.value.trim();if(!t)return;const b=document.getElementById('chat-box');b.innerHTML+=`<div class="msg outgoing">${t}</div>`;b.scrollTop=b.scrollHeight;i.value='';setTimeout(()=>{b.innerHTML+=`<div class="msg incoming">Mesajın alındı, teşekkürler ❤️</div>`;b.scrollTop=b.scrollHeight},1000)}
-
-/* YILDIZLAR + MAİL */
-let selectedStars = 0;
-document.querySelectorAll('.star').forEach(star => {
-  star.addEventListener('click', () => {
-    selectedStars = parseInt(star.dataset.val);
-    document.querySelectorAll('.star').forEach((s, i) => {
-      s.classList.toggle('active', i < selectedStars);
-    });
-  });
-});
-document.getElementById('send-feedback').addEventListener('click', () => {
-  const yorum = document.getElementById('feedback-text').value.trim();
-  if (selectedStars === 0) { showSystemMessage('Lütfen yıldız verin!'); return; }
-  if (yorum === '') { showSystemMessage('Lütfen yorum yazın!'); return; }
-  const konu = encodeURIComponent(`Legacy VIP - ${selectedStars} Yıldız`);
-  const icerik = encodeURIComponent(`Puan: ${selectedStars}/5\n\n${yorum}\n\nTarih: ${new Date().toLocaleString('tr-TR')}`);
-  window.location.href = `mailto:memetcinar223@gmail.com?subject=${konu}&body=${icerik}`;
-  showSystemMessage('Teşekkürler! Değerlendirmeniz gönderildi ❤️');
-  document.getElementById('feedback-text').value = '';
-  selectedStars = 0;
-  document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
-});
-
-/* PLAYER */
-let ytReady=false;
-function onYouTubeIframeAPIReady(){ytReady=true;player=new YT.Player('youtube-player',{height:'0',width:'0',videoId:songs[0].id,events:{'onStateChange':onPlayerStateChange}})}
-function onPlayerStateChange(e){if(e.data===YT.PlayerState.PLAYING){isPlaying=true;document.getElementById('main-play-btn').innerHTML='<i class="fas fa-pause"></i>';startProgress()}else{isPlaying=false;document.getElementById('main-play-btn').innerHTML='<i class="fas fa-play"></i>';stopProgress()}if(e.data===YT.PlayerState.ENDED)nextSong()}
-function initPlayer(){if(!window.YT){const t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t)}document.getElementById('main-play-btn').onclick=togglePlay;document.getElementById('prev-btn').onclick=prevSong;document.getElementById('next-btn').onclick=nextSong;document.getElementById('progress').onclick=seek}
-function playSong(idx){currentIdx=idx;const s=songs[idx];document.getElementById('p-title').textContent=s.title;document.getElementById('p-artist').textContent=s.artist;document.getElementById('p-art').src=s.cover;if(player)player.loadVideoById(s.id)}
-function togglePlay(){if(!player)return;isPlaying?player.pauseVideo():player.playVideo()}
-function nextSong(){currentIdx=(currentIdx+1)%songs.length;playSong(currentIdx)}
-function prevSong(){currentIdx=(currentIdx-1+songs.length)%songs.length;playSong(currentIdx)}
-function startProgress(){clearInterval(progressInterval);progressInterval=setInterval(()=>{if(player&&player.getDuration){const pct=player.getCurrentTime()/player.getDuration()*100;document.getElementById('progress-bar').style.width=pct+'%'}},500)}
-function stopProgress(){clearInterval(progressInterval)}
-function seek(e){if(!player||!player.getDuration())return;const r=e.currentTarget.getBoundingClientRect();const pct=(e.clientX-r.left)/r.width;player.seekTo(player.getDuration()*pct,true)}
-
-/* SNAKE OYUNU */
-let snake, food, dx=0, dy=0, snakeInterval, snakeScore=0, snakeGameActive=false;
-const snakeCanvas=document.getElementById('snake-canvas'), sctx=snakeCanvas.getContext('2d');
-const box=20;
-function initSnakeGame(){resizeSnakeCanvas();document.getElementById('snake-start').onclick=startSnake}
-function resizeSnakeCanvas(){snakeCanvas.width=Math.min(window.innerWidth-60,600);snakeCanvas.height=400}
-function startSnake(){if(snakeGameActive)return;snakeGameActive=true;snakeScore=0;document.getElementById('snake-score').textContent='0';snake=[{x:9*box,y:10*box}];createFood();dx=box;dy=0;clearInterval(snakeInterval);snakeInterval=setInterval(drawSnake,120)}
-function createFood(){food={x:Math.floor(Math.random()*(snakeCanvas.width/box))*box,y:Math.floor(Math.random()*(snakeCanvas.height/box))*box}}
-function drawSnake(){
-  sctx.fillStyle='#000';sctx.fillRect(0,0,snakeCanvas.width,snakeCanvas.height);
-  snake.forEach((p,i)=>{sctx.fillStyle=i===0?'#00F0FF':'#FFD700';sctx.fillRect(p.x,p.y,box,box);sctx.strokeStyle='#000';sctx.strokeRect(p.x,p.y,box,box)});
-  sctx.font='30px Orbitron';sctx.fillStyle='#FFD700';sctx.fillText('♪',food.x,food.y+box-3);
-  let head={x:snake[0].x+dx,y:snake[0].y+dy};
-  if(head.x<0)head.x=snakeCanvas.width-box;if(head.x>=snakeCanvas.width)head.x=0;if(head.y<0)head.y=snakeCanvas.height-box;if(head.y>=snakeCanvas.height)head.y=0;
-  if(snake.some(p=>p.x===head.x&&p.y===head.y)){clearInterval(snakeInterval);snakeGameActive=false;showSystemMessage('Oyun bitti! Skor: '+snakeScore);return}
-  snake.unshift(head);
-  if(head.x===food.x&&head.y===food.y){snakeScore+=10;document.getElementById('snake-score').textContent=snakeScore;createFood()}else snake.pop()
+/* --- NAVIGATION --- */
+function switchTab(id, el) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
 }
-document.addEventListener('keydown',e=>{if(!snakeGameActive)return;if(e.key==='ArrowLeft'&&dx===0){dx=-box;dy=0}else if(e.key==='ArrowUp'&&dy===0){dx=0;dy=-box}else if(e.key==='ArrowRight'&&dx===0){dx=box;dy=0}else if(e.key==='ArrowDown'&&dy===0){dx=0;dy=box}});
 
-/* AUTO START */
-if(getComputedStyle(document.getElementById('login-gateway')).display==='none')initApp();
-window.onYouTubeIframeAPIReady=onYouTubeIframeAPIReady;
+/* --- CLOCK --- */
+function initClock() {
+  const tick = () => {
+    const d = new Date();
+    document.getElementById('clock').innerText = d.toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'});
+    document.getElementById('date').innerText = d.toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'});
+  };
+  setInterval(tick, 1000); tick();
+}
+
+/* --- CALENDAR LOGIC (FIXED) --- */
+let calDate = new Date();
+const specialDays = {
+  "1-1": "snowy",   // Yılbaşı (Kar)
+  "23-4": "flag",   // 23 Nisan (Bayrak)
+  "19-5": "flag",   // 19 Mayıs (Bayrak)
+  "15-7": "flag",   // 15 Temmuz (Bayrak)
+  "30-8": "flag",   // 30 Ağustos (Bayrak)
+  "29-10": "flag",  // 29 Ekim (Bayrak)
+  "14-2": "special" // Sevgililer Günü (Kalp/Yıldız)
+};
+
+function changeMonth(dir) {
+  calDate.setMonth(calDate.getMonth() + dir);
+  initCalendar();
+}
+
+function initCalendar() {
+  const y = calDate.getFullYear();
+  const m = calDate.getMonth();
+  const monthNames = ["OCAK","ŞUBAT","MART","NİSAN","MAYIS","HAZİRAN","TEMMUZ","AĞUSTOS","EYLÜL","EKİM","KASIM","ARALIK"];
+  
+  document.getElementById('cal-title').innerText = `${monthNames[m]} ${y}`;
+  
+  const firstDay = new Date(y, m, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(y, m+1, 0).getDate();
+  const calBody = document.getElementById('cal-body');
+  calBody.innerHTML = '';
+  
+  // Shift day: Mon=0 ... Sun=6
+  let start = firstDay === 0 ? 6 : firstDay - 1;
+
+  // Empty cells
+  for(let i=0; i<start; i++) {
+    calBody.innerHTML += `<div class="cal-cell empty"></div>`;
+  }
+
+  const today = new Date();
+  for(let d=1; d<=daysInMonth; d++) {
+    const key = `${d}-${m+1}`;
+    let cls = "cal-cell";
+    if(d === today.getDate() && m === today.getMonth() && y === today.getFullYear()) cls += " today";
+    if(specialDays[key]) cls += " " + specialDays[key];
+    
+    calBody.innerHTML += `<div class="${cls}">${d}</div>`;
+  }
+}
+
+/* --- WEATHER (UPDATED) --- */
+async function initWeather() {
+  // Malatya Coordinates default
+  const lat = 38.35, lon = 38.31;
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m`);
+    const data = await res.json();
+    if(data.current_weather) {
+      const w = data.current_weather;
+      document.getElementById('w-temp').innerText = Math.round(w.temperature) + "°";
+      document.getElementById('w-wind').innerText = w.windspeed;
+      
+      // Basic humidity logic since current_weather doesn't give it directly in simple view
+      // We simulate or pick closest hour
+      document.getElementById('w-hum').innerText = data.hourly.relativehumidity_2m[new Date().getHours()] || "40";
+
+      // Icon Logic
+      const code = w.weathercode;
+      const iconEl = document.getElementById('w-icon');
+      let iconClass = "fa-sun";
+      let color = "orange";
+      
+      if(code > 3) { iconClass = "fa-cloud-sun"; color="#ddd"; }
+      if(code > 40) { iconClass = "fa-cloud-rain"; color="#00F0FF"; }
+      if(code > 70) { iconClass = "fa-snowflake"; color="#fff"; }
+      
+      iconEl.className = `fas ${iconClass} weather-icon-lg`;
+      iconEl.style.color = color;
+      
+      const descMap = {0:"Açık", 1:"Az Bulutlu", 2:"Parçalı Bulutlu", 3:"Kapalı", 61:"Yağmurlu", 71:"Karlı"};
+      document.getElementById('w-desc').innerText = descMap[code] || "Malatya";
+    }
+  } catch(e) {
+    console.log("Weather error", e);
+  }
+}
+
+/* --- MUSIC PLAYER --- */
+function renderSongs() {
+  const c = document.getElementById('song-container');
+  c.innerHTML = '';
+  songs.forEach((s, i) => {
+    c.innerHTML += `
+      <div class="song-row" onclick="playSong(${i})">
+        <img src="${s.cover}" style="width:40px; height:40px; border-radius:4px; object-fit:cover;">
+        <div>
+          <div style="font-weight:bold; font-size:0.9rem">${s.title}</div>
+          <div style="font-size:0.75rem; color:#888">${s.artist}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function loadYouTubeAPI() {
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+}
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('yt-player', {
+    height: '0', width: '0',
+    videoId: songs[0].id,
+    events: { 'onStateChange': onPlayerStateChange }
+  });
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    isPlaying = true;
+    document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-pause"></i>';
+    startProgress();
+  } else {
+    isPlaying = false;
+    document.getElementById('play-pause-btn').innerHTML = '<i class="fas fa-play"></i>';
+    stopProgress();
+  }
+}
+
+function playSong(idx) {
+  currIdx = idx;
+  const s = songs[idx];
+  document.getElementById('track-title').innerText = s.title;
+  document.getElementById('track-artist').innerText = s.artist;
+  document.getElementById('track-art').src = s.cover;
+  document.getElementById('track-art').style.display = 'block';
+  document.getElementById('track-placeholder').style.display = 'none';
+  
+  if(player) player.loadVideoById(s.id);
+  
+  document.querySelectorAll('.song-row').forEach((r, i) => {
+    r.classList.toggle('active', i === idx);
+  });
+}
+
+function togglePlay() {
+  if(!player) return;
+  isPlaying ? player.pauseVideo() : player.playVideo();
+}
+function playNext() { playSong((currIdx + 1) % songs.length); }
+function playPrev() { playSong((currIdx - 1 + songs.length) % songs.length); }
+
+function startProgress() {
+  clearInterval(progInt);
+  progInt = setInterval(() => {
+    if(player && player.getCurrentTime) {
+      const dur = player.getDuration();
+      const curr = player.getCurrentTime();
+      if(dur > 0) document.getElementById('prog-bar').style.width = (curr/dur)*100 + "%";
+    }
+  }, 500);
+}
+function stopProgress() { clearInterval(progInt); }
+
+document.getElementById('prog-rail').onclick = (e) => {
+  if(!player) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  player.seekTo(player.getDuration() * pct, true);
+};
+
+/* --- CHAT --- */
+function sendMsg() {
+  const inp = document.getElementById('chat-in');
+  const txt = inp.value.trim();
+  if(!txt) return;
+  const box = document.getElementById('chat-history');
+  box.innerHTML += `<div class="msg out">${txt}</div>`;
+  inp.value = '';
+  box.scrollTop = box.scrollHeight;
+  
+  setTimeout(() => {
+    box.innerHTML += `<div class="msg in">Mesajınız alındı. Sanatçımız en kısa sürede dönüş yapacaktır.</div>`;
+    box.scrollTop = box.scrollHeight;
+  }, 1500);
+}
+
+/* --- SNAKE GAME --- */
+let gameInt, snake = [], food = {}, dx=0, dy=0, score=0;
+const cvs = document.getElementById('game-canvas');
+const ctx = cvs.getContext('2d');
+const box = 20;
+
+function startGame() {
+  clearInterval(gameInt);
+  snake = [{x:100, y:100}];
+  score = 0; document.getElementById('score').innerText = 0;
+  dx = box; dy = 0;
+  createFood();
+  gameInt = setInterval(gameLoop, 150);
+}
+
+function createFood() {
+  food = {
+    x: Math.floor(Math.random()*(cvs.width/box))*box,
+    y: Math.floor(Math.random()*(cvs.height/box))*box
+  };
+}
+
+function gameLoop() {
+  ctx.fillStyle = '#000'; ctx.fillRect(0,0,cvs.width,cvs.height);
+  
+  // Food
+  ctx.fillStyle = '#FFD700'; ctx.font = '20px Arial';
+  ctx.fillText('♪', food.x+4, food.y+18);
+  
+  // Snake
+  snake.forEach((h, i) => {
+    ctx.fillStyle = i===0 ? '#00F0FF' : '#fff';
+    ctx.fillRect(h.x, h.y, box-2, box-2);
+  });
+  
+  const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+  
+  // Walls
+  if(head.x < 0) head.x = cvs.width-box;
+  if(head.x >= cvs.width) head.x = 0;
+  if(head.y < 0) head.y = cvs.height-box;
+  if(head.y >= cvs.height) head.y = 0;
+  
+  // Self hit
+  if(snake.some(s => s.x === head.x && s.y === head.y)) {
+    clearInterval(gameInt);
+    alert('Oyun Bitti! Skor: ' + score);
+    return;
+  }
+  
+  snake.unshift(head);
+  if(head.x === food.x && head.y === food.y) {
+    score += 10;
+    document.getElementById('score').innerText = score;
+    createFood();
+  } else {
+    snake.pop();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowUp' && dy===0) { dx=0; dy=-box; }
+  if(e.key === 'ArrowDown' && dy===0) { dx=0; dy=box; }
+  if(e.key === 'ArrowLeft' && dx===0) { dx=-box; dy=0; }
+  if(e.key === 'ArrowRight' && dx===0) { dx=box; dy=0; }
+});
 </script>
 </body>
 </html>
