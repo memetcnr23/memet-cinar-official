@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-device="desktop">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -13,9 +13,10 @@
   --gold:#FFD700;--neon-blue:#00F0FF;--neon-red:#FF003C;--bg:#050505;
   --glass:rgba(15,15,15,0.9);--glass-border:rgba(255,255,255,0.08);--glass-shadow:0 10px 40px rgba(0,0,0,0.8);
   --smooth:cubic-bezier(.2,.9,.2,1);--radius:16px;--muted:#999;
+  --vh:1vh;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;width:100%;overflow:hidden;}
+html,body{height:calc(var(--vh)*100);width:100%;overflow:hidden;}
 body{
   font-family:'Rajdhani',sans-serif;
   background:
@@ -160,7 +161,8 @@ body{
 #lyrics-panel h3{font-family:'Orbitron';font-size:1rem;margin-bottom:4px;}
 #lyrics-song-title{font-weight:700;font-size:.9rem;margin-bottom:2px;}
 #lyrics-song-artist{font-size:.8rem;color:var(--muted);margin-bottom:6px;}
-#lyrics-meta{font-size:.7rem;color:#777;margin-bottom:8px;}
+#lyrics-meta{font-size:.7rem;color:#777;margin-bottom:4px;}
+#lyrics-tools{display:flex;justify-content:space-between;font-size:.75rem;margin:4px 0;color:#999;}
 #lyrics-view{background:rgba(0,0,0,0.45);border-radius:10px;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;font-size:.85rem;line-height:1.5;white-space:pre-line;max-height:180px;overflow-y:auto;margin-bottom:8px;}
 #lyrics-editor{margin-top:4px;}
 #lyrics-input{width:100%;min-height:100px;max-height:220px;resize:vertical;background:#111;border:1px solid #444;color:#fff;border-radius:8px;padding:8px;font-size:.85rem;font-family:inherit;}
@@ -170,7 +172,7 @@ body{
 /* ARTISTS extra (HAKKIMDA) */
 .about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
-.about-stat-pill{border-radius:999px;border:1px solid rgba(255,255,255,0.16);padding:4px 10px;font-size:.75rem;display:inline-flex;align-items:center;gap6px;margin:2px 4px 2px 0;background:rgba(0,0,0,0.4);}
+.about-stat-pill{border-radius:999px;border:1px solid rgba(255,255,255,0.16);padding:4px 10px;font-size:.75rem;display:inline-flex;align-items:center;gap:6px;margin:2px 4px 2px 0;background:rgba(0,0,0,0.4);}
 .about-bar{height:6px;border-radius:999px;background:#111;overflow:hidden;margin-top:6px;}
 .about-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--neon-blue),var(--gold));width:82%;}
 .about-tagline{font-size:.85rem;color:#ccc;margin-bottom:4px;}
@@ -229,7 +231,7 @@ body{
     </div>
   </div>
   <div class="top-status">
-    <span><i class="fas fa-user"></i> Misafir Modu · Oturum Yok</span>
+    <span id="device-label"><i class="fas fa-user"></i> Misafir Modu · Oturum Yok</span>
     <span>Şarkı sözleri bu cihazda saklanır</span>
   </div>
 </header>
@@ -308,10 +310,14 @@ body{
         <div id="lyrics-song-title">Henüz şarkı seçilmedi</div>
         <div id="lyrics-song-artist" class="song-artist">Listeden bir şarkı seç.</div>
         <div id="lyrics-meta">Durum: Şarkı seçilmedi.</div>
+        <div id="lyrics-tools">
+          <span id="lyrics-autosave">Otomatik kayıt: beklemede</span>
+          <span id="lyrics-stats">0 karakter · 0 satır</span>
+        </div>
         <div id="lyrics-view">Burada seçilen şarkının sözleri görünecek. Yazdığın sözler yalnızca bu cihazda saklanır.</div>
         <div id="lyrics-editor">
           <textarea id="lyrics-input" placeholder="Şarkı sözlerini buraya yaz... (Bu cihazda kaydedilir)"></textarea>
-          <button id="lyrics-save-btn" type="button" onclick="saveLyrics()">Sözleri Kaydet</button>
+          <button id="lyrics-save-btn" type="button" onclick="saveLyrics(false)">Sözleri Kaydet</button>
         </div>
         <p id="lyrics-login-hint">Oturum sistemi yok. Sözler tarayıcıda (localStorage) saklanır.</p>
       </div>
@@ -323,7 +329,6 @@ body{
     <div class="grid-2">
       <!-- MEMET ÇINAR -->
       <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
-        <!-- GÖRSEL DÜZELTİLDİ: ui-avatars -->
         <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--gold);" alt="Memet Çınar">
         <div>
           <h3 style="color:var(--gold); margin-bottom:5px">
@@ -350,15 +355,12 @@ body{
           <p style="font-size:0.85rem; color:#aaa">Söz Yazarı</p>
           <span style="font-size:0.7rem; background:#555; color:#fff; padding:2px 6px; border-radius:4px;">ONAYLI</span>
           <div style="margin-top:8px; font-size:1.1rem;">
-            <!-- Instagram -->
             <a href="https://www.instagram.com/bilalguvercin_official/" target="_blank" rel="noopener" style="margin-right:8px; color:#C13584;">
               <i class="fab fa-instagram"></i>
             </a>
-            <!-- YouTube -->
             <a href="https://www.youtube.com/channel/UCGxmNCKcU2wbYCK3xvKGVxg" target="_blank" rel="noopener" style="margin-right:8px; color:#FF0000;">
               <i class="fab fa-youtube"></i>
             </a>
-            <!-- Spotify henüz eklenmedi -->
             <span title="Henüz eklenmedi" style="margin-right:8px; color:#555; cursor:not-allowed;">
               <i class="fab fa-spotify"></i>
             </span>
@@ -436,12 +438,10 @@ body{
   <!-- CONTACT -->
   <section id="contact" class="screen">
     <div class="center-flex" style="height:60vh">
-      <!-- GÖRSEL DÜZELTİLDİ: ui-avatars -->
       <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:120px; height:120px; border-radius:50%; border:4px solid var(--gold); margin-bottom:20px;" alt="Memet Çınar">
       <h2 style="font-family:'Cinzel'; color:var(--gold)">MEMET ÇINAR</h2>
       <p style="color:#aaa; margin-bottom:18px">Resmi iletişim kanalları (linkleri gerçek profillerinle güncelleyebilirsin).</p>
       <div style="display:flex; gap:20px; font-size:2rem;">
-        <!-- Buradaki href'leri kendi gerçek profillerinle değiştirebilirsin -->
         <a href="#" style="color:#C13584"><i class="fab fa-instagram"></i></a>
         <a href="#" style="color:#FF0000"><i class="fab fa-youtube"></i></a>
         <a href="#" style="color:#1DB954"><i class="fab fa-spotify"></i></a>
@@ -489,6 +489,22 @@ function loadYouTubeAPI(){
 <script>
 /* ======= GLOBAL STATE ======= */
 let currIdx=0,player=null,isPlaying=false,progInt,calDate=new Date();
+let lyricsTimer=null;
+
+/* ======= VIEWPORT & DEVICE ======= */
+function updateVh(){
+  const vh=window.innerHeight*0.01;
+  document.documentElement.style.setProperty('--vh',vh+'px');
+}
+function detectDevice(){
+  const w=window.innerWidth;
+  let type='Masaüstü',icon='desktop';
+  if(w<600){type='Mobil';icon='mobile-screen-button';}
+  else if(w<1024){type='Tablet';icon='tablet-screen-button';}
+  document.documentElement.setAttribute('data-device',type.toLowerCase());
+  const el=document.getElementById('device-label');
+  if(el){el.innerHTML=`<i class="fa-solid fa-${icon}"></i> Cihaz: ${type}`;}
+}
 
 /* ======= HOVER SES EFEKTİ (GAMER) ======= */
 let audioCtx=null;
@@ -505,13 +521,20 @@ function playHoverSfx(){
 /* COVER DEFAULT */
 const defaultArtistCover="https://ui-avatars.com/api/?name=Memet+Çınar&background=000000&color=ffffff&size=256";
 
-/* SONG DATA – kapaklar YouTube hqdefault ile */
+/* SONG DATA – GENİŞLEMİŞ */
 const songs=[
+  {title:"SONSUZ IŞIK (10 KASIM 193∞)",artist:"Memet Çınar",id:"P3ulDeTz7pA",cover:"https://img.youtube.com/vi/P3ulDeTz7pA/hqdefault.jpg"},
+  {title:"ELKAY ve HAKDAM",artist:"Memet Çınar",id:"J-j5SGM3lVI",cover:"https://img.youtube.com/vi/J-j5SGM3lVI/hqdefault.jpg"},
+  {title:"Son Kez",artist:"Memet Çınar",id:"B57csIfqcIY",cover:"https://img.youtube.com/vi/B57csIfqcIY/hqdefault.jpg"},
+  {title:"Son Defa Hatırla",artist:"Memet Çınar",id:"wBV38vYfMwE",cover:"https://img.youtube.com/vi/wBV38vYfMwE/hqdefault.jpg"},
+  {title:"Affet Beni",artist:"Memet Çınar",id:"bayw-a4NIiE",cover:"https://img.youtube.com/vi/bayw-a4NIiE/hqdefault.jpg"},
+  {title:"Bahar Yangını",artist:"Memet Çınar",id:"ifL7SIs03qo",cover:"https://img.youtube.com/vi/ifL7SIs03qo/hqdefault.jpg"},
+  {title:"Başka Birisi",artist:"Memet Çınar",id:"M90Fr_a7bOw",cover:"https://img.youtube.com/vi/M90Fr_a7bOw/hqdefault.jpg"},
   {title:"BU BİR RÜYA",artist:"Bilal Güvercin",id:"JlmddA0lefw",cover:"https://img.youtube.com/vi/JlmddA0lefw/hqdefault.jpg"},
   {title:"YILDIZLAR",artist:"Memet Çınar",id:"AMDerpIe9QE",cover:"https://img.youtube.com/vi/AMDerpIe9QE/hqdefault.jpg"},
   {title:"BÖYLE İŞTE ELKAY",artist:"Memet Çınar",id:"EkAtzXOP0p0",cover:"https://img.youtube.com/vi/EkAtzXOP0p0/hqdefault.jpg"},
   {title:"LEYA",artist:"Memet Çınar",id:"8La-12lYhao",cover:"https://img.youtube.com/vi/8La-12lYhao/hqdefault.jpg"},
-  {title:"ELKAY 2",artist:"Çoklu Sanatçı Kadrosu",id:"-Wrg7mJ__Ek",cover:"https://img.youtube.com/vi/-Wrg7mJ__Ek/hqdefault.jpg"},
+  {title:"ELKAY 2",artist:"Memet Çınar",id:"-Wrg7mJ__Ek",cover:"https://img.youtube.com/vi/-Wrg7mJ__Ek/hqdefault.jpg"},
   {title:"ELKAY GİBİ",artist:"Memet Çınar",id:"0QWuDJhDsHQ",cover:"https://img.youtube.com/vi/0QWuDJhDsHQ/hqdefault.jpg"},
   {title:"KORUYUCU AİLE",artist:"Memet Çınar",id:"2ti6IK3Aix0",cover:"https://img.youtube.com/vi/2ti6IK3Aix0/hqdefault.jpg"},
   {title:"EĞİLMEZ",artist:"Memet Çınar",id:"441IylCM7B4",cover:"https://img.youtube.com/vi/441IylCM7B4/hqdefault.jpg"},
@@ -536,6 +559,11 @@ const songs=[
 
 /* INIT */
 window.onload=()=>{
+  updateVh();
+  detectDevice();
+  window.addEventListener('resize',()=>{updateVh();detectDevice();});
+  window.addEventListener('orientationchange',()=>{updateVh();detectDevice();});
+
   initClock();
   initCalendar();
   initWeather();
@@ -545,6 +573,19 @@ window.onload=()=>{
   document
     .querySelectorAll('.nav-item, .widget-card')
     .forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
+
+  const progRail=document.getElementById('prog-rail');
+  if(progRail){
+    progRail.onclick=e=>{
+      if(!player||!player.seekTo||!player.getDuration) return;
+      const r=e.currentTarget.getBoundingClientRect();
+      const p=(e.clientX-r.left)/r.width;
+      player.seekTo(player.getDuration()*p,true);
+    };
+  }
+
+  const li=document.getElementById('lyrics-input');
+  if(li){li.addEventListener('input',handleLyricsInput);}
 };
 
 function showSysMsg(txt){
@@ -646,7 +687,7 @@ function renderSongs(){
   const c=document.getElementById('song-container'); if(!c) return;
   c.innerHTML='';
   songs.forEach((s,i)=>{
-    const imgSrc=(s.cover&&s.cover.trim()!=="")?s.cover:(s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover);
+    const imgSrc=(s.cover&&s.cover.trim()!="")?s.cover:(s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover);
     const row=document.createElement('div'); row.className='song-row';
     row.innerHTML=`<img src="${imgSrc}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;" alt="${s.title}">
       <div><div class="song-title">${s.title}</div><div class="song-artist">${s.artist}</div></div>
@@ -678,45 +719,78 @@ function onPlayerStateChange(e){
   }
 }
 
-/* LYRICS (LOCALSTORAGE) */
+/* LYRICS (LOCALSTORAGE, GELİŞMİŞ) */
+function updateLyricsStats(){
+  const inp=document.getElementById('lyrics-input');
+  const stats=document.getElementById('lyrics-stats');
+  if(!inp||!stats) return;
+  const text=inp.value||"";
+  const lines=text.split(/\n/).length;
+  const chars=text.length;
+  stats.textContent=`${chars} karakter · ${lines} satır`;
+}
+function handleLyricsInput(){
+  updateLyricsStats();
+  clearTimeout(lyricsTimer);
+  lyricsTimer=setTimeout(()=>saveLyrics(true),1000);
+}
+
 function updateLyricsPanel(song){
   const tEl=document.getElementById('lyrics-song-title');
   const aEl=document.getElementById('lyrics-song-artist');
   const meta=document.getElementById('lyrics-meta');
   const view=document.getElementById('lyrics-view');
   const inp=document.getElementById('lyrics-input');
-  if(!tEl||!aEl||!meta||!view||!inp) return;
+  const auto=document.getElementById('lyrics-autosave');
+  if(!tEl||!aEl||!meta||!view||!inp||!auto) return;
 
   tEl.innerText=song.title;
   aEl.innerText=song.artist;
   const key=getSongKey(song);
   const stored=localStorage.getItem('lyrics_'+key);
+  const savedAt=localStorage.getItem('lyrics_savedAt_'+key);
   if(stored){
     view.innerText=stored;
     inp.value=stored;
     meta.innerText="Bu şarkı için bu cihazda kayıtlı sözler var.";
+    if(savedAt){
+      auto.textContent="Son otomatik kayıt: "+new Date(savedAt).toLocaleString('tr-TR');
+    }else{
+      auto.textContent="Kayıt bulundu.";
+    }
   }else{
     view.innerText="Bu şarkı için henüz söz eklenmemiş. Bu cihazda ilk sözleri sen kaydedebilirsin.";
     inp.value="";
     meta.innerText="Henüz yerel kayıt yok.";
+    auto.textContent="Otomatik kayıt: beklemede";
   }
+  updateLyricsStats();
 }
-function saveLyrics(){
+
+function saveLyrics(auto){
   const s=songs[currIdx];
+  if(!s){showSysMsg("Önce listeden bir şarkı seçmelisin.");return;}
   const key=getSongKey(s);
   const inp=document.getElementById('lyrics-input');
   const view=document.getElementById('lyrics-view');
   const meta=document.getElementById('lyrics-meta');
-  if(!inp||!view||!meta) return;
+  const autoLbl=document.getElementById('lyrics-autosave');
+  if(!inp||!view||!meta||!autoLbl) return;
   const text=inp.value.trim();
-  if(!text) return showSysMsg("Boş söz kaydedemezsiniz.");
+  if(!text){
+    if(!auto) showSysMsg("Boş söz kaydedemezsiniz.");
+    return;
+  }
   try{
+    const now=new Date();
     localStorage.setItem('lyrics_'+key,text);
+    localStorage.setItem('lyrics_savedAt_'+key,now.toISOString());
     view.innerText=text;
     meta.innerText="Bu şarkının sözleri bu cihazda kaydedildi.";
-    showSysMsg("Şarkı sözleri başarıyla bu cihazda kaydedildi.");
+    autoLbl.textContent="Son kayıt: "+now.toLocaleString('tr-TR');
+    if(!auto) showSysMsg("Şarkı sözleri başarıyla bu cihazda kaydedildi.");
   }catch(e){
-    showSysMsg("Tarayıcı depolamasına yazarken hata oluştu.");
+    if(!auto) showSysMsg("Tarayıcı depolamasına yazarken hata oluştu.");
   }
 }
 
@@ -729,7 +803,7 @@ function playSong(idx){
   const ph=document.getElementById('track-placeholder');
   if(title) title.innerText=s.title;
   if(artist) artist.innerText=s.artist;
-  const imgSrc=(s.cover&&s.cover.trim()!=="")?s.cover:(s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover);
+  const imgSrc=(s.cover&&s.cover.trim()!="")?s.cover:(s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover);
   if(art&&ph){
     if(imgSrc){art.src=imgSrc;art.style.display='block';ph.style.display='none';}
     else{art.style.display='none';ph.style.display='grid';}
@@ -760,15 +834,6 @@ function startProgress(){
   },500);
 }
 function stopProgress(){clearInterval(progInt);}
-const progRail=document.getElementById('prog-rail');
-if(progRail){
-  progRail.onclick=e=>{
-    if(!player||!player.seekTo||!player.getDuration) return;
-    const r=e.currentTarget.getBoundingClientRect();
-    const p=(e.clientX-r.left)/r.width;
-    player.seekTo(player.getDuration()*p,true);
-  };
-}
 
 /* CHAT */
 function sendMsg(){
@@ -840,6 +905,7 @@ function gameLoop(){
     snake.pop();
   }
 }
+
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowUp'&&dy===0){dx=0;dy=-boxSize;}
   if(e.key==='ArrowDown'&&dy===0){dx=0;dy=boxSize;}
