@@ -740,6 +740,44 @@ document.addEventListener('keydown', e => {
   if(e.key === 'ArrowLeft' && dx===0) { dx=-box; dy=0; }
   if(e.key === 'ArrowRight' && dx===0) { dx=box; dy=0; }
 });
+
+/* --- TOUCH CONTROLS (DOKUNMATİK) --- */
+let touchStartX = 0;
+let touchStartY = 0;
+
+cvs.addEventListener('touchstart', function(e) {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  e.preventDefault(); // Oyun sırasında sayfanın kaymasını engeller
+}, {passive: false});
+
+cvs.addEventListener('touchmove', function(e) {
+  e.preventDefault(); // Sürekli kaydırma sırasında ekranın oynamasını engeller
+}, {passive: false});
+
+cvs.addEventListener('touchend', function(e) {
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+  handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+}, {passive: false});
+
+function handleSwipe(sx, sy, ex, ey) {
+  const diffX = ex - sx;
+  const diffY = ey - sy;
+  
+  // Çok küçük dokunuşları yoksay (Tıklama ile karışmaması için)
+  if(Math.abs(diffX) < 20 && Math.abs(diffY) < 20) return;
+
+  if(Math.abs(diffX) > Math.abs(diffY)) {
+    // Yatay Hareket
+    if(diffX > 0 && dx === 0) { dx = box; dy = 0; } // Sağ
+    else if(diffX < 0 && dx === 0) { dx = -box; dy = 0; } // Sol
+  } else {
+    // Dikey Hareket
+    if(diffY > 0 && dy === 0) { dx = 0; dy = box; } // Aşağı
+    else if(diffY < 0 && dy === 0) { dx = 0; dy = -box; } // Yukarı
+  }
+}
 </script>
 </body>
 </html>
