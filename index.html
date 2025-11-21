@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>MEMET ÇINAR | THE LEGACY VIP</title>
 
+<!-- FAVICON (Google / sekme simgesi) -->
+<link rel="icon" type="image/svg+xml" href="icon-memet-cinar-music.svg" />
+
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -49,15 +52,7 @@ body{
   border-bottom:1px solid rgba(255,215,0,0.18);box-shadow:0 10px 40px rgba(0,0,0,0.8);
 }
 .brand{display:flex;align-items:center;gap:12px;}
-.brand-logo{width:38px;height:38px;border-radius:12px;border:2px solid var(--gold);
-  display:grid;place-items:center;background:radial-gradient(circle at 30% 0%,#fff,#555);
-  box-shadow:0 0 18px rgba(255,215,0,0.6);}
-.brand .name{
-  font-family:'Cinzel',serif;font-weight:800;font-size:1.4rem;
-  background:linear-gradient(to right,#fff,var(--gold),var(--neon-blue));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;
-}
-.brand-sub{font-size:.7rem;color:var(--muted);text-transform:uppercase;}
+.brand-logo-full svg{height:60px;width:auto;display:block;}
 .top-status{font-size:.8rem;color:var(--neon-blue);display:flex;flex-direction:column;align-items:flex-end;}
 .top-status span:nth-child(2){font-size:.7rem;color:var(--muted);}
 
@@ -74,7 +69,6 @@ body{
 @media(max-width:768px){
   .nav-dock{bottom:0;left:0;right:0;height:76px;flex-direction:row;justify-content:space-around;border-top:1px solid var(--gold);border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom);}
   .viewport{position:fixed;top:70px;left:0;right:0;bottom:150px;overflow-y:auto;padding:15px;}
-  .brand .name{font-size:1.1rem;}
 }
 .nav-item{
   width:46px;height:46px;border-radius:16px;display:grid;place-items:center;font-size:1.25rem;
@@ -124,31 +118,185 @@ body{
 .w-detail{text-align:center;}
 .w-val{font-family:'Orbitron';color:var(--neon-blue);font-size:1.1rem;}
 .w-label{font-size:.75rem;color:#888;}
+#weather-box.realistic{background:radial-gradient(circle at 0 0,rgba(0,240,255,0.15),rgba(0,0,0,0.9));border-radius:16px;padding:6px 10px;}
 
 /* CALENDAR */
 .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;}
 .cal-head{font-size:.8rem;color:var(--muted);padding-bottom:8px;}
-.cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.03);cursor:pointer;position:relative;font-weight:bold;font-size:.95rem;transition:.2s;}
-.cal-cell:hover{background:rgba(255,215,0,0.12);border:1px solid var(--gold);transform:translateY(-2px) scale(1.03);}
+
+.cal-cell{
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:rgba(255,255,255,0.03);
+  cursor:pointer;
+  position:relative;
+  font-weight:bold;
+  font-size:.95rem;
+  transition:.2s;
+  overflow:hidden;
+}
+.cal-cell:hover{
+  background:rgba(255,215,0,0.12);
+  border:1px solid var(--gold);
+  transform:translateY(-2px) scale(1.03);
+}
 .cal-cell.empty{background:transparent;cursor:default;}
-.cal-cell.today{border:1px solid var(--neon-blue);box-shadow:0 0 10px rgba(0,240,255,0.4);}
-.cal-cell.snowy{color:#fff;}
-.cal-cell.snowy::after{content:'❄';position:absolute;top:-5px;right:-5px;font-size:10px;animation:snowFall 2s linear infinite;color:var(--neon-blue);}
-@keyframes snowFall{0%{transform:translateY(-5px) rotate(0);opacity:0;}50%{opacity:1;}100%{transform:translateY(15px) rotate(360);opacity:0;}}
-.cal-cell.flag{background:linear-gradient(135deg,rgba(227,10,23,0.25),rgba(0,0,0,0));border:1px solid #E30A17;}
-.cal-cell.flag::before{content:'🇹🇷';position:absolute;top:2px;right:2px;font-size:10px;animation:wave 2s ease-in-out infinite;}
-@keyframes wave{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
-.cal-cell.special{border-color:var(--gold);}
-.cal-cell.special::before{content:'★';position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--gold);animation:pulseStar 1.5s infinite;}
-@keyframes pulseStar{0%{transform:translateX(-50%) scale(1);opacity:.7;}50%{transform:translateX(-50%) scale(1.5);opacity:1;}100%{transform:translateX(-50%) scale(1);opacity:.7;}}
+.cal-cell.today{
+  border:1px solid var(--neon-blue);
+  box-shadow:0 0 10px rgba(0,240,255,0.4);
+}
+
+/* ❄ Genel karlı gün efekti */
+.cal-cell.snowy{
+  color:#fff;
+  background:radial-gradient(circle at 30% 0%,rgba(255,255,255,0.18),rgba(0,0,0,0.8));
+}
+.cal-cell.snowy::after{
+  content:'❄';
+  position:absolute;
+  font-size:10px;
+  top:-10px;
+  right:4px;
+  animation:snowDrift 3s linear infinite;
+  opacity:0.9;
+}
+@keyframes snowDrift{
+  0%{transform:translate(0,-5px) rotate(0deg);opacity:0;}
+  40%{opacity:1;}
+  100%{transform:translate(-8px,18px) rotate(360deg);opacity:0;}
+}
+
+/* 🇹🇷 Resmi milli bayramlar – bayrak + parıltı */
+.cal-cell.flag{
+  background:radial-gradient(circle at 10% 0%,rgba(227,10,23,0.4),rgba(0,0,0,0.85));
+  border:1px solid #E30A17;
+  box-shadow:0 0 12px rgba(227,10,23,0.6);
+  animation:flagPulse 2.2s ease-in-out infinite;
+}
+.cal-cell.flag::before{
+  content:'🇹🇷';
+  position:absolute;
+  top:4px;
+  right:4px;
+  font-size:11px;
+  animation:flagWave 2s ease-in-out infinite;
+}
+@keyframes flagWave{
+  0%,100%{transform:rotate(-4deg) translateX(0);}
+  50%{transform:rotate(5deg) translateX(1px);}
+}
+@keyframes flagPulse{
+  0%{box-shadow:0 0 6px rgba(227,10,23,0.6);}
+  50%{box-shadow:0 0 16px rgba(227,10,23,1);}
+  100%{box-shadow:0 0 6px rgba(227,10,23,0.6);}
+}
+
+/* 🎆 YILBAŞI (1 OCAK) – konfeti / havai fişek hissi */
+.cal-cell.newyear{
+  background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.4),rgba(0,0,0,0.9));
+  border:1px solid rgba(255,215,0,0.8);
+  color:#fff;
+  animation:newyearGlow 2.4s ease-in-out infinite;
+}
+.cal-cell.newyear::before,
+.cal-cell.newyear::after{
+  content:'';
+  position:absolute;
+  width:180%;
+  height:180%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.2);
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,0.35);
+  opacity:0;
+  pointer-events:none;
+}
+.cal-cell.newyear::before{
+  animation:fireworkRing 1.8s ease-out infinite;
+}
+.cal-cell.newyear::after{
+  animation:fireworkRing 1.8s ease-out infinite;
+  animation-delay:.9s;
+}
+.cal-cell.newyear span.confetti-dot{
+  position:absolute;
+  width:4px;
+  height:8px;
+  border-radius:999px;
+  background:var(--gold);
+  top:50%;
+  left:50%;
+  opacity:0;
+  transform:translate(-50%,-50%);
+  animation:confettiBurst 1.8s ease-out infinite;
+}
+.cal-cell.newyear span.c1{background:#FFD700;transform:translate(-50%,-50%) rotate(15deg);}
+.cal-cell.newyear span.c2{background:#00F0FF;transform:translate(-50%,-50%) rotate(75deg);animation-delay:.2s;}
+.cal-cell.newyear span.c3{background:#FF4D7A;transform:translate(-50%,-50%) rotate(135deg);animation-delay:.4s;}
+.cal-cell.newyear span.c4{background:#FFFFFF;transform:translate(-50%,-50%) rotate(210deg);animation-delay:.6s;}
+@keyframes fireworkRing{
+  0%{transform:translate(-50%,-50%) scale(0.2);opacity:0;}
+  35%{opacity:1;}
+  100%{transform:translate(-50%,-50%) scale(1);opacity:0;}
+}
+@keyframes confettiBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) translateY(0) scale(1);}
+  20%{opacity:1;}
+  100%{opacity:0;transform:translate(-50%,-50%) translateY(-26px) scale(1.1);}
+}
+@keyframes newyearGlow{
+  0%{box-shadow:0 0 10px rgba(255,215,0,0.5);}
+  50%{box-shadow:0 0 24px rgba(255,215,0,1);}
+  100%{box-shadow:0 0 10px rgba(255,215,0,0.5);}
+}
+
+/* ÖZEL GÜN (örn: 14 Şubat) */
+.cal-cell.special{
+  border-color:var(--gold);
+  background:radial-gradient(circle at 50% 0%,rgba(255,105,180,0.25),rgba(0,0,0,0.9));
+  animation:specialPulse 2s ease-in-out infinite;
+}
+.cal-cell.special::before{
+  content:'★';
+  position:absolute;
+  top:2px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  color:var(--gold);
+}
+.cal-cell.special::after{
+  content:'❤';
+  position:absolute;
+  bottom:2px;
+  right:4px;
+  font-size:10px;
+  color:#ff6fa5;
+  animation:heartFloat 2.4s ease-in-out infinite;
+}
+@keyframes specialPulse{
+  0%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-2px) scale(1.05);}
+  100%{transform:translateY(0) scale(1);}
+}
+@keyframes heartFloat{
+  0%{transform:translateY(0);opacity:.6;}
+  50%{transform:translateY(-3px);opacity:1;}
+  100%{transform:translateY(0);opacity:.6;}
+}
 
 /* SONGS & LYRICS */
 .songs-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;}
 @media(max-width:900px){.songs-layout{grid-template-columns:1fr;}}
 .section-title{font-family:'Orbitron';color:var(--gold);margin-bottom:18px;border-left:4px solid var(--gold);padding-left:15px;text-transform:uppercase;letter-spacing:1px;}
-.song-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;}
-.song-row{display:flex;align-items:center;gap:12px;padding:10px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid transparent;transition:.2s var(--smooth);cursor:pointer;position:relative;overflow:hidden;}
+.song-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
+.song-row{display:flex;flex-direction:column;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid transparent;transition:.2s var(--smooth);cursor:pointer;position:relative;overflow:hidden;}
+.song-row-main{display:flex;align-items:center;gap:12px;}
 .song-row::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 0 0,rgba(0,240,255,0.25),transparent 55%);opacity:0;transition:.25s;mix-blend-mode:screen;}
 .song-row:hover{border-color:var(--gold);background:rgba(255,215,0,0.06);transform:translateY(-2px);}
 .song-row:hover::after{opacity:1;}
@@ -156,13 +304,14 @@ body{
 .song-title{font-weight:700;font-size:.9rem;}
 .song-artist{font-size:.75rem;color:#aaa;}
 .song-tag{font-size:.7rem;padding:2px 6px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);color:var(--muted);}
+.song-inline-lyrics{font-size:.7rem;color:#aaa;background:rgba(0,0,0,0.4);border-radius:8px;padding:6px 8px;border:1px dashed rgba(255,255,255,0.08);}
+.song-inline-lyrics span.hint{color:var(--gold);}
 
-/* Lyrics panel */
 #lyrics-panel h3{font-family:'Orbitron';font-size:1rem;margin-bottom:4px;}
 #lyrics-song-title{font-weight:700;font-size:.9rem;margin-bottom:2px;}
 #lyrics-song-artist{font-size:.8rem;color:var(--muted);margin-bottom:6px;}
 #lyrics-meta{font-size:.7rem;color:#777;margin-bottom:4px;}
-#lyrics-tools{display:flex;justify-content:space-between;font-size:.75rem;margin:4px 0;color:#999;}
+#lyrics-tools{display:flex;justify-content:space-between;font-size:.75rem;margin:4px 0;color:#999;gap:10px;flex-wrap:wrap;}
 #lyrics-view{background:rgba(0,0,0,0.45);border-radius:10px;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;font-size:.85rem;line-height:1.5;white-space:pre-line;max-height:180px;overflow-y:auto;margin-bottom:8px;}
 #lyrics-editor{margin-top:4px;}
 #lyrics-input{width:100%;min-height:100px;max-height:220px;resize:vertical;background:#111;border:1px solid #444;color:#fff;border-radius:8px;padding:8px;font-size:.85rem;font-family:inherit;}
@@ -205,6 +354,70 @@ body{
 
 /* GAME */
 #game-canvas{background:#000;border:2px solid #333;max-width:100%;box-shadow:0 0 18px rgba(0,0,0,0.9);}
+.game-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;width:100%;}
+@media(max-width:900px){.game-grid{grid-template-columns:1fr;}}
+.game-library-card ul{list-style:none;padding-left:0;font-size:.82rem;color:#ccc;}
+.game-library-card li{margin-bottom:8px;}
+.game-badges span{display:inline-flex;align-items:center;gap:5px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);padding:3px 8px;font-size:.7rem;margin-right:6px;margin-top:4px;}
+.game-links a{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;margin-right:10px;margin-top:6px;text-decoration:none;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.16);}
+.game-links a:hover{background:rgba(255,255,255,0.08);} 
+
+/* ANIME KIZ – SAĞ ALTA SABİT */
+.anime-floating{
+  position:fixed;
+  right:20px;
+  bottom:110px;
+  width:150px;
+  z-index:1200;
+  cursor:pointer;
+}
+@media(max-width:768px){
+  .anime-floating{
+    right:10px;
+    bottom:150px;
+    width:120px;
+  }
+}
+.anime-floating-inner{
+  position:relative;
+}
+.anime-floating-img{
+  width:100%;
+  display:block;
+  border-radius:16px;
+  box-shadow:0 0 20px rgba(255,134,200,0.7);
+  border:1px solid rgba(255,255,255,0.18);
+}
+.anime-hearts-container{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.anime-heart{
+  position:absolute;
+  font-size:1.2rem;
+  color:#ff86c8;
+  animation:heartRise 1s ease-out forwards;
+  text-shadow:0 0 6px rgba(255,134,200,0.9);
+}
+@keyframes heartRise{
+  0%{transform:translate(-50%,0) scale(0.4);opacity:0;}
+  40%{opacity:1;}
+  100%{transform:translate(-50%,-50px) scale(1.1);opacity:0;}
+}
+.anime-float-speech{
+  margin-top:6px;
+  font-size:.75rem;
+  color:#f5f5f5;
+  background:rgba(0,0,0,0.75);
+  border-radius:999px;
+  padding:4px 10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.7);
+  border:1px solid rgba(255,255,255,0.12);
+  text-align:center;
+  font-family:'Orbitron',sans-serif;
+}
 </style>
 </head>
 <body>
@@ -223,13 +436,61 @@ body{
 
 <!-- TOP HEADER -->
 <header class="hud-top">
-  <div class="brand">
-    <div class="brand-logo"><i class="fas fa-crown" style="color:var(--gold); font-size:1.3rem;"></i></div>
-    <div>
-      <div class="name">MEMET ÇINAR</div>
-      <div class="brand-sub">THE LEGACY · VIP GAMER PANEL · PLATINIUM VERIFIED <i class="fa-solid fa-circle-check" style="color:#e5e4e2;"></i></div>
-    </div>
+  <div class="brand brand-logo-full">
+    <!-- MÜZİK TEMALI MEMET ÇINAR KAPAK LOGOSU (INLINE SVG) -->
+    <svg viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FFF6D0"/>
+          <stop offset="40%" stop-color="#FFD700"/>
+          <stop offset="100%" stop-color="#FF8C00"/>
+        </linearGradient>
+        <linearGradient id="neonBlueGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00F0FF"/>
+          <stop offset="100%" stop-color="#4DF5FF"/>
+        </linearGradient>
+        <linearGradient id="neonPinkGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FF4D7A"/>
+          <stop offset="100%" stop-color="#FF9BC4"/>
+        </linearGradient>
+        <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0  0 0 0 0 0.75  0 0 0 0 1  0 0 0 0.75 0"/>
+        </filter>
+        <filter id="noiseLogo" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="1" stitchTiles="noStitch"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.16 0"/>
+          <feBlend in="SourceGraphic" mode="overlay"/>
+        </filter>
+      </defs>
+      <g filter="url(#softGlow)">
+        <rect x="12" y="20" width="616" height="140" rx="32" ry="32" fill="#05060C" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+      </g>
+      <g transform="translate(38,40)">
+        <circle cx="48" cy="50" r="44" fill="#050711" stroke="url(#neonBlueGrad)" stroke-width="3"/>
+        <circle cx="48" cy="50" r="34" fill="rgba(5,8,18,0.95)" stroke="url(#goldGrad)" stroke-width="2"/>
+        <path d="M30 30 L36 22 L48 30 L60 22 L66 30 L63 40 H33 Z" fill="url(#goldGrad)"/>
+        <circle cx="36" cy="22" r="2" fill="#FFF9E5"/>
+        <circle cx="48" cy="20" r="2.4" fill="#FFFFFF"/>
+        <circle cx="60" cy="22" r="2" fill="#FFF9E5"/>
+        <path d="M38 40 L38 60" stroke="url(#neonBlueGrad)" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="34" cy="60" rx="6" ry="4.5" fill="url(#neonBlueGrad)"/>
+        <path d="M52 38 L52 56" stroke="url(#neonPinkGrad)" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="48" cy="56" rx="5.5" ry="4" fill="url(#neonPinkGrad)"/>
+        <rect x="32" y="66" width="4" height="8" fill="#00F0FF"/>
+        <rect x="40" y="64" width="4" height="10" fill="#FFD700"/>
+        <rect x="48" y="62" width="4" height="12" fill="#00F0FF"/>
+        <rect x="56" y="64" width="4" height="10" fill="#FF4D7A"/>
+        <rect x="64" y="66" width="4" height="8" fill="#00F0FF"/>
+      </g>
+      <g transform="translate(150,54)" filter="url(#noiseLogo)">
+        <text x="0" y="0" font-family="Cinzel, 'Times New Roman', serif" font-size="38" font-weight="900" letter-spacing="6" fill="url(#goldGrad)">MEMET ÇINAR</text>
+        <path d="M2 10 C 40 22, 80 0, 140 14 S 230 26, 280 8" fill="none" stroke="url(#neonBlueGrad)" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+        <text x="3" y="40" font-family="Orbitron, system-ui, sans-serif" font-size="13" font-weight="600" letter-spacing="3" fill="#AEB8FF">MUSIC · ARTIST · OFFICIAL</text>
+      </g>
+    </svg>
   </div>
+
   <div class="top-status">
     <span id="device-label"><i class="fas fa-user"></i> Misafir Modu · Oturum Yok</span>
     <span>Şarkı sözleri bu cihazda saklanır</span>
@@ -306,7 +567,7 @@ body{
         <div class="song-list" id="song-container"></div>
       </div>
       <div class="widget-card" id="lyrics-panel">
-        <h3>ŞARKI SÖZLERİ</h3>
+        <h3>ŞARKI SÖZLERİ (YEREL EDİTÖR)</h3>
         <div id="lyrics-song-title">Henüz şarkı seçilmedi</div>
         <div id="lyrics-song-artist" class="song-artist">Listeden bir şarkı seç.</div>
         <div id="lyrics-meta">Durum: Şarkı seçilmedi.</div>
@@ -314,7 +575,7 @@ body{
           <span id="lyrics-autosave">Otomatik kayıt: beklemede</span>
           <span id="lyrics-stats">0 karakter · 0 satır</span>
         </div>
-        <div id="lyrics-view">Burada seçilen şarkının sözleri görünecek. Yazdığın sözler yalnızca bu cihazda saklanır.</div>
+        <div id="lyrics-view">Burada seçilen şarkının sözleri görünecek. Resmî şarkı sözleri telif nedeniyle otomatik eklenmiyor; kendi yorumunu ve söz taslağını buraya kaydedebilirsin.</div>
         <div id="lyrics-editor">
           <textarea id="lyrics-input" placeholder="Şarkı sözlerini buraya yaz... (Bu cihazda kaydedilir)"></textarea>
           <button id="lyrics-save-btn" type="button" onclick="saveLyrics(false)">Sözleri Kaydet</button>
@@ -327,7 +588,6 @@ body{
   <!-- ARTISTS + HAKKIMDA -->
   <section id="artists" class="screen">
     <div class="grid-2">
-      <!-- MEMET ÇINAR -->
       <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
         <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--gold);" alt="Memet Çınar">
         <div>
@@ -336,7 +596,7 @@ body{
             <i class="fa-solid fa-circle-check" style="color:#1DA1F2;" title="Mavi Tik - Resmi Sanatçı"></i>
           </h3>
           <p style="font-size:0.85rem; color:#aaa">Solist · Besteci · Söz Yazarı</p>
-          <div style="margin-top:6px; display:flex; gap:6px; font-size:.7rem;">
+          <div style="margin-top:6px; display:flex; gap:6px; font-size:.7rem; flex-wrap:wrap;">
             <span style="background:#1DA1F2; color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">MAVİ TİK</span>
             <span style="background:linear-gradient(90deg,#ffd700,#ff8c00); color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">ALTIN SEVİYE</span>
             <span style="background:linear-gradient(90deg,#e5e4e2,#ffffff); color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">PLATİNYUM VIP</span>
@@ -344,7 +604,6 @@ body{
         </div>
       </div>
 
-      <!-- BİLAL GÜVERCİN -->
       <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
         <img src="https://ui-avatars.com/api/?name=Bilal+Güvercin&background=111827&color=ffffff&size=256" style="width:80px; height:80px; border-radius:50%; border:2px solid #fff;" alt="Bilal Güvercin">
         <div>
@@ -355,21 +614,14 @@ body{
           <p style="font-size:0.85rem; color:#aaa">Söz Yazarı</p>
           <span style="font-size:0.7rem; background:#555; color:#fff; padding:2px 6px; border-radius:4px;">ONAYLI</span>
           <div style="margin-top:8px; font-size:1.1rem;">
-            <a href="https://www.instagram.com/bilalguvercin_official/" target="_blank" rel="noopener" style="margin-right:8px; color:#C13584;">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/channel/UCGxmNCKcU2wbYCK3xvKGVxg" target="_blank" rel="noopener" style="margin-right:8px; color:#FF0000;">
-              <i class="fab fa-youtube"></i>
-            </a>
-            <span title="Henüz eklenmedi" style="margin-right:8px; color:#555; cursor:not-allowed;">
-              <i class="fab fa-spotify"></i>
-            </span>
+            <a href="https://www.instagram.com/bilalguvercin_official/" target="_blank" rel="noopener" style="margin-right:8px; color:#C13584;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCGxmNCKcU2wbYCK3xvKGVxg" target="_blank" rel="noopener" style="margin-right:8px; color:#FF0000;"><i class="fab fa-youtube"></i></a>
+            <span title="Henüz eklenmedi" style="margin-right:8px; color:#555; cursor:not-allowed;"><i class="fab fa-spotify"></i></span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- HAKKIMDA – GAMER PROFİL KARTI -->
     <div class="widget-card" style="margin-top:20px;">
       <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;">
         <i class="fas fa-user-astronaut"></i> HAKKIMDA · MEMET ÇINAR
@@ -426,12 +678,59 @@ body{
 
   <!-- GAME -->
   <section id="game" class="screen">
-    <div class="widget-card center-flex">
-      <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px">NOTA AVCISI</h3>
-      <div style="margin-bottom:10px">Skor: <span id="score" style="color:var(--neon-blue)">0</span></div>
-      <canvas id="game-canvas" width="300" height="300"></canvas>
-      <button onclick="startGame()" style="margin-top:15px; padding:10px 30px; background:var(--neon-blue); border:none; border-radius:20px; font-weight:bold; cursor:pointer;">BAŞLAT</button>
-      <p style="font-size:0.8rem; color:#666; margin-top:10px;">Yön tuşları veya dokunarak yönlendir.</p>
+    <div class="game-grid">
+      <div class="widget-card center-flex" style="flex-direction:column;">
+        <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px">NOTA AVCISI</h3>
+        <div style="margin-bottom:10px">Skor: <span id="score" style="color:var(--neon-blue)">0</span></div>
+        <canvas id="game-canvas" width="300" height="300"></canvas>
+        <button onclick="startGame()" style="margin-top:15px; padding:10px 30px; background:var(--neon-blue); border:none; border-radius:20px; font-weight:bold; cursor:pointer;">BAŞLAT</button>
+        <p style="font-size:0.8rem; color:#666; margin-top:10px;">Yön tuşları veya dokunarak yönlendir.</p>
+      </div>
+      <div class="widget-card game-library-card">
+        <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:8px;"><i class="fas fa-gamepad"></i> RETRO OYUN KÜTÜPHANESİ</h3>
+        <p style="font-size:.8rem; color:#aaa; margin-bottom:8px;">Tetris ve Atari tarzı basit oyunlar için hazır bağlantılar ve indirilebilir dosya slotları. Kendi .apk ve .exe dosyalarını ürettiğinde buradaki linkleri değiştirebilirsin.</p>
+        <ul>
+          <li>
+            <strong>Retro Tetris</strong>
+            <div class="game-badges">
+              <span><i class="fas fa-globe"></i> Tarayıcı</span>
+              <span><i class="fab fa-android"></i> Android APK</span>
+              <span><i class="fab fa-windows"></i> Windows EXE</span>
+            </div>
+            <div class="game-links">
+              <a href="https://tetris.com/play-tetris" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
+              <a href="#" title="Kendi Tetris APK dosyanı buraya bağlayabilirsin."><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#" title="Kendi Tetris EXE dosyanı buraya bağlayabilirsin."><i class="fab fa-windows"></i> EXE İndir</a>
+            </div>
+          </li>
+          <li>
+            <strong>Space Shooter (Atari Hissi)</strong>
+            <div class="game-badges">
+              <span><i class="fas fa-globe"></i> Tarayıcı</span>
+              <span><i class="fab fa-android"></i> Android APK</span>
+              <span><i class="fab fa-windows"></i> Windows EXE</span>
+            </div>
+            <div class="game-links">
+              <a href="https://www.free80sarcade.com/spaceinvaders.php" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
+              <a href="#" title="Kendi space shooter APK dosyanı buraya bağlayabilirsin."><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#" title="Kendi space shooter EXE dosyanı buraya bağlayabilirsin."><i class="fab fa-windows"></i> EXE İndir</a>
+            </div>
+          </li>
+          <li>
+            <strong>Classic Pong</strong>
+            <div class="game-badges">
+              <span><i class="fas fa-globe"></i> Tarayıcı</span>
+              <span><i class="fab fa-android"></i> Android APK</span>
+              <span><i class="fab fa-windows"></i> Windows EXE</span>
+            </div>
+            <div class="game-links">
+              <a href="https://ponggame.org/" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
+              <a href="#" title="Kendi pong APK dosyanı buraya bağlayabilirsin."><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#" title="Kendi pong EXE dosyanı buraya bağlayabilirsin."><i class="fab fa-windows"></i> EXE İndir</a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -441,7 +740,7 @@ body{
       <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:120px; height:120px; border-radius:50%; border:4px solid var(--gold); margin-bottom:20px;" alt="Memet Çınar">
       <h2 style="font-family:'Cinzel'; color:var(--gold)">MEMET ÇINAR</h2>
       <p style="color:#aaa; margin-bottom:18px">Resmi iletişim kanalları (linkleri gerçek profillerinle güncelleyebilirsin).</p>
-      <div style="display:flex; gap:20px; font-size:2rem;">
+      <div style="display:flex; gap:20px; font-size:2rem; flex-wrap:wrap; justify-content:center;">
         <a href="#" style="color:#C13584"><i class="fab fa-instagram"></i></a>
         <a href="#" style="color:#FF0000"><i class="fab fa-youtube"></i></a>
         <a href="#" style="color:#1DB954"><i class="fab fa-spotify"></i></a>
@@ -450,6 +749,15 @@ body{
     </div>
   </section>
 </main>
+
+<!-- ANIME KIZ – SAĞ ALTTA SABİT GIF -->
+<div class="anime-floating" id="anime-companion">
+  <div class="anime-floating-inner">
+    <div class="anime-hearts-container" id="anime-hearts"></div>
+    <img src="https://media.tenor.com/AlApU9C3uXgAAAAj/anime.gif" alt="Anime Companion" class="anime-floating-img">
+  </div>
+  <div class="anime-float-speech" id="anime-quote">"Bugün hangi şarkıyla level atlıyoruz?"</div>
+</div>
 
 <!-- PLAYER -->
 <footer class="player-bar">
@@ -487,11 +795,9 @@ function loadYouTubeAPI(){
 </script>
 
 <script>
-/* ======= GLOBAL STATE ======= */
 let currIdx=0,player=null,isPlaying=false,progInt,calDate=new Date();
 let lyricsTimer=null;
 
-/* ======= VIEWPORT & DEVICE ======= */
 function updateVh(){
   const vh=window.innerHeight*0.01;
   document.documentElement.style.setProperty('--vh',vh+'px');
@@ -506,7 +812,6 @@ function detectDevice(){
   if(el){el.innerHTML=`<i class="fa-solid fa-${icon}"></i> Cihaz: ${type}`;}
 }
 
-/* ======= HOVER SES EFEKTİ (GAMER) ======= */
 let audioCtx=null;
 function ensureAudioCtx(){ if(!audioCtx){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) audioCtx=new AC(); } }
 function playHoverSfx(){
@@ -518,75 +823,42 @@ function playHoverSfx(){
   osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime+0.15);
 }
 
-/* COVER DEFAULT */
 const defaultArtistCover="https://ui-avatars.com/api/?name=Memet+Çınar&background=000000&color=ffffff&size=256";
 
-/* SONG DATA – GENİŞLEMİŞ */
-const songs=[
-  {title:"SONSUZ IŞIK (10 KASIM 193∞)",artist:"Memet Çınar",id:"P3ulDeTz7pA",cover:"https://img.youtube.com/vi/P3ulDeTz7pA/hqdefault.jpg"},
-  {title:"ELKAY ve HAKDAM",artist:"Memet Çınar",id:"J-j5SGM3lVI",cover:"https://img.youtube.com/vi/J-j5SGM3lVI/hqdefault.jpg"},
-  {title:"Son Kez",artist:"Memet Çınar",id:"B57csIfqcIY",cover:"https://img.youtube.com/vi/B57csIfqcIY/hqdefault.jpg"},
-  {title:"Son Defa Hatırla",artist:"Memet Çınar",id:"wBV38vYfMwE",cover:"https://img.youtube.com/vi/wBV38vYfMwE/hqdefault.jpg"},
-  {title:"Affet Beni",artist:"Memet Çınar",id:"bayw-a4NIiE",cover:"https://img.youtube.com/vi/bayw-a4NIiE/hqdefault.jpg"},
-  {title:"Bahar Yangını",artist:"Memet Çınar",id:"ifL7SIs03qo",cover:"https://img.youtube.com/vi/ifL7SIs03qo/hqdefault.jpg"},
-  {title:"Başka Birisi",artist:"Memet Çınar",id:"M90Fr_a7bOw",cover:"https://img.youtube.com/vi/M90Fr_a7bOw/hqdefault.jpg"},
-  {title:"BU BİR RÜYA",artist:"Bilal Güvercin",id:"JlmddA0lefw",cover:"https://img.youtube.com/vi/JlmddA0lefw/hqdefault.jpg"},
-  {title:"YILDIZLAR",artist:"Memet Çınar",id:"AMDerpIe9QE",cover:"https://img.youtube.com/vi/AMDerpIe9QE/hqdefault.jpg"},
-  {title:"BÖYLE İŞTE ELKAY",artist:"Memet Çınar",id:"EkAtzXOP0p0",cover:"https://img.youtube.com/vi/EkAtzXOP0p0/hqdefault.jpg"},
-  {title:"LEYA",artist:"Memet Çınar",id:"8La-12lYhao",cover:"https://img.youtube.com/vi/8La-12lYhao/hqdefault.jpg"},
-  {title:"ELKAY 2",artist:"Memet Çınar",id:"-Wrg7mJ__Ek",cover:"https://img.youtube.com/vi/-Wrg7mJ__Ek/hqdefault.jpg"},
-  {title:"ELKAY GİBİ",artist:"Memet Çınar",id:"0QWuDJhDsHQ",cover:"https://img.youtube.com/vi/0QWuDJhDsHQ/hqdefault.jpg"},
-  {title:"KORUYUCU AİLE",artist:"Memet Çınar",id:"2ti6IK3Aix0",cover:"https://img.youtube.com/vi/2ti6IK3Aix0/hqdefault.jpg"},
-  {title:"EĞİLMEZ",artist:"Memet Çınar",id:"441IylCM7B4",cover:"https://img.youtube.com/vi/441IylCM7B4/hqdefault.jpg"},
-  {title:"GECEYE YAZDIM",artist:"Memet Çınar",id:"WsR79WlMqNI",cover:"https://img.youtube.com/vi/WsR79WlMqNI/hqdefault.jpg"},
-  {title:"VAZGEÇMEZ BU KALP",artist:"Memet Çınar",id:"0xgUyoGm4hY",cover:"https://img.youtube.com/vi/0xgUyoGm4hY/hqdefault.jpg"},
-  {title:"VUR BENİ KALBİMDEN",artist:"Memet Çınar",id:"gMGz2e9uMcA",cover:"https://img.youtube.com/vi/gMGz2e9uMcA/hqdefault.jpg"},
-  {title:"DÜNYAMIN GÜNEŞİ",artist:"Memet Çınar",id:"fvt8tI8n_cY",cover:"https://img.youtube.com/vi/fvt8tI8n_cY/hqdefault.jpg"},
-  {title:"YOLUMU KAYBETTİM",artist:"Memet Çınar",id:"Rs6g6yaacXo",cover:"https://img.youtube.com/vi/Rs6g6yaacXo/hqdefault.jpg"},
-  {title:"BİLE BİLE",artist:"Memet Çınar",id:"qED3CgFJ1Fc",cover:"https://img.youtube.com/vi/qED3CgFJ1Fc/hqdefault.jpg"},
-  {title:"BİTTİ HİKAYEM",artist:"Memet Çınar",id:"KMcinbhM7Bw",cover:"https://img.youtube.com/vi/KMcinbhM7Bw/hqdefault.jpg"},
-  {title:"SEN GİTTİN YA",artist:"Memet Çınar",id:"BWdb0W2ARmA",cover:"https://img.youtube.com/vi/BWdb0W2ARmA/hqdefault.jpg"},
-  {title:"SONSUZA DEK SENİ BEKLEDİM",artist:"Memet Çınar",id:"ZIGiuOGCmA4",cover:"https://img.youtube.com/vi/ZIGiuOGCmA4/hqdefault.jpg"},
-  {title:"ÖZÜR DİLERİM",artist:"Memet Çınar",id:"mSnp-mPxGus",cover:"https://img.youtube.com/vi/mSnp-mPxGus/hqdefault.jpg"},
-  {title:"GEL DE BİTSİN BU HASRET",artist:"Memet Çınar",id:"DDEhRqKm1bE",cover:"https://img.youtube.com/vi/DDEhRqKm1bE/hqdefault.jpg"},
-  {title:"BİR DUBLE DAHA",artist:"Memet Çınar",id:"8E0G3myGiFk",cover:"https://img.youtube.com/vi/8E0G3myGiFk/hqdefault.jpg"},
-  {title:"KIRMIZI YAZMA",artist:"Memet Çınar",id:"NzVEoSWhgl0",cover:"https://img.youtube.com/vi/NzVEoSWhgl0/hqdefault.jpg"},
-  {title:"AYREN",artist:"Memet Çınar",id:"pbS4NlHpzxw",cover:"https://img.youtube.com/vi/pbS4NlHpzxw/hqdefault.jpg"},
-  {title:"GÖZLERİ",artist:"Memet Çınar",id:"36ykG4zUtL0",cover:"https://img.youtube.com/vi/36ykG4zUtL0/hqdefault.jpg"},
-  {title:"KİBİR",artist:"Memet Çınar",id:"CNdZW-4h2FY",cover:"https://img.youtube.com/vi/CNdZW-4h2FY/hqdefault.jpg"},
-  {title:"AŞKIN KÜLLERİ",artist:"Memet Çınar",id:"F3MAB4cgmEI",cover:"https://img.youtube.com/vi/F3MAB4cgmEI/hqdefault.jpg"}
+const songs = [
+  { title: "SONSUZ IŞIK (10 KASIM 193∞)", artist: "Memet Çınar", id: "P3ulDeTz7pA" },
+  { title: "ELKAY ve HAKDAM",             artist: "Memet Çınar", id: "J-j5SGM3lVI" },
+  { title: "GECEYE YAZDIM",               artist: "Memet Çınar", id: "WsR79WlMqNI" },
+  { title: "YILDIZLAR",                   artist: "Memet Çınar", id: "AMDerpIe9QE" },
+  { title: "KİBİR",                       artist: "Memet Çınar", id: "CNdZW-4h2FY" },
+  { title: "BÖYLE İŞTE ELKAY",            artist: "Memet Çınar", id: "EkAtzXOP0p0" },
+  { title: "LEYA",                        artist: "Memet Çınar", id: "8La-12lYhao" },
+  { title: "ELKAY 2",                     artist: "Memet Çınar", id: "-Wrg7mJ__Ek" },
+  { title: "ELKAY GİBİ",                  artist: "Memet Çınar", id: "0QWuDJhDsHQ" },
+  { title: "KORUYUCU AİLE",               artist: "Memet Çınar", id: "2ti6IK3Aix0" },
+  { title: "EĞİLMEZ",                     artist: "Memet Çınar", id: "QTYO4ZE4GvI" },
+  { title: "SEN GİTTİN YA",               artist: "Memet Çınar", id: "BWdb0W2ARmA" },
+  { title: "TATTIM ÖLÜMÜ",                artist: "Memet Çınar", id: "GychhkAbwH4" },
+  { title: "İREMİN ŞARKISI",              artist: "Memet Çınar", id: "CcCs4_OZNOo" },
+  { title: "BU BİR RÜYA",                 artist: "Bilal Güvercin", id: "JlmddA0lefw" },
+
+  // DEVAMI – önceki listeden eksik olan tüm parçalar:
+  { title: "VAZGEÇMEZ BU KALP",           artist: "Memet Çınar", id: "0xgUyoGm4hY" },
+  { title: "VUR BENİ KALBİMDEN",          artist: "Memet Çınar", id: "gMGz2e9uMcA" },
+  { title: "DÜNYAMIN GÜNEŞİ",             artist: "Memet Çınar", id: "fvt8tI8n_cY" },
+  { title: "YOLUMU KAYBETTİM",            artist: "Memet Çınar", id: "Rs6g6yaacXo" },
+  { title: "BİLE BİLE",                   artist: "Memet Çınar", id: "qED3CgFJ1Fc" },
+  { title: "BİTTİ HİKAYEM",               artist: "Memet Çınar", id: "KMcinbhM7Bw" },
+  { title: "SONSUZA DEK SENİ BEKLEDİM",   artist: "Memet Çınar", id: "ZIGiuOGCmA4" },
+  { title: "ÖZÜR DİLERİM",                artist: "Memet Çınar", id: "mSnp-mPxGus" },
+  { title: "GEL DE BİTSİN BU HASRET",     artist: "Memet Çınar", id: "DDEhRqKm1bE" },
+  { title: "BİR DUBLE DAHA",              artist: "Memet Çınar", id: "8E0G3myGiFk" },
+  { title: "KIRMIZI YAZMA",               artist: "Memet Çınar", id: "NzVEoSWhgl0" },
+  { title: "AYREN",                       artist: "Memet Çınar", id: "pbS4NlHpzxw" },
+  { title: "GÖZLERİ",                     artist: "Memet Çınar", id: "36ykG4zUtL0" },
+  { title: "AŞKIN KÜLLERİ",               artist: "Memet Çınar", id: "F3MAB4cgmEI" }
 ];
 
-/* INIT */
-window.onload=()=>{
-  updateVh();
-  detectDevice();
-  window.addEventListener('resize',()=>{updateVh();detectDevice();});
-  window.addEventListener('orientationchange',()=>{updateVh();detectDevice();});
-
-  initClock();
-  initCalendar();
-  initWeather();
-  renderSongs();
-  loadYouTubeAPI();
-
-  document
-    .querySelectorAll('.nav-item, .widget-card')
-    .forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
-
-  const progRail=document.getElementById('prog-rail');
-  if(progRail){
-    progRail.onclick=e=>{
-      if(!player||!player.seekTo||!player.getDuration) return;
-      const r=e.currentTarget.getBoundingClientRect();
-      const p=(e.clientX-r.left)/r.width;
-      player.seekTo(player.getDuration()*p,true);
-    };
-  }
-
-  const li=document.getElementById('lyrics-input');
-  if(li){li.addEventListener('input',handleLyricsInput);}
-};
 
 function showSysMsg(txt){
   document.getElementById('sys-msg').innerText=txt;
@@ -596,7 +868,6 @@ function getSongKey(song){
   return song.id ? song.id : ('title_'+song.title.toLowerCase().replace(/[^a-z0-9ığüşöç]/gi,'_'));
 }
 
-/* NAV */
 function switchTab(id,el){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const screen=document.getElementById(id);
@@ -605,7 +876,6 @@ function switchTab(id,el){
   el.classList.add('active');
 }
 
-/* CLOCK */
 function initClock(){
   const t=()=>{
     const d=new Date();
@@ -618,10 +888,16 @@ function initClock(){
   setInterval(t,1000); t();
 }
 
-/* CALENDAR */
 const specialDays={
-  "1-1":"snowy","23-4":"flag","19-5":"flag","15-7":"flag","30-8":"flag","29-10":"flag","14-2":"special"
+  "1-1":"newyear",
+  "14-2":"special",
+  "23-4":"flag",
+  "19-5":"flag",
+  "15-7":"flag",
+  "30-8":"flag",
+  "29-10":"flag"
 };
+
 function changeMonth(dir){calDate.setMonth(calDate.getMonth()+dir);initCalendar();}
 function initCalendar(){
   const y=calDate.getFullYear(),m=calDate.getMonth();
@@ -641,11 +917,14 @@ function initCalendar(){
     let cls="cal-cell";
     if(d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear())cls+=" today";
     if(specialDays[key])cls+=" "+specialDays[key];
-    body.innerHTML+=`<div class="${cls}">${d}</div>`;
+    let inner=d;
+    if(specialDays[key]==='newyear'){
+      inner=`${d}<span class="confetti-dot c1"></span><span class="confetti-dot c2"></span><span class="confetti-dot c3"></span><span class="confetti-dot c4"></span>`;
+    }
+    body.innerHTML+=`<div class="${cls}">${inner}</div>`;
   }
 }
 
-/* WEATHER */
 async function initWeather(){
   const lat=38.35,lon=38.31;
   try{
@@ -658,55 +937,72 @@ async function initWeather(){
       const hEl=document.getElementById('w-hum');
       const iEl=document.getElementById('w-icon');
       const dEl=document.getElementById('w-desc');
-      if(!tEl||!wEl||!hEl||!iEl||!dEl) return;
+      const box=document.getElementById('weather-box');
+      if(!tEl||!wEl||!hEl||!iEl||!dEl||!box) return;
 
+      box.classList.add('realistic');
       tEl.innerText=Math.round(w.temperature)+"°";
       wEl.innerText=w.windspeed;
-      hEl.innerText=(data.hourly?.relativehumidity_2m?.[new Date().getHours()])??"40";
+      const hour=new Date().getHours();
+      hEl.innerText=(data.hourly&&data.hourly.relativehumidity_2m&&data.hourly.relativehumidity_2m[hour])??"--";
 
       const code=w.weathercode;
-      let icon="fa-sun",color="orange";
-      if(code>3){icon="fa-cloud-sun";color="#ddd";}
-      if(code>40){icon="fa-cloud-rain";color="#00F0FF";}
-      if(code>70){icon="fa-snowflake";color="#fff";}
+      let icon="fa-sun",color="orange",desc="Açık";
+      if(code===0){icon="fa-sun";color="#ffd760";desc="Açık";}
+      else if(code===1||code===2){icon="fa-cloud-sun";color="#fffae0";desc="Parçalı bulutlu";}
+      else if(code===3){icon="fa-cloud";color="#d0d7e2";desc="Kapalı";}
+      else if(code>=45&&code<=48){icon="fa-smog";color="#9ba3b0";desc="Sisli";}
+      else if(code>=51&&code<=67){icon="fa-cloud-rain";color="#00F0FF";desc="Yağmurlu";}
+      else if(code>=71&&code<=77){icon="fa-snowflake";color="#ffffff";desc="Karlı";}
+      else if(code>=80&&code<=82){icon="fa-cloud-showers-heavy";color="#6be0ff";desc="Sağanak";}
+      else if(code>=95){icon="fa-bolt";color="#ffd760";desc="Gök gürültülü";}
       iEl.className=`fas ${icon} weather-icon-lg`;
       iEl.style.color=color;
-
-      const map={0:"Açık",1:"Az Bulutlu",2:"Parçalı Bulutlu",3:"Kapalı",61:"Yağmurlu",71:"Karlı"};
-      dEl.innerText=map[code]||"Anlık hava bilgisi";
+      dEl.innerText=desc+" · Gerçek zamanlı veri";
     }
   }catch(e){
-    console.log("Weather error",e);
+    console.log('Weather error',e);
     const dEl=document.getElementById('w-desc');
     if(dEl) dEl.innerText="Veri alınamadı";
   }
 }
 
-/* SONG LIST & PLAYER */
 function renderSongs(){
   const c=document.getElementById('song-container'); if(!c) return;
   c.innerHTML='';
   songs.forEach((s,i)=>{
-    const imgSrc=(s.cover&&s.cover.trim()!="")?s.cover:(s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover);
-    const row=document.createElement('div'); row.className='song-row';
-    row.innerHTML=`<img src="${imgSrc}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;" alt="${s.title}">
-      <div><div class="song-title">${s.title}</div><div class="song-artist">${s.artist}</div></div>
-      <div class="song-tag">${s.id?"YT":"ID YOK"}</div>`;
+    const imgSrc=s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover;
+    const key=getSongKey(s);
+    const row=document.createElement('div');
+    row.className='song-row';
+    row.innerHTML=
+      `<div class="song-row-main">
+         <img src="${imgSrc}" style="width:44px;height:44px;border-radius:6px;object-fit:cover;" alt="${s.title}">
+         <div style="flex:1;">
+           <div class="song-title">${s.title}</div>
+           <div class="song-artist">${s.artist}</div>
+         </div>
+         <div class="song-tag">YT</div>
+       </div>
+       <div class="song-inline-lyrics" data-song-key="${key}"><span class="hint">Söz durumu:</span> Henüz yerel kayıt yok.</div>`;
     row.onclick=()=>playSong(i);
     row.addEventListener('mouseenter',()=>playHoverSfx());
     c.appendChild(row);
   });
+  refreshInlineLyricsBadges();
 }
+
 function onYouTubeIframeAPIReady(){
-  if(typeof YT==="undefined"||!document.getElementById('yt-player')) return;
+  if(typeof YT==='undefined'||!document.getElementById('yt-player')) return;
   player=new YT.Player('yt-player',{
     height:'0',width:'0',videoId:songs[0].id,
     events:{'onStateChange':onPlayerStateChange}
   });
 }
+
 function onPlayerStateChange(e){
-  if(!e||typeof YT==="undefined") return;
-  if(e.data==YT.PlayerState.PLAYING){
+  if(!e||typeof YT==='undefined') return;
+  if(e.data===YT.PlayerState.PLAYING){
     isPlaying=true;
     const btn=document.getElementById('play-pause-btn');
     if(btn) btn.innerHTML='<i class="fas fa-pause"></i>';
@@ -719,79 +1015,91 @@ function onPlayerStateChange(e){
   }
 }
 
-/* LYRICS (LOCALSTORAGE, GELİŞMİŞ) */
-function updateLyricsStats(){
-  const inp=document.getElementById('lyrics-input');
-  const stats=document.getElementById('lyrics-stats');
-  if(!inp||!stats) return;
-  const text=inp.value||"";
-  const lines=text.split(/\n/).length;
-  const chars=text.length;
-  stats.textContent=`${chars} karakter · ${lines} satır`;
-}
-function handleLyricsInput(){
-  updateLyricsStats();
-  clearTimeout(lyricsTimer);
-  lyricsTimer=setTimeout(()=>saveLyrics(true),1000);
-}
-
 function updateLyricsPanel(song){
   const tEl=document.getElementById('lyrics-song-title');
   const aEl=document.getElementById('lyrics-song-artist');
   const meta=document.getElementById('lyrics-meta');
   const view=document.getElementById('lyrics-view');
   const inp=document.getElementById('lyrics-input');
-  const auto=document.getElementById('lyrics-autosave');
-  if(!tEl||!aEl||!meta||!view||!inp||!auto) return;
-
+  if(!tEl||!aEl||!meta||!view||!inp) return;
   tEl.innerText=song.title;
   aEl.innerText=song.artist;
   const key=getSongKey(song);
   const stored=localStorage.getItem('lyrics_'+key);
-  const savedAt=localStorage.getItem('lyrics_savedAt_'+key);
   if(stored){
     view.innerText=stored;
     inp.value=stored;
     meta.innerText="Bu şarkı için bu cihazda kayıtlı sözler var.";
-    if(savedAt){
-      auto.textContent="Son otomatik kayıt: "+new Date(savedAt).toLocaleString('tr-TR');
-    }else{
-      auto.textContent="Kayıt bulundu.";
-    }
   }else{
-    view.innerText="Bu şarkı için henüz söz eklenmemiş. Bu cihazda ilk sözleri sen kaydedebilirsin.";
+    const msg="Bu şarkı için henüz yerel söz eklenmemiş. Resmî sözler telif nedeniyle otomatik eklenmiyor, kendi taslağını yazabilirsin.";
+    view.innerText=msg;
     inp.value="";
     meta.innerText="Henüz yerel kayıt yok.";
-    auto.textContent="Otomatik kayıt: beklemede";
   }
   updateLyricsStats();
 }
 
 function saveLyrics(auto){
   const s=songs[currIdx];
-  if(!s){showSysMsg("Önce listeden bir şarkı seçmelisin.");return;}
+  if(!s) return;
   const key=getSongKey(s);
   const inp=document.getElementById('lyrics-input');
   const view=document.getElementById('lyrics-view');
   const meta=document.getElementById('lyrics-meta');
-  const autoLbl=document.getElementById('lyrics-autosave');
-  if(!inp||!view||!meta||!autoLbl) return;
+  const autoLabel=document.getElementById('lyrics-autosave');
+  if(!inp||!view||!meta) return;
   const text=inp.value.trim();
   if(!text){
-    if(!auto) showSysMsg("Boş söz kaydedemezsiniz.");
-    return;
+    localStorage.removeItem('lyrics_'+key);
+    view.innerText="Metin temizlendi. İstersen yeniden yazabilirsin.";
+    meta.innerText="Bu şarkı için kayıtlı söz yok.";
+  }else{
+    try{
+      localStorage.setItem('lyrics_'+key,text);
+      view.innerText=text;
+      meta.innerText= auto ? "Otomatik kaydedildi." : "Bu şarkının sözleri bu cihazda kaydedildi.";
+    }catch(e){
+      showSysMsg("Tarayıcı depolamasına yazarken hata oluştu.");
+    }
   }
-  try{
-    const now=new Date();
-    localStorage.setItem('lyrics_'+key,text);
-    localStorage.setItem('lyrics_savedAt_'+key,now.toISOString());
-    view.innerText=text;
-    meta.innerText="Bu şarkının sözleri bu cihazda kaydedildi.";
-    autoLbl.textContent="Son kayıt: "+now.toLocaleString('tr-TR');
-    if(!auto) showSysMsg("Şarkı sözleri başarıyla bu cihazda kaydedildi.");
-  }catch(e){
-    if(!auto) showSysMsg("Tarayıcı depolamasına yazarken hata oluştu.");
+  if(auto && autoLabel){
+    const d=new Date();
+    autoLabel.innerText=`Otomatik kayıt: ${d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}`;
   }
+  refreshInlineLyricsBadges();
+  updateLyricsStats();
+}
+
+function refreshInlineLyricsBadges(){
+  document.querySelectorAll('.song-inline-lyrics').forEach(div=>{
+    const key=div.getAttribute('data-song-key');
+    const has=localStorage.getItem('lyrics_'+key);
+    if(has){
+      div.innerHTML='<span class="hint">Söz durumu:</span> Bu şarkı için yerel söz kaydedildi.';
+    }else{
+      div.innerHTML='<span class="hint">Söz durumu:</span> Henüz yerel kayıt yok.';
+    }
+  });
+}
+
+function updateLyricsStats(){
+  const inp=document.getElementById('lyrics-input');
+  const stats=document.getElementById('lyrics-stats');
+  if(!inp||!stats) return;
+  const text=inp.value;
+  const chars=text.length;
+  const lines=text ? text.split(/\n/).length : 0;  // DÜZELTİLMİŞ
+  stats.innerText=`${chars} karakter · ${lines} satır`;
+}
+
+function initLyricsAutosave(){
+  const inp=document.getElementById('lyrics-input');
+  if(!inp) return;
+  inp.addEventListener('input',()=>{
+    updateLyricsStats();
+    if(lyricsTimer) clearTimeout(lyricsTimer);
+    lyricsTimer=setTimeout(()=>saveLyrics(true),1000);
+  });
 }
 
 function playSong(idx){
@@ -803,7 +1111,7 @@ function playSong(idx){
   const ph=document.getElementById('track-placeholder');
   if(title) title.innerText=s.title;
   if(artist) artist.innerText=s.artist;
-  const imgSrc=(s.cover&&s.cover.trim()!="")?s.cover:(s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover);
+  const imgSrc=s.id?`https://img.youtube.com/vi/${s.id}/hqdefault.jpg`:defaultArtistCover;
   if(art&&ph){
     if(imgSrc){art.src=imgSrc;art.style.display='block';ph.style.display='none';}
     else{art.style.display='none';ph.style.display='grid';}
@@ -817,12 +1125,14 @@ function playSong(idx){
   const rows=document.querySelectorAll('.song-row');
   rows.forEach((r,i2)=>r.classList.toggle('active',i2===idx));
 }
+
 function togglePlay(){
   if(!player||!player.playVideo||!player.pauseVideo) return;
   isPlaying?player.pauseVideo():player.playVideo();
 }
 function playNext(){playSong((currIdx+1)%songs.length);}
 function playPrev(){playSong((currIdx-1+songs.length)%songs.length);}
+
 function startProgress(){
   clearInterval(progInt);
   const bar=document.getElementById('prog-bar'); if(!bar) return;
@@ -835,7 +1145,16 @@ function startProgress(){
 }
 function stopProgress(){clearInterval(progInt);}
 
-/* CHAT */
+const progRail=document.getElementById('prog-rail');
+if(progRail){
+  progRail.onclick=e=>{
+    if(!player||!player.seekTo||!player.getDuration) return;
+    const r=e.currentTarget.getBoundingClientRect();
+    const p=(e.clientX-r.left)/r.width;
+    player.seekTo(player.getDuration()*p,true);
+  };
+}
+
 function sendMsg(){
   const inp=document.getElementById('chat-in');
   const box=document.getElementById('chat-history');
@@ -846,16 +1165,16 @@ function sendMsg(){
   inp.value='';
   box.scrollTop=box.scrollHeight;
   setTimeout(()=>{
-    box.innerHTML+=`<div class="msg in">Mesajınız alındı. Uygun olduğumuzda dönüş yapacağız.</div>`;
+    box.innerHTML+='<div class="msg in">Mesajınız alındı. Uygun olduğumuzda dönüş yapacağız.</div>';
     box.scrollTop=box.scrollHeight;
   },800);
 }
 
-/* GAME (Snake) */
 let gameInt,snake=[],food={},dx=0,dy=0,score=0;
 const cvs=document.getElementById('game-canvas');
 const ctx=cvs?cvs.getContext('2d'):null;
 const boxSize=20;
+
 function startGame(){
   if(!ctx||!cvs) return;
   clearInterval(gameInt);
@@ -912,6 +1231,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft'&&dx===0){dx=-boxSize;dy=0;}
   if(e.key==='ArrowRight'&&dx===0){dx=boxSize;dy=0;}
 });
+
 let touchStartX=0,touchStartY=0;
 if(cvs){
   cvs.addEventListener('touchstart',e=>{
@@ -934,6 +1254,49 @@ if(cvs){
     }
   },{passive:false});
 }
+
+function initAnimeCompanion(){
+  const area=document.getElementById('anime-companion');
+  const hearts=document.getElementById('anime-hearts');
+  const quoteEl=document.getElementById('anime-quote');
+  if(!area||!hearts||!quoteEl) return;
+  const quotes=[
+    '"Bugün hangi şarkıyla level atlıyoruz?"',
+    '"Combo: Oyun + lo-fi + gece modu!"',
+    '"Bir sonraki satırı sen yaz, ben dinlerim."',
+    '"Yeni single gelince beraber kutlayalım!"'
+  ];
+  let qIndex=0;
+  area.addEventListener('click',e=>{
+    const rect=area.getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+    const heart=document.createElement('span');
+    heart.className='anime-heart';
+    heart.style.left=x+'px';
+    heart.style.top=y+'px';
+    heart.innerText='❤';
+    hearts.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+    qIndex=(qIndex+1)%quotes.length;
+    quoteEl.innerText=quotes[qIndex];
+  });
+}
+
+window.onload=()=>{
+  updateVh();
+  detectDevice();
+  initClock();
+  initCalendar();
+  initWeather();
+  renderSongs();
+  initLyricsAutosave();
+  initAnimeCompanion();
+  loadYouTubeAPI();
+  document.querySelectorAll('.nav-item, .widget-card').forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
+};
+
+window.addEventListener('resize',()=>{updateVh();detectDevice();});
 </script>
 </body>
 </html>
