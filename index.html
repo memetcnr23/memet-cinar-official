@@ -11,11 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- (1) Digital Dismay fontu -->
+<!-- Digital Dismay fontu -->
 <link href="https://fonts.cdnfonts.com/css/digital-dismay?styles=116363" rel="stylesheet">
 
 <style>
-/* (2) İsteğe bağlı @import (CDN Fonts sayfasındaki gibi) */
 @import url('https://fonts.cdnfonts.com/css/digital-dismay?styles=116363');
 
 :root{
@@ -109,8 +108,6 @@ body{
 
 /* CLOCK & NEWS */
 .led-clock-box{background:#000;border:2px solid #333;border-radius:10px;padding:10px 24px;display:inline-flex;flex-direction:column;align-items:center;margin-bottom:20px;box-shadow:0 0 20px rgba(255,0,0,0.2);}
-
-/* (3) SAAT YAZI STİLİ – Digital Dismay */
 .led-time{
   font-family:'Digital Dismay', sans-serif;
   font-size:3.4rem;
@@ -118,28 +115,202 @@ body{
   line-height:1;
   text-shadow:0 0 15px var(--neon-red);
 }
-
 .led-date{font-family:'Orbitron',sans-serif;color:#bbb;margin-top:5px;font-size:.85rem;letter-spacing:1px;}
 .news-ticker{background:rgba(0,10,25,0.9);border-left:4px solid var(--neon-blue);border-radius:6px;height:40px;display:flex;align-items:center;margin-bottom:25px;overflow:hidden;position:relative;}
 .news-ticker::before{content:'LIVE';position:absolute;left:8px;top:7px;font-size:.65rem;padding:2px 6px;border-radius:999px;background:var(--neon-red);font-weight:700;}
 .news-content{white-space:nowrap;animation:ticker 22s linear infinite;padding-left:110px;display:flex;gap:40px;font-size:.85rem;}
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
-/* WEATHER */
-.weather-main{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0;}
-.weather-icon-lg{font-size:3rem;filter:drop-shadow(0 0 10px rgba(255,255,255,0.3));animation:floatW 3s ease-in-out infinite;}
+/* HAVA DURUMU – ÖZEL NEON TASARIM KARTI */
+#weather-box{
+  position:relative;
+  padding:18px 16px 16px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 0 0,rgba(0,240,255,0.35),rgba(3,6,18,0.96)),
+    radial-gradient(circle at 100% 100%,rgba(255,215,0,0.25),rgba(0,0,0,0.98));
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 18px 40px rgba(0,0,0,0.9);
+}
+#weather-box::before{
+  content:'';
+  position:absolute;
+  inset:-40%;
+  background:
+    radial-gradient(circle at 50% 0,rgba(255,255,255,0.18),transparent 55%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,0.06) 0,
+      rgba(255,255,255,0.06) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  opacity:.12;
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+
+/* Ortadaki dairesel “hava küresi” */
+.weather-main{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  margin:4px 0 16px;
+}
+.weather-orb{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  position:relative;
+  padding:4px;
+  background:
+    conic-gradient(from 180deg,var(--neon-blue),var(--gold),var(--neon-red),var(--neon-blue));
+  box-shadow:
+    0 0 25px rgba(0,240,255,0.5),
+    0 0 55px rgba(255,215,0,0.4);
+}
+.weather-orb-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 0,rgba(255,255,255,0.12),rgba(3,8,18,0.96));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.weather-orb-inner::before{
+  content:'';
+  position:absolute;
+  inset:12%;
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,0.22);
+  box-shadow:0 0 18px rgba(0,0,0,0.9) inset;
+}
+
+/* İkon + sıcaklık */
+.weather-icon-lg{font-size:3rem;filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));}
+#w-icon{
+  font-size:2.4rem;
+  margin-bottom:4px;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));
+  animation:floatW 3.2s ease-in-out infinite;
+}
+#w-temp{
+  font-family:'Digital Dismay',sans-serif;
+  font-size:2.2rem;
+  letter-spacing:2px;
+  text-shadow:0 0 18px rgba(255,255,255,0.7);
+}
 @keyframes floatW{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
-.weather-details{display:flex;justify-content:space-around;margin-top:15px;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px;}
-.w-detail{text-align:center;}
-.w-val{font-family:'Orbitron';color:var(--neon-blue);font-size:1.1rem;}
-.w-label{font-size:.75rem;color:#888;}
-#weather-box.realistic{background:radial-gradient(circle at 0 0,rgba(0,240,255,0.15),rgba(0,0,0,0.9));border-radius:16px;padding:6px 10px;}
+
+/* Sağ taraf yazılar */
+.weather-main-info{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-width:180px;
+}
+.weather-location{
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.7);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.weather-location i{
+  font-size:.8rem;
+  color:var(--neon-blue);
+}
+#w-desc{
+  font-size:.85rem;
+  color:#e3e8ff;
+}
+.weather-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:.7rem;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(0,0,0,0.45);
+  color:#cbd5ff;
+}
+
+/* Alt kısım – rüzgar / nem kutucukları */
+.weather-details{
+  display:flex;
+  justify-content:space-between;
+  margin-top:4px;
+  gap:10px;
+}
+.w-detail{
+  flex:1;
+  background:rgba(0,0,0,0.45);
+  border-radius:12px;
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 8px 20px rgba(0,0,0,0.7);
+}
+.w-val{
+  font-family:'Orbitron';
+  color:var(--neon-blue);
+  font-size:1rem;
+}
+.w-label{
+  font-size:.7rem;
+  color:#9ca3af;
+}
+
+/* Farklı hava tiplerine göre arka plan */
+#weather-box.w-sunny{
+  background:
+    radial-gradient(circle at 0 0,rgba(255,215,0,0.35),rgba(17,8,0,0.98)),
+    radial-gradient(circle at 100% 100%,rgba(255,140,0,0.25),rgba(0,0,0,1));
+}
+#weather-box.w-cloudy{
+  background:
+    radial-gradient(circle at 0 0,rgba(148,163,184,0.4),rgba(15,23,42,0.98)),
+    radial-gradient(circle at 100% 100%,rgba(51,65,85,0.6),rgba(3,6,12,1));
+}
+#weather-box.w-rainy{
+  background:
+    radial-gradient(circle at 0 0,rgba(56,189,248,0.45),rgba(8,11,26,0.98)),
+    radial-gradient(circle at 100% 100%,rgba(15,23,42,0.9),rgba(0,0,0,1));
+}
+#weather-box.w-snowy{
+  background:
+    radial-gradient(circle at 0 0,rgba(148,197,255,0.55),rgba(15,23,42,0.98)),
+    radial-gradient(circle at 100% 100%,rgba(226,232,240,0.45),rgba(15,23,42,1));
+}
+#weather-box.w-storm{
+  background:
+    radial-gradient(circle at 0 0,rgba(248,250,252,0.2),rgba(15,23,42,1)),
+    radial-gradient(circle at 100% 100%,rgba(55,65,81,0.9),rgba(3,4,10,1));
+}
+
+/* Küçük ekran düzeltmesi */
+@media (max-width:768px){
+  .weather-main{
+    gap:14px;
+  }
+  .weather-orb{
+    width:115px;
+    height:115px;
+  }
+}
 
 /* CALENDAR */
 .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;}
 .cal-head{font-size:.8rem;color:var(--muted);padding-bottom:8px;}
-
 .cal-cell{
   aspect-ratio:1;
   display:flex;
@@ -559,15 +730,36 @@ body{
         <h3 style="font-family:'Orbitron'; color:var(--neon-blue); border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:10px;">HAVA DURUMU · MALATYA</h3>
         <div id="weather-box">
           <div class="weather-main">
-            <i id="w-icon" class="fas fa-sun weather-icon-lg" style="color:orange"></i>
-            <div style="text-align:left">
-              <div id="w-temp" style="font-size:2.5rem; font-weight:bold; line-height:1">--°</div>
-              <div id="w-desc" style="color:#aaa; font-size:0.9rem">Yükleniyor...</div>
+            <!-- Neon hava küresi -->
+            <div class="weather-orb">
+              <div class="weather-orb-inner">
+                <i id="w-icon" class="fas fa-sun weather-icon-lg"></i>
+                <div id="w-temp">--°</div>
+              </div>
+            </div>
+
+            <!-- Yazılı bilgiler -->
+            <div class="weather-main-info">
+              <div class="weather-location">
+                <i class="fas fa-location-dot"></i>
+                <span>MALATYA · TR</span>
+              </div>
+              <div id="w-desc">Yükleniyor...</div>
+              <span class="weather-badge">
+                <i class="fas fa-circle"></i> GERÇEK ZAMANLI VERİ
+              </span>
             </div>
           </div>
+
           <div class="weather-details">
-            <div class="w-detail"><div class="w-val" id="w-wind">--</div><div class="w-label">RÜZGAR (km/s)</div></div>
-            <div class="w-detail"><div class="w-val" id="w-hum">--</div><div class="w-label">NEM (%)</div></div>
+            <div class="w-detail">
+              <div class="w-val" id="w-wind">--</div>
+              <div class="w-label">RÜZGAR (km/s)</div>
+            </div>
+            <div class="w-detail">
+              <div class="w-val" id="w-hum">--</div>
+              <div class="w-label">NEM (%)</div>
+            </div>
           </div>
         </div>
       </div>
@@ -856,7 +1048,6 @@ const songs = [
   { title: "TATTIM ÖLÜMÜ",                artist: "Memet Çınar", id: "GychhkAbwH4" },
   { title: "İREMİN ŞARKISI",              artist: "Memet Çınar", id: "CcCs4_OZNOo" },
   { title: "BU BİR RÜYA",                 artist: "Bilal Güvercin", id: "JlmddA0lefw" },
-
   { title: "VAZGEÇMEZ BU KALP",           artist: "Memet Çınar", id: "0xgUyoGm4hY" },
   { title: "VUR BENİ KALBİMDEN",          artist: "Memet Çınar", id: "gMGz2e9uMcA" },
   { title: "DÜNYAMIN GÜNEŞİ",             artist: "Memet Çınar", id: "fvt8tI8n_cY" },
@@ -872,7 +1063,6 @@ const songs = [
   { title: "GÖZLERİ",                     artist: "Memet Çınar", id: "36ykG4zUtL0" },
   { title: "AŞKIN KÜLLERİ",               artist: "Memet Çınar", id: "F3MAB4cgmEI" }
 ];
-
 
 function showSysMsg(txt){
   document.getElementById('sys-msg').innerText=txt;
@@ -954,25 +1144,38 @@ async function initWeather(){
       const box=document.getElementById('weather-box');
       if(!tEl||!wEl||!hEl||!iEl||!dEl||!box) return;
 
-      box.classList.add('realistic');
       tEl.innerText=Math.round(w.temperature)+"°";
       wEl.innerText=w.windspeed;
       const hour=new Date().getHours();
       hEl.innerText=(data.hourly&&data.hourly.relativehumidity_2m&&data.hourly.relativehumidity_2m[hour])??"--";
 
       const code=w.weathercode;
-      let icon="fa-sun",color="orange",desc="Açık";
-      if(code===0){icon="fa-sun";color="#ffd760";desc="Açık";}
-      else if(code===1||code===2){icon="fa-cloud-sun";color="#fffae0";desc="Parçalı bulutlu";}
-      else if(code===3){icon="fa-cloud";color="#d0d7e2";desc="Kapalı";}
-      else if(code>=45&&code<=48){icon="fa-smog";color="#9ba3b0";desc="Sisli";}
-      else if(code>=51&&code<=67){icon="fa-cloud-rain";color="#00F0FF";desc="Yağmurlu";}
-      else if(code>=71&&code<=77){icon="fa-snowflake";color="#ffffff";desc="Karlı";}
-      else if(code>=80&&code<=82){icon="fa-cloud-showers-heavy";color="#6be0ff";desc="Sağanak";}
-      else if(code>=95){icon="fa-bolt";color="#ffd760";desc="Gök gürültülü";}
+      let icon="fa-sun",color="orange",desc="Açık",stateClass="w-sunny";
+
+      if(code===0){
+        icon="fa-sun";color="#ffd760";desc="Açık";stateClass="w-sunny";
+      }else if(code===1||code===2){
+        icon="fa-cloud-sun";color="#fffae0";desc="Parçalı bulutlu";stateClass="w-cloudy";
+      }else if(code===3){
+        icon="fa-cloud";color="#d0d7e2";desc="Kapalı";stateClass="w-cloudy";
+      }else if(code>=45&&code<=48){
+        icon="fa-smog";color="#9ba3b0";desc="Sisli";stateClass="w-cloudy";
+      }else if(code>=51&&code<=67){
+        icon="fa-cloud-rain";color="#00F0FF";desc="Yağmurlu";stateClass="w-rainy";
+      }else if(code>=71&&code<=77){
+        icon="fa-snowflake";color="#ffffff";desc="Karlı";stateClass="w-snowy";
+      }else if(code>=80&&code<=82){
+        icon="fa-cloud-showers-heavy";color="#6be0ff";desc="Sağanak";stateClass="w-rainy";
+      }else if(code>=95){
+        icon="fa-bolt";color="#ffd760";desc="Gök gürültülü";stateClass="w-storm";
+      }
+
       iEl.className=`fas ${icon} weather-icon-lg`;
       iEl.style.color=color;
       dEl.innerText=desc+" · Gerçek zamanlı veri";
+
+      box.classList.remove('w-sunny','w-cloudy','w-rainy','w-snowy','w-storm');
+      box.classList.add(stateClass);
     }
   }catch(e){
     console.log('Weather error',e);
@@ -1184,6 +1387,7 @@ function sendMsg(){
   },800);
 }
 
+/* OYUN – NOTA AVCISI (snake tarzı) */
 let gameInt,snake=[],food={},dx=0,dy=0,score=0;
 const cvs=document.getElementById('game-canvas');
 const ctx=cvs?cvs.getContext('2d'):null;
@@ -1269,6 +1473,7 @@ if(cvs){
   },{passive:false});
 }
 
+/* Anime companion */
 function initAnimeCompanion(){
   const area=document.getElementById('anime-companion');
   const hearts=document.getElementById('anime-hearts');
