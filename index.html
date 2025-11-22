@@ -399,7 +399,7 @@ body{
   box-shadow:0 0 10px rgba(0,240,255,0.4);
 }
 
-/* Flags & effects (unchanged logic) */
+/* Flags & effects */
 .cal-cell.snowy{
   color:#fff;
   background:radial-gradient(circle at 30% 0%,rgba(255,255,255,0.18),rgba(0,0,0,0.8));
@@ -757,7 +757,7 @@ body.game-fullscreen #game .game-grid{
     width:110px;
   }
 }
-.anime-floating.hidden-mobile{display:none;}
+.anime-floating.hidden{display:none;}
 .anime-floating-inner{position:relative;}
 .anime-floating-img{
   width:100%;
@@ -797,27 +797,28 @@ body.game-fullscreen #game .game-grid{
   font-family:'Orbitron',sans-serif;
 }
 
-/* Anime toggle button MOBILE ONLY */
+/* Anime toggle button – HER YERDE GÖRÜNSÜN */
 .anime-toggle-btn{
-  display:none;
+  position:fixed;
+  right:10px;
+  bottom:90px;
+  z-index:1201;
+  padding:6px 12px;
+  border-radius:999px;
+  border:none;
+  background:rgba(15,23,42,0.95);
+  color:#e5e7eb;
+  font-size:.75rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  box-shadow:0 0 12px rgba(0,0,0,0.8);
+  cursor:pointer;
 }
 @media(max-width:768px){
   .anime-toggle-btn{
-    display:block;
-    position:fixed;
     right:10px;
     bottom:90px;
-    z-index:1201;
-    padding:6px 12px;
-    border-radius:999px;
-    border:none;
-    background:rgba(15,23,42,0.95);
-    color:#e5e7eb;
-    font-size:.75rem;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    box-shadow:0 0 12px rgba(0,0,0,0.8);
-    cursor:pointer;
+    font-size:.7rem;
   }
 }
 
@@ -842,7 +843,7 @@ body.game-fullscreen #game .game-grid{
 <!-- TOP HEADER -->
 <header class="hud-top">
   <div class="brand brand-logo-full">
-    <!-- LOGO SVG (değiştirmeden kullanıyorum) -->
+    <!-- LOGO SVG -->
     <svg viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
@@ -1023,7 +1024,7 @@ body.game-fullscreen #game .game-grid{
             MEMET ÇINAR
             <i class="fa-solid fa-circle-check" style="color:#1DA1F2;" title="Mavi Tik - Resmi Sanatçı"></i>
           </h3>
-          <p style="font-size:0.85rem; color:#aaa">Solist · Besteci · Resmi-Sanatçı/Müzisyen . Söz Yazarı</p>
+          <p style="font-size:0.85rem; color:#aaa">Solist · Besteci · Resmi-Sanatçı/Müzisyen · Söz Yazarı</p>
           <div style="margin-top:6px; display:flex; gap:6px; font-size:.7rem; flex-wrap:wrap;">
             <span style="background:#1DA1F2; color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">MAVİ TİK</span>
             <span style="background:linear-gradient(90deg,#ffd700,#ff8c00); color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">ALTIN SEVİYE</span>
@@ -1091,7 +1092,7 @@ body.game-fullscreen #game .game-grid{
       </div>
     </div>
 
-    <!-- SÖZ YAZARLARI – TEK TEK, ONAYLI, ALTIN TİKLİ, ORTAK ÇALIŞMA -->
+    <!-- SÖZ YAZARLARI – TEK TEK, ONAYLI, ALTIN TİK, ORTAK ÇALIŞMA -->
     <div class="widget-card" style="margin-top:20px;">
       <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;">
         <i class="fas fa-pen-nib"></i> SÖZ YAZARLARI · ELKAY 2 ORTAK ÇALIŞMA
@@ -1292,7 +1293,7 @@ body.game-fullscreen #game .game-grid{
   </div>
   <div class="anime-float-speech" id="anime-quote">"Bugün hangi şarkıyla level atlıyoruz?"</div>
 </div>
-<button class="anime-toggle-btn" id="anime-toggle">Anime Asistan</button>
+<button class="anime-toggle-btn" id="anime-toggle">Anime Asistanı Gizle</button>
 
 <!-- PLAYER -->
 <footer class="player-bar">
@@ -1359,7 +1360,7 @@ function playHoverSfx(){
   osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime+0.15);
 }
 
-/* SONGS – memet cınar listesi (YouTube ID'leri) */
+/* SONGS – Memet Çınar listesi (YouTube ID'leri) */
 const defaultArtistCover="https://ui-avatars.com/api/?name=Memet+Çınar&background=000000&color=ffffff&size=256";
 
 const songs = [
@@ -1689,15 +1690,102 @@ if(progRail){
   };
 }
 
-/* LONCA YAPAY ZEKA */
+/* LONCA – GELİŞMİŞ YAPAY ZEKA (backend + opsiyonel OpenAI) */
+
+let guildHistory = [
+  {
+    role: "system",
+    content:
+      "Sen 'Lonca Sohbeti' alanında çalışan bir asistanısın. " +
+      "Kullanıcıya Türkçe cevap ver, gerektiğinde kısa İngilizce kelimeler kullanabilirsin. " +
+      "Kullanıcının adı bilinmiyor, ama sen nazik, samimi ve yaratıcı ol. " +
+      "Müzik, şarkı sözü, oyunlar ve gündelik sorulara yardım et. " +
+      "Kendini 'lonca yapay zekâ asistanı' olarak tanıtabilirsin."
+  }
+];
+
+const USE_DIRECT_OPENAI = false;          // GERÇEK SİTEDE BÖYLE KALSIN
+const BACKEND_ENDPOINT   = "/api/lonca-chat"; // Kendi backend endpoint'in
+
+async function fetchAdvancedAnswer(userText) {
+  // Önce backend üzerinden dene
+  if (!USE_DIRECT_OPENAI) {
+    try {
+      const res = await fetch(BACKEND_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: guildHistory,
+          userMessage: userText
+        })
+      });
+
+      if (!res.ok) {
+        console.error("Backend hata durumu:", res.status);
+        throw new Error("Backend hata");
+      }
+
+      const data = await res.json();
+      if (data && data.reply) {
+        return data.reply;
+      }
+    } catch (err) {
+      console.error("Backend çağrısında hata:", err);
+      // Aşağıda fallback'e düşecek
+    }
+  }
+
+  // DİREKT OpenAI – SADECE DENEME AMAÇLI, GERÇEK SİTEDE ANAHTARI BURAYA KOYMA!
+  try {
+    const OPENAI_API_KEY = "BURAYA_OPENAI_API_KEY_YAZMA - backend'de tut";
+
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + OPENAI_API_KEY
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: guildHistory.concat({
+          role: "user",
+          content: userText
+        }),
+        temperature: 0.8
+      })
+    });
+
+    if (!res.ok) {
+      console.error("OpenAI hata durumu:", res.status);
+      throw new Error("OpenAI hata");
+    }
+
+    const data = await res.json();
+    const reply =
+      data.choices?.[0]?.message?.content ||
+      "Şu anda cevap oluştururken bir sorun yaşadım.";
+
+    return reply;
+  } catch (err) {
+    console.error("OpenAI çağrısında hata:", err);
+    return (
+      "Şu an çevrimdışı gibiyim gibi görünüyorum. " +
+      "İnternet bağlantını ve sayfayı kontrol edip biraz sonra tekrar dene. 🙂"
+    );
+  }
+}
+
+/* CHAT yardımcıları */
 function copyStatic(btn){
   const parent=btn.parentElement;
   if(!parent) return;
   const text=parent.innerText.replace('Kopyala','').trim();
-  navigator.clipboard?.writeText(text).then(()=>{
-    btn.textContent='Kopyalandı';
-    setTimeout(()=>btn.textContent='Kopyala',1000);
-  });
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent='Kopyalandı';
+      setTimeout(()=>btn.textContent='Kopyala',1000);
+    });
+  }
 }
 function appendUserMessage(text){
   const box=document.getElementById('chat-history');
@@ -1719,10 +1807,12 @@ function appendAiMessage(text){
   btn.className='msg-copy-btn';
   btn.textContent='Kopyala';
   btn.addEventListener('click',()=>{
-    navigator.clipboard?.writeText(text).then(()=>{
-      btn.textContent='Kopyalandı';
-      setTimeout(()=>btn.textContent='Kopyala',1000);
-    });
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(text).then(()=>{
+        btn.textContent='Kopyalandı';
+        setTimeout(()=>btn.textContent='Kopyala',1000);
+      });
+    }
   });
   div.appendChild(span);
   div.appendChild(btn);
@@ -1730,62 +1820,39 @@ function appendAiMessage(text){
   box.scrollTop=box.scrollHeight;
 }
 
-/* basit lonca AI – math + şarkı sözü */
-function isMathExpression(str){
-  const s=str.replace(/,/g,'.').replace(/\s+/g,'');
-  return /^[0-9.+\-*/()%]+$/.test(s);
-}
-function evalMath(str){
-  try{
-    const expr=str.replace(/,/g,'.');
-    // basit, sadece rakam ve işlem işaretleri
-    if(!/^[0-9.+\-*/()%\s]+$/.test(expr)) return null;
-    // eslint-disable-next-line no-new-func
-    const fn=new Function("return ("+expr+")");
-    const res=fn();
-    if(typeof res==='number' && isFinite(res)) return res;
-    return null;
-  }catch(e){return null;}
-}
-function generateLyricsPrompt(){
-  const lines=[
-    "Gece düştü şehrin üstüne, ışıklar söndü birer birer",
-    "Kalbimde yankılandı ismin, sanki bitmeyen bir eser",
-    "ELKAY 2'de gizli kaldı, söyleyemediğim cümleler",
-    "Bir level daha atladım, ama sensiz bu zaferler…"
-  ];
-  return lines.join("\n");
-}
-function guildAiAnswer(text){
-  const t=text.trim();
-  if(!t) return "Boş mesaj algıladım, birkaç kelime daha ekleyebilirsin.";
-  if(isMathExpression(t)){
-    const r=evalMath(t);
-    if(r===null) return "İşlemi çözemiyorum, sadece + - * / ve parantez kullan.";
-    return `İşlemin sonucu: ${r}`;
-  }
-  const lower=t.toLowerCase();
-  if(lower.includes("şarkı sözü") || lower.includes("lyrics") || lower.includes("nakarat")){
-    return "İşte ELKAY evrenine uygun bir örnek şarkı sözü taslağı:\n\n"+generateLyricsPrompt();
-  }
-  if(lower.includes("merhaba") || lower.includes("selam")){
-    return "Selam! Ben lonca yapay zekâ asistanıyım. Benden matematik, bilgi ya da şarkı sözü taslağı isteyebilirsin.";
-  }
-  return "Bu konuda sana özel bir yanıt ürettim ama unutmadan: Ben sadece bu siteye özel, basit bir lonca asistanıyım. Detaylı şeyler için komutlarını biraz daha net yazabilirsin.\n\nİstersen şu örnekleri dene:\n- 25*4+10\n- \"ELKAY 2 için duygusal nakarat yaz\"";
-}
-function sendMsg(){
+/* Gelişmiş mesaj gönderme */
+async function sendMsg(){
   const inp=document.getElementById('chat-in');
   const box=document.getElementById('chat-history');
   if(!inp||!box) return;
   const txt=inp.value.trim();
   if(!txt) return;
+
   appendUserMessage(txt);
   inp.value='';
   box.scrollTop=box.scrollHeight;
-  setTimeout(()=>{
-    const ans=guildAiAnswer(txt);
-    appendAiMessage(ans);
-  },400);
+
+  guildHistory.push({ role:"user", content:txt });
+
+  const typingDiv=document.createElement('div');
+  typingDiv.className='msg in ai-msg';
+  typingDiv.textContent='Yazıyor...';
+  box.appendChild(typingDiv);
+  box.scrollTop=box.scrollHeight;
+
+  try{
+    const answer=await fetchAdvancedAnswer(txt);
+    box.removeChild(typingDiv);
+    appendAiMessage(answer);
+    guildHistory.push({ role:"assistant", content:answer });
+  }catch(err){
+    console.error('Lonca AI genel hata:',err);
+    box.removeChild(typingDiv);
+    appendAiMessage(
+      "Şu anda cevap verirken beklenmedik bir hata oluştu. " +
+      "Biraz sonra tekrar dener misin?"
+    );
+  }
 }
 
 /* GAME – snake style */
@@ -1918,9 +1985,8 @@ function initAnimeCompanion(){
     qIndex=(qIndex+1)%quotes.length;
     quoteEl.innerText=quotes[qIndex];
 
-    // anime kızdan lonca AI'a yönlendirme
     const chatNav=document.querySelector('.nav-item[data-tab="chat"]');
-    switchTab('chat',chatNav);
+    if(chatNav) switchTab('chat',chatNav);
     const inp=document.getElementById('chat-in');
     if(inp){
       inp.focus();
@@ -1928,12 +1994,15 @@ function initAnimeCompanion(){
     }
   });
 
-  // mobil toggle
   const toggle=document.getElementById('anime-toggle');
   if(toggle){
     toggle.addEventListener('click',()=>{
-      area.classList.toggle('hidden-mobile');
-      toggle.textContent=area.classList.contains('hidden-mobile')?'Anime Asistanı Göster':'Anime Asistanı Gizle';
+      area.classList.toggle('hidden');
+      if(area.classList.contains('hidden')){
+        toggle.textContent='Anime Asistanı Göster';
+      }else{
+        toggle.textContent='Anime Asistanı Gizle';
+      }
     });
   }
 }
