@@ -1,18 +1,35 @@
 // server.js
 
-const express = require("express");
-const cors = require("cors");
-const OpenAI = require("openai");
-require("dotenv").config();
+import express, { json } from "express";
+import cors from "cors";
+import OpenAI from "openai";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// .env dosyasındaki anahtarı kullan
+// .env dosyasını yükle
+dotenv.config();
+
+// __dirname'i ES module içinde elde et
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// OpenAI istemcisi
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(json());
+
+// index.html, script.js, styles.css vs. aynı klasörden servis et
+app.use(express.static(__dirname));
+
+// Sağlık kontrolü için test endpoint
+app.get("/ping", (req, res) => {
+  res.send("Lonca AI ayakta ✅");
+});
 
 // LONCA YAPAY ZEKA ENDPOINT
 app.post("/lonca-ai", async (req, res) => {
@@ -60,5 +77,5 @@ app.post("/lonca-ai", async (req, res) => {
 // SUNUCUYU BAŞLAT
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Lonca AI sunucusu http://localhost:" + PORT + " üzerinde çalışıyor");
+  console.log(`Lonca AI sunucusu http://localhost:${PORT} üzerinde çalışıyor`);
 });
