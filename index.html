@@ -211,9 +211,7 @@ body{
   box-shadow:0 18px 40px rgba(0,0,0,0.9);
 }
 #weather-box::before{
-  content:'';
-  position:absolute;
-  inset:-40%;
+  content:'';position:absolute;inset:-40%;
   background:
     radial-gradient(circle at 50% 0,rgba(255,255,255,0.18),transparent 55%),
     repeating-linear-gradient(
@@ -223,23 +221,14 @@ body{
       transparent 1px,
       transparent 4px
     );
-  opacity:.12;
-  mix-blend-mode:screen;
-  pointer-events:none;
+  opacity:.12;mix-blend-mode:screen;pointer-events:none;
 }
 .weather-main{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
+  display:flex;align-items:center;justify-content:center;gap:18px;
   margin:4px 0 16px;
 }
 .weather-orb{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  position:relative;
-  padding:4px;
+  width:130px;height:130px;border-radius:50%;position:relative;padding:4px;
   background:
     conic-gradient(from 180deg,var(--neon-blue),var(--gold),var(--neon-red),var(--neon-blue));
   box-shadow:
@@ -247,90 +236,57 @@ body{
     0 0 55px rgba(255,215,0,0.4);
 }
 .weather-orb-inner{
-  position:relative;
-  width:100%;
-  height:100%;
-  border-radius:50%;
+  position:relative;width:100%;height:100%;border-radius:50%;
   background:radial-gradient(circle at 30% 0,rgba(255,255,255,0.12),rgba(3,8,18,0.96));
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   overflow:hidden;
 }
 .weather-orb-inner::before{
-  content:'';
-  position:absolute;
-  inset:12%;
-  border-radius:50%;
+  content:'';position:absolute;inset:12%;border-radius:50%;
   border:1px dashed rgba(255,255,255,0.22);
   box-shadow:0 0 18px rgba(0,0,0,0.9) inset;
 }
 #w-icon{
-  font-size:2.4rem;
-  margin-bottom:4px;
+  font-size:2.4rem;margin-bottom:4px;
   filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));
   animation:floatW 3.2s ease-in-out infinite;
 }
 #w-temp{
   font-family:'Digital Dismay',sans-serif;
-  font-size:2.2rem;
-  letter-spacing:2px;
+  font-size:2.2rem;letter-spacing:2px;
   text-shadow:0 0 18px rgba(255,255,255,0.7);
 }
 @keyframes floatW{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
 /* Weather info */
 .weather-main-info{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  max-width:180px;
+  display:flex;flex-direction:column;gap:8px;max-width:180px;
 }
 .weather-location{
-  font-size:.75rem;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  color:rgba(255,255,255,0.7);
-  display:flex;
-  align-items:center;
-  gap:6px;
+  font-size:.75rem;text-transform:uppercase;letter-spacing:2px;
+  color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;
 }
 .weather-location i{font-size:.8rem;color:var(--neon-blue);}
 #w-desc{font-size:.85rem;color:#e3e8ff;}
 .weather-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-size:.7rem;
-  padding:3px 8px;
-  border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.7rem;padding:3px 8px;border-radius:999px;
   border:1px solid rgba(255,255,255,0.18);
-  background:rgba(0,0,0,0.45);
-  color:#cbd5ff;
+  background:rgba(0,0,0,0.45);color:#cbd5ff;
 }
 .weather-details{
-  display:flex;
-  justify-content:space-between;
-  margin-top:4px;
-  gap:10px;
+  display:flex;justify-content:space-between;margin-top:4px;gap:10px;
 }
 .w-detail{
-  flex:1;
-  background:rgba(0,0,0,0.45);
-  border-radius:12px;
-  padding:8px 10px;
-  border:1px solid rgba(255,255,255,0.12);
+  flex:1;background:rgba(0,0,0,0.45);border-radius:12px;
+  padding:8px 10px;border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 8px 20px rgba(0,0,0,0.7);
 }
 .w-val{
-  font-family:'Orbitron';
-  color:var(--neon-blue);
-  font-size:1rem;
+  font-family:'Orbitron';color:var(--neon-blue);font-size:1rem;
 }
 .w-label{
-  font-size:.7rem;
-  color:#9ca3af;
+  font-size:.7rem;color:#9ca3af;
 }
 
 /* Weather state backgrounds */
@@ -364,23 +320,16 @@ body{
   .weather-orb{width:115px;height:115px;}
 }
 
-/* CALENDAR (özel gün efektleri aynı) */
+/* CALENDAR */
 .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;}
 .cal-head{font-size:.8rem;color:var(--muted);padding-bottom:8px;}
 .cal-cell{
   aspect-ratio:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:8px;
-  background:rgba(255,255,255,0.03);
-  cursor:pointer;
-  position:relative;
-  font-weight:bold;
-  font-size:.95rem;
-  transition:.2s;
-  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;background:rgba(255,255,255,0.03);
+  cursor:pointer;position:relative;font-weight:bold;font-size:.95rem;
+  transition:.2s;overflow:hidden;
 }
 .cal-cell:hover{
   background:rgba(255,215,0,0.12);
@@ -393,7 +342,7 @@ body{
   box-shadow:0 0 10px rgba(0,240,255,0.4);
 }
 
-/* ... özel gün animasyonları ... */
+/* özel gün animasyonları */
 .cal-cell.snowy{
   color:#fff;
   background:radial-gradient(circle at 30% 0%,rgba(255,255,255,0.18),rgba(0,0,0,0.8));
@@ -537,23 +486,15 @@ body{
   gap:12px;
 }
 .song-row{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  padding:10px;
-  background:rgba(255,255,255,0.03);
-  border-radius:14px;
-  border:1px solid transparent;
+  display:flex;flex-direction:column;gap:8px;
+  padding:10px;background:rgba(255,255,255,0.03);
+  border-radius:14px;border:1px solid transparent;
   transition:.2s var(--smooth);
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
+  cursor:pointer;position:relative;overflow:hidden;
   clip-path:polygon(8% 0,100% 0,100% 78%,92% 100%,0 100%,0 18%);
 }
 .song-row::after{
-  content:'';
-  position:absolute;
-  inset:0;
+  content:'';position:absolute;inset:0;
   background:radial-gradient(circle at 0 0,rgba(0,240,255,0.25),transparent 55%);
   opacity:0;transition:.25s;mix-blend-mode:screen;
 }
@@ -579,8 +520,7 @@ body{
   background:rgba(0,0,0,0.4);
 }
 .song-inline-lyrics{
-  font-size:.7rem;
-  color:#aaa;
+  font-size:.7rem;color:#aaa;
   background:rgba(0,0,0,0.4);
   border-radius:8px;
   padding:6px 8px;
@@ -751,8 +691,7 @@ body.game-fullscreen #game .game-grid{
     width:110px;
   }
 }
-/* DEĞİŞTİ: hidden-mobile -> hidden (her cihazda) */
-.anime-floating.hidden{display:none;}
+.anime-floating.hidden-mobile{display:none;}
 .anime-floating-inner{position:relative;}
 .anime-floating-img{
   width:100%;
@@ -792,7 +731,7 @@ body.game-fullscreen #game .game-grid{
   font-family:'Orbitron',sans-serif;
 }
 
-/* Anime toggle button – her cihazda var */
+/* Anime toggle button */
 .anime-toggle-btn{
   position:fixed;
   right:10px;
@@ -837,8 +776,6 @@ body.game-fullscreen #game .game-grid{
 <header class="hud-top">
   <div class="brand brand-logo-full">
     <!-- Logo SVG -->
-    <!-- ... SVG kısmı aynı ... -->
-    <!-- (Senin gönderdiğin SVG aynen duruyor) -->
     <svg viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
@@ -911,16 +848,373 @@ body.game-fullscreen #game .game-grid{
 <!-- MAIN CONTENT -->
 <main class="viewport">
   <!-- HOME -->
-  <!-- (Home, Songs, Artists, Chat, Game, Contact bölümleri senin gönderdiğinle birebir aynı, sadece anime kısmı değişti) -->
-  <!-- Tüm bölümleri aynen bıraktım, burada yer sıkıntısı olmasın diye tekrar yorumlamıyorum -->
-  <!-- AŞAĞIDA SENİN KODUN OLDUĞU GİBİ DEVAM EDİYOR -->
-  
-  <!-- HOME -->
-  <!-- ... BURADAN İTİBAREN GÖNDERDİĞİN KODLA AYNI ... -->
-  <!-- (Home / Songs / Artists / Chat / Game / Contact) -->
-  
-  <!-- Ben hepsini değiştirmeden bıraktım, sadece anime JS ve CSS güncel. -->
-  
+  <section id="home" class="screen active">
+    <div style="text-align:center;">
+      <div class="led-clock-box">
+        <div class="led-time" id="clock">00:00:00</div>
+        <div class="led-date" id="date">...</div>
+      </div>
+    </div>
+
+    <!-- LED TABELA NEWS -->
+    <div class="news-ticker">
+      <div class="news-inner">
+        <div class="news-content">
+          <span><i class="fas fa-bolt"></i> MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR!</span>
+          <span><i class="fas fa-star"></i> MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA.</span>
+          <span><i class="fas fa-music"></i> 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA.</span>
+          <span><i class="fas fa-check-circle"></i> LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="widget-card">
+        <div class="calendar-header">
+          <button class="p-btn" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+          <h3 id="cal-title" style="font-family:'Orbitron'; color:var(--gold)"></h3>
+          <button class="p-btn" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="cal-grid" style="margin-bottom:5px;">
+          <div class="cal-head">Pt</div><div class="cal-head">Sa</div><div class="cal-head">Ça</div><div class="cal-head">Pe</div><div class="cal-head">Cu</div><div class="cal-head">Ct</div><div class="cal-head">Pz</div>
+        </div>
+        <div id="cal-body" class="cal-grid"></div>
+      </div>
+
+      <div class="widget-card">
+        <h3 style="font-family:'Orbitron'; color:var(--neon-blue); border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:10px;">HAVA DURUMU · MALATYA</h3>
+        <div id="weather-box">
+          <div class="weather-main">
+            <div class="weather-orb">
+              <div class="weather-orb-inner">
+                <i id="w-icon" class="fas fa-sun"></i>
+                <div id="w-temp">--°</div>
+              </div>
+            </div>
+            <div class="weather-main-info">
+              <div class="weather-location">
+                <i class="fas fa-location-dot"></i>
+                <span>MALATYA · TR</span>
+              </div>
+              <div id="w-desc">Yükleniyor...</div>
+              <span class="weather-badge">
+                <i class="fas fa-circle"></i> GERÇEK ZAMANLI VERİ
+              </span>
+            </div>
+          </div>
+          <div class="weather-details">
+            <div class="w-detail">
+              <div class="w-val" id="w-wind">--</div>
+              <div class="w-label">RÜZGAR (km/s)</div>
+            </div>
+            <div class="w-detail">
+              <div class="w-val" id="w-hum">--</div>
+              <div class="w-label">NEM (%)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SONGS + LYRICS -->
+  <section id="songs" class="screen">
+    <h2 class="section-title">MÜZİK KÜTÜPHANESİ</h2>
+    <div class="songs-layout">
+      <div class="widget-card">
+        <div class="song-list" id="song-container"></div>
+      </div>
+      <div class="widget-card" id="lyrics-panel">
+        <h3>ŞARKI SÖZLERİ (YEREL EDİTÖR)</h3>
+        <div id="lyrics-song-title">Henüz şarkı seçilmedi</div>
+        <div id="lyrics-song-artist" class="song-artist">Listeden bir şarkı seç.</div>
+        <div id="lyrics-meta">Durum: Şarkı seçilmedi.</div>
+        <div id="lyrics-tools">
+          <span id="lyrics-autosave">Otomatik kayıt: beklemede</span>
+          <span id="lyrics-stats">0 karakter · 0 satır</span>
+        </div>
+        <div id="lyrics-view">
+          Burada seçilen şarkının sözleri görünecek. Resmî şarkı sözleri telif nedeniyle otomatik eklenmiyor;
+          kendi yorumunu ve söz taslağını buraya kaydedebilirsin.
+        </div>
+        <div id="lyrics-editor">
+          <textarea id="lyrics-input" placeholder="Şarkı sözlerini buraya yaz... (Bu cihazda kaydedilir)"></textarea>
+          <button id="lyrics-save-btn" type="button" onclick="saveLyrics(false)">Sözleri Kaydet</button>
+        </div>
+        <p id="lyrics-login-hint">Oturum sistemi yok. Sözler tarayıcıda (localStorage) saklanır.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTISTS + WRITERS -->
+  <section id="artists" class="screen">
+    <div class="grid-2">
+      <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
+        <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--gold);" alt="Memet Çınar">
+        <div>
+          <h3 style="color:var(--gold); margin-bottom:5px">
+            MEMET ÇINAR
+            <i class="fa-solid fa-circle-check" style="color:#1DA1F2;" title="Mavi Tik - Resmi Sanatçı"></i>
+          </h3>
+          <p style="font-size:0.85rem; color:#aaa">Solist · Besteci · Resmi-Sanatçı/Müzisyen · Söz Yazarı</p>
+          <div style="margin-top:6px; display:flex; gap:6px; font-size:.7rem; flex-wrap:wrap;">
+            <span style="background:#1DA1F2; color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">MAVİ TİK</span>
+            <span style="background:linear-gradient(90deg,#ffd700,#ff8c00); color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">ALTIN SEVİYE</span>
+            <span style="background:linear-gradient(90deg,#e5e4e2,#ffffff); color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">PLATİNYUM VIP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
+        <img src="https://ui-avatars.com/api/?name=Bilal+Güvercin&background=111827&color=ffffff&size=256" style="width:80px; height:80px; border-radius:50%; border:2px solid #fff;" alt="Bilal Güvercin">
+        <div>
+          <h3 style="color:#fff; margin-bottom:5px">
+            BİLAL GÜVERCİN
+            <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+          </h3>
+          <p style="font-size:0.85rem; color:#aaa">Söz Yazarı</p>
+          <span style="font-size:0.7rem; background:#555; color:#fff; padding:2px 6px; border-radius:4px;">ONAYLI</span>
+          <div style="margin-top:6px; font-size:.75rem; color:#ccc;">Eser: Bu Bir Rüya</div>
+          <div style="margin-top:8px; font-size:1.1rem;">
+            <a href="https://www.instagram.com/bilalguvercin_official/" target="_blank" rel="noopener" style="margin-right:8px; color:#C13584;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCGxmNCKcU2wbYCK3xvKGVxg" target="_blank" rel="noopener" style="margin-right:8px; color:#FF0000;"><i class="fab fa-youtube"></i></a>
+            <span title="Henüz eklenmedi" style="margin-right:8px; color:#555; cursor:not-allowed;"><i class="fab fa-spotify"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hakkımda -->
+    <div class="widget-card" style="margin-top:20px;">
+      <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;">
+        <i class="fas fa-user-astronaut"></i> HAKKIMDA · MEMET ÇINAR
+      </h3>
+      <div class="about-grid">
+        <div>
+          <p class="about-tagline">“Söz, melodi ve duyguyu oyun evreni gibi birleştiren prodüktör.”</p>
+          <p class="about-text">
+            Malatya çıkışlı bağımsız bir sanatçı olan <strong>Memet Çınar</strong>;
+            duygusal vokalleri, akılda kalıcı melodileri ve dijital çağın ruhuna
+            uygun prodüksiyonlarıyla kendi evrenini kuruyor. Rap, pop ve arabesk
+            dokunuşları modern sound’larla harmanlayarak kendine özgü bir stil
+            oluşturuyor.
+          </p>
+          <p class="about-text" style="margin-top:8px;">
+            Bu panel; şarkılarını, sözlerini ve kendi dünyanı yönetebileceğin özel bir
+            <strong>gamer arayüzü</strong> olarak tasarlandı. Zamanla yeni özellikler,
+            yeni şarkılar ve özel içeriklerle güncellenmeye devam edebilir.
+          </p>
+        </div>
+        <div>
+          <div>
+            <span class="about-stat-pill"><i class="fas fa-star"></i> Level: 27</span>
+            <span class="about-stat-pill"><i class="fas fa-fire"></i> Rank: LEGACY</span>
+            <span class="about-stat-pill"><i class="fas fa-heart"></i> Mood: LO-FI / EMOTIONAL</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span style="font-size:.75rem;color:#aaa;">Sanatçı XP:</span>
+            <div class="about-bar"><div class="about-bar-fill"></div></div>
+          </div>
+          <div style="margin-top:10px;font-size:.8rem;color:#ccc;">
+            <div><i class="fas fa-music"></i> Yayındaki şarkılar: <strong>+25</strong></div>
+            <div><i class="fas fa-headphones"></i> Tarz: Pop / Rap / Duygusal</div>
+            <div><i class="fas fa-location-dot"></i> Konum: Malatya (TR)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SÖZ YAZARLARI – ELKAY 2 ORTAK ÇALIŞMA -->
+    <div class="widget-card" style="margin-top:20px;">
+      <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;">
+        <i class="fas fa-pen-nib"></i> SÖZ YAZARLARI · ELKAY 2 ORTAK ÇALIŞMA
+      </h3>
+      <div class="writers-grid">
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Hazal+Erden&background=111827&color=ffffff&size=256" alt="Hazal Erden">
+          <div>
+            <div class="writer-main-name">
+              Hazal Erden
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Leyla+Loly&background=111827&color=ffffff&size=256" alt="Leyla Loly">
+          <div>
+            <div class="writer-main-name">
+              Leyla Loly
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Nazli+Gül&background=111827&color=ffffff&size=256" alt="Nazli Gül">
+          <div>
+            <div class="writer-main-name">
+              Nazli GÜl
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Retaj+Manaf&background=111827&color=ffffff&size=256" alt="Retaj Manaf">
+          <div>
+            <div class="writer-main-name">
+              Retaj Manaf
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Zeynep+Karaca&background=111827&color=ffffff&size=256" alt="Zeynep Karaca">
+          <div>
+            <div class="writer-main-name">
+              Zeynep Karaca
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAT / LONCA YAPAY ZEKA -->
+  <section id="chat" class="screen">
+    <div class="widget-card" style="height:70vh; display:flex; flex-direction:column;">
+      <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:8px;">LONCA SOHBETİ · İNTERNET DESTEKLİ YAPAY ZEKA</h3>
+      <p style="font-size:.75rem;color:#aaa;margin-bottom:10px;">
+        Bu panel, sunucudaki GPT tabanlı lonca asistanına bağlıdır. Sorular sor, matematik işlemleri yaz (örn: <code>25*4+10</code>),
+        ya da “ELKAY 2 için duygusal şarkı sözü yaz” gibi komutlar ver. Metinleri alttaki kopyala butonuyla alabilirsin.
+      </p>
+      <div id="chat-history" class="chat-box">
+        <div class="msg in ai-msg">
+          Merhaba, ben lonca yapay zekâ asistanıyım. Sunucu üzerinden gerçek zamanlı yanıt üretirim; bana her şeyi sorabilirsin.
+          <button class="msg-copy-btn" onclick="copyStatic(this)">Kopyala</button>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:auto;">
+        <input type="text" id="chat-in" placeholder="Mesaj yaz veya işlem gir (örn: 12*8 + 5)..." style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:12px; border-radius:20px; outline:none;">
+        <button onclick="sendMsg()" style="width:50px; height:50px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="game" class="screen">
+    <div class="game-grid">
+      <div class="widget-card center-flex game-main-card" style="flex-direction:column;">
+        <div class="game-toolbar">
+          <button id="btn-game-expand" class="game-fs-btn" type="button">Tam Ekran</button>
+          <button id="btn-game-collapse" class="game-fs-btn" type="button" style="display:none;">Çık</button>
+        </div>
+        <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px">NOTA AVCISI</h3>
+        <div style="margin-bottom:10px">Skor: <span id="score" style="color:var(--neon-blue)">0</span></div>
+        <canvas id="game-canvas" width="300" height="300"></canvas>
+        <button onclick="startGame()" style="margin-top:15px; padding:10px 30px; background:var(--neon-blue); border:none; border-radius:20px; font-weight:bold; cursor:pointer;">BAŞLAT</button>
+        <p style="font-size:0.8rem; color:#666; margin-top:10px;">Yön tuşları veya dokunarak yönlendir.</p>
+      </div>
+      <div class="widget-card game-library-card">
+        <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:8px;"><i class="fas fa-gamepad"></i> RETRO OYUN KÜTÜPHANESİ</h3>
+        <p style="font-size:.8rem; color:#aaa; margin-bottom:8px;">Tetris ve Atari tarzı basit oyunlar için hazır bağlantılar. Kendi .apk ve .exe dosyalarını ürettiğinde buradaki linkleri değiştirebilirsin.</p>
+        <ul>
+          <li>
+            <strong>Retro Tetris</strong>
+            <div class="game-badges">
+              <span><i class="fas fa-globe"></i> Tarayıcı</span>
+              <span><i class="fab fa-android"></i> Android APK</span>
+              <span><i class="fab fa-windows"></i> Windows EXE</span>
+            </div>
+            <div class="game-links">
+              <a href="https://tetris.com/play-tetris" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
+              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
+            </div>
+          </li>
+          <li>
+            <strong>Space Shooter (Atari Hissi)</strong>
+            <div class="game-badges">
+              <span><i class="fas fa-globe"></i> Tarayıcı</span>
+              <span><i class="fab fa-android"></i> Android APK</span>
+              <span><i class="fab fa-windows"></i> Windows EXE</span>
+            </div>
+            <div class="game-links">
+              <a href="https://www.free80sarcade.com/spaceinvaders.php" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
+              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
+            </div>
+          </li>
+          <li>
+            <strong>Classic Pong</strong>
+            <div class="game-badges">
+              <span><i class="fas fa-globe"></i> Tarayıcı</span>
+              <span><i class="fab fa-android"></i> Android APK</span>
+              <span><i class="fab fa-windows"></i> Windows EXE</span>
+            </div>
+            <div class="game-links">
+              <a href="https://ponggame.org/" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
+              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="screen">
+    <div class="center-flex" style="height:60vh">
+      <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:120px; height:120px; border-radius:50%; border:4px solid var(--gold); margin-bottom:20px;" alt="Memet Çınar">
+      <h2 style="font-family:'Cinzel'; color:var(--gold)">MEMET ÇINAR</h2>
+      <p style="color:#aaa; margin-bottom:18px">Resmi iletişim kanalları.</p>
+      <div style="display:flex; gap:20px; font-size:2rem; flex-wrap:wrap; justify-content:center;">
+        <a href="#" style="color:#C13584"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="color:#FF0000"><i class="fab fa-youtube"></i></a>
+        <a href="#" style="color:#1DB954"><i class="fab fa-spotify"></i></a>
+        <a href="#" style="color:#fff"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- ANIME KIZ -->
@@ -935,7 +1229,25 @@ body.game-fullscreen #game .game-grid{
 
 <!-- PLAYER -->
 <footer class="player-bar">
-  <!-- ... player kodun olduğu gibi duruyor ... -->
+  <div class="p-left">
+    <img id="track-art" src="" style="display:none;" class="p-art" alt="Kapak">
+    <div id="track-placeholder" class="p-art" style="background:#222; display:grid; place-items:center;"><i class="fas fa-music" style="color:#555"></i></div>
+    <div class="p-info">
+      <h4 id="track-title">Müzik Seçilmedi</h4>
+      <p id="track-artist">Listeden seçin</p>
+    </div>
+  </div>
+  <div class="p-center">
+    <div class="p-controls">
+      <button class="p-btn" onclick="playPrev()"><i class="fas fa-step-backward"></i></button>
+      <button class="p-play" id="play-pause-btn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+      <button class="p-btn" onclick="playNext()"><i class="fas fa-step-forward"></i></button>
+    </div>
+    <div class="progress-rail" id="prog-rail">
+      <div class="progress-bar" id="prog-bar"></div>
+    </div>
+  </div>
+  <div class="p-extra"><i class="fas fa-volume-up"></i></div>
 </footer>
 
 <!-- Hidden YouTube player -->
@@ -1309,7 +1621,27 @@ if(progRail){
   };
 }
 
-/* LONCA AI – backend'e istek */
+/* LONCA AI – LOKAL + VERCEL OTOMATİK BAĞLANTI */
+
+// localhost / 127.0.0.1 / file:// ise lokal backend (server.js),
+// diğer tüm hostlarda Vercel API kullanılır.
+const isLocalEnv =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  window.location.protocol === "file:";
+
+/* LONCA AI – BACKEND URL AYARI
+   - Vercel’de çalışırken  : https://memet-cinar-official-tpeh.vercel.app/api/lonca-ai
+   - Lokal Node server.js  : http://localhost:3000/lonca-ai
+*/
+const API_URL =
+  window.location.hostname === "memet-cinar-official-tpeh.vercel.app"
+    ? "https://memet-cinar-official-tpeh.vercel.app/api/lonca-ai"
+    : "http://localhost:3000/lonca-ai";
+
+
+const API_PATH = isLocalEnv ? "/lonca-ai" : "/api/lonca-ai";
+
 function copyStatic(btn){
   const parent=btn.parentElement;
   if(!parent) return;
@@ -1357,13 +1689,13 @@ function appendAiMessage(text){
 /* Sunucuya istek atan fonksiyon */
 async function loncaAiRequest(promptText){
   try{
-    const res=await fetch('/lonca-ai',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+    const res = await fetch(API_URL, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
       body:JSON.stringify({message:promptText})
     });
     if(!res.ok){
-      throw new Error('HTTP '+res.status);
+      throw new Error("HTTP "+res.status);
     }
     const data=await res.json();
     if(data && data.answer){
@@ -1372,7 +1704,9 @@ async function loncaAiRequest(promptText){
     return "Sunucudan boş yanıt geldi.";
   }catch(err){
     console.error('Lonca AI hata:',err);
-    return "Lonca yapay zekâ sunucusuna bağlanırken bir hata oluştu. Sunucunun (server.js) çalıştığından emin ol.";
+    return isLocalEnv
+      ? "Lonca yapay zekâ sunucusuna bağlanırken bir hata oluştu. 'node server.js' ile backend'in çalıştığından ve OPENAI_API_KEY ayarlı olduğundan emin ol."
+      : "Lonca yapay zekâ sunucusuna bağlanırken bir hata oluştu. Vercel üzerindeki /api/lonca-ai fonksiyonunu kontrol et.";
   }
 }
 
@@ -1382,11 +1716,24 @@ async function sendMsg(){
   if(!inp||!box) return;
   const txt=inp.value.trim();
   if(!txt) return;
+
+  // Kullanıcı mesajını ekle
   appendUserMessage(txt);
   inp.value='';
   box.scrollTop=box.scrollHeight;
 
+  // Yükleniyor balonu
+  const loadingDiv=document.createElement('div');
+  loadingDiv.className='msg in ai-msg';
+  loadingDiv.textContent='Yükleniyor...';
+  box.appendChild(loadingDiv);
+  box.scrollTop=box.scrollHeight;
+
+  // Backend'e isteği at
   const ans=await loncaAiRequest(txt);
+
+  // Yükleniyor'u kaldır ve cevabı ekle
+  box.removeChild(loadingDiv);
   appendAiMessage(ans);
 }
 
@@ -1491,7 +1838,7 @@ function initGameFullscreenButtons(){
   });
 }
 
-/* ANIME AI COMPANION – GÜNCEL HAL */
+/* ANIME AI COMPANION */
 function initAnimeCompanion(){
   const area=document.getElementById('anime-companion');
   const hearts=document.getElementById('anime-hearts');
@@ -1505,20 +1852,6 @@ function initAnimeCompanion(){
     '"Lonca asistanına bir şey sor, ben de izleyeyim!"'
   ];
   let qIndex=0;
-
-  /* KALICILIK: localStorage */
-  try{
-    const saved=localStorage.getItem('anime_hidden')==='1';
-    if(saved){
-      area.classList.add('hidden');
-      toggle.textContent='Anime Asistanı Göster';
-    }else{
-      toggle.textContent='Anime Asistanı Gizle';
-    }
-  }catch(e){
-    toggle.textContent='Anime Asistanı Gizle';
-  }
-
   area.addEventListener('click',e=>{
     const rect=area.getBoundingClientRect();
     const x=e.clientX-rect.left;
@@ -1543,11 +1876,8 @@ function initAnimeCompanion(){
   });
 
   toggle.addEventListener('click',()=>{
-    const isHidden=area.classList.toggle('hidden');
-    toggle.textContent=isHidden ? 'Anime Asistanı Göster' : 'Anime Asistanı Gizle';
-    try{
-      localStorage.setItem('anime_hidden',isHidden ? '1':'0');
-    }catch(e){}
+    area.classList.toggle('hidden-mobile');
+    toggle.textContent=area.classList.contains('hidden-mobile') ? 'Anime Asistanı Göster' : 'Anime Asistanı Gizle';
   });
 }
 
@@ -1564,8 +1894,20 @@ window.onload=()=>{
   initGameFullscreenButtons();
   loadYouTubeAPI();
   document.querySelectorAll('.nav-item, .widget-card').forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
+
+  // Enter ile lonca mesajı gönderme
+  const input=document.getElementById('chat-in');
+  if(input){
+    input.addEventListener('keydown',e=>{
+      if(e.key==='Enter'){
+        e.preventDefault();
+        sendMsg();
+      }
+    });
+  }
 };
 window.addEventListener('resize',()=>{updateVh();detectDevice();});
 </script>
+<script src="script.js" ></script>
 </body>
 </html>
