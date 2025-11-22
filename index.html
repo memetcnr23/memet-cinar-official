@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>MEMET ÇINAR | THE LEGACY VIP</title>
 
-<!-- FAVICON (Google / sekme simgesi) -->
+<!-- FAVICON -->
 <link rel="icon" type="image/svg+xml" href="icon-memet-cinar-music.svg" />
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Digital Dismay fontu -->
+<!-- Digital clock font -->
 <link href="https://fonts.cdnfonts.com/css/digital-dismay?styles=116363" rel="stylesheet">
 
 <style>
@@ -33,6 +33,7 @@ body{
     linear-gradient(135deg,#02030a,#050505);
   color:#fff;position:relative;
 }
+
 /* BG FX */
 .bg-fx{position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:
@@ -106,117 +107,102 @@ body{
 .widget-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 18px 45px rgba(0,0,0,0.9);border-color:rgba(255,215,0,0.4);}
 .widget-card:hover::after{opacity:1;}
 
-/* CLOCK & NEWS */
+/* CLOCK */
 .led-clock-box{
-  background:#000;
-  border:2px solid #333;
-  border-radius:14px;
-  padding:12px 28px;
+  background:#020305;
+  border-radius:18px;
+  padding:14px 26px 16px;
   display:inline-flex;
   flex-direction:column;
   align-items:center;
   margin-bottom:20px;
-  box-shadow:0 0 25px rgba(255,0,0,0.25);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 0 25px rgba(255,0,0,0.25),
+    0 14px 40px rgba(0,0,0,0.9);
+  position:relative;
+  overflow:hidden;
+}
+.led-clock-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 0 0,rgba(255,0,0,0.25),transparent 55%),
+    radial-gradient(circle at 100% 100%,rgba(255,255,255,0.1),transparent 55%);
+  opacity:.6;
+  mix-blend-mode:screen;
+  pointer-events:none;
 }
 .led-time{
   font-family:'Digital Dismay', sans-serif;
   font-size:3.4rem;
-  color:var(--neon-red);
+  color:#ff4b4b;
   line-height:1;
+  text-shadow:
+    0 0 6px rgba(255,80,80,0.9),
+    0 0 14px rgba(255,0,0,0.8);
   letter-spacing:4px;
-  text-shadow:0 0 10px var(--neon-red),0 0 20px var(--neon-red);
-  transition:transform .18s ease,text-shadow .18s ease;
-}
-.led-time.tick{
-  transform:scale(1.02);
-  text-shadow:0 0 14px var(--neon-red),0 0 26px var(--neon-red);
 }
 .led-date{
   font-family:'Orbitron',sans-serif;
   color:#bbb;
   margin-top:5px;
   font-size:.85rem;
-  letter-spacing:1px;
+  letter-spacing:2px;
 }
 
-/* === YENI LED TABELA / NEWS TICKER === */
+/* REALISTIC LED TICKER */
 .news-ticker{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:
-    radial-gradient(circle at 0 0,rgba(255,0,80,0.3),transparent 55%),
-    radial-gradient(circle at 100% 100%,rgba(0,0,0,0.95),rgba(0,0,0,1));
-  border-radius:18px;
-  padding:8px 14px;
-  margin-bottom:25px;
-  border:1px solid rgba(255,255,255,0.12);
-  box-shadow:0 14px 32px rgba(0,0,0,0.9);
-}
-
-.news-live-pill{
-  min-width:52px;
-  padding:4px 10px;
-  border-radius:999px;
-  background:radial-gradient(circle at 30% 30%,#fff,#ff003c);
-  color:#fff;
-  font-size:0.7rem;
-  font-weight:700;
-  text-align:center;
-  box-shadow:0 0 16px rgba(255,0,60,0.9);
-  font-family:'Orbitron',sans-serif;
-}
-
-.news-window{
   position:relative;
+  background:#1a0000;
+  border-radius:14px;
+  padding:4px 16px 6px;
+  margin-bottom:25px;
   overflow:hidden;
-  border-radius:999px;
-  flex:1;
-  height:32px;
-  padding:0 8px;
-  background:
-    radial-gradient(circle at 0 0,rgba(255,255,255,0.08),transparent 55%),
-    radial-gradient(circle at 100% 100%,rgba(5,5,5,1),rgba(0,0,0,1));
   box-shadow:
-    inset 0 0 8px rgba(0,0,0,0.9),
-    0 0 12px rgba(0,0,0,0.7);
+    0 0 4px rgba(0,0,0,0.9),
+    0 0 18px rgba(255,0,0,0.7);
+  border:1px solid rgba(255,80,80,0.7);
 }
-
-/* noktalı LED grid */
-.news-window::before{
-  content:'';
+.news-ticker::before{
+  content:'● LIVE';
   position:absolute;
-  inset:0;
-  background-image:radial-gradient(circle,#111 1px, transparent 1.6px);
-  background-size:6px 6px;
-  opacity:.9;
-  mix-blend-mode:soft-light;
-  pointer-events:none;
+  left:10px;
+  top:7px;
+  font-size:.65rem;
+  padding:2px 8px;
+  border-radius:999px;
+  background:radial-gradient(circle at 30% 0,#ff4b4b,#900);
+  color:#ffecec;
+  font-weight:700;
+  letter-spacing:1px;
+  text-shadow:0 0 4px rgba(0,0,0,0.8);
 }
-
-.news-text{
-  position:absolute;
+.news-inner{
+  margin-left:80px;
+  overflow:hidden;
+}
+.news-content{
+  display:inline-flex;
+  gap:50px;
   white-space:nowrap;
-  left:100%;
-  top:50%;
-  transform:translate(0,-50%);
-  font-family:'Digital Dismay','Orbitron',monospace;
-  font-size:0.95rem;
-  letter-spacing:0.16em;
-  color:#ffd34d;
+  font-family:'VT323',monospace;
+  font-size:1rem;
+  letter-spacing:2px;
+  color:#ffd9a6;
   text-shadow:
-    0 0 3px #facc15,
-    0 0 7px #facc15,
-    0 0 13px #facc15;
-  animation:ledScroll 22s linear infinite;
+    0 0 4px rgba(255,200,0,0.8),
+    0 0 10px rgba(255,140,0,0.7);
+  animation:ledTicker 28s linear infinite;
+}
+.news-content span i{margin-right:6px;}
+@keyframes ledTicker{
+  0%{transform:translateX(100%);}
+  100%{transform:translateX(-100%);}
 }
 
-@keyframes ledScroll{
-  0%{transform:translate(0,-50%);}
-  100%{transform:translate(-100%,-50%);}
-}
-
-/* HAVA DURUMU – ÖZEL NEON TASARIM KARTI */
+/* WEATHER – neon orb */
 #weather-box{
   position:relative;
   padding:18px 16px 16px;
@@ -228,7 +214,6 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 18px 40px rgba(0,0,0,0.9);
 }
-
 #weather-box::before{
   content:'';
   position:absolute;
@@ -246,8 +231,6 @@ body{
   mix-blend-mode:screen;
   pointer-events:none;
 }
-
-/* Ortadaki dairesel “hava küresi” */
 .weather-main{
   display:flex;
   align-items:center;
@@ -255,7 +238,6 @@ body{
   gap:18px;
   margin:4px 0 16px;
 }
-
 .weather-orb{
   width:130px;
   height:130px;
@@ -268,7 +250,6 @@ body{
     0 0 25px rgba(0,240,255,0.5),
     0 0 55px rgba(255,215,0,0.4);
 }
-
 .weather-orb-inner{
   position:relative;
   width:100%;
@@ -281,7 +262,6 @@ body{
   justify-content:center;
   overflow:hidden;
 }
-
 .weather-orb-inner::before{
   content:'';
   position:absolute;
@@ -290,33 +270,27 @@ body{
   border:1px dashed rgba(255,255,255,0.22);
   box-shadow:0 0 18px rgba(0,0,0,0.9) inset;
 }
-
-/* İkon + sıcaklık */
-.weather-icon-lg{font-size:3rem;filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));}
 #w-icon{
   font-size:2.4rem;
   margin-bottom:4px;
   filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));
   animation:floatW 3.2s ease-in-out infinite;
 }
-
 #w-temp{
   font-family:'Digital Dismay',sans-serif;
   font-size:2.2rem;
   letter-spacing:2px;
   text-shadow:0 0 18px rgba(255,255,255,0.7);
 }
-
 @keyframes floatW{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
-/* Sağ taraf yazılar */
+/* Weather right side */
 .weather-main-info{
   display:flex;
   flex-direction:column;
   gap:8px;
   max-width:180px;
 }
-
 .weather-location{
   font-size:.75rem;
   text-transform:uppercase;
@@ -326,17 +300,8 @@ body{
   align-items:center;
   gap:6px;
 }
-
-.weather-location i{
-  font-size:.8rem;
-  color:var(--neon-blue);
-}
-
-#w-desc{
-  font-size:.85rem;
-  color:#e3e8ff;
-}
-
+.weather-location i{font-size:.8rem;color:var(--neon-blue);}
+#w-desc{font-size:.85rem;color:#e3e8ff;}
 .weather-badge{
   display:inline-flex;
   align-items:center;
@@ -349,14 +314,13 @@ body{
   color:#cbd5ff;
 }
 
-/* Alt kısım – rüzgar / nem kutucukları */
+/* Weather details */
 .weather-details{
   display:flex;
   justify-content:space-between;
   margin-top:4px;
   gap:10px;
 }
-
 .w-detail{
   flex:1;
   background:rgba(0,0,0,0.45);
@@ -365,19 +329,17 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 8px 20px rgba(0,0,0,0.7);
 }
-
 .w-val{
   font-family:'Orbitron';
   color:var(--neon-blue);
   font-size:1rem;
 }
-
 .w-label{
   font-size:.7rem;
   color:#9ca3af;
 }
 
-/* Farklı hava tiplerine göre arka plan */
+/* Weather state backgrounds */
 #weather-box.w-sunny{
   background:
     radial-gradient(circle at 0 0,rgba(255,215,0,0.35),rgba(17,8,0,0.98)),
@@ -403,23 +365,15 @@ body{
     radial-gradient(circle at 0 0,rgba(248,250,252,0.2),rgba(15,23,42,1)),
     radial-gradient(circle at 100% 100%,rgba(55,65,81,0.9),rgba(3,4,10,1));
 }
-
-/* Küçük ekran düzeltmesi */
 @media (max-width:768px){
-  .weather-main{
-    gap:14px;
-  }
-  .weather-orb{
-    width:115px;
-    height:115px;
-  }
+  .weather-main{gap:14px;}
+  .weather-orb{width:115px;height:115px;}
 }
 
 /* CALENDAR */
 .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;}
 .cal-head{font-size:.8rem;color:var(--muted);padding-bottom:8px;}
-
 .cal-cell{
   aspect-ratio:1;
   display:flex;
@@ -445,7 +399,7 @@ body{
   box-shadow:0 0 10px rgba(0,240,255,0.4);
 }
 
-/* ❄ Genel karlı gün efekti */
+/* Flags & effects (unchanged logic) */
 .cal-cell.snowy{
   color:#fff;
   background:radial-gradient(circle at 30% 0%,rgba(255,255,255,0.18),rgba(0,0,0,0.8));
@@ -464,8 +418,6 @@ body{
   40%{opacity:1;}
   100%{transform:translate(-8px,18px) rotate(360deg);opacity:0;}
 }
-
-/* 🇹🇷 Resmi milli bayramlar – bayrak + parıltı */
 .cal-cell.flag{
   background:radial-gradient(circle at 10% 0%,rgba(227,10,23,0.4),rgba(0,0,0,0.85));
   border:1px solid #E30A17;
@@ -489,8 +441,6 @@ body{
   50%{box-shadow:0 0 16px rgba(227,10,23,1);}
   100%{box-shadow:0 0 6px rgba(227,10,23,0.6);}
 }
-
-/* 🎆 YILBAŞI (1 OCAK) – konfeti / havai fişek hissi */
 .cal-cell.newyear{
   background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.4),rgba(0,0,0,0.9));
   border:1px solid rgba(255,215,0,0.8);
@@ -549,8 +499,6 @@ body{
   50%{box-shadow:0 0 24px rgba(255,215,0,1);}
   100%{box-shadow:0 0 10px rgba(255,215,0,0.5);}
 }
-
-/* ÖZEL GÜN (örn: 14 Şubat) */
 .cal-cell.special{
   border-color:var(--gold);
   background:radial-gradient(circle at 50% 0%,rgba(255,105,180,0.25),rgba(0,0,0,0.9));
@@ -589,17 +537,61 @@ body{
 .songs-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;}
 @media(max-width:900px){.songs-layout{grid-template-columns:1fr;}}
 .section-title{font-family:'Orbitron';color:var(--gold);margin-bottom:18px;border-left:4px solid var(--gold);padding-left:15px;text-transform:uppercase;letter-spacing:1px;}
-.song-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
-.song-row{display:flex;flex-direction:column;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid transparent;transition:.2s var(--smooth);cursor:pointer;position:relative;overflow:hidden;}
-.song-row-main{display:flex;align-items:center;gap:12px;}
-.song-row::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 0 0,rgba(0,240,255,0.25),transparent 55%);opacity:0;transition:.25s;mix-blend-mode:screen;}
-.song-row:hover{border-color:var(--gold);background:rgba(255,215,0,0.06);transform:translateY(-2px);}
+.song-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:12px;
+}
+.song-row{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:10px;
+  background:rgba(255,255,255,0.03);
+  border-radius:14px;
+  border:1px solid transparent;
+  transition:.2s var(--smooth);
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  clip-path:polygon(8% 0,100% 0,100% 78%,92% 100%,0 100%,0 18%);
+}
+.song-row::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 0 0,rgba(0,240,255,0.25),transparent 55%);
+  opacity:0;transition:.25s;mix-blend-mode:screen;
+}
+.song-row:hover{
+  border-color:var(--gold);
+  background:rgba(255,215,0,0.06);
+  transform:translateY(-2px);
+}
 .song-row:hover::after{opacity:1;}
-.song-row.active{border-color:var(--neon-blue);background:rgba(0,240,255,0.09);}
+.song-row.active{
+  border-color:var(--neon-blue);
+  background:rgba(0,240,255,0.09);
+}
+.song-row-main{display:flex;align-items:center;gap:12px;}
 .song-title{font-weight:700;font-size:.9rem;}
 .song-artist{font-size:.75rem;color:#aaa;}
-.song-tag{font-size:.7rem;padding:2px 6px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);color:var(--muted);}
-.song-inline-lyrics{font-size:.7rem;color:#aaa;background:rgba(0,0,0,0.4);border-radius:8px;padding:6px 8px;border:1px dashed rgba(255,255,255,0.08);}
+.song-tag{
+  font-size:.7rem;
+  padding:2px 6px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.12);
+  color:var(--muted);
+  background:rgba(0,0,0,0.4);
+}
+.song-inline-lyrics{
+  font-size:.7rem;
+  color:#aaa;
+  background:rgba(0,0,0,0.4);
+  border-radius:8px;
+  padding:6px 8px;
+  border:1px dashed rgba(255,255,255,0.08);
+}
 .song-inline-lyrics span.hint{color:var(--gold);}
 
 #lyrics-panel h3{font-family:'Orbitron';font-size:1rem;margin-bottom:4px;}
@@ -613,7 +605,7 @@ body{
 #lyrics-save-btn{margin-top:6px;padding:6px 14px;border-radius:999px;border:none;background:var(--gold);color:#000;font-weight:700;font-size:.8rem;cursor:pointer;}
 #lyrics-login-hint{font-size:.78rem;color:#999;margin-top:6px;}
 
-/* ARTISTS extra (HAKKIMDA) */
+/* ARTISTS & WRITERS */
 .about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
 .about-stat-pill{border-radius:999px;border:1px solid rgba(255,255,255,0.16);padding:4px 10px;font-size:.75rem;display:inline-flex;align-items:center;gap:6px;margin:2px 4px 2px 0;background:rgba(0,0,0,0.4);}
@@ -622,11 +614,67 @@ body{
 .about-tagline{font-size:.85rem;color:#ccc;margin-bottom:4px;}
 .about-text{font-size:.8rem;color:#aaa;line-height:1.5;}
 
-/* CHAT */
-.chat-box{height:300px;overflow-y:auto;background:rgba(0,0,0,0.35);border-radius:10px;padding:15px;margin-bottom:10px;border:1px solid #222;display:flex;flex-direction:column;}
-.msg{padding:8px 12px;border-radius:15px;margin-bottom:8px;max-width:80%;font-size:.9rem;}
+/* Writers grid */
+.writers-grid{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+}
+.writer-card{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(15,15,20,0.9);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 25px rgba(0,0,0,0.7);
+}
+.writer-avatar{
+  width:64px;height:64px;border-radius:50%;
+  border:2px solid #fff;object-fit:cover;
+}
+.writer-main-name{font-size:.95rem;font-weight:700;}
+.writer-role{font-size:.8rem;color:#aaa;}
+.writer-badges{margin-top:4px;display:flex;gap:6px;flex-wrap:wrap;font-size:.65rem;}
+.writer-badge{
+  padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);
+  background:rgba(0,0,0,0.6);
+}
+.writer-badge.gold{
+  background:linear-gradient(90deg,#ffd700,#ff8c00);
+  color:#000;border-color:rgba(255,215,0,0.8);font-weight:700;
+}
+.writer-badge.ok{background:#555;color:#fff;}
+.writer-badge.collab{background:#0f172a;color:#e5e7eb;border-color:rgba(148,163,184,0.8);}
+.writer-works{margin-top:4px;font-size:.75rem;color:#ccc;}
+
+/* CHAT / LONCA AI */
+.chat-box{
+  height:300px;overflow-y:auto;background:rgba(0,0,0,0.35);
+  border-radius:10px;padding:15px;margin-bottom:10px;border:1px solid #222;
+  display:flex;flex-direction:column;
+}
+.msg{
+  padding:8px 12px;border-radius:15px;margin-bottom:8px;max-width:80%;font-size:.9rem;position:relative;
+}
 .msg.in{background:#222;color:#ddd;align-self:flex-start;border-bottom-left-radius:2px;}
 .msg.out{background:var(--gold);color:#000;margin-left:auto;border-bottom-right-radius:2px;font-weight:600;}
+.msg.ai-msg{background:#111;color:#e5e7eb;border:1px solid rgba(148,163,184,0.4);}
+.msg-copy-btn{
+  position:absolute;
+  right:6px;
+  bottom:4px;
+  font-size:.65rem;
+  padding:2px 6px;
+  border-radius:999px;
+  border:none;
+  background:rgba(15,23,42,0.85);
+  color:#e5e7eb;
+  cursor:pointer;
+}
+.msg-copy-btn:hover{background:rgba(30,64,175,0.95);}
 .center-flex{display:flex;align-items:center;justify-content:center;height:100%;text-align:center;flex-direction:column;}
 
 /* PLAYER BAR */
@@ -647,7 +695,7 @@ body{
 .progress-rail:hover .progress-bar::after{opacity:1;}
 .p-extra{color:var(--neon-blue);font-size:1.2rem;}
 
-/* GAME */
+/* GAME + FULLSCREEN BUTTONS */
 #game-canvas{background:#000;border:2px solid #333;max-width:100%;box-shadow:0 0 18px rgba(0,0,0,0.9);}
 .game-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;width:100%;}
 @media(max-width:900px){.game-grid{grid-template-columns:1fr;}}
@@ -655,9 +703,45 @@ body{
 .game-library-card li{margin-bottom:8px;}
 .game-badges span{display:inline-flex;align-items:center;gap:5px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);padding:3px 8px;font-size:.7rem;margin-right:6px;margin-top:4px;}
 .game-links a{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;margin-right:10px;margin-top:6px;text-decoration:none;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.16);}
-.game-links a:hover{background:rgba(255,255,255,0.08);} 
+.game-links a:hover{background:rgba(255,255,255,0.08);}
+.game-toolbar{
+  position:absolute;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:6px;
+}
+.game-fs-btn{
+  padding:4px 10px;
+  border-radius:999px;
+  border:none;
+  background:rgba(15,23,42,0.9);
+  color:#e5e7eb;
+  font-size:.7rem;
+  cursor:pointer;
+}
+.game-fs-btn:hover{background:rgba(37,99,235,0.95);}
+.game-main-card{position:relative;}
+body.game-fullscreen .nav-dock{display:none;}
+body.game-fullscreen .viewport{
+  top:70px;
+  left:0;
+  right:0;
+  bottom:90px;
+}
+body.game-fullscreen #game{
+  position:fixed;
+  inset:70px 0 90px 0;
+  background:rgba(0,0,0,0.96);
+  z-index:1500;
+  overflow:auto;
+}
+body.game-fullscreen #game .game-grid{
+  max-width:960px;
+  margin:0 auto;
+}
 
-/* ANIME KIZ – SAĞ ALTA SABİT */
+/* ANIME GIRL */
 .anime-floating{
   position:fixed;
   right:20px;
@@ -669,13 +753,12 @@ body{
 @media(max-width:768px){
   .anime-floating{
     right:10px;
-    bottom:140px;
-    width:90px;    /* mobilde daha küçük */
+    bottom:150px;
+    width:110px;
   }
 }
-.anime-floating-inner{
-  position:relative;
-}
+.anime-floating.hidden-mobile{display:none;}
+.anime-floating-inner{position:relative;}
 .anime-floating-img{
   width:100%;
   display:block;
@@ -713,6 +796,33 @@ body{
   text-align:center;
   font-family:'Orbitron',sans-serif;
 }
+
+/* Anime toggle button MOBILE ONLY */
+.anime-toggle-btn{
+  display:none;
+}
+@media(max-width:768px){
+  .anime-toggle-btn{
+    display:block;
+    position:fixed;
+    right:10px;
+    bottom:90px;
+    z-index:1201;
+    padding:6px 12px;
+    border-radius:999px;
+    border:none;
+    background:rgba(15,23,42,0.95);
+    color:#e5e7eb;
+    font-size:.75rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    box-shadow:0 0 12px rgba(0,0,0,0.8);
+    cursor:pointer;
+  }
+}
+
+/* SYSTEM MODAL SIMPLE */
+#sys-modal{display:none;}
 </style>
 </head>
 <body>
@@ -721,7 +831,7 @@ body{
 <div class="scanlines"></div>
 
 <!-- SYSTEM MODAL -->
-<div id="sys-modal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.8); align-items:center; justify-content:center;">
+<div id="sys-modal" style="position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.8); align-items:center; justify-content:center;">
   <div style="background:#111; border:1px solid var(--neon-blue); padding:30px; border-radius:15px; text-align:center; max-width:90%; width:400px; box-shadow:0 0 30px rgba(0,240,255,0.2);">
     <h3 style="color:var(--neon-blue); font-family:'Orbitron'; margin-bottom:15px">SİSTEM MESAJI</h3>
     <p id="sys-msg" style="color:#ccc; margin-bottom:20px"></p>
@@ -732,7 +842,7 @@ body{
 <!-- TOP HEADER -->
 <header class="hud-top">
   <div class="brand brand-logo-full">
-    <!-- MÜZİK TEMALI MEMET ÇINAR KAPAK LOGOSU (INLINE SVG) -->
+    <!-- LOGO SVG (değiştirmeden kullanıyorum) -->
     <svg viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
@@ -794,12 +904,12 @@ body{
 
 <!-- NAVIGATION -->
 <nav class="nav-dock">
-  <div class="nav-item active" onclick="switchTab('home', this)"><i class="fas fa-home"></i></div>
-  <div class="nav-item" onclick="switchTab('songs', this)"><i class="fas fa-music"></i></div>
-  <div class="nav-item" onclick="switchTab('artists', this)"><i class="fas fa-users"></i></div>
-  <div class="nav-item" onclick="switchTab('chat', this)"><i class="fas fa-comments"></i></div>
-  <div class="nav-item" onclick="switchTab('game', this)"><i class="fas fa-gamepad"></i></div>
-  <div class="nav-item" onclick="switchTab('contact', this)"><i class="fas fa-paper-plane"></i></div>
+  <div class="nav-item active" data-tab="home" onclick="switchTab('home', this)"><i class="fas fa-home"></i></div>
+  <div class="nav-item" data-tab="songs" onclick="switchTab('songs', this)"><i class="fas fa-music"></i></div>
+  <div class="nav-item" data-tab="artists" onclick="switchTab('artists', this)"><i class="fas fa-users"></i></div>
+  <div class="nav-item" data-tab="chat" onclick="switchTab('chat', this)"><i class="fas fa-comments"></i></div>
+  <div class="nav-item" data-tab="game" onclick="switchTab('game', this)"><i class="fas fa-gamepad"></i></div>
+  <div class="nav-item" data-tab="contact" onclick="switchTab('contact', this)"><i class="fas fa-paper-plane"></i></div>
 </nav>
 
 <!-- MAIN CONTENT -->
@@ -813,13 +923,14 @@ body{
       </div>
     </div>
 
-    <!-- LED TABELA -->
+    <!-- LED TABELA NEWS -->
     <div class="news-ticker">
-      <div class="news-live-pill">LIVE</div>
-      <div class="news-window">
-        <div class="news-text" id="news-text">
-          MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR! · MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA. · 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA. · LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF. · 
-          MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR! · MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA. · 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA. · LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF. · 
+      <div class="news-inner">
+        <div class="news-content">
+          <span><i class="fas fa-bolt"></i> MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR!</span>
+          <span><i class="fas fa-star"></i> MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA.</span>
+          <span><i class="fas fa-music"></i> 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA.</span>
+          <span><i class="fas fa-check-circle"></i> LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF.</span>
         </div>
       </div>
     </div>
@@ -841,15 +952,12 @@ body{
         <h3 style="font-family:'Orbitron'; color:var(--neon-blue); border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:10px;">HAVA DURUMU · MALATYA</h3>
         <div id="weather-box">
           <div class="weather-main">
-            <!-- Neon hava küresi -->
             <div class="weather-orb">
               <div class="weather-orb-inner">
-                <i id="w-icon" class="fas fa-sun weather-icon-lg"></i>
+                <i id="w-icon" class="fas fa-sun"></i>
                 <div id="w-temp">--°</div>
               </div>
             </div>
-
-            <!-- Yazılı bilgiler -->
             <div class="weather-main-info">
               <div class="weather-location">
                 <i class="fas fa-location-dot"></i>
@@ -861,7 +969,6 @@ body{
               </span>
             </div>
           </div>
-
           <div class="weather-details">
             <div class="w-detail">
               <div class="w-val" id="w-wind">--</div>
@@ -893,7 +1000,10 @@ body{
           <span id="lyrics-autosave">Otomatik kayıt: beklemede</span>
           <span id="lyrics-stats">0 karakter · 0 satır</span>
         </div>
-        <div id="lyrics-view">Burada seçilen şarkının sözleri görünecek. Resmî şarkı sözleri telif nedeniyle otomatik eklenmiyor; kendi yorumunu ve söz taslağını buraya kaydedebilirsin.</div>
+        <div id="lyrics-view">
+          Burada seçilen şarkının sözleri görünecek. Resmî şarkı sözleri telif nedeniyle otomatik eklenmiyor;
+          kendi yorumunu ve söz taslağını buraya kaydedebilirsin.
+        </div>
         <div id="lyrics-editor">
           <textarea id="lyrics-input" placeholder="Şarkı sözlerini buraya yaz... (Bu cihazda kaydedilir)"></textarea>
           <button id="lyrics-save-btn" type="button" onclick="saveLyrics(false)">Sözleri Kaydet</button>
@@ -903,7 +1013,7 @@ body{
     </div>
   </section>
 
-  <!-- ARTISTS + HAKKIMDA -->
+  <!-- ARTISTS + WRITERS -->
   <section id="artists" class="screen">
     <div class="grid-2">
       <div class="widget-card" style="display:flex; gap:15px; align-items:center;">
@@ -913,7 +1023,7 @@ body{
             MEMET ÇINAR
             <i class="fa-solid fa-circle-check" style="color:#1DA1F2;" title="Mavi Tik - Resmi Sanatçı"></i>
           </h3>
-          <p style="font-size:0.85rem; color:#aaa">Solist · Besteci · Söz Yazarı</p>
+          <p style="font-size:0.85rem; color:#aaa">Solist · Besteci · Resmi-Sanatçı/Müzisyen . Söz Yazarı</p>
           <div style="margin-top:6px; display:flex; gap:6px; font-size:.7rem; flex-wrap:wrap;">
             <span style="background:#1DA1F2; color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">MAVİ TİK</span>
             <span style="background:linear-gradient(90deg,#ffd700,#ff8c00); color:#000; padding:2px 6px; border-radius:999px; font-weight:bold;">ALTIN SEVİYE</span>
@@ -931,6 +1041,7 @@ body{
           </h3>
           <p style="font-size:0.85rem; color:#aaa">Söz Yazarı</p>
           <span style="font-size:0.7rem; background:#555; color:#fff; padding:2px 6px; border-radius:4px;">ONAYLI</span>
+          <div style="margin-top:6px; font-size:.75rem; color:#ccc;">Eser: Bu Bir Rüya</div>
           <div style="margin-top:8px; font-size:1.1rem;">
             <a href="https://www.instagram.com/bilalguvercin_official/" target="_blank" rel="noopener" style="margin-right:8px; color:#C13584;"><i class="fab fa-instagram"></i></a>
             <a href="https://www.youtube.com/channel/UCGxmNCKcU2wbYCK3xvKGVxg" target="_blank" rel="noopener" style="margin-right:8px; color:#FF0000;"><i class="fab fa-youtube"></i></a>
@@ -940,6 +1051,7 @@ body{
       </div>
     </div>
 
+    <!-- Hakkımda -->
     <div class="widget-card" style="margin-top:20px;">
       <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;">
         <i class="fas fa-user-astronaut"></i> HAKKIMDA · MEMET ÇINAR
@@ -978,17 +1090,117 @@ body{
         </div>
       </div>
     </div>
+
+    <!-- SÖZ YAZARLARI – TEK TEK, ONAYLI, ALTIN TİKLİ, ORTAK ÇALIŞMA -->
+    <div class="widget-card" style="margin-top:20px;">
+      <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;">
+        <i class="fas fa-pen-nib"></i> SÖZ YAZARLARI · ELKAY 2 ORTAK ÇALIŞMA
+      </h3>
+      <div class="writers-grid">
+        <!-- Hazal Erden -->
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Hazal+Erden&background=111827&color=ffffff&size=256" alt="Hazal Erden">
+          <div>
+            <div class="writer-main-name">
+              Hazal Erden
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+        <!-- Leyla Loly -->
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Leyla+Loly&background=111827&color=ffffff&size=256" alt="Leyla Loly">
+          <div>
+            <div class="writer-main-name">
+              Leyla Loly
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+        <!-- Nazli Gül -->
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Nazli+Gül&background=111827&color=ffffff&size=256" alt="Nazli Gül">
+          <div>
+            <div class="writer-main-name">
+              Nazli GÜl
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+        <!-- Retaj Manaf -->
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Retaj+Manaf&background=111827&color=ffffff&size=256" alt="Retaj Manaf">
+          <div>
+            <div class="writer-main-name">
+              Retaj Manaf
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+        <!-- Zeynep Karaca -->
+        <div class="writer-card">
+          <img class="writer-avatar" src="https://ui-avatars.com/api/?name=Zeynep+Karaca&background=111827&color=ffffff&size=256" alt="Zeynep Karaca">
+          <div>
+            <div class="writer-main-name">
+              Zeynep Karaca
+              <i class="fa-solid fa-circle-check" style="color:#FFD700;" title="Altın Tik - Söz Yazarı"></i>
+            </div>
+            <div class="writer-role">Söz Yazarı</div>
+            <div class="writer-badges">
+              <span class="writer-badge ok">ONAYLI</span>
+              <span class="writer-badge gold">ALTIN TİK</span>
+              <span class="writer-badge collab">ORTAK ÇALIŞMA</span>
+            </div>
+            <div class="writer-works">Eser: ELKAY 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- CHAT -->
+  <!-- CHAT / LONCA YAPAY ZEKA -->
   <section id="chat" class="screen">
     <div class="widget-card" style="height:70vh; display:flex; flex-direction:column;">
-      <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:15px;">VIP SOHBET</h3>
+      <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:8px;">LONCA SOHBETİ · YAPAY ZEKA ASİSTANI</h3>
+      <p style="font-size:.75rem;color:#aaa;margin-bottom:10px;">
+        Sorular sor, matematik işlemleri yaz (örn: <code>25*4+10</code>), ya da “ELKAY 2 için duygusal şarkı sözü yaz” gibi komutlar ver.
+      </p>
       <div id="chat-history" class="chat-box">
-        <div class="msg in">Sisteme hoşgeldiniz. Size nasıl yardımcı olabilirim?</div>
+        <div class="msg in ai-msg">
+          Merhaba, ben lonca yapay zekâ asistanıyım. Sana bilgi, matematik ve şarkı sözü taslaklarında yardım edebilirim.
+          <button class="msg-copy-btn" onclick="copyStatic(this)">Kopyala</button>
+        </div>
       </div>
       <div style="display:flex; gap:10px; margin-top:auto;">
-        <input type="text" id="chat-in" placeholder="Mesaj yaz..." style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:12px; border-radius:20px; outline:none;">
+        <input type="text" id="chat-in" placeholder="Mesaj yaz veya işlem gir (örn: 12*8 + 5)..." style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:12px; border-radius:20px; outline:none;">
         <button onclick="sendMsg()" style="width:50px; height:50px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
       </div>
     </div>
@@ -997,7 +1209,11 @@ body{
   <!-- GAME -->
   <section id="game" class="screen">
     <div class="game-grid">
-      <div class="widget-card center-flex" style="flex-direction:column;">
+      <div class="widget-card center-flex game-main-card" style="flex-direction:column;">
+        <div class="game-toolbar">
+          <button id="btn-game-expand" class="game-fs-btn" type="button">Tam Ekran</button>
+          <button id="btn-game-collapse" class="game-fs-btn" type="button" style="display:none;">Çık</button>
+        </div>
         <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:10px">NOTA AVCISI</h3>
         <div style="margin-bottom:10px">Skor: <span id="score" style="color:var(--neon-blue)">0</span></div>
         <canvas id="game-canvas" width="300" height="300"></canvas>
@@ -1017,8 +1233,8 @@ body{
             </div>
             <div class="game-links">
               <a href="https://tetris.com/play-tetris" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
-              <a href="#" title="Kendi Tetris APK dosyanı buraya bağlayabilirsin."><i class="fab fa-android"></i> APK İndir</a>
-              <a href="#" title="Kendi Tetris EXE dosyanı buraya bağlayabilirsin."><i class="fab fa-windows"></i> EXE İndir</a>
+              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
             </div>
           </li>
           <li>
@@ -1030,8 +1246,8 @@ body{
             </div>
             <div class="game-links">
               <a href="https://www.free80sarcade.com/spaceinvaders.php" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
-              <a href="#" title="Kendi space shooter APK dosyanı buraya bağlayabilirsin."><i class="fab fa-android"></i> APK İndir</a>
-              <a href="#" title="Kendi space shooter EXE dosyanı buraya bağlayabilirsin."><i class="fab fa-windows"></i> EXE İndir</a>
+              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
             </div>
           </li>
           <li>
@@ -1043,8 +1259,8 @@ body{
             </div>
             <div class="game-links">
               <a href="https://ponggame.org/" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
-              <a href="#" title="Kendi pong APK dosyanı buraya bağlayabilirsin."><i class="fab fa-android"></i> APK İndir</a>
-              <a href="#" title="Kendi pong EXE dosyanı buraya bağlayabilirsin."><i class="fab fa-windows"></i> EXE İndir</a>
+              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
+              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
             </div>
           </li>
         </ul>
@@ -1057,7 +1273,7 @@ body{
     <div class="center-flex" style="height:60vh">
       <img src="https://ui-avatars.com/api/?name=Memet+Çınar&background=111827&color=ffffff&size=256" style="width:120px; height:120px; border-radius:50%; border:4px solid var(--gold); margin-bottom:20px;" alt="Memet Çınar">
       <h2 style="font-family:'Cinzel'; color:var(--gold)">MEMET ÇINAR</h2>
-      <p style="color:#aaa; margin-bottom:18px">Resmi iletişim kanalları (linkleri gerçek profillerinle güncelleyebilirsin).</p>
+      <p style="color:#aaa; margin-bottom:18px">Resmi iletişim kanalları.</p>
       <div style="display:flex; gap:20px; font-size:2rem; flex-wrap:wrap; justify-content:center;">
         <a href="#" style="color:#C13584"><i class="fab fa-instagram"></i></a>
         <a href="#" style="color:#FF0000"><i class="fab fa-youtube"></i></a>
@@ -1068,7 +1284,7 @@ body{
   </section>
 </main>
 
-<!-- ANIME KIZ – SAĞ ALTTA SABİT GIF -->
+<!-- ANIME KIZ – SAĞ ALTTA SABİT -->
 <div class="anime-floating" id="anime-companion">
   <div class="anime-floating-inner">
     <div class="anime-hearts-container" id="anime-hearts"></div>
@@ -1076,6 +1292,7 @@ body{
   </div>
   <div class="anime-float-speech" id="anime-quote">"Bugün hangi şarkıyla level atlıyoruz?"</div>
 </div>
+<button class="anime-toggle-btn" id="anime-toggle">Anime Asistan</button>
 
 <!-- PLAYER -->
 <footer class="player-bar">
@@ -1130,6 +1347,7 @@ function detectDevice(){
   if(el){el.innerHTML=`<i class="fa-solid fa-${icon}"></i> Cihaz: ${type}`;}
 }
 
+/* hover sfx */
 let audioCtx=null;
 function ensureAudioCtx(){ if(!audioCtx){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) audioCtx=new AC(); } }
 function playHoverSfx(){
@@ -1141,6 +1359,7 @@ function playHoverSfx(){
   osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime+0.15);
 }
 
+/* SONGS – memet cınar listesi (YouTube ID'leri) */
 const defaultArtistCover="https://ui-avatars.com/api/?name=Memet+Çınar&background=000000&color=ffffff&size=256";
 
 const songs = [
@@ -1159,7 +1378,6 @@ const songs = [
   { title: "TATTIM ÖLÜMÜ",                artist: "Memet Çınar", id: "GychhkAbwH4" },
   { title: "İREMİN ŞARKISI",              artist: "Memet Çınar", id: "CcCs4_OZNOo" },
   { title: "BU BİR RÜYA",                 artist: "Bilal Güvercin", id: "JlmddA0lefw" },
-
   { title: "VAZGEÇMEZ BU KALP",           artist: "Memet Çınar", id: "0xgUyoGm4hY" },
   { title: "VUR BENİ KALBİMDEN",          artist: "Memet Çınar", id: "gMGz2e9uMcA" },
   { title: "DÜNYAMIN GÜNEŞİ",             artist: "Memet Çınar", id: "fvt8tI8n_cY" },
@@ -1184,31 +1402,29 @@ function getSongKey(song){
   return song.id ? song.id : ('title_'+song.title.toLowerCase().replace(/[^a-z0-9ığüşöç]/gi,'_'));
 }
 
+/* TAB SWITCH */
 function switchTab(id,el){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const screen=document.getElementById(id);
   if(screen) screen.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  el.classList.add('active');
+  if(el) el.classList.add('active');
 }
 
+/* CLOCK with seconds */
 function initClock(){
-  const tick=()=>{
+  const t=()=>{
     const d=new Date();
     const clock=document.getElementById('clock');
     const date=document.getElementById('date');
     if(!clock||!date) return;
     clock.innerText=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    date.innerText=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
-    clock.classList.remove('tick');
-    // force reflow for animation reset
-    void clock.offsetWidth;
-    clock.classList.add('tick');
+    date.innerText=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'}).toUpperCase();
   };
-  tick();
-  setInterval(tick,1000);
+  setInterval(t,1000); t();
 }
 
+/* CALENDAR */
 const specialDays={
   "1-1":"newyear",
   "14-2":"special",
@@ -1218,7 +1434,6 @@ const specialDays={
   "30-8":"flag",
   "29-10":"flag"
 };
-
 function changeMonth(dir){calDate.setMonth(calDate.getMonth()+dir);initCalendar();}
 function initCalendar(){
   const y=calDate.getFullYear(),m=calDate.getMonth();
@@ -1246,6 +1461,7 @@ function initCalendar(){
   }
 }
 
+/* WEATHER */
 async function initWeather(){
   const lat=38.35,lon=38.31;
   try{
@@ -1268,29 +1484,17 @@ async function initWeather(){
 
       const code=w.weathercode;
       let icon="fa-sun",color="orange",desc="Açık",stateClass="w-sunny";
-
-      if(code===0){
-        icon="fa-sun";color="#ffd760";desc="Açık";stateClass="w-sunny";
-      }else if(code===1||code===2){
-        icon="fa-cloud-sun";color="#fffae0";desc="Parçalı bulutlu";stateClass="w-cloudy";
-      }else if(code===3){
-        icon="fa-cloud";color="#d0d7e2";desc="Kapalı";stateClass="w-cloudy";
-      }else if(code>=45&&code<=48){
-        icon="fa-smog";color="#9ba3b0";desc="Sisli";stateClass="w-cloudy";
-      }else if(code>=51&&code<=67){
-        icon="fa-cloud-rain";color="#00F0FF";desc="Yağmurlu";stateClass="w-rainy";
-      }else if(code>=71&&code<=77){
-        icon="fa-snowflake";color="#ffffff";desc="Karlı";stateClass="w-snowy";
-      }else if(code>=80&&code<=82){
-        icon="fa-cloud-showers-heavy";color="#6be0ff";desc="Sağanak";stateClass="w-rainy";
-      }else if(code>=95){
-        icon="fa-bolt";color="#ffd760";desc="Gök gürültülü";stateClass="w-storm";
-      }
-
-      iEl.className=`fas ${icon} weather-icon-lg`;
+      if(code===0){icon="fa-sun";color="#ffd760";desc="Açık";stateClass="w-sunny";}
+      else if(code===1||code===2){icon="fa-cloud-sun";color="#fffae0";desc="Parçalı bulutlu";stateClass="w-cloudy";}
+      else if(code===3){icon="fa-cloud";color="#d0d7e2";desc="Kapalı";stateClass="w-cloudy";}
+      else if(code>=45&&code<=48){icon="fa-smog";color="#9ba3b0";desc="Sisli";stateClass="w-cloudy";}
+      else if(code>=51&&code<=67){icon="fa-cloud-rain";color="#00F0FF";desc="Yağmurlu";stateClass="w-rainy";}
+      else if(code>=71&&code<=77){icon="fa-snowflake";color="#ffffff";desc="Karlı";stateClass="w-snowy";}
+      else if(code>=80&&code<=82){icon="fa-cloud-showers-heavy";color="#6be0ff";desc="Sağanak";stateClass="w-rainy";}
+      else if(code>=95){icon="fa-bolt";color="#ffd760";desc="Gök gürültülü";stateClass="w-storm";}
+      iEl.className=`fas ${icon}`;
       iEl.style.color=color;
       dEl.innerText=desc+" · Gerçek zamanlı veri";
-
       box.classList.remove('w-sunny','w-cloudy','w-rainy','w-snowy','w-storm');
       box.classList.add(stateClass);
     }
@@ -1301,6 +1505,7 @@ async function initWeather(){
   }
 }
 
+/* SONG LIST RENDER */
 function renderSongs(){
   const c=document.getElementById('song-container'); if(!c) return;
   c.innerHTML='';
@@ -1326,6 +1531,7 @@ function renderSongs(){
   refreshInlineLyricsBadges();
 }
 
+/* YOUTUBE */
 function onYouTubeIframeAPIReady(){
   if(typeof YT==='undefined'||!document.getElementById('yt-player')) return;
   player=new YT.Player('yt-player',{
@@ -1333,7 +1539,6 @@ function onYouTubeIframeAPIReady(){
     events:{'onStateChange':onPlayerStateChange}
   });
 }
-
 function onPlayerStateChange(e){
   if(!e||typeof YT==='undefined') return;
   if(e.data===YT.PlayerState.PLAYING){
@@ -1349,6 +1554,7 @@ function onPlayerStateChange(e){
   }
 }
 
+/* LYRICS PANEL */
 function updateLyricsPanel(song){
   const tEl=document.getElementById('lyrics-song-title');
   const aEl=document.getElementById('lyrics-song-artist');
@@ -1372,7 +1578,6 @@ function updateLyricsPanel(song){
   }
   updateLyricsStats();
 }
-
 function saveLyrics(auto){
   const s=songs[currIdx];
   if(!s) return;
@@ -1403,7 +1608,6 @@ function saveLyrics(auto){
   refreshInlineLyricsBadges();
   updateLyricsStats();
 }
-
 function refreshInlineLyricsBadges(){
   document.querySelectorAll('.song-inline-lyrics').forEach(div=>{
     const key=div.getAttribute('data-song-key');
@@ -1415,7 +1619,6 @@ function refreshInlineLyricsBadges(){
     }
   });
 }
-
 function updateLyricsStats(){
   const inp=document.getElementById('lyrics-input');
   const stats=document.getElementById('lyrics-stats');
@@ -1425,17 +1628,17 @@ function updateLyricsStats(){
   const lines=text ? text.split(/\n/).length : 0;
   stats.innerText=`${chars} karakter · ${lines} satır`;
 }
-
 function initLyricsAutosave(){
   const inp=document.getElementById('lyrics-input');
   if(!inp) return;
   inp.addEventListener('input',()=>{
     updateLyricsStats();
     if(lyricsTimer) clearTimeout(lyricsTimer);
-    lyricsTimer=setTimeout(()=>saveLyrics(true),1000);
+    lyricsTimer=setTimeout(()=>saveLyrics(true),900);
   });
 }
 
+/* PLAYER CONTROLS */
 function playSong(idx){
   currIdx=idx;
   const s=songs[idx];
@@ -1459,14 +1662,12 @@ function playSong(idx){
   const rows=document.querySelectorAll('.song-row');
   rows.forEach((r,i2)=>r.classList.toggle('active',i2===idx));
 }
-
 function togglePlay(){
   if(!player||!player.playVideo||!player.pauseVideo) return;
   isPlaying?player.pauseVideo():player.playVideo();
 }
 function playNext(){playSong((currIdx+1)%songs.length);}
 function playPrev(){playSong((currIdx-1+songs.length)%songs.length);}
-
 function startProgress(){
   clearInterval(progInt);
   const bar=document.getElementById('prog-bar'); if(!bar) return;
@@ -1478,7 +1679,6 @@ function startProgress(){
   },500);
 }
 function stopProgress(){clearInterval(progInt);}
-
 const progRail=document.getElementById('prog-rail');
 if(progRail){
   progRail.onclick=e=>{
@@ -1489,21 +1689,106 @@ if(progRail){
   };
 }
 
+/* LONCA YAPAY ZEKA */
+function copyStatic(btn){
+  const parent=btn.parentElement;
+  if(!parent) return;
+  const text=parent.innerText.replace('Kopyala','').trim();
+  navigator.clipboard?.writeText(text).then(()=>{
+    btn.textContent='Kopyalandı';
+    setTimeout(()=>btn.textContent='Kopyala',1000);
+  });
+}
+function appendUserMessage(text){
+  const box=document.getElementById('chat-history');
+  if(!box) return;
+  const div=document.createElement('div');
+  div.className='msg out';
+  div.textContent=text;
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
+}
+function appendAiMessage(text){
+  const box=document.getElementById('chat-history');
+  if(!box) return;
+  const div=document.createElement('div');
+  div.className='msg in ai-msg';
+  const span=document.createElement('span');
+  span.textContent=text;
+  const btn=document.createElement('button');
+  btn.className='msg-copy-btn';
+  btn.textContent='Kopyala';
+  btn.addEventListener('click',()=>{
+    navigator.clipboard?.writeText(text).then(()=>{
+      btn.textContent='Kopyalandı';
+      setTimeout(()=>btn.textContent='Kopyala',1000);
+    });
+  });
+  div.appendChild(span);
+  div.appendChild(btn);
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
+}
+
+/* basit lonca AI – math + şarkı sözü */
+function isMathExpression(str){
+  const s=str.replace(/,/g,'.').replace(/\s+/g,'');
+  return /^[0-9.+\-*/()%]+$/.test(s);
+}
+function evalMath(str){
+  try{
+    const expr=str.replace(/,/g,'.');
+    // basit, sadece rakam ve işlem işaretleri
+    if(!/^[0-9.+\-*/()%\s]+$/.test(expr)) return null;
+    // eslint-disable-next-line no-new-func
+    const fn=new Function("return ("+expr+")");
+    const res=fn();
+    if(typeof res==='number' && isFinite(res)) return res;
+    return null;
+  }catch(e){return null;}
+}
+function generateLyricsPrompt(){
+  const lines=[
+    "Gece düştü şehrin üstüne, ışıklar söndü birer birer",
+    "Kalbimde yankılandı ismin, sanki bitmeyen bir eser",
+    "ELKAY 2'de gizli kaldı, söyleyemediğim cümleler",
+    "Bir level daha atladım, ama sensiz bu zaferler…"
+  ];
+  return lines.join("\n");
+}
+function guildAiAnswer(text){
+  const t=text.trim();
+  if(!t) return "Boş mesaj algıladım, birkaç kelime daha ekleyebilirsin.";
+  if(isMathExpression(t)){
+    const r=evalMath(t);
+    if(r===null) return "İşlemi çözemiyorum, sadece + - * / ve parantez kullan.";
+    return `İşlemin sonucu: ${r}`;
+  }
+  const lower=t.toLowerCase();
+  if(lower.includes("şarkı sözü") || lower.includes("lyrics") || lower.includes("nakarat")){
+    return "İşte ELKAY evrenine uygun bir örnek şarkı sözü taslağı:\n\n"+generateLyricsPrompt();
+  }
+  if(lower.includes("merhaba") || lower.includes("selam")){
+    return "Selam! Ben lonca yapay zekâ asistanıyım. Benden matematik, bilgi ya da şarkı sözü taslağı isteyebilirsin.";
+  }
+  return "Bu konuda sana özel bir yanıt ürettim ama unutmadan: Ben sadece bu siteye özel, basit bir lonca asistanıyım. Detaylı şeyler için komutlarını biraz daha net yazabilirsin.\n\nİstersen şu örnekleri dene:\n- 25*4+10\n- \"ELKAY 2 için duygusal nakarat yaz\"";
+}
 function sendMsg(){
   const inp=document.getElementById('chat-in');
   const box=document.getElementById('chat-history');
   if(!inp||!box) return;
   const txt=inp.value.trim();
   if(!txt) return;
-  box.innerHTML+=`<div class="msg out">${txt}</div>`;
+  appendUserMessage(txt);
   inp.value='';
   box.scrollTop=box.scrollHeight;
   setTimeout(()=>{
-    box.innerHTML+='<div class="msg in">Mesajınız alındı. Uygun olduğumuzda dönüş yapacağız.</div>';
-    box.scrollTop=box.scrollHeight;
-  },800);
+    const ans=guildAiAnswer(txt);
+    appendAiMessage(ans);
+  },400);
 }
 
+/* GAME – snake style */
 let gameInt,snake=[],food={},dx=0,dy=0,score=0;
 const cvs=document.getElementById('game-canvas');
 const ctx=cvs?cvs.getContext('2d'):null;
@@ -1531,9 +1816,11 @@ function gameLoop(){
   if(!ctx||!cvs) return;
   ctx.fillStyle='#000';
   ctx.fillRect(0,0,cvs.width,cvs.height);
+  // food
   ctx.fillStyle='#FFD700';
   ctx.font='20px Arial';
   ctx.fillText('♪',food.x+4,food.y+18);
+  // snake
   snake.forEach((h,i)=>{
     ctx.fillStyle=i===0?'#00F0FF':'#fff';
     ctx.fillRect(h.x,h.y,boxSize-2,boxSize-2);
@@ -1558,14 +1845,12 @@ function gameLoop(){
     snake.pop();
   }
 }
-
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowUp'&&dy===0){dx=0;dy=-boxSize;}
   if(e.key==='ArrowDown'&&dy===0){dx=0;dy=boxSize;}
   if(e.key==='ArrowLeft'&&dx===0){dx=-boxSize;dy=0;}
   if(e.key==='ArrowRight'&&dx===0){dx=boxSize;dy=0;}
 });
-
 let touchStartX=0,touchStartY=0;
 if(cvs){
   cvs.addEventListener('touchstart',e=>{
@@ -1589,6 +1874,24 @@ if(cvs){
   },{passive:false});
 }
 
+/* GAME fullscreen buttons */
+function initGameFullscreenButtons(){
+  const btnExpand=document.getElementById('btn-game-expand');
+  const btnCollapse=document.getElementById('btn-game-collapse');
+  if(!btnExpand||!btnCollapse) return;
+  btnExpand.addEventListener('click',()=>{
+    document.body.classList.add('game-fullscreen');
+    btnExpand.style.display='none';
+    btnCollapse.style.display='inline-block';
+  });
+  btnCollapse.addEventListener('click',()=>{
+    document.body.classList.remove('game-fullscreen');
+    btnExpand.style.display='inline-block';
+    btnCollapse.style.display='none';
+  });
+}
+
+/* ANIME AI COMPANION */
 function initAnimeCompanion(){
   const area=document.getElementById('anime-companion');
   const hearts=document.getElementById('anime-hearts');
@@ -1598,7 +1901,7 @@ function initAnimeCompanion(){
     '"Bugün hangi şarkıyla level atlıyoruz?"',
     '"Combo: Oyun + lo-fi + gece modu!"',
     '"Bir sonraki satırı sen yaz, ben dinlerim."',
-    '"Yeni single gelince beraber kutlayalım!"'
+    '"Lonca asistanına bir şey sor, ben de izleyeyim!"'
   ];
   let qIndex=0;
   area.addEventListener('click',e=>{
@@ -1614,9 +1917,28 @@ function initAnimeCompanion(){
     setTimeout(()=>heart.remove(),1000);
     qIndex=(qIndex+1)%quotes.length;
     quoteEl.innerText=quotes[qIndex];
+
+    // anime kızdan lonca AI'a yönlendirme
+    const chatNav=document.querySelector('.nav-item[data-tab="chat"]');
+    switchTab('chat',chatNav);
+    const inp=document.getElementById('chat-in');
+    if(inp){
+      inp.focus();
+      inp.placeholder='Anime Asistan: Bana istediğini sor :)';
+    }
   });
+
+  // mobil toggle
+  const toggle=document.getElementById('anime-toggle');
+  if(toggle){
+    toggle.addEventListener('click',()=>{
+      area.classList.toggle('hidden-mobile');
+      toggle.textContent=area.classList.contains('hidden-mobile')?'Anime Asistanı Göster':'Anime Asistanı Gizle';
+    });
+  }
 }
 
+/* ONLOAD */
 window.onload=()=>{
   updateVh();
   detectDevice();
@@ -1626,10 +1948,10 @@ window.onload=()=>{
   renderSongs();
   initLyricsAutosave();
   initAnimeCompanion();
+  initGameFullscreenButtons();
   loadYouTubeAPI();
   document.querySelectorAll('.nav-item, .widget-card').forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
 };
-
 window.addEventListener('resize',()=>{updateVh();detectDevice();});
 </script>
 </body>
