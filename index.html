@@ -107,19 +107,113 @@ body{
 .widget-card:hover::after{opacity:1;}
 
 /* CLOCK & NEWS */
-.led-clock-box{background:#000;border:2px solid #333;border-radius:10px;padding:10px 24px;display:inline-flex;flex-direction:column;align-items:center;margin-bottom:20px;box-shadow:0 0 20px rgba(255,0,0,0.2);}
+.led-clock-box{
+  background:#000;
+  border:2px solid #333;
+  border-radius:10px;
+  padding:10px 24px;
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:20px;
+  box-shadow:0 0 20px rgba(255,0,0,0.2);
+}
 .led-time{
   font-family:'Digital Dismay', sans-serif;
   font-size:3.4rem;
   color:var(--neon-red);
   line-height:1;
   text-shadow:0 0 15px var(--neon-red);
+  letter-spacing:2px;
 }
-.led-date{font-family:'Orbitron',sans-serif;color:#bbb;margin-top:5px;font-size:.85rem;letter-spacing:1px;}
-.news-ticker{background:rgba(0,10,25,0.9);border-left:4px solid var(--neon-blue);border-radius:6px;height:40px;display:flex;align-items:center;margin-bottom:25px;overflow:hidden;position:relative;}
-.news-ticker::before{content:'LIVE';position:absolute;left:8px;top:7px;font-size:.65rem;padding:2px 6px;border-radius:999px;background:var(--neon-red);font-weight:700;}
-.news-content{white-space:nowrap;animation:ticker 22s linear infinite;padding-left:110px;display:flex;gap:40px;font-size:.85rem;}
-@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+.led-date{
+  font-family:'Orbitron',sans-serif;
+  color:#bbb;
+  margin-top:5px;
+  font-size:.85rem;
+  letter-spacing:1px;
+}
+
+/* KAYAN YAZI – GERÇEKÇİ LED TABELA */
+.news-ticker{
+  position:relative;
+  height:56px;
+  margin-bottom:25px;
+  padding-left:110px;
+  padding-right:18px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  border-radius:16px;
+  background:
+    radial-gradient(circle at 0 0,rgba(0,0,0,0.1),rgba(3,3,3,1));
+  border:2px solid #111;
+  box-shadow:
+    0 0 0 1px #222,
+    0 0 25px rgba(0,0,0,0.9),
+    0 0 22px rgba(255,0,0,0.5);
+}
+
+/* LED modül noktaları */
+.news-ticker::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,#222 1px,transparent 0);
+  background-size:4px 4px;
+  opacity:.55;
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+
+/* Sol tarafta “LIVE” LED kapsülü */
+.news-ticker::before{
+  content:'LIVE';
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  padding:5px 12px;
+  border-radius:999px;
+  font-family:'Digital Dismay',sans-serif;
+  font-size:.85rem;
+  letter-spacing:2px;
+  background:radial-gradient(circle at 30% 0,rgba(255,255,255,0.25),rgba(90,0,0,1));
+  color:#ff4d4d;
+  text-shadow:0 0 8px rgba(255,80,80,1);
+  box-shadow:
+    0 0 12px rgba(255,0,0,0.9),
+    0 0 2px rgba(255,255,255,0.6) inset;
+  border:1px solid rgba(255,255,255,0.2);
+  z-index:2;
+}
+
+/* Kayan metin – LED stil */
+.news-content{
+  position:relative;
+  white-space:nowrap;
+  animation:ticker 22s linear infinite;
+  display:flex;
+  gap:40px;
+  font-size:0.95rem;
+  font-family:'Digital Dismay',sans-serif;
+  letter-spacing:3px;
+  color:#ff4040;
+  text-shadow:
+    0 0 6px rgba(255,100,100,1),
+    0 0 14px rgba(255,0,0,0.8);
+  z-index:1;
+}
+.news-content span i{
+  margin-right:6px;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,0.8));
+}
+
+@keyframes ticker{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
 
 /* HAVA DURUMU – ÖZEL NEON TASARIM KARTI */
 #weather-box{
@@ -133,6 +227,7 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 18px 40px rgba(0,0,0,0.9);
 }
+
 #weather-box::before{
   content:'';
   position:absolute;
@@ -159,6 +254,7 @@ body{
   gap:18px;
   margin:4px 0 16px;
 }
+
 .weather-orb{
   width:130px;
   height:130px;
@@ -171,6 +267,7 @@ body{
     0 0 25px rgba(0,240,255,0.5),
     0 0 55px rgba(255,215,0,0.4);
 }
+
 .weather-orb-inner{
   position:relative;
   width:100%;
@@ -183,6 +280,7 @@ body{
   justify-content:center;
   overflow:hidden;
 }
+
 .weather-orb-inner::before{
   content:'';
   position:absolute;
@@ -200,12 +298,14 @@ body{
   filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));
   animation:floatW 3.2s ease-in-out infinite;
 }
+
 #w-temp{
   font-family:'Digital Dismay',sans-serif;
   font-size:2.2rem;
   letter-spacing:2px;
   text-shadow:0 0 18px rgba(255,255,255,0.7);
 }
+
 @keyframes floatW{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
 /* Sağ taraf yazılar */
@@ -215,6 +315,7 @@ body{
   gap:8px;
   max-width:180px;
 }
+
 .weather-location{
   font-size:.75rem;
   text-transform:uppercase;
@@ -224,14 +325,17 @@ body{
   align-items:center;
   gap:6px;
 }
+
 .weather-location i{
   font-size:.8rem;
   color:var(--neon-blue);
 }
+
 #w-desc{
   font-size:.85rem;
   color:#e3e8ff;
 }
+
 .weather-badge{
   display:inline-flex;
   align-items:center;
@@ -251,6 +355,7 @@ body{
   margin-top:4px;
   gap:10px;
 }
+
 .w-detail{
   flex:1;
   background:rgba(0,0,0,0.45);
@@ -259,11 +364,13 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 8px 20px rgba(0,0,0,0.7);
 }
+
 .w-val{
   font-family:'Orbitron';
   color:var(--neon-blue);
   font-size:1rem;
 }
+
 .w-label{
   font-size:.7rem;
   color:#9ca3af;
@@ -311,6 +418,7 @@ body{
 .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;}
 .cal-head{font-size:.8rem;color:var(--muted);padding-bottom:8px;}
+
 .cal-cell{
   aspect-ratio:1;
   display:flex;
@@ -561,7 +669,7 @@ body{
   .anime-floating{
     right:10px;
     bottom:150px;
-    width:120px;
+    width:120px; /* mobilde biraz daha küçük */
   }
 }
 .anime-floating-inner{
@@ -699,7 +807,7 @@ body{
   <section id="home" class="screen active">
     <div style="text-align:center;">
       <div class="led-clock-box">
-        <div class="led-time" id="clock">00:00</div>
+        <div class="led-time" id="clock">00:00:00</div>
         <div class="led-date" id="date">...</div>
       </div>
     </div>
@@ -1086,7 +1194,7 @@ function initClock(){
     const clock=document.getElementById('clock');
     const date=document.getElementById('date');
     if(!clock||!date) return;
-    clock.innerText=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+    clock.innerText=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
     date.innerText=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
   };
   setInterval(t,1000); t();
@@ -1387,7 +1495,6 @@ function sendMsg(){
   },800);
 }
 
-/* OYUN – NOTA AVCISI (snake tarzı) */
 let gameInt,snake=[],food={},dx=0,dy=0,score=0;
 const cvs=document.getElementById('game-canvas');
 const ctx=cvs?cvs.getContext('2d'):null;
@@ -1473,7 +1580,6 @@ if(cvs){
   },{passive:false});
 }
 
-/* Anime companion */
 function initAnimeCompanion(){
   const area=document.getElementById('anime-companion');
   const hearts=document.getElementById('anime-hearts');
