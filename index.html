@@ -106,25 +106,30 @@ body{
 .widget-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 18px 45px rgba(0,0,0,0.9);border-color:rgba(255,215,0,0.4);}
 .widget-card:hover::after{opacity:1;}
 
-/* CLOCK & NEWS – SAAT */
+/* CLOCK & NEWS */
 .led-clock-box{
   background:#000;
   border:2px solid #333;
   border-radius:14px;
-  padding:10px 26px;
+  padding:12px 28px;
   display:inline-flex;
   flex-direction:column;
   align-items:center;
   margin-bottom:20px;
-  box-shadow:0 0 24px rgba(255,0,0,0.3);
+  box-shadow:0 0 25px rgba(255,0,0,0.25);
 }
 .led-time{
   font-family:'Digital Dismay', sans-serif;
-  font-size:3.6rem;
+  font-size:3.4rem;
   color:var(--neon-red);
   line-height:1;
-  text-shadow:0 0 18px var(--neon-red);
   letter-spacing:4px;
+  text-shadow:0 0 10px var(--neon-red),0 0 20px var(--neon-red);
+  transition:transform .18s ease,text-shadow .18s ease;
+}
+.led-time.tick{
+  transform:scale(1.02);
+  text-shadow:0 0 14px var(--neon-red),0 0 26px var(--neon-red);
 }
 .led-date{
   font-family:'Orbitron',sans-serif;
@@ -134,46 +139,81 @@ body{
   letter-spacing:1px;
 }
 
-/* KAYAN LED TABELA (DOT MATRIX) */
+/* === YENI LED TABELA / NEWS TICKER === */
 .news-ticker{
-  position:relative;
-  background:radial-gradient(circle at 0 0,#130300,#050105);
-  border-radius:18px;
-  border:1px solid rgba(255,140,0,0.5);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.8),
-    0 10px 35px rgba(0,0,0,0.95);
-  height:62px;
-  padding:8px 16px 8px 96px;
-  margin-bottom:25px;
   display:flex;
   align-items:center;
-}
-.news-ticker::before{
-  content:'LIVE';
-  position:absolute;
-  left:16px;
-  top:50%;
-  transform:translateY(-50%);
-  padding:6px 14px;
-  border-radius:999px;
-  background:radial-gradient(circle at 30% 0,#ff7070,#b00000);
-  color:#fff;
-  font-size:.7rem;
-  letter-spacing:2px;
-  font-family:'Orbitron',sans-serif;
-  box-shadow:0 0 14px rgba(255,60,60,0.95);
-  text-shadow:0 0 6px rgba(0,0,0,0.8);
+  gap:10px;
+  background:
+    radial-gradient(circle at 0 0,rgba(255,0,80,0.3),transparent 55%),
+    radial-gradient(circle at 100% 100%,rgba(0,0,0,0.95),rgba(0,0,0,1));
+  border-radius:18px;
+  padding:8px 14px;
+  margin-bottom:25px;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 14px 32px rgba(0,0,0,0.9);
 }
 
-/* LED panel canvas */
-#led-ticker{
-  width:100%;
-  height:100%;
-  display:block;
-  border-radius:12px;
-  background:radial-gradient(circle at 50% 50%,#000,#050200);
-  box-shadow:inset 0 0 12px rgba(0,0,0,0.9);
+.news-live-pill{
+  min-width:52px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:radial-gradient(circle at 30% 30%,#fff,#ff003c);
+  color:#fff;
+  font-size:0.7rem;
+  font-weight:700;
+  text-align:center;
+  box-shadow:0 0 16px rgba(255,0,60,0.9);
+  font-family:'Orbitron',sans-serif;
+}
+
+.news-window{
+  position:relative;
+  overflow:hidden;
+  border-radius:999px;
+  flex:1;
+  height:32px;
+  padding:0 8px;
+  background:
+    radial-gradient(circle at 0 0,rgba(255,255,255,0.08),transparent 55%),
+    radial-gradient(circle at 100% 100%,rgba(5,5,5,1),rgba(0,0,0,1));
+  box-shadow:
+    inset 0 0 8px rgba(0,0,0,0.9),
+    0 0 12px rgba(0,0,0,0.7);
+}
+
+/* noktalı LED grid */
+.news-window::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(circle,#111 1px, transparent 1.6px);
+  background-size:6px 6px;
+  opacity:.9;
+  mix-blend-mode:soft-light;
+  pointer-events:none;
+}
+
+.news-text{
+  position:absolute;
+  white-space:nowrap;
+  left:100%;
+  top:50%;
+  transform:translate(0,-50%);
+  font-family:'Digital Dismay','Orbitron',monospace;
+  font-size:0.95rem;
+  letter-spacing:0.16em;
+  color:#ffd34d;
+  text-shadow:
+    0 0 3px #facc15,
+    0 0 7px #facc15,
+    0 0 13px #facc15;
+  animation:ledScroll 22s linear infinite;
+}
+
+@keyframes ledScroll{
+  0%{transform:translate(0,-50%);}
+  100%{transform:translate(-100%,-50%);}
 }
 
 /* HAVA DURUMU – ÖZEL NEON TASARIM KARTI */
@@ -188,8 +228,11 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 18px 40px rgba(0,0,0,0.9);
 }
+
 #weather-box::before{
-  content:'';position:absolute;inset:-40%;
+  content:'';
+  position:absolute;
+  inset:-40%;
   background:
     radial-gradient(circle at 50% 0,rgba(255,255,255,0.18),transparent 55%),
     repeating-linear-gradient(
@@ -199,60 +242,142 @@ body{
       transparent 1px,
       transparent 4px
     );
-  opacity:.12;mix-blend-mode:screen;pointer-events:none;
+  opacity:.12;
+  mix-blend-mode:screen;
+  pointer-events:none;
 }
+
+/* Ortadaki dairesel “hava küresi” */
 .weather-main{
-  display:flex;align-items:center;justify-content:center;gap:18px;margin:4px 0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  margin:4px 0 16px;
 }
+
 .weather-orb{
-  width:130px;height:130px;border-radius:50%;position:relative;padding:4px;
-  background:conic-gradient(from 180deg,var(--neon-blue),var(--gold),var(--neon-red),var(--neon-blue));
-  box-shadow:0 0 25px rgba(0,240,255,0.5),0 0 55px rgba(255,215,0,0.4);
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  position:relative;
+  padding:4px;
+  background:
+    conic-gradient(from 180deg,var(--neon-blue),var(--gold),var(--neon-red),var(--neon-blue));
+  box-shadow:
+    0 0 25px rgba(0,240,255,0.5),
+    0 0 55px rgba(255,215,0,0.4);
 }
+
 .weather-orb-inner{
-  position:relative;width:100%;height:100%;border-radius:50%;
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:50%;
   background:radial-gradient(circle at 30% 0,rgba(255,255,255,0.12),rgba(3,8,18,0.96));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
+
 .weather-orb-inner::before{
-  content:'';position:absolute;inset:12%;border-radius:50%;border:1px dashed rgba(255,255,255,0.22);box-shadow:0 0 18px rgba(0,0,0,0.9) inset;
+  content:'';
+  position:absolute;
+  inset:12%;
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,0.22);
+  box-shadow:0 0 18px rgba(0,0,0,0.9) inset;
 }
+
+/* İkon + sıcaklık */
 .weather-icon-lg{font-size:3rem;filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));}
 #w-icon{
-  font-size:2.4rem;margin-bottom:4px;
+  font-size:2.4rem;
+  margin-bottom:4px;
   filter:drop-shadow(0 0 10px rgba(255,255,255,0.9));
   animation:floatW 3.2s ease-in-out infinite;
 }
+
 #w-temp{
   font-family:'Digital Dismay',sans-serif;
   font-size:2.2rem;
   letter-spacing:2px;
   text-shadow:0 0 18px rgba(255,255,255,0.7);
 }
+
 @keyframes floatW{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+
+/* Sağ taraf yazılar */
 .weather-main-info{
-  display:flex;flex-direction:column;gap:8px;max-width:180px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-width:180px;
 }
+
 .weather-location{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:2px;
-  color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.7);
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
-.weather-location i{font-size:.8rem;color:var(--neon-blue);}
-#w-desc{font-size:.85rem;color:#e3e8ff;}
+
+.weather-location i{
+  font-size:.8rem;
+  color:var(--neon-blue);
+}
+
+#w-desc{
+  font-size:.85rem;
+  color:#e3e8ff;
+}
+
 .weather-badge{
-  display:inline-flex;align-items:center;gap:6px;font-size:.7rem;padding:3px 8px;
-  border-radius:999px;border:1px solid rgba(255,255,255,0.18);
-  background:rgba(0,0,0,0.45);color:#cbd5ff;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:.7rem;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(0,0,0,0.45);
+  color:#cbd5ff;
 }
+
+/* Alt kısım – rüzgar / nem kutucukları */
 .weather-details{
-  display:flex;justify-content:space-between;margin-top:4px;gap:10px;
+  display:flex;
+  justify-content:space-between;
+  margin-top:4px;
+  gap:10px;
 }
+
 .w-detail{
-  flex:1;background:rgba(0,0,0,0.45);border-radius:12px;padding:8px 10px;
-  border:1px solid rgba(255,255,255,0.12);box-shadow:0 8px 20px rgba(0,0,0,0.7);
+  flex:1;
+  background:rgba(0,0,0,0.45);
+  border-radius:12px;
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 8px 20px rgba(0,0,0,0.7);
 }
-.w-val{font-family:'Orbitron';color:var(--neon-blue);font-size:1rem;}
-.w-label{font-size:.7rem;color:#9ca3af;}
+
+.w-val{
+  font-family:'Orbitron';
+  color:var(--neon-blue);
+  font-size:1rem;
+}
+
+.w-label{
+  font-size:.7rem;
+  color:#9ca3af;
+}
+
+/* Farklı hava tiplerine göre arka plan */
 #weather-box.w-sunny{
   background:
     radial-gradient(circle at 0 0,rgba(255,215,0,0.35),rgba(17,8,0,0.98)),
@@ -278,21 +403,36 @@ body{
     radial-gradient(circle at 0 0,rgba(248,250,252,0.2),rgba(15,23,42,1)),
     radial-gradient(circle at 100% 100%,rgba(55,65,81,0.9),rgba(3,4,10,1));
 }
+
+/* Küçük ekran düzeltmesi */
 @media (max-width:768px){
-  .weather-main{gap:14px;}
-  .weather-orb{width:115px;height:115px;}
+  .weather-main{
+    gap:14px;
+  }
+  .weather-orb{
+    width:115px;
+    height:115px;
+  }
 }
 
 /* CALENDAR */
 .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;}
 .cal-head{font-size:.8rem;color:var(--muted);padding-bottom:8px;}
+
 .cal-cell{
   aspect-ratio:1;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:8px;background:rgba(255,255,255,0.03);
-  cursor:pointer;position:relative;font-weight:bold;font-size:.95rem;
-  transition:.2s;overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:rgba(255,255,255,0.03);
+  cursor:pointer;
+  position:relative;
+  font-weight:bold;
+  font-size:.95rem;
+  transition:.2s;
+  overflow:hidden;
 }
 .cal-cell:hover{
   background:rgba(255,215,0,0.12);
@@ -304,21 +444,28 @@ body{
   border:1px solid var(--neon-blue);
   box-shadow:0 0 10px rgba(0,240,255,0.4);
 }
+
 /* ❄ Genel karlı gün efekti */
 .cal-cell.snowy{
   color:#fff;
   background:radial-gradient(circle at 30% 0%,rgba(255,255,255,0.18),rgba(0,0,0,0.8));
 }
 .cal-cell.snowy::after{
-  content:'❄';position:absolute;font-size:10px;top:-10px;right:4px;
-  animation:snowDrift 3s linear infinite;opacity:0.9;
+  content:'❄';
+  position:absolute;
+  font-size:10px;
+  top:-10px;
+  right:4px;
+  animation:snowDrift 3s linear infinite;
+  opacity:0.9;
 }
 @keyframes snowDrift{
   0%{transform:translate(0,-5px) rotate(0deg);opacity:0;}
   40%{opacity:1;}
   100%{transform:translate(-8px,18px) rotate(360deg);opacity:0;}
 }
-/* 🇹🇷 Resmi milli bayramlar */
+
+/* 🇹🇷 Resmi milli bayramlar – bayrak + parıltı */
 .cal-cell.flag{
   background:radial-gradient(circle at 10% 0%,rgba(227,10,23,0.4),rgba(0,0,0,0.85));
   border:1px solid #E30A17;
@@ -326,7 +473,11 @@ body{
   animation:flagPulse 2.2s ease-in-out infinite;
 }
 .cal-cell.flag::before{
-  content:'🇹🇷';position:absolute;top:4px;right:4px;font-size:11px;
+  content:'🇹🇷';
+  position:absolute;
+  top:4px;
+  right:4px;
+  font-size:11px;
   animation:flagWave 2s ease-in-out infinite;
 }
 @keyframes flagWave{
@@ -338,7 +489,8 @@ body{
   50%{box-shadow:0 0 16px rgba(227,10,23,1);}
   100%{box-shadow:0 0 6px rgba(227,10,23,0.6);}
 }
-/* 🎆 YILBAŞI */
+
+/* 🎆 YILBAŞI (1 OCAK) – konfeti / havai fişek hissi */
 .cal-cell.newyear{
   background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.4),rgba(0,0,0,0.9));
   border:1px solid rgba(255,215,0,0.8);
@@ -347,17 +499,36 @@ body{
 }
 .cal-cell.newyear::before,
 .cal-cell.newyear::after{
-  content:'';position:absolute;width:180%;height:180%;top:50%;left:50%;
+  content:'';
+  position:absolute;
+  width:180%;
+  height:180%;
+  top:50%;
+  left:50%;
   transform:translate(-50%,-50%) scale(0.2);
-  border-radius:50%;border:1px dashed rgba(255,255,255,0.35);
-  opacity:0;pointer-events:none;
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,0.35);
+  opacity:0;
+  pointer-events:none;
 }
-.cal-cell.newyear::before{animation:fireworkRing 1.8s ease-out infinite;}
-.cal-cell.newyear::after{animation:fireworkRing 1.8s ease-out infinite;animation-delay:.9s;}
+.cal-cell.newyear::before{
+  animation:fireworkRing 1.8s ease-out infinite;
+}
+.cal-cell.newyear::after{
+  animation:fireworkRing 1.8s ease-out infinite;
+  animation-delay:.9s;
+}
 .cal-cell.newyear span.confetti-dot{
-  position:absolute;width:4px;height:8px;border-radius:999px;
-  background:var(--gold);top:50%;left:50%;opacity:0;
-  transform:translate(-50%,-50%);animation:confettiBurst 1.8s ease-out infinite;
+  position:absolute;
+  width:4px;
+  height:8px;
+  border-radius:999px;
+  background:var(--gold);
+  top:50%;
+  left:50%;
+  opacity:0;
+  transform:translate(-50%,-50%);
+  animation:confettiBurst 1.8s ease-out infinite;
 }
 .cal-cell.newyear span.c1{background:#FFD700;transform:translate(-50%,-50%) rotate(15deg);}
 .cal-cell.newyear span.c2{background:#00F0FF;transform:translate(-50%,-50%) rotate(75deg);animation-delay:.2s;}
@@ -378,19 +549,30 @@ body{
   50%{box-shadow:0 0 24px rgba(255,215,0,1);}
   100%{box-shadow:0 0 10px rgba(255,215,0,0.5);}
 }
-/* ÖZEL GÜN */
+
+/* ÖZEL GÜN (örn: 14 Şubat) */
 .cal-cell.special{
   border-color:var(--gold);
   background:radial-gradient(circle at 50% 0%,rgba(255,105,180,0.25),rgba(0,0,0,0.9));
   animation:specialPulse 2s ease-in-out infinite;
 }
 .cal-cell.special::before{
-  content:'★';position:absolute;top:2px;left:50%;
-  transform:translateX(-50%);font-size:10px;color:var(--gold);
+  content:'★';
+  position:absolute;
+  top:2px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  color:var(--gold);
 }
 .cal-cell.special::after{
-  content:'❤';position:absolute;bottom:2px;right:4px;
-  font-size:10px;color:#ff6fa5;animation:heartFloat 2.4s ease-in-out infinite;
+  content:'❤';
+  position:absolute;
+  bottom:2px;
+  right:4px;
+  font-size:10px;
+  color:#ff6fa5;
+  animation:heartFloat 2.4s ease-in-out infinite;
 }
 @keyframes specialPulse{
   0%{transform:translateY(0) scale(1);}
@@ -419,6 +601,7 @@ body{
 .song-tag{font-size:.7rem;padding:2px 6px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);color:var(--muted);}
 .song-inline-lyrics{font-size:.7rem;color:#aaa;background:rgba(0,0,0,0.4);border-radius:8px;padding:6px 8px;border:1px dashed rgba(255,255,255,0.08);}
 .song-inline-lyrics span.hint{color:var(--gold);}
+
 #lyrics-panel h3{font-family:'Orbitron';font-size:1rem;margin-bottom:4px;}
 #lyrics-song-title{font-weight:700;font-size:.9rem;margin-bottom:2px;}
 #lyrics-song-artist{font-size:.8rem;color:var(--muted);margin-bottom:6px;}
@@ -486,21 +669,30 @@ body{
 @media(max-width:768px){
   .anime-floating{
     right:10px;
-    bottom:150px;
-    width:100px; /* MOBİLDE DAHA KÜÇÜK */
+    bottom:140px;
+    width:90px;    /* mobilde daha küçük */
   }
 }
-.anime-floating-inner{position:relative;}
+.anime-floating-inner{
+  position:relative;
+}
 .anime-floating-img{
-  width:100%;display:block;border-radius:16px;
+  width:100%;
+  display:block;
+  border-radius:16px;
   box-shadow:0 0 20px rgba(255,134,200,0.7);
   border:1px solid rgba(255,255,255,0.18);
 }
 .anime-hearts-container{
-  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
 }
 .anime-heart{
-  position:absolute;font-size:1.2rem;color:#ff86c8;
+  position:absolute;
+  font-size:1.2rem;
+  color:#ff86c8;
   animation:heartRise 1s ease-out forwards;
   text-shadow:0 0 6px rgba(255,134,200,0.9);
 }
@@ -510,11 +702,16 @@ body{
   100%{transform:translate(-50%,-50px) scale(1.1);opacity:0;}
 }
 .anime-float-speech{
-  margin-top:6px;font-size:.75rem;color:#f5f5f5;
-  background:rgba(0,0,0,0.75);border-radius:999px;padding:4px 10px;
+  margin-top:6px;
+  font-size:.75rem;
+  color:#f5f5f5;
+  background:rgba(0,0,0,0.75);
+  border-radius:999px;
+  padding:4px 10px;
   box-shadow:0 0 10px rgba(0,0,0,0.7);
   border:1px solid rgba(255,255,255,0.12);
-  text-align:center;font-family:'Orbitron',sans-serif;
+  text-align:center;
+  font-family:'Orbitron',sans-serif;
 }
 </style>
 </head>
@@ -535,7 +732,7 @@ body{
 <!-- TOP HEADER -->
 <header class="hud-top">
   <div class="brand brand-logo-full">
-    <!-- LOGO -->
+    <!-- MÜZİK TEMALI MEMET ÇINAR KAPAK LOGOSU (INLINE SVG) -->
     <svg viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
@@ -616,9 +813,15 @@ body{
       </div>
     </div>
 
-    <!-- GERÇEKÇİ DOT-MATRIX LED TABELA -->
+    <!-- LED TABELA -->
     <div class="news-ticker">
-      <canvas id="led-ticker"></canvas>
+      <div class="news-live-pill">LIVE</div>
+      <div class="news-window">
+        <div class="news-text" id="news-text">
+          MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR! · MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA. · 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA. · LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF. · 
+          MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR! · MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA. · 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA. · LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF. · 
+        </div>
+      </div>
     </div>
 
     <div class="grid-2">
@@ -940,9 +1143,6 @@ function playHoverSfx(){
 
 const defaultArtistCover="https://ui-avatars.com/api/?name=Memet+Çınar&background=000000&color=ffffff&size=256";
 
-/* LED TABELA METNİ */
-const ledTickerText = "  MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR!   •   MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA.   •   'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA.   •   LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF.  ";
-
 const songs = [
   { title: "SONSUZ IŞIK (10 KASIM 193∞)", artist: "Memet Çınar", id: "P3ulDeTz7pA" },
   { title: "ELKAY ve HAKDAM",             artist: "Memet Çınar", id: "J-j5SGM3lVI" },
@@ -992,20 +1192,23 @@ function switchTab(id,el){
   el.classList.add('active');
 }
 
-/* SAAT – saniyeli */
 function initClock(){
-  const t=()=>{
+  const tick=()=>{
     const d=new Date();
     const clock=document.getElementById('clock');
     const date=document.getElementById('date');
     if(!clock||!date) return;
     clock.innerText=d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
     date.innerText=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
+    clock.classList.remove('tick');
+    // force reflow for animation reset
+    void clock.offsetWidth;
+    clock.classList.add('tick');
   };
-  setInterval(t,1000); t();
+  tick();
+  setInterval(tick,1000);
 }
 
-/* TAKVİM ÖZEL GÜNLER */
 const specialDays={
   "1-1":"newyear",
   "14-2":"special",
@@ -1043,7 +1246,6 @@ function initCalendar(){
   }
 }
 
-/* HAVA DURUMU */
 async function initWeather(){
   const lat=38.35,lon=38.31;
   try{
@@ -1099,108 +1301,6 @@ async function initWeather(){
   }
 }
 
-/* GERÇEKÇİ DOT-MATRIX LED TABELA */
-let ledTickerInitialized=false;
-function initLedTicker(){
-  const canvas=document.getElementById('led-ticker');
-  if(!canvas || ledTickerInitialized) return;
-  ledTickerInitialized=true;
-
-  const ctx=canvas.getContext('2d');
-  const dpr=window.devicePixelRatio||1;
-
-  const textCanvas=document.createElement('canvas');
-  const tctx=textCanvas.getContext('2d');
-
-  let scrollX=0;
-  let brightnessData=null;
-  let cols=0,rows=0;
-  const dotSpacing=6;
-  const dotRadius=2.2;
-
-  function buildTextBuffer(){
-    const cssWidth=canvas.clientWidth||600;
-    const fontSize=18;
-    tctx.font=`600 ${fontSize}px 'Rajdhani', system-ui, sans-serif`;
-    const textWidth=Math.ceil(tctx.measureText(ledTickerText).width)+cssWidth;
-    textCanvas.width=textWidth;
-    textCanvas.height=fontSize*2;
-
-    tctx.fillStyle='black';
-    tctx.fillRect(0,0,textCanvas.width,textCanvas.height);
-    tctx.font=`600 ${fontSize}px 'Rajdhani', system-ui, sans-serif`;
-    tctx.fillStyle='white';
-    tctx.textBaseline='middle';
-    tctx.fillText(ledTickerText, cssWidth, textCanvas.height/2);
-
-    const img=tctx.getImageData(0,0,textCanvas.width,textCanvas.height).data;
-    brightnessData=new Uint8Array(textCanvas.width*textCanvas.height);
-    for(let y=0;y<textCanvas.height;y++){
-      for(let x=0;x<textCanvas.width;x++){
-        const i=(y*textCanvas.width+x)*4;
-        brightnessData[y*textCanvas.width+x]=(img[i]+img[i+1]+img[i+2])/3;
-      }
-    }
-  }
-
-  function resize(){
-    const cssWidth=canvas.clientWidth||600;
-    const cssHeight=canvas.clientHeight||44;
-    canvas.width=cssWidth*dpr;
-    canvas.height=cssHeight*dpr;
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    cols=Math.floor(cssWidth/dotSpacing);
-    rows=Math.floor(cssHeight/dotSpacing);
-    buildTextBuffer();
-  }
-
-  resize();
-  window.addEventListener('resize',resize);
-
-  function draw(){
-    const w=canvas.clientWidth||600;
-    const h=canvas.clientHeight||44;
-    ctx.clearRect(0,0,w,h);
-    ctx.fillStyle='#050200';
-    ctx.fillRect(0,0,w,h);
-
-    if(!brightnessData){requestAnimationFrame(draw);return;}
-
-    const sampleScaleX=textCanvas.width/cols;
-    const sampleScaleY=textCanvas.height/rows;
-
-    scrollX=(scrollX+1)%textCanvas.width;
-
-    for(let row=0;row<rows;row++){
-      for(let col=0;col<cols;col++){
-        const sx=Math.floor((col*sampleScaleX+scrollX)%textCanvas.width);
-        const sy=Math.floor(row*sampleScaleY);
-        const b=brightnessData[sy*textCanvas.width+sx];
-
-        const cx=col*dotSpacing+dotSpacing/2;
-        const cy=row*dotSpacing+dotSpacing/2;
-
-        ctx.beginPath();
-        ctx.arc(cx,cy,dotRadius,0,Math.PI*2);
-        if(b>30){
-          const intensity=b/255;
-          ctx.fillStyle=`rgba(255,180,70,${0.6+0.4*intensity})`;
-          ctx.shadowColor=`rgba(255,120,30,${0.6*intensity})`;
-          ctx.shadowBlur=8*intensity;
-        }else{
-          ctx.fillStyle='rgba(25,12,0,0.55)';
-          ctx.shadowBlur=0;
-        }
-        ctx.fill();
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-
-  requestAnimationFrame(draw);
-}
-
-/* ŞARKI LİSTESİ */
 function renderSongs(){
   const c=document.getElementById('song-container'); if(!c) return;
   c.innerHTML='';
@@ -1226,7 +1326,6 @@ function renderSongs(){
   refreshInlineLyricsBadges();
 }
 
-/* YT API */
 function onYouTubeIframeAPIReady(){
   if(typeof YT==='undefined'||!document.getElementById('yt-player')) return;
   player=new YT.Player('yt-player',{
@@ -1234,6 +1333,7 @@ function onYouTubeIframeAPIReady(){
     events:{'onStateChange':onPlayerStateChange}
   });
 }
+
 function onPlayerStateChange(e){
   if(!e||typeof YT==='undefined') return;
   if(e.data===YT.PlayerState.PLAYING){
@@ -1249,7 +1349,6 @@ function onPlayerStateChange(e){
   }
 }
 
-/* LYRICS PANEL */
 function updateLyricsPanel(song){
   const tEl=document.getElementById('lyrics-song-title');
   const aEl=document.getElementById('lyrics-song-artist');
@@ -1326,6 +1425,7 @@ function updateLyricsStats(){
   const lines=text ? text.split(/\n/).length : 0;
   stats.innerText=`${chars} karakter · ${lines} satır`;
 }
+
 function initLyricsAutosave(){
   const inp=document.getElementById('lyrics-input');
   if(!inp) return;
@@ -1336,7 +1436,6 @@ function initLyricsAutosave(){
   });
 }
 
-/* PLAYER KONTROLLERİ */
 function playSong(idx){
   currIdx=idx;
   const s=songs[idx];
@@ -1360,12 +1459,14 @@ function playSong(idx){
   const rows=document.querySelectorAll('.song-row');
   rows.forEach((r,i2)=>r.classList.toggle('active',i2===idx));
 }
+
 function togglePlay(){
   if(!player||!player.playVideo||!player.pauseVideo) return;
   isPlaying?player.pauseVideo():player.playVideo();
 }
 function playNext(){playSong((currIdx+1)%songs.length);}
 function playPrev(){playSong((currIdx-1+songs.length)%songs.length);}
+
 function startProgress(){
   clearInterval(progInt);
   const bar=document.getElementById('prog-bar'); if(!bar) return;
@@ -1378,7 +1479,6 @@ function startProgress(){
 }
 function stopProgress(){clearInterval(progInt);}
 
-/* PROGRESS TIKLAMA */
 const progRail=document.getElementById('prog-rail');
 if(progRail){
   progRail.onclick=e=>{
@@ -1389,7 +1489,6 @@ if(progRail){
   };
 }
 
-/* CHAT */
 function sendMsg(){
   const inp=document.getElementById('chat-in');
   const box=document.getElementById('chat-history');
@@ -1405,7 +1504,6 @@ function sendMsg(){
   },800);
 }
 
-/* OYUN – Notalı Snake */
 let gameInt,snake=[],food={},dx=0,dy=0,score=0;
 const cvs=document.getElementById('game-canvas');
 const ctx=cvs?cvs.getContext('2d'):null;
@@ -1460,6 +1558,7 @@ function gameLoop(){
     snake.pop();
   }
 }
+
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowUp'&&dy===0){dx=0;dy=-boxSize;}
   if(e.key==='ArrowDown'&&dy===0){dx=0;dy=boxSize;}
@@ -1467,7 +1566,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'&&dx===0){dx=boxSize;dy=0;}
 });
 
-/* TOUCH KONTROL */
 let touchStartX=0,touchStartY=0;
 if(cvs){
   cvs.addEventListener('touchstart',e=>{
@@ -1491,7 +1589,6 @@ if(cvs){
   },{passive:false});
 }
 
-/* ANIME COMPANION */
 function initAnimeCompanion(){
   const area=document.getElementById('anime-companion');
   const hearts=document.getElementById('anime-hearts');
@@ -1520,7 +1617,6 @@ function initAnimeCompanion(){
   });
 }
 
-/* WINDOW LOAD */
 window.onload=()=>{
   updateVh();
   detectDevice();
@@ -1530,7 +1626,6 @@ window.onload=()=>{
   renderSongs();
   initLyricsAutosave();
   initAnimeCompanion();
-  initLedTicker();
   loadYouTubeAPI();
   document.querySelectorAll('.nav-item, .widget-card').forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
 };
