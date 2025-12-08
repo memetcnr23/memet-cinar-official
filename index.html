@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>MEMET ÇINAR | THE LEGACY VIP</title>
 
-<link rel="icon" type="image/svg+xml" href="icon-memet-cinar-music.svg" />
+<!-- Favicon fallback to avoid 404 in preview if file missing -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.cdnfonts.com/css/digital-dismay?styles=116363" rel="stylesheet">
@@ -532,7 +533,7 @@ body{
 #lyrics-song-title{font-weight:700;font-size:.9rem;margin-bottom:2px;}
 #lyrics-song-artist{font-size:.8rem;color:var(--muted);margin-bottom:6px;}
 #lyrics-meta{font-size:.7rem;color:#777;margin-bottom:4px;}
-#lyrics-tools{display:flex;justify-content:space-between;font-size:.75rem;margin:4px 0;color:#999;gap:10px;flex-wrap:wrap;}
+#lyrics-tools{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;margin:4px 0;color:#999;gap:10px;flex-wrap:wrap;}
 #lyrics-view{background:rgba(0,0,0,0.45);border-radius:10px;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;font-size:.85rem;line-height:1.5;white-space:pre-line;max-height:180px;overflow-y:auto;margin-bottom:8px;}
 #lyrics-editor{margin-top:4px;}
 #lyrics-input{width:100%;min-height:100px;max-height:220px;resize:vertical;background:#111;border:1px solid #444;color:#fff;border-radius:8px;padding:8px;font-size:.85rem;font-family:inherit;}
@@ -584,7 +585,7 @@ body{
 .writer-badge.collab{background:#0f172a;color:#e5e7eb;border-color:rgba(148,163,184,0.8);}
 .writer-works{margin-top:4px;font-size:.75rem;color:#ccc;}
 
-/* CHAT / LONCA AI */
+/* CHAT / GOOGLE AI */
 .chat-box{
   height:300px;overflow-y:auto;background:rgba(0,0,0,0.35);
   border-radius:10px;padding:15px;margin-bottom:10px;border:1px solid #222;
@@ -675,87 +676,13 @@ body.game-fullscreen #game .game-grid{
   margin:0 auto;
 }
 
-/* ANIME GIRL */
-.anime-floating{
-  position:fixed;
-  right:20px;
-  bottom:110px;
-  width:150px;
-  z-index:1200;
-  cursor:pointer;
-}
-@media(max-width:768px){
-  .anime-floating{
-    right:10px;
-    bottom:150px;
-    width:110px;
-  }
-}
-.anime-floating.hidden-mobile{display:none;}
-.anime-floating-inner{position:relative;}
-.anime-floating-img{
-  width:100%;
-  display:block;
-  border-radius:16px;
-  box-shadow:0 0 20px rgba(255,134,200,0.7);
-  border:1px solid rgba(255,255,255,0.18);
-}
-.anime-hearts-container{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-}
-.anime-heart{
-  position:absolute;
-  font-size:1.2rem;
-  color:#ff86c8;
-  animation:heartRise 1s ease-out forwards;
-  text-shadow:0 0 6px rgba(255,134,200,0.9);
-}
-@keyframes heartRise{
-  0%{transform:translate(-50%,0) scale(0.4);opacity:0;}
-  40%{opacity:1;}
-  100%{transform:translate(-50%,-50px) scale(1.1);opacity:0;}
-}
-.anime-float-speech{
-  margin-top:6px;
-  font-size:.75rem;
-  color:#f5f5f5;
-  background:rgba(0,0,0,0.75);
-  border-radius:999px;
-  padding:4px 10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.7);
-  border:1px solid rgba(255,255,255,0.12);
-  text-align:center;
-  font-family:'Orbitron',sans-serif;
-}
-
-/* Anime toggle button */
-.anime-toggle-btn{
-  position:fixed;
-  right:10px;
-  bottom:90px;
-  z-index:1201;
-  padding:6px 12px;
-  border-radius:999px;
-  border:none;
-  background:rgba(15,23,42,0.95);
-  color:#e5e7eb;
-  font-size:.75rem;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  box-shadow:0 0 12px rgba(0,0,0,0.8);
-  cursor:pointer;
-}
-@media(max-width:768px){
-  .anime-toggle-btn{
-    bottom:85px;
-  }
-}
-
 /* SYSTEM MODAL */
 #sys-modal{display:none;}
+
+/* AI MODAL */
+#ai-modal, #apikey-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2100;align-items:center;justify-content:center;}
+.ai-modal-box{background:#111;border:1px solid var(--neon-blue);border-radius:20px;padding:25px;width:90%;max-width:450px;position:relative;box-shadow:0 0 50px rgba(0,240,255,0.15);}
+.ai-modal-close{position:absolute;top:15px;right:20px;color:#aaa;font-size:1.5rem;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -769,6 +696,39 @@ body.game-fullscreen #game .game-grid{
     <h3 style="color:var(--neon-blue); font-family:'Orbitron'; margin-bottom:15px">SİSTEM MESAJI</h3>
     <p id="sys-msg" style="color:#ccc; margin-bottom:20px"></p>
     <button onclick="document.getElementById('sys-modal').style.display='none'" style="background:var(--neon-blue); border:none; padding:10px 30px; border-radius:20px; font-weight:bold; cursor:pointer;">TAMAM</button>
+  </div>
+</div>
+
+<!-- API KEY MODAL -->
+<div id="apikey-modal">
+  <div class="ai-modal-box">
+    <div class="ai-modal-close" onclick="document.getElementById('apikey-modal').style.display='none'">&times;</div>
+    <h3 style="color:var(--gold); font-family:'Orbitron'; margin-bottom:10px;">🔑 API ANAHTARI AYARI</h3>
+    <p style="color:#bbb; font-size:0.85rem; margin-bottom:15px;">
+      Uygulama yayınlandığında (hosting/local) otomatik anahtar çalışmaz. Kendi Google Gemini API anahtarınızı girin. (Tarayıcıda saklanır)
+    </p>
+    <input type="text" id="user-api-key-input" placeholder="Google Gemini API Key Yapıştır..." style="width:100%; padding:12px; border-radius:10px; border:1px solid #444; background:#222; color:#fff; margin-bottom:15px; outline:none;">
+    <button onclick="saveUserApiKey()" style="width:100%; padding:12px; background:linear-gradient(90deg, var(--neon-blue), #2563eb); color:#fff; border:none; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1rem;">
+      KAYDET
+    </button>
+    <div style="margin-top:10px; font-size:0.75rem; color:#666; text-align:center;">
+      <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#aaa; text-decoration:underline;">Anahtar Al (Google AI Studio)</a>
+    </div>
+  </div>
+</div>
+
+<!-- AI LYRICS MODAL -->
+<div id="ai-modal">
+  <div class="ai-modal-box">
+    <div class="ai-modal-close" onclick="document.getElementById('ai-modal').style.display='none'">&times;</div>
+    <h3 style="color:var(--gold); font-family:'Orbitron'; margin-bottom:10px;">✨ AI SÖZ YAZARI</h3>
+    <p style="color:#bbb; font-size:0.85rem; margin-bottom:15px;">
+      Bir konu, duygu veya tema girin. Gemini AI, Memet Çınar tarzında 4 dizelik özel bir bölüm yazsın.
+    </p>
+    <input type="text" id="ai-lyrics-prompt" placeholder="Örn: Malatya geceleri, imkansız aşk..." style="width:100%; padding:12px; border-radius:10px; border:1px solid #444; background:#222; color:#fff; margin-bottom:15px; outline:none;">
+    <button onclick="generateAiLyrics()" style="width:100%; padding:12px; background:linear-gradient(90deg, var(--gold), #ff8c00); border:none; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1rem;">
+      <i class="fas fa-magic"></i> SÖZLERİ OLUŞTUR
+    </button>
   </div>
 </div>
 
@@ -863,7 +823,7 @@ body.game-fullscreen #game .game-grid{
           <span><i class="fas fa-bolt"></i> MEMET ÇINAR YENİ SINGLE'LAR İLE DÖNÜYOR!</span>
           <span><i class="fas fa-star"></i> MALATYA ÖZEL GAMER SAHNE ŞOVU YAKINDA.</span>
           <span><i class="fas fa-music"></i> 'YILDIZLAR' TÜM DİJİTAL PLATFORMLARDA YAYINDA.</span>
-          <span><i class="fas fa-check-circle"></i> LEGACY v3.0 · LOKAL ŞARKI SÖZLERİ EDİTÖRÜ AKTİF.</span>
+          <span><i class="fas fa-check-circle"></i> LEGACY v3.0 · GOOGLE AI ENTEGRASYONU AKTİF.</span>
         </div>
       </div>
     </div>
@@ -930,8 +890,13 @@ body.game-fullscreen #game .game-grid{
         <div id="lyrics-song-artist" class="song-artist">Listeden bir şarkı seç.</div>
         <div id="lyrics-meta">Durum: Şarkı seçilmedi.</div>
         <div id="lyrics-tools">
-          <span id="lyrics-autosave">Otomatik kayıt: beklemede</span>
-          <span id="lyrics-stats">0 karakter · 0 satır</span>
+          <div>
+            <span id="lyrics-autosave">Otomatik kayıt: beklemede</span>
+            <span id="lyrics-stats">0 karakter · 0 satır</span>
+          </div>
+          <button class="p-btn" onclick="document.getElementById('ai-modal').style.display='flex'" style="font-size:0.8rem; color:var(--neon-blue); border:1px solid var(--neon-blue); border-radius:12px; padding:4px 10px;">
+            ✨ AI SÖZ YAZARI
+          </button>
         </div>
         <div id="lyrics-view">
           Burada seçilen şarkının sözleri görünecek. Resmî şarkı sözleri telif nedeniyle otomatik eklenmiyor;
@@ -1001,13 +966,12 @@ body.game-fullscreen #game .game-grid{
           </p>
           <p class="about-text" style="margin-top:8px;">
             Bu panel; şarkılarını, sözlerini ve kendi dünyanı yönetebileceğin özel bir
-            <strong>gamer arayüzü</strong> olarak tasarlandı. Zamanla yeni özellikler,
-            yeni şarkılar ve özel içeriklerle güncellenmeye devam edebilir.
+            <strong>gamer arayüzü</strong> olarak tasarlandı.
           </p>
         </div>
         <div>
           <div>
-            <span class="about-stat-pill"><i class="fas fa-star"></i> Level: 27</span>
+            <span class="about-stat-pill"><i class="fas fa-star"></i> Level: 28</span>
             <span class="about-stat-pill"><i class="fas fa-fire"></i> Rank: LEGACY</span>
             <span class="about-stat-pill"><i class="fas fa-heart"></i> Mood: LO-FI / EMOTIONAL</span>
           </div>
@@ -1118,22 +1082,35 @@ body.game-fullscreen #game .game-grid{
     </div>
   </section>
 
-  <!-- CHAT / LONCA YAPAY ZEKA -->
+  <!-- CHAT / GOOGLE AI -->
   <section id="chat" class="screen">
     <div class="widget-card" style="height:70vh; display:flex; flex-direction:column;">
-      <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:8px;">LONCA SOHBETİ · İNTERNET DESTEKLİ YAPAY ZEKA</h3>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin:0;">GOOGLE GEMINI AI · ASİSTAN</h3>
+        <button onclick="document.getElementById('apikey-modal').style.display='flex'" style="background:transparent; border:1px solid #444; color:#aaa; border-radius:50%; width:30px; height:30px; cursor:pointer;" title="API Ayarları"><i class="fas fa-cog"></i></button>
+      </div>
       <p style="font-size:.75rem;color:#aaa;margin-bottom:10px;">
-        Bu panel, sunucudaki GPT tabanlı lonca asistanına bağlıdır. Sorular sor, matematik işlemleri yaz (örn: <code>25*4+10</code>),
-        ya da “ELKAY 2 için duygusal şarkı sözü yaz” gibi komutlar ver. Metinleri alttaki kopyala butonuyla alabilirsin.
+        Bu panel doğrudan Google'ın en yeni yapay zeka modeli Gemini'ye bağlıdır. Sorular sor, matematik işlemleri yaz (örn: <code>25*4+10</code>),
+        ya da “ELKAY 2 için duygusal şarkı sözü yaz” gibi komutlar ver.
       </p>
+      
+      <!-- Mood Buttons -->
+      <div style="display:flex; gap:8px; margin-bottom:10px; overflow-x:auto; padding-bottom:5px;">
+        <button onclick="getMoodRecommendation('Hüzünlü')" style="flex:none; background:#222; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:15px; font-size:.75rem; cursor:pointer;">😔 Hüzünlü</button>
+        <button onclick="getMoodRecommendation('Enerjik')" style="flex:none; background:#222; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:15px; font-size:.75rem; cursor:pointer;">🥳 Enerjik</button>
+        <button onclick="getMoodRecommendation('Aşık')" style="flex:none; background:#222; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:15px; font-size:.75rem; cursor:pointer;">🥰 Aşık</button>
+        <button onclick="getMoodRecommendation('Yorgun')" style="flex:none; background:#222; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:15px; font-size:.75rem; cursor:pointer;">😴 Yorgun</button>
+        <button onclick="getMoodRecommendation('Hırslı')" style="flex:none; background:#222; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:15px; font-size:.75rem; cursor:pointer;">😤 Hırslı</button>
+      </div>
+
       <div id="chat-history" class="chat-box">
         <div class="msg in ai-msg">
-          Merhaba, ben lonca yapay zekâ asistanıyım. Sunucu üzerinden gerçek zamanlı yanıt üretirim; bana her şeyi sorabilirsin.
+          Merhaba Memet Çınar! Ben Google Gemini destekli asistanınım. Müzik, söz yazarlığı veya herhangi bir konuda sana nasıl yardımcı olabilirim?
           <button class="msg-copy-btn" onclick="copyStatic(this)">Kopyala</button>
         </div>
       </div>
       <div style="display:flex; gap:10px; margin-top:auto;">
-        <input type="text" id="chat-in" placeholder="Mesaj yaz veya işlem gir (örn: 12*8 + 5)..." style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:12px; border-radius:20px; outline:none;">
+        <input type="text" id="chat-in" placeholder="Mesaj yaz veya işlem gir..." style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:12px; border-radius:20px; outline:none;">
         <button onclick="sendMsg()" style="width:50px; height:50px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
       </div>
     </div>
@@ -1155,45 +1132,33 @@ body.game-fullscreen #game .game-grid{
       </div>
       <div class="widget-card game-library-card">
         <h3 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:8px;"><i class="fas fa-gamepad"></i> RETRO OYUN KÜTÜPHANESİ</h3>
-        <p style="font-size:.8rem; color:#aaa; margin-bottom:8px;">Tetris ve Atari tarzı basit oyunlar için hazır bağlantılar. Kendi .apk ve .exe dosyalarını ürettiğinde buradaki linkleri değiştirebilirsin.</p>
+        <p style="font-size:.8rem; color:#aaa; margin-bottom:8px;">Tetris ve Atari tarzı basit oyunlar için hazır bağlantılar.</p>
         <ul>
           <li>
             <strong>Retro Tetris</strong>
             <div class="game-badges">
               <span><i class="fas fa-globe"></i> Tarayıcı</span>
-              <span><i class="fab fa-android"></i> Android APK</span>
-              <span><i class="fab fa-windows"></i> Windows EXE</span>
             </div>
             <div class="game-links">
               <a href="https://tetris.com/play-tetris" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
-              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
-              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
             </div>
           </li>
           <li>
-            <strong>Space Shooter (Atari Hissi)</strong>
+            <strong>Space Shooter</strong>
             <div class="game-badges">
               <span><i class="fas fa-globe"></i> Tarayıcı</span>
-              <span><i class="fab fa-android"></i> Android APK</span>
-              <span><i class="fab fa-windows"></i> Windows EXE</span>
             </div>
             <div class="game-links">
               <a href="https://www.free80sarcade.com/spaceinvaders.php" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
-              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
-              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
             </div>
           </li>
           <li>
             <strong>Classic Pong</strong>
             <div class="game-badges">
               <span><i class="fas fa-globe"></i> Tarayıcı</span>
-              <span><i class="fab fa-android"></i> Android APK</span>
-              <span><i class="fab fa-windows"></i> Windows EXE</span>
             </div>
             <div class="game-links">
               <a href="https://ponggame.org/" target="_blank" rel="noopener"><i class="fas fa-play"></i> Tarayıcıda Oyna</a>
-              <a href="#"><i class="fab fa-android"></i> APK İndir</a>
-              <a href="#"><i class="fab fa-windows"></i> EXE İndir</a>
             </div>
           </li>
         </ul>
@@ -1216,16 +1181,6 @@ body.game-fullscreen #game .game-grid{
     </div>
   </section>
 </main>
-
-<!-- ANIME KIZ -->
-<div class="anime-floating" id="anime-companion">
-  <div class="anime-floating-inner">
-    <div class="anime-hearts-container" id="anime-hearts"></div>
-    <img src="https://media.tenor.com/AlApU9C3uXgAAAAj/anime.gif" alt="Anime Companion" class="anime-floating-img">
-  </div>
-  <div class="anime-float-speech" id="anime-quote">"Bugün hangi şarkıyla level atlıyoruz?"</div>
-</div>
-<button class="anime-toggle-btn" id="anime-toggle">Anime Asistanı Gizle</button>
 
 <!-- PLAYER -->
 <footer class="player-bar">
@@ -1621,26 +1576,171 @@ if(progRail){
   };
 }
 
-/* LONCA AI – LOKAL + VERCEL OTOMATİK BAĞLANTI */
+/* GOOGLE GEMINI AI INTEGRATION */
 
-// localhost / 127.0.0.1 / file:// ise lokal backend (server.js),
-// diğer tüm hostlarda Vercel API kullanılır.
-const isLocalEnv =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1" ||
-  window.location.protocol === "file:";
+const apiKey = ""; // API key is injected by the environment
 
-/* LONCA AI – BACKEND URL AYARI
-   - Vercel’de çalışırken  : https://memet-cinar-official-tpeh.vercel.app/api/lonca-ai
-   - Lokal Node server.js  : http://localhost:3000/lonca-ai
-*/
-const API_URL =
-  window.location.hostname === "memet-cinar-official-tpeh.vercel.app"
-    ? "https://memet-cinar-official-tpeh.vercel.app/api/lonca-ai"
-    : "http://localhost:3000/lonca-ai";
+function getEffectiveApiKey() {
+  // If the environment injected a key (longer than empty), use it
+  if(apiKey && apiKey.length > 5) return apiKey;
+  // Otherwise try localStorage
+  return localStorage.getItem('gemini_user_key') || "";
+}
 
+function saveUserApiKey(){
+  const inp = document.getElementById('user-api-key-input');
+  if(!inp) return;
+  const val = inp.value.trim();
+  if(!val){
+    alert("Lütfen geçerli bir anahtar girin.");
+    return;
+  }
+  localStorage.setItem('gemini_user_key', val);
+  document.getElementById('apikey-modal').style.display='none';
+  alert("API anahtarınız tarayıcıya kaydedildi. Artık AI özelliklerini kullanabilirsiniz.");
+}
 
-const API_PATH = isLocalEnv ? "/lonca-ai" : "/api/lonca-ai";
+async function callGeminiAPI(prompt) {
+  const effectiveKey = getEffectiveApiKey();
+  
+  if(!effectiveKey){
+    // Show Modal if key is missing
+    document.getElementById('apikey-modal').style.display = 'flex';
+    throw new Error("API Anahtarı eksik. Lütfen ayarlardan kendi anahtarınızı girin.");
+  }
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${effectiveKey}`;
+  const payload = {
+    contents: [{ parts: [{ text: prompt }] }]
+  };
+
+  const delays = [1000, 2000, 4000, 8000, 16000];
+  for (let i = 0; i <= delays.length; i++) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      
+      if (!response.ok) {
+        if (response.status === 400 || response.status === 403) {
+           throw new Error("API Anahtarı Hatası: Anahtar geçersiz veya yetkisiz. Lütfen ayarlardan kontrol edin.");
+        }
+        if (response.status === 429 && i < delays.length) {
+           await new Promise(r => setTimeout(r, delays[i]));
+           continue;
+        }
+        throw new Error(`API Hatası: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      return text || "Yanıt alınamadı.";
+      
+    } catch (error) {
+      if (i === delays.length) throw error;
+      await new Promise(r => setTimeout(r, delays[i]));
+    }
+  }
+}
+
+/* Feature 1: AI Lyrics Generator */
+async function generateAiLyrics() {
+  const input = document.getElementById('ai-lyrics-prompt');
+  const promptText = input.value.trim();
+  if (!promptText) {
+    alert("Lütfen bir konu veya duygu girin.");
+    return;
+  }
+  
+  // Close modal and show loading state in editor
+  document.getElementById('ai-modal').style.display='none';
+  const editor = document.getElementById('lyrics-input');
+  const originalVal = editor.value;
+  editor.value += "\n\n✨ AI yazıyor... Lütfen bekleyin...";
+  
+  const systemPrompt = `
+    Sen ünlü sanatçı Memet Çınar'ın yardımcı yapay zeka asistanısın.
+    Görevin: Kullanıcının verdiği konuya uygun, Memet Çınar'ın tarzında (duygusal, arabesk, pop, rap karışımı) 4 dizelik (bir kıta) şarkı sözü yazmak.
+    Konu: "${promptText}"
+    Dil: Türkçe.
+    Sadece sözleri yaz, başka açıklama yapma.
+  `;
+
+  try {
+    const lyrics = await callGeminiAPI(systemPrompt);
+    editor.value = originalVal + "\n\n✨ [AI ÜRETİMİ]:\n" + lyrics + "\n-------------------";
+    updateLyricsStats();
+    saveLyrics(false);
+  } catch (err) {
+    editor.value = originalVal + "\n\n⚠️ AI Hatası: " + err.message;
+  }
+}
+
+/* Feature 2: Mood DJ */
+async function getMoodRecommendation(mood) {
+  // Show in chat
+  switchTab('chat');
+  const box = document.getElementById('chat-history');
+  
+  // User msg
+  const userDiv = document.createElement('div');
+  userDiv.className = 'msg out';
+  userDiv.textContent = `Modum: ${mood}. Hangi şarkıyı dinlemeliyim?`;
+  box.appendChild(userDiv);
+  box.scrollTop = box.scrollHeight;
+  
+  // Loading msg
+  const loadingDiv = document.createElement('div');
+  loadingDiv.className = 'msg in ai-msg';
+  loadingDiv.textContent = '✨ DJ Gemini şarkı seçiyor...';
+  box.appendChild(loadingDiv);
+  box.scrollTop = box.scrollHeight;
+
+  const songTitles = songs.map(s => s.title).join(", ");
+  const systemPrompt = `
+    Sen bir DJ ve Memet Çınar hayranısın.
+    Kullanıcının modu: "${mood}".
+    Mevcut şarkı listesi: ${songTitles}.
+    Görevin: Bu listeden bu moda EN UYGUN tek bir şarkıyı seç.
+    Yanıt formatı: "Sana önerim: [Şarkı Adı]. Çünkü [1 cümlelik kısa, samimi neden]."
+    Lütfen şarkı adını tam olarak listedeki gibi yaz.
+  `;
+
+  try {
+    const recommendation = await callGeminiAPI(systemPrompt);
+    box.removeChild(loadingDiv);
+    
+    // Create AI response bubble
+    const aiDiv = document.createElement('div');
+    aiDiv.className = 'msg in ai-msg';
+    aiDiv.textContent = recommendation;
+    
+    // Parse song name to add play button
+    const songMatch = songs.find(s => recommendation.includes(s.title));
+    if (songMatch) {
+      const playBtn = document.createElement('button');
+      playBtn.className = 'msg-copy-btn';
+      playBtn.style.position = 'relative';
+      playBtn.style.marginTop = '8px';
+      playBtn.style.width = '100%';
+      playBtn.innerHTML = '<i class="fas fa-play"></i> Hemen Çal';
+      playBtn.onclick = () => {
+        const idx = songs.indexOf(songMatch);
+        if (idx !== -1) playSong(idx);
+      };
+      aiDiv.appendChild(playBtn);
+    }
+    
+    box.appendChild(aiDiv);
+    box.scrollTop = box.scrollHeight;
+    
+  } catch (err) {
+    box.removeChild(loadingDiv);
+    appendAiMessage("Bir hata oluştu: " + err.message);
+  }
+}
 
 function copyStatic(btn){
   const parent=btn.parentElement;
@@ -1686,30 +1786,6 @@ function appendAiMessage(text){
   box.scrollTop=box.scrollHeight;
 }
 
-/* Sunucuya istek atan fonksiyon */
-async function loncaAiRequest(promptText){
-  try{
-    const res = await fetch(API_URL, {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message:promptText})
-    });
-    if(!res.ok){
-      throw new Error("HTTP "+res.status);
-    }
-    const data=await res.json();
-    if(data && data.answer){
-      return data.answer;
-    }
-    return "Sunucudan boş yanıt geldi.";
-  }catch(err){
-    console.error('Lonca AI hata:',err);
-    return isLocalEnv
-      ? "Lonca yapay zekâ sunucusuna bağlanırken bir hata oluştu. 'node server.js' ile backend'in çalıştığından ve OPENAI_API_KEY ayarlı olduğundan emin ol."
-      : "Lonca yapay zekâ sunucusuna bağlanırken bir hata oluştu. Vercel üzerindeki /api/lonca-ai fonksiyonunu kontrol et.";
-  }
-}
-
 async function sendMsg(){
   const inp=document.getElementById('chat-in');
   const box=document.getElementById('chat-history');
@@ -1725,16 +1801,18 @@ async function sendMsg(){
   // Yükleniyor balonu
   const loadingDiv=document.createElement('div');
   loadingDiv.className='msg in ai-msg';
-  loadingDiv.textContent='Yükleniyor...';
+  loadingDiv.textContent='Google AI yanıtlıyor...';
   box.appendChild(loadingDiv);
   box.scrollTop=box.scrollHeight;
 
-  // Backend'e isteği at
-  const ans=await loncaAiRequest(txt);
-
-  // Yükleniyor'u kaldır ve cevabı ekle
-  box.removeChild(loadingDiv);
-  appendAiMessage(ans);
+  try {
+    const ans = await callGeminiAPI(txt);
+    box.removeChild(loadingDiv);
+    appendAiMessage(ans);
+  } catch (err) {
+    box.removeChild(loadingDiv);
+    appendAiMessage("Bir hata oluştu: " + err.message);
+  }
 }
 
 /* GAME – snake style */
@@ -1838,49 +1916,6 @@ function initGameFullscreenButtons(){
   });
 }
 
-/* ANIME AI COMPANION */
-function initAnimeCompanion(){
-  const area=document.getElementById('anime-companion');
-  const hearts=document.getElementById('anime-hearts');
-  const quoteEl=document.getElementById('anime-quote');
-  const toggle=document.getElementById('anime-toggle');
-  if(!area||!hearts||!quoteEl||!toggle) return;
-  const quotes=[
-    '"Bugün hangi şarkıyla level atlıyoruz?"',
-    '"Combo: Oyun + lo-fi + gece modu!"',
-    '"Bir sonraki satırı sen yaz, ben dinlerim."',
-    '"Lonca asistanına bir şey sor, ben de izleyeyim!"'
-  ];
-  let qIndex=0;
-  area.addEventListener('click',e=>{
-    const rect=area.getBoundingClientRect();
-    const x=e.clientX-rect.left;
-    const y=e.clientY-rect.top;
-    const heart=document.createElement('span');
-    heart.className='anime-heart';
-    heart.style.left=x+'px';
-    heart.style.top=y+'px';
-    heart.innerText='❤';
-    hearts.appendChild(heart);
-    setTimeout(()=>heart.remove(),1000);
-    qIndex=(qIndex+1)%quotes.length;
-    quoteEl.innerText=quotes[qIndex];
-
-    const chatNav=document.querySelector('.nav-item[data-tab="chat"]');
-    switchTab('chat',chatNav);
-    const inp=document.getElementById('chat-in');
-    if(inp){
-      inp.focus();
-      inp.placeholder='Anime Asistan: Bana istediğini sor :)';
-    }
-  });
-
-  toggle.addEventListener('click',()=>{
-    area.classList.toggle('hidden-mobile');
-    toggle.textContent=area.classList.contains('hidden-mobile') ? 'Anime Asistanı Göster' : 'Anime Asistanı Gizle';
-  });
-}
-
 /* ONLOAD */
 window.onload=()=>{
   updateVh();
@@ -1890,7 +1925,6 @@ window.onload=()=>{
   initWeather();
   renderSongs();
   initLyricsAutosave();
-  initAnimeCompanion();
   initGameFullscreenButtons();
   loadYouTubeAPI();
   document.querySelectorAll('.nav-item, .widget-card').forEach(el=>el.addEventListener('mouseenter',()=>playHoverSfx()));
